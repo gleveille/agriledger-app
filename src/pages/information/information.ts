@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, NavParams, LoadingController} from 'ionic-angular';
-import {WalletPage} from "../wallet/wallet";
-import { Storage } from '@ionic/storage';
-import {WelcomePage} from "../welcome/welcome";
-import {ToastProvider} from "../../providers/toast/toast";
-import {LoopbackProfileProvider} from "../../providers/loopback-profile/loopback-profile";
+import {WeatherProvider} from "../../providers/weather/weather";
+import {Storage} from '@ionic/storage';
 
 
 @Component({
@@ -13,35 +10,33 @@ import {LoopbackProfileProvider} from "../../providers/loopback-profile/loopback
 })
 export class InformationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private loadingCtrl:LoadingController,
-              private loopbackService:LoopbackProfileProvider,
-              private storage:Storage,
-              private toastProvider:ToastProvider) {
+  weather:any;
+  location:{
+    city:string,
+    state:string
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InformationPage');
-  }
-  private goToWalletPage() {
-    this.navCtrl.push(WalletPage);
+  constructor(public navCtrl:NavController, public navParams:NavParams,
+              private weatherProvider:WeatherProvider,
+              private storage:Storage) {
+
   }
 
-  logout(){
-    let loader = this.loadingCtrl.create({
-      content: "Logging you out",
-      spinner: 'crescent'
+  ionViewWillEnter() {
+    this.storage.get('location').then((val) => {
+      if (val != null) {
+        this.location = JSON.parse(val);
+      } else {
+        this.location = {
+          city: 'Miami',
+          state: 'FL'
+        }
+      }
+      this.weatherProvider.getWeather(this.location.city, this.location.state)
+        .subscribe(weather => {
+          this.weather = weather.current_observation;
+        });
     });
-
-    loader.present();
-
-
-    this.loopbackService.logout().then(()=>{
-      loader.dismiss();
-      this.navCtrl.parent.parent.setRoot(WelcomePage);
-    }).catch((err)=>{
-      loader.dismiss();
-      this.toastProvider.presentToast(err);
-    })
   }
+
 }

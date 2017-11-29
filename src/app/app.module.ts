@@ -42,6 +42,7 @@ import {AssetsPage} from "../pages/assets/assets";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {AssetInfoPage} from "../pages/asset-info/asset-info";
 import {CreateAssetPage} from "../pages/create-asset/create-asset";
+import { WeatherProvider } from '../providers/weather/weather';
 
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http,'./assets/translate/', '.json');
@@ -125,7 +126,8 @@ export function HttpLoaderFactory(http: Http) {
     FingerprintProvider,
     PinDialogProvider,
     TranslateServiceProvider,
-    PhotoViewer
+    PhotoViewer,
+    WeatherProvider
   ]
 })
 export class AppModule {}
