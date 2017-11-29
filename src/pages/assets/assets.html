@@ -1,0 +1,52 @@
+<ion-header>
+  <page-header [title]="'Assets'"></page-header>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-row no-padding (click)="createAsset()">
+      <ion-col text-center>
+        <button ion-button icon-start col-12 style="background-color: #462066" class="btnHeight40Px">
+          <ion-icon name='link'></ion-icon>
+          Add Assets
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-card>
+      <div (click)="assetInfo()">
+        <ion-card-content>
+          <ion-card-title>
+            Asset Name
+          </ion-card-title>
+          <p>
+            Description
+          </p>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col no-padding>
+            <button ion-button clear small icon-start>
+              <ion-icon name='star'></ion-icon>
+              Grade
+            </button>
+          </ion-col>
+          <!--<ion-col text-center no-padding>
+            <button ion-button clear small icon-start>
+              <ion-icon name='cloud-upload'></ion-icon>
+              Add Evidence
+            </button>
+          </ion-col>-->
+          <ion-col text-right no-padding>
+            <button ion-button clear small icon-start>
+              <ion-icon name='basket'></ion-icon>
+              Quantity
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card>
+  </ion-list>
+
+</ion-content>

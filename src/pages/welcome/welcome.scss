@@ -1,0 +1,208 @@
+page-welcome {
+
+  .top-80 {
+    padding-top: 70%;
+  }
+
+  .Slide1 {
+    background-image: url('../assets/img/intro1_p.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+  .Slide2 {
+    background-image: url('../assets/img/intro2_p.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+  .Slide3 {
+    background-image: url('../assets/img/intro3_p.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+    .Slide4 {
+    background-image: url('../assets/img/intro4_p.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+    .Slide5 {
+    background-image: url('../assets/img/intro5_p.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+  .Slide1a {
+    background-image: url('../assets/img/intro1_l.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+  .Slide2a {
+    background-image: url('../assets/img/intro2_l.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+  .Slide3a {
+    background-image: url('../assets/img/intro3_l.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+    .Slide4a {
+    background-image: url('../assets/img/intro4_l.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+    .Slide5a {
+    background-image: url('../assets/img/intro5_l.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+  }
+
+
+  .WelcomeBtn {
+    border: hidden;
+    background: transparent;
+  }
+
+  $scope: swiper = (
+  options: (
+    pagination: '.custom-swiper-pagination',
+    paginationClickable: true,
+    loop: false,
+    direction: 'horizontal',
+    spaceBetween: 20,
+    speed: 600
+),
+data: ()
+);
+
+  .btnPosition {
+    position: fixed;
+    bottom: 25px;
+    z-index: 1;
+  }
+
+  .btnPositionSkip {
+    position: absolute;
+    z-index: 2;
+    top: 0%;
+  }
+
+  .language_text img, .language_option img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 5px 0 0 5px;
+  }
+  .language_text, .language_gather li {
+    width: 50px;
+    margin-bottom: 0px;
+  }
+
+  .down_icon {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid rgb(201,201,201);
+    width: 0px;
+    height: 0px;
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    left: 40px;
+  }
+
+  .dropdown {
+    position: absolute;
+    display: inline-block;
+    top: 0px;
+    z-index: 5;
+    right: 10px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  picToView:string= "assets/img/uk.png";
+
+
+}

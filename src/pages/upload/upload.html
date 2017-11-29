@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar color="headerColor">
+    <ion-title>
+      <a href="#" style="text-decoration: none" (click)="dismiss()">{{'Cancel'|translate}}</a>
+      <span style="float: right">
+              {{pageConfigData.headerName||'Upload' | translate}}
+      </span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+
+
+  <div id="file-upload-form" class="uploader">
+    <label for="file-upload" id="file-drag">
+      <div id="start">
+        <ion-icon style="font-size:5em;" name="md-cloud-upload"></ion-icon>
+        <div>{{'Supported Images (JPG/JPEG,PNG)'|translate}}</div>
+        <span id="file-upload-btn" class="btn btn-primary">{{'Choose your profile'|translate}}</span>
+      </div>
+    </label>
+    <input id="file-upload" type="file" name="fileUpload" accept="image/*" ng2FileSelect [uploader]="uploader"/>
+  </div>
+
+
+  <ion-list>
+    <ion-item *ngFor="let item of uploader.queue">
+      <!--        <ion-avatar item-start>
+                <img [src]="item.file">
+              </ion-avatar>
+  -->
+      {{ item?.file?.name }}
+
+      <button *ngIf="item.isSuccess" ion-button outline item-end icon-left>
+        <ion-icon name="md-checkmark-circle"></ion-icon>
+        {{'Done'|translate}}
+      </button>
+
+      <button *ngIf="item.isError" ion-button outline item-end icon-left>
+        <ion-icon name="md-close-circle"></ion-icon>
+        {{'Failed'|translate}}
+      </button>
+      <button ion-button outline item-end icon-left
+              (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+        <ion-icon name="md-cloud-upload"></ion-icon>
+        {{'Upload'|translate}}
+      </button>
+
+      <!--  <button ion-button outline item-end icon-left
+                (click)="item.cancel()" [disabled]="!item.isUploading">
+          <ion-icon name="md-close"></ion-icon>
+          Cancel
+        </button>-->
+
+      <button ion-button outline item-end icon-left
+              (click)="item.remove()">
+        <ion-icon name="trash"></ion-icon>
+        {{'Remove'|translate}}
+      </button>
+
+
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>
+
+
