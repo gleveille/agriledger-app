@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {AzureApiSubscriptionKey,ProfileApi} from "../../app/api";
+import {AzureApiSubscriptionKey,ProfileApi,UserApi} from "../../app/api";
 import { Storage } from '@ionic/storage';
 import {Iprofile} from "../../interfaces/profile.interface";
 
@@ -37,9 +37,8 @@ export class LoopbackProfileProvider {
 
   public getProfile(id?:string):Promise<Iprofile>{
 
-    let agriId=id || this.profile.id;
     return new Promise((resolve,reject)=>{
-      this.http.get(`${ProfileApi.getProfileById()}/${agriId}`,{headers:this.headers})
+      this.http.get(`${UserApi.get()}/${agriId}`,{headers:this.headers})
         .subscribe((response:any)=>{
           this.profile=response.json();
           resolve(response.json());
@@ -86,21 +85,20 @@ export class LoopbackProfileProvider {
 
   }
 
-  logout(){
+  async logout(){
 
-    return new Promise((resolve,reject)=>{
-      this.storage.remove('agriId').then(()=>{
-        for(let i in this.profile){
-          this.profile[i]=null;
-        }
-        return this.storage.remove('market-credential');
-      }).then(()=>{
-        resolve();
+    try{
+      await this.storage.remove('accessToken');
+      await this.storage.remove('userId')
+      for(let i in this.profile){
+        this.profile[i]=null;
+      }
+      return true;
+    }
 
-      }).catch((err)=>{
-        reject(err);
-      })
-    });
+    catch (err){
+      return false;
+    }
   }
 
 }

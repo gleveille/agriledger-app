@@ -12,8 +12,7 @@ export class InformationPage {
 
   weather:any;
   location:{
-    city:string,
-    state:string
+    city:string
   }
 
   constructor(public navCtrl:NavController, public navParams:NavParams,
@@ -28,11 +27,10 @@ export class InformationPage {
         this.location = JSON.parse(val);
       } else {
         this.location = {
-          city: 'Miami',
-          state: 'FL'
+          city: 'Heliaokeng'
         }
       }
-      this.weatherProvider.getWeather(this.location.city, this.location.state)
+      this.weatherProvider.getWeather(this.location.city)
         .subscribe(weather => {
           this.weather = weather.current_observation;
         });

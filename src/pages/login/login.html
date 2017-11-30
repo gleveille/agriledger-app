@@ -1,54 +1,29 @@
-<!--
-  Generated template for the LoginPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>login</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Sign In</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <form>
-    <div class="row responsive-md">
-      <div class="col col-50 col-offset-25">
+  <form #f="ngForm" (ngSubmit)="login(f)">
 
-        <div class="header padding text-center">
-          <img src="img/logo.png" alt="Your logo here"/>
-        </div>
+    <ion-list padding style="padding-top:0px">
+      <ion-item class="paddingLeftRem">
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email" name="email" required email id="email"></ion-input>
+      </ion-item>
 
-        <div class="list">
-          <label class="item item-input">
-            <input type="email" placeholder="Email">
-          </label>
-          <label class="item item-input">
-            <input type="password" placeholder="Password">
-          </label>
-        </div>
+      <ion-item class="paddingLeftRem">
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" ngModel [(ngModel)]="password"  name="password" required></ion-input>
+      </ion-item>
+    </ion-list>
 
-        <button class="button button-block button-positive">
-          Log In
-        </button>
-
-        <div class="row row-no-padding">
-          <div class="col">
-            <button class="button button-clear button-light">
-              Forgot password?
-            </button>
-          </div>
-
-          <div class="col text-right">
-            <button class="button button-clear button-light">
-              Sign up
-            </button>
-          </div>
-        </div>
-      </div>
+    <div padding>
+      <button ion-button color="primary" block large type="submit" [disabled]="!f.valid">Log in</button>
     </div>
   </form>
 </ion-content>

@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 import {changeURL} from './api'
 import {LoopbackProfileProvider} from "../providers/loopback-profile/loopback-profile";
 import {Iprofile} from "../interfaces/profile.interface";
+import {UserProvider} from "../providers/user/user";
 
 declare var agrichainJS;
 @Component({
@@ -17,8 +18,8 @@ declare var agrichainJS;
 export class MyApp {
     rootPage:any=WelcomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,storage:Storage,
-              public loadingCtrl:LoadingController,private loopbackservice:LoopbackProfileProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private storage:Storage,
+              public loadingCtrl:LoadingController,private userService:UserProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -27,50 +28,63 @@ export class MyApp {
 
       statusBar.backgroundColorByHexString('#576293');
       splashScreen.hide();
-
-      let loader = this.loadingCtrl.create({
-        content: "Please wait checking credentials...",
-        spinner: 'crescent'
-      });
-
-      loader.present();
-      storage.get('urlconfig').then((urls)=>{
-        console.log('manually entered urls are')
-        console.log(urls)
-        if(urls)
-        changeURL(urls.lbURL,urls.bcURL);
-        storage.get('agriId').then((agriId:string)=>{
-          console.log('agriId from local storage is')
-          console.log(agriId)
-          if(agriId){
-            this.loopbackservice.getProfile(agriId).then((profile:Iprofile)=>{
-              loader.dismiss();
-              this.rootPage=TabsPage;
-
-            }).catch((err)=>{
-              loader.dismiss();
-              this.rootPage=WelcomePage;
-
-            })
-          }
-
-
-          else{
-            loader.dismiss();
-            this.rootPage=WelcomePage;
-
-
-          }
-        }).catch((err)=>{
-          console.log(err)
-          loader.dismiss();
-          this.rootPage=WelcomePage;
-        })
-      }).catch(()=>{
-        loader.dismiss();
-        this.rootPage=WelcomePage;
-      })
+      this.verify();
 
     });
+  }
+
+  async verify(){
+    let loader = this.loadingCtrl.create({
+      content: "Please wait checking credentials...",
+      spinner: 'crescent'
+    });
+    loader.present();
+
+    let accessToken;
+    let userId;
+    let profile;
+
+    try{
+      accessToken= await this.storage.get('accessToken');
+      console.log('access token', accessToken)
+    }
+
+    catch (err){
+      console.log(err);
+
+    }
+
+
+
+    try{
+      userId= await this.storage.get('userId')
+      console.log('userId', userId)
+
+    }
+    catch (err){
+      console.log(err);
+
+    }
+
+    if(accessToken &&  userId){
+      try{
+        profile = await this.userService.getUser(userId,accessToken);
+        console.log(profile)
+        loader.dismiss();
+
+        this.rootPage=TabsPage;
+        return true;
+      }
+
+      catch (err){
+        console.log(err);
+
+      }
+
+    }
+
+    loader.dismiss();
+    this.rootPage=WelcomePage;
+    return false;
   }
 }

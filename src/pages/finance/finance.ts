@@ -11,7 +11,6 @@ import {InformationPage} from "../information/information";
 export class FinancePage {
 
   city: string;
-  state: string;
 
   constructor(public navCtrl:NavController, public navParams:NavParams,
               private storage:Storage) {
@@ -19,10 +18,8 @@ export class FinancePage {
       if (val != null) {
         let location = JSON.parse(val);
         this.city = location.city;
-        this.state = location.state;
       } else {
         this.city = 'Miami';
-        this.state = 'FL';
       }
     });
   }
@@ -33,8 +30,7 @@ export class FinancePage {
 
   saveForm() {
     let location = {
-      city: this.city,
-      state: this.state
+      city: this.city
     }
     this.storage.set('location', JSON.stringify(location));
     this.navCtrl.push(InformationPage);

@@ -8,8 +8,8 @@ const localnet='http://139.59.243.90:5000';//localhost
 const testnet='http://test.acchain.org';//quest.careers
 const mainnet='http://52.175.39.29:5000';//test.quest
 
-export let ServerUrl=prodUrl;
-let BlockChainServerUrl=mainnet;
+export let ServerUrl=devUrl;
+let BlockChainServerUrl=localnet;
 
 export const TestnetMagic= '8e9b66ed';
 export const MainnetMagic= '7e9b88ed';
@@ -34,6 +34,35 @@ export let ProfileApi= {
   listProfile: ()=>ServerUrl +'/api/profiles',
   updateProfile:()=>ServerUrl +'/api/profiles'
 };
+
+export const UserApi={
+  login:{
+    url:()=>ServerUrl+'/api/users/login',
+    method:'POST'
+
+  },
+  logout:{
+    url:()=>ServerUrl+'/api/users/logout',
+    method:'POST'
+
+  },
+  changePassword:{
+    url:()=>ServerUrl+'/api/users/change-password',
+    method:'POST'
+
+  },
+  findById:{
+    url:()=>ServerUrl+'/api/users',
+    method:'GET'
+
+  },
+  list:{
+    url:()=>ServerUrl+'/api/users',
+    method:'GET'
+
+  }
+}
+
 
 export let ContainerApi={
   ProfileUploadUrl:()=>ServerUrl+'/api/containers/profiles/upload',
