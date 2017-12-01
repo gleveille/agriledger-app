@@ -1,23 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { FileUploader } from 'ng2-file-upload';
-import {AzureApiSubscriptionKey} from '../../../src/app/api'
 import {Events} from "ionic-angular/index";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable()
 export class UploadProvider {
   uploader:FileUploader;
 
-  constructor(public http: Http,private events:Events) {
+  constructor(public http: HttpClient,private events:Events) {
 
   }
   initUploader(url,config){
     this.uploader= new FileUploader({
-      url: url,
-      headers:[{name:"Ocp-Apim-Subscription-Key",value:AzureApiSubscriptionKey},
-        {name:'x-id',value:config.id},{name:'Ocp-Apim-Trace',value:'true'}],
+      url: url
     });
 
     this.uploader.onAfterAddingFile = (file:any)=> {

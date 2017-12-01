@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, LoadingController} from 'ionic-angular';
-import {WeatherProvider} from "../../providers/weather/weather";
+import {WeatherProvider} from "../../providers/weather";
 import {Storage} from '@ionic/storage';
 
 
@@ -27,11 +27,11 @@ export class InformationPage {
         this.location = JSON.parse(val);
       } else {
         this.location = {
-          city: 'Heliaokeng'
+          city: 'Heilongji'
         }
       }
       this.weatherProvider.getWeather(this.location.city)
-        .subscribe(weather => {
+        .subscribe((weather:any) => {
           this.weather = weather.current_observation;
         });
     });

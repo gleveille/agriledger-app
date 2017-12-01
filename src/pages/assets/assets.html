@@ -8,28 +8,28 @@
   <ion-list>
     <ion-row no-padding (click)="createAsset()">
       <ion-col text-center>
-        <button ion-button icon-start col-12 style="background-color: #462066" class="btnHeight40Px">
+        <button ion-button icon-start col-12 style="background-color: #205066a3" class="btnHeight40Px">
           <ion-icon name='link'></ion-icon>
           Add Assets
         </button>
       </ion-col>
     </ion-row>
 
-    <ion-card>
+    <ion-card *ngFor="let asset of assets">
       <div (click)="assetInfo()">
         <ion-card-content>
           <ion-card-title>
-            Asset Name
+            {{asset.name}}
           </ion-card-title>
           <p>
-            Description
+            {{asset.category}}
           </p>
         </ion-card-content>
         <ion-row no-padding>
           <ion-col no-padding>
             <button ion-button clear small icon-start>
               <ion-icon name='star'></ion-icon>
-              Grade
+              {{asset.status}}
             </button>
           </ion-col>
           <!--<ion-col text-center no-padding>
@@ -41,7 +41,7 @@
           <ion-col text-right no-padding>
             <button ion-button clear small icon-start>
               <ion-icon name='basket'></ion-icon>
-              Quantity
+              {{asset.quantity}}
             </button>
           </ion-col>
         </ion-row>

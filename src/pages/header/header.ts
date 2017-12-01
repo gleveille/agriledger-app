@@ -1,11 +1,10 @@
-import { Component,Input } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
-import { ToastProvider } from '../../providers/toast/toast';
-import { LoopbackProfileProvider } from '../../providers/loopback-profile/loopback-profile';
-import { WelcomePage } from '../welcome/welcome';
+import {Component, Input} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {LoadingController} from 'ionic-angular/components/loading/loading-controller';
+import {ToastProvider} from '../../providers/toast';
+import {WelcomePage} from '../welcome/welcome';
 import {WalletPage} from "../wallet/wallet";
-
+import {UserService} from "../../providers/user.service";
 
 
 @Component({
@@ -14,16 +13,18 @@ import {WalletPage} from "../wallet/wallet";
 })
 export class HeaderPage {
 
-  @Input('title') title :string='';
-  constructor(public navCtrl: NavController, private loadingCtrl:LoadingController,
-    private toastService:ToastProvider,private loopbackService:LoopbackProfileProvider,
-     public navParams: NavParams) {
+  @Input('title') title:string = '';
+
+  constructor(public navCtrl:NavController, private loadingCtrl:LoadingController,
+              private toastService:ToastProvider,
+              public navParams:NavParams, private user: UserService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HeaderPage');
   }
-  logout(){
+
+  logout() {
     let loader = this.loadingCtrl.create({
       content: "Logging you out",
       spinner: 'crescent'
@@ -32,10 +33,10 @@ export class HeaderPage {
     loader.present();
 
 
-    this.loopbackService.logout().then(()=>{
+    this.user.logout().subscribe(()=> {
       loader.dismiss();
       this.navCtrl.parent.parent.setRoot(WelcomePage);
-    }).catch((err)=>{
+    },(err)=>{
       loader.dismiss();
       this.toastService.presentToast(err);
     })

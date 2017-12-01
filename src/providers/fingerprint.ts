@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {FingerprintAIO, FingerprintOptions} from '@ionic-native/fingerprint-aio';
-import {ToastProvider} from "../toast/toast";
-import {PinDialogProvider} from "../pin-dialog/pin-dialog";
-import {Iprofile} from "../../interfaces/profile.interface";
+import {ToastProvider} from "./toast";
+import {PinDialogProvider} from "./pin-dialog";
 import { ActionSheetController } from 'ionic-angular';
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable()
@@ -19,7 +18,7 @@ export class FingerprintProvider {
     localizedReason: 'Please authenticate' //Only for iOS
   };
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
               public actionSheetCtrl: ActionSheetController,
 
               private faio: FingerprintAIO,private toastProvider:ToastProvider,private pinService:PinDialogProvider) {

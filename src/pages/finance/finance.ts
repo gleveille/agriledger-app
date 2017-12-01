@@ -19,7 +19,7 @@ export class FinancePage {
         let location = JSON.parse(val);
         this.city = location.city;
       } else {
-        this.city = 'Miami';
+        this.city = 'Heilongji';
       }
     });
   }

@@ -2,7 +2,7 @@ import {TabsPage} from './../tabs/tabs';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
-import {TranslateServiceProvider} from "../../providers/translate-service/translate-service";
+import {TranslateServiceProvider} from "../../providers/translate-service";
 import {LoginPage} from "../login/login";
 
 

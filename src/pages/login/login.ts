@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, Form} from 'ionic-angular';
-import {UserProvider} from "../../providers/user/user";
 import {NgForm} from "@angular/forms/forms";
-import {ToastProvider} from "../../providers/toast/toast";
+import {ToastProvider} from "../../providers/toast";
 import {TabsPage} from "../tabs/tabs";
+import {UserService} from "../../providers/user.service";
 
 /**
  * Generated class for the LoginPage page.
@@ -18,7 +18,7 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private userService:UserProvider,private toastService:ToastProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private userService:UserService,private toastService:ToastProvider) {
   }
 
   ionViewDidLoad() {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ToastController} from "ionic-angular/index";
-import {TranslateServiceProvider} from "../../providers/translate-service/translate-service";
+import {TranslateServiceProvider} from "./translate-service";
 
 
 @Injectable()

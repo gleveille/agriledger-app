@@ -1,12 +1,12 @@
 
 import {Component} from '@angular/core';
 import { Events } from 'ionic-angular';
-import {ContainerApi} from '../../../src/app/api'
+import {ContainerApi} from '../../../src/app/api.config'
 
 import { FileUploader } from 'ng2-file-upload';
 import {NavParams, ViewController} from "ionic-angular/index";
-import {IUploadPageConfig} from "../../interfaces/uploadPageConfig.interface";
-import {UploadProvider} from "../../providers/upload/upload";
+import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
+import {UploadProvider} from "../../providers/upload";
 
 @Component({
   selector: 'page-uploads',
