@@ -16,6 +16,13 @@
 
 <ion-content>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+                           pullingText="Pull to refresh"
+                           refreshingSpinner="circles"
+                           refreshingText="Refreshing"></ion-refresher-content>
+  </ion-refresher>
+
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'puppies'">
       <ion-row no-padding (click)="createAsset()">

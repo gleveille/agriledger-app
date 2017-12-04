@@ -35,4 +35,20 @@ export class AssetsPage {
     })
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.assetService.getMyAssets().subscribe((data)=>{
+      console.log(data)
+      this.assets=data;
+    },(err)=>{
+      console.log(err)
+    })
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
+
 }

@@ -46,10 +46,7 @@ export class UserService {
   }
   getUser(){
 
-    if(this.user && this.user.id){
-
-      return Observable.of(this.user);
-    }
+  
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
       .concatMap((userId)=>{
         console.log('userId ',userId)
@@ -63,7 +60,6 @@ export class UserService {
       })
       .do((user)=>{
         this.user=user;
-        this.accessToken=user.id;
       })
       .catch((err)=>{
         return this.errorHandler.handle(err);
@@ -97,6 +93,6 @@ export class UserService {
 
 
 
-  
+
 
 }
