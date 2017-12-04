@@ -12,18 +12,24 @@
 
     <ion-list padding style="padding-top:0px">
       <ion-item class="paddingLeftRem">
-        <ion-label floating>Email</ion-label>
+        <ion-label floating>Username</ion-label>
         <ion-input type="email" [(ngModel)]="email" name="email" required email id="email"></ion-input>
       </ion-item>
 
       <ion-item class="paddingLeftRem">
-        <ion-label floating>Password</ion-label>
+        <ion-label floating>6 digit Password</ion-label>
         <ion-input type="password" ngModel [(ngModel)]="password"  name="password" required></ion-input>
       </ion-item>
     </ion-list>
 
     <div padding>
-      <button ion-button color="primary" block large type="submit" [disabled]="!f.valid">Log in</button>
+      <button ion-button color="primary" block large type="submit" [disabled]="!f.valid">Login</button>
     </div>
   </form>
+
+  <ion-item class="terms">
+    <ion-label>I agree to the Terms and Conditions</ion-label>
+    <ion-checkbox color="dark"></ion-checkbox>
+  </ion-item>
+
 </ion-content>

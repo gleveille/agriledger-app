@@ -108,7 +108,10 @@
   "Passcode can not be left blank":"密码不能留空",
   "6 digit Passcode":"6位密码",
   "SAVE": "保存",
-  "Please wait We are updating the passcode for you...": "请稍候我们正在更新您的密码..."
+  "Please wait We are updating the passcode for you...": "请稍候我们正在更新您的密码...",
+  "Information": "信息",
+  "Finance": "金融",
+  "Home": "家"
 
 
 

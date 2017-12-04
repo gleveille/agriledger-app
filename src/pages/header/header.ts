@@ -5,6 +5,7 @@ import {ToastProvider} from '../../providers/toast';
 import {WelcomePage} from '../welcome/welcome';
 import {WalletPage} from "../wallet/wallet";
 import {UserService} from "../../providers/user.service";
+import {CommunityPage} from "../community/community";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class HeaderPage {
     console.log('ionViewDidLoad HeaderPage');
   }
 
-  logout() {
+  /*logout() {
     let loader = this.loadingCtrl.create({
       content: "Logging you out",
       spinner: 'crescent'
@@ -40,9 +41,13 @@ export class HeaderPage {
       loader.dismiss();
       this.toastService.presentToast(err);
     })
-  }
+  }*/
 
   wallet() {
     this.navCtrl.push(WalletPage);
+  }
+
+  community() {
+    this.navCtrl.push(CommunityPage)
   }
 }

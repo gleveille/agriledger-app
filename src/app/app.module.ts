@@ -46,6 +46,8 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/h
 import {UserService} from "../providers/user.service";
 import {AssetsService} from "../providers/assets.service";
 import {ErrorHandlerService} from "../providers/error-handler.service";
+import {HomePage} from "../pages/home/home";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 /*export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http,'./assets/translate/', '.json');
@@ -73,7 +75,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FinancePage,
     AssetsPage,
     AssetInfoPage,
-    CreateAssetPage
+    CreateAssetPage,
+    HomePage
   ],
   imports: [
     HttpClientModule,
@@ -115,7 +118,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FinancePage,
     AssetsPage,
     AssetInfoPage,
-    CreateAssetPage
+    CreateAssetPage,
+    HomePage
   ],
   providers: [
     {
@@ -140,7 +144,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PhotoViewer,
     WeatherProvider,
     UserService,
-    AssetsService
+    AssetsService,
+    SocialSharing
   ]
 })
 export class AppModule {}

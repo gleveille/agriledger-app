@@ -32,4 +32,16 @@ page-login {
       }
     }
   }
+
+  .item.item-md .checkbox-md {
+    position: static;
+    display: block;
+    margin: 9px 10px 9px 4px;
+  }
+
+  .terms.item-md.item-block .item-inner {
+    padding-right: 0px;
+    border-bottom: 0px solid #dedede;
+  }
+
 }

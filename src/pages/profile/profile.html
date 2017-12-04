@@ -4,59 +4,47 @@
 
 <ion-content>
 
+  <ion-fab top right>
+    <button ion-fab mini (click)="contactUs()"><ion-icon name="build"></ion-icon></button>
+  </ion-fab>
+
+  <ion-row>
+    <ion-col col-12 text-center>
+      <img src="assets/img/default-avatar.png" style="border-radius: 55px; width: 100px; height: 100px;" (click)="upload()">
+      <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">User Name</p>
+    </ion-col>
+  </ion-row>
+
   <ion-list>
-    <!--<ion-item text-center color="headerColor">
-      <img width="100" height="100"
-           *ngIf="profilePromise==='resolved' && profile.profileUrl && profile.profileUrl.length" width="100"
-           height="100" [src]="serverUrl+profile.profileUrl+authenticationQueryParameter"
-           style="border-radius:50%;position: relative;top:10px;">
-      <ion-icon *ngIf="profilePromise==='pending' || profilePromise==='rejected'
-        || (profilePromise==='resolved' && (!profile.profileUrl ||  !profile.profileUrl.length))"
-                style="font-size: 80px;" name="md-person"></ion-icon>
-    </ion-item>-->
     <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label floating>Agri Id number</ion-label>
+      <ion-input type="password"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Phone Number</ion-label>
+      <ion-label floating>Mobile Number</ion-label>
       <ion-input type="tel"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Country/Region</ion-label>
+      <ion-label floating>Wechat</ion-label>
+      <ion-input type="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Company name</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Land Dimension</ion-label>
+      <ion-label floating>Adderss</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
   </ion-list>
 
-
-  <!--<ion-card>
-    <ion-card-content>
-      <ion-card-title>
-        Crop Name
-      </ion-card-title>
-      <p>
-        Description
-      </p>
-    </ion-card-content>
-    <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small icon-start>
-          <ion-icon name='star'></ion-icon>
-          Grade
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small icon-start>
-          <ion-icon name='basket'></ion-icon>
-          Quantity
-        </button>
+  <ion-grid style="position: sticky; bottom: 0px; background-color: white;">
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button>Confirm profile is correct</button>
       </ion-col>
     </ion-row>
-  </ion-card>-->
+  </ion-grid>
 
 </ion-content>
 

@@ -1,5 +1,9 @@
 <ion-header>
-  <page-header color="primary" [title]="'Create-Asset'"></page-header>
+  <ion-navbar no-border-bottom color="headerColor">
+    <ion-title>
+      Create Asset
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -10,25 +14,26 @@
       <ion-input type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Asset Description</ion-label>
+      <ion-label floating>Asset Category</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Quantity</ion-label>
+      <ion-label floating>Asset Quantity</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label floating>Category</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+    <div padding>
+      <button ion-button color="primary" class="btnHeight40Px" block type="submit" (click)="updateAssets()">
+        {{'UPDATE'|translate}}
+      </button>
+    </div>
   </ion-list>
 
-  <ion-row no-padding>
+  <!--<ion-row no-padding>
     <ion-col text-center>
       <button ion-button icon-start col-12 class="btnHeight40Px" style="background-color: #205066a3">
         Save
       </button>
     </ion-col>
-  </ion-row>
+  </ion-row>-->
 
 </ion-content>

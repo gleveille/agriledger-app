@@ -1,0 +1,27 @@
+<ion-header>
+  <page-header [title]="'Home'"></page-header>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-row>
+    <ion-col col-12 text-center>
+      <img src="assets/img/default-avatar.png" style="border-radius: 55px; width: 100px; height: 100px;">
+      <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">User Name</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-card (click)="assets()">
+    <img src="assets/img/background-2.jpg"/>
+    <div class="card-title">Assets</div>
+    <div class="card-subtitle">41 Listings</div>
+  </ion-card>
+
+  <ion-card (click)="information()">
+    <img src="assets/img/background-2.jpg"/>
+    <div class="card-title">Information</div>
+    <div class="card-subtitle">64 Listings</div>
+  </ion-card>
+
+</ion-content>

@@ -10,6 +10,8 @@ import {Storage} from '@ionic/storage';
 })
 export class InformationPage {
 
+  pet: string = "puppies";
+
   weather:any;
   location:{
     city:string

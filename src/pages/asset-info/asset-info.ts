@@ -1,12 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {AssetsService} from "../../providers/assets.service";
 
-/**
- * Generated class for the AssetInfoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,10 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AssetInfoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  asset = {};
+
+  pet: string = "puppies";
+
+  constructor(public navCtrl:NavController, public navParams:NavParams, private assetService:AssetsService) {
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AssetInfoPage');
+    this.asset = this.navParams.get('asset');
+    console.log(this.asset)
   }
 }

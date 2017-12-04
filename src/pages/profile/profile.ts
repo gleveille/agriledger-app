@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {NavController, AlertController} from "ionic-angular/index";
+import {UploadPage} from "../upload/upload";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 
 @Component({
@@ -9,7 +12,21 @@ import 'rxjs/add/operator/catch';
 })
 export class ProfilePage {
 
-  constructor() {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private socialSharing: SocialSharing) {
+
+  }
+
+  upload() {
+    this.navCtrl.push(UploadPage);
+  }
+
+  contactUs() {
+    let alert = this.alertCtrl.create({
+      title: 'Hi!',
+      subTitle: 'To make changes to your details please Contact Us!',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

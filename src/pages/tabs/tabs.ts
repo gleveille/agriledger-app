@@ -4,17 +4,18 @@ import {InformationPage} from "../information/information";
 import {AssetsPage} from "../assets/assets";
 import {CommunityPage} from "../community/community";
 import {FinancePage} from "../finance/finance";
+import {HomePage} from "../home/home";
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = ProfilePage;
+  tab1Root = HomePage;
   tab2Root = AssetsPage;
   tab3Root = InformationPage;
-  tab4Root = CommunityPage;
-  tab5Root = FinancePage;
+  tab4Root = FinancePage;
+  tab5Root = ProfilePage;
 
 
   constructor() {

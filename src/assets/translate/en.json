@@ -107,5 +107,8 @@
   "6 digit Passcode":"6 digit Passcode",
   "Passcode can not be left blank":"Passcode can not be left blank",
   "SAVE": "SAVE",
-  "Please wait We are updating the passcode for you...": "Please wait We are updating the passcode for you..."
+  "Please wait We are updating the passcode for you...": "Please wait We are updating the passcode for you...",
+  "Information": "Information",
+  "Finance": "Finance",
+  "Home": "Home"
 }

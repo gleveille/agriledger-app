@@ -11,13 +11,15 @@ import {AssetsService} from "../../providers/assets.service";
 export class AssetsPage {
 
   assets = [];
+  pet: string = "puppies";
+
 
   constructor(public navCtrl:NavController, public navParams:NavParams, private assetService:AssetsService) {
 
   }
 
-  assetInfo() {
-    this.navCtrl.push(AssetInfoPage);
+  assetInfo(asset) {
+    this.navCtrl.push(AssetInfoPage,{asset:asset});
   }
 
   createAsset() {
