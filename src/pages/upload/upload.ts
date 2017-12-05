@@ -27,14 +27,10 @@ export class UploadPage {
 
     this.pageConfigData=params.get('config')||{};
     console.log('pageConfigData', params.get('config'));
-
     this.url=this.getApi();
     this.uploader=this.uploadProvider.initUploader(this.url,this.pageConfigData);
 
-
   }
-
-
 
   getApi(){
     if(this.pageConfigData.uploadType==='profile')
@@ -42,7 +38,6 @@ export class UploadPage {
     else if(this.pageConfigData.uploadType==='field')
       return ContainerApi.FieldUploadUrl();
   }
-
 
   dismiss() {
     this.viewCtrl.dismiss();

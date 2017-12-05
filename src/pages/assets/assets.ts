@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {AssetInfoPage} from "../asset-info/asset-info";
 import {CreateAssetPage} from "../create-asset/create-asset";
 import {AssetsService} from "../../providers/assets.service";
+import {UploadPage} from "../upload/upload";
 
 @Component({
   selector: 'page-assets',

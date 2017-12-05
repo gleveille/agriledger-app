@@ -22,28 +22,27 @@
     <ion-list *ngSwitchCase="'puppies'">
       <ion-item>
         <ion-label floating>Asset Name</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.name" name="name" text-capitalize disabled></ion-input>
+        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Asset Category</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.category" name="category" text-capitalize disabled></ion-input>
+        <ion-input type="text" [(ngModel)]="asset.category" text-capitalize disabled></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Asset Quantity</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.quantity" name="quantity" text-capitalize disabled></ion-input>
+        <ion-input type="text" [(ngModel)]="asset.quantity" text-capitalize disabled></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Asset Status</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.status" name="description" text-capitalize disabled></ion-input>
+        <ion-input type="text" [(ngModel)]="asset.status" text-capitalize disabled></ion-input>
       </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase="'kittens'">
       <ion-row no-padding>
-        <ion-col text-center>
-          <button ion-button icon-start col-12 class="btnHeight40Px" style="background-color: #205066a3">
-            <ion-icon name='cloud-upload'></ion-icon>
-            Upload Evidence
+        <ion-col text-right>
+          <button ion-button clear style="color: crimson; letter-spacing: 2px;" (click)="uploadPage()">
+            +&nbsp; Add Evidence
           </button>
         </ion-col>
       </ion-row>

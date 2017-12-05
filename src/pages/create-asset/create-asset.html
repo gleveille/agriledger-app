@@ -7,33 +7,74 @@
 </ion-header>
 
 <ion-content>
+  <ion-list no-padding>
 
-  <ion-list>
+    <h5 text-center style="opacity: .8; letter-spacing: 4px;">
+      Asset category
+    </h5>
+
     <ion-item>
-      <ion-label floating>Asset Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label floating>Level 1</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,0)" [(ngModel)]="asset.category.level1"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelOne" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-label floating>Asset Category</ion-label>
-      <ion-input type="text"></ion-input>
+
+    <ion-item *ngIf="assetCategoriesLevelTwo.length">
+      <ion-label floating>Level 2</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,1)" [(ngModel)]="asset.category.level2"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelTwo" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-label floating>Asset Quantity</ion-label>
-      <ion-input type="text"></ion-input>
+
+    <ion-item *ngIf="assetCategoriesLevelThree.length">
+      <ion-label floating>Level 3</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,2)" [(ngModel)]="asset.category.level3"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelThree" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
     </ion-item>
-    <div padding>
-      <button ion-button color="primary" class="btnHeight40Px" block type="submit" (click)="updateAssets()">
-        {{'UPDATE'|translate}}
-      </button>
+
+    <ion-item *ngIf="assetCategoriesLevelFour.length">
+      <ion-label floating>Level 4</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,3)" [(ngModel)]="asset.category.level4"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelFour" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="assetCategoriesLevelFive.length">
+      <ion-label floating>Level 5</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,4)" [(ngModel)]="asset.category.level5" multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelFive" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <div *ngIf="deepestCategorySelected">
+      <h5 text-center style="opacity: .8; letter-spacing: 4px;">
+        Asset Information
+      </h5>
+      <ion-item>
+        <ion-label floating>Participant Name *</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize name="name" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Asset Quantity *</ion-label>
+        <ion-input type="number" [(ngModel)]="asset.quantity" text-capitalize name="currency" required></ion-input>
+      </ion-item>
+
+
+      <div padding text-right>
+        <button ion-button color="primary" type="submit" [disabled]="false"
+                (click)="registerAsset()">
+          {{registerPromise==='pending'?'Registering' :'Register'}}
+        </button>
+
+      </div>
     </div>
+
   </ion-list>
-
-  <!--<ion-row no-padding>
-    <ion-col text-center>
-      <button ion-button icon-start col-12 class="btnHeight40Px" style="background-color: #205066a3">
-        Save
-      </button>
-    </ion-col>
-  </ion-row>-->
-
 </ion-content>

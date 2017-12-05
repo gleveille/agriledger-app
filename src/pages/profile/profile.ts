@@ -17,7 +17,7 @@ export class ProfilePage {
   }
 
   upload() {
-    this.navCtrl.push(UploadPage);
+    this.navCtrl.push(UploadPage,{config:{uploadType:'profile'}});
   }
 
   contactUs() {

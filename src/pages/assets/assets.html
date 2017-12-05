@@ -27,7 +27,7 @@
     <ion-list *ngSwitchCase="'puppies'">
       <ion-row no-padding (click)="createAsset()">
         <ion-col text-right no-padding>
-          <button ion-button clear style="color: crimson; margin-right: 8px">
+          <button ion-button clear style="color: crimson; margin-right: 8px; letter-spacing: 2px;">
             +&nbsp; Add Assets
           </button>
         </ion-col>
@@ -48,24 +48,10 @@
                   <ion-col col-6>
                     <ion-item>
                       <ion-label floating>Asset Category:</ion-label>
-                      <ion-input type="tel" [(ngModel)]="asset.category" text-capitalize disabled></ion-input>
+                      <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
                     </ion-item>
                   </ion-col>
                 </ion-row>
-                <!--<ion-row>
-                  <ion-col>
-                    <ion-item>
-                      <ion-label floating>Asset Status:</ion-label>
-                      <ion-input type="tel" [(ngModel)]="asset.status" text-capitalize disabled></ion-input>
-                    </ion-item>
-                  </ion-col>
-                  <ion-col>
-                    <ion-item>
-                      <ion-label floating>Asset Quantity:</ion-label>
-                      <ion-input type="tel" [(ngModel)]="asset.quantity" text-capitalize disabled></ion-input>
-                    </ion-item>
-                  </ion-col>
-                </ion-row>-->
               </ion-grid>
 
             </ion-card-content>
