@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
+import {ToastProvider} from "../../providers/toast";
 
 
 @IonicPage()
@@ -12,8 +13,8 @@ export class CreateAssetPage {
 
   asset:any = {
     name: null,
-    categoryId:null,
-    quantity:null,
+    categoryId: null,
+    quantity: null,
     category: {level1: {}, level2: {}, level3: {}, level4: {}, level5: {}},
   };
 
@@ -32,7 +33,7 @@ export class CreateAssetPage {
   deepestCategorySelected = false;
   lastCategoryId = null;
 
-  constructor(public navCtrl:NavController, public navParams:NavParams, private assetsService:AssetsService) {
+  constructor(public navCtrl:NavController, public navParams:NavParams, private assetsService:AssetsService, private toastService:ToastProvider) {
 
   }
 
@@ -51,7 +52,7 @@ export class CreateAssetPage {
     if (!category.hasChildren) {
       this.deepestCategorySelected = true;
       this.lastCategoryId = category.id;
-      this.asset.categoryId=this.lastCategoryId;
+      this.asset.categoryId = this.lastCategoryId;
       return;
     }
     this.deepestCategorySelected = false;
@@ -95,7 +96,7 @@ export class CreateAssetPage {
 
 
       }, (err) => {
-        this.toastService.error('Category', 'Something went wrong');
+        this.toastService.presentToast('Category', 'Something went wrong');
       })
 
 
@@ -109,28 +110,28 @@ export class CreateAssetPage {
 
 
       }, (err) => {
-        this.toastService.error('Category', 'Something went wrong');
+        this.toastService.presentToast('Category', 'Something went wrong');
       })
   }
 
   registerAsset() {
-    let asset=JSON.parse(JSON.stringify(this.asset));
+    let asset = JSON.parse(JSON.stringify(this.asset));
     console.log(this.asset)
-    for(let level in this.asset.category){
+    for (let level in this.asset.category) {
 
-      if(this.asset.category[level].attrs &&this.asset.category[level].attrs.length )
-      asset.category[level]=this.asset.category[level].attrs[this.chosenLang];
+      if (this.asset.category[level].attrs && this.asset.category[level].attrs.length)
+        asset.category[level] = this.asset.category[level].attrs[this.chosenLang];
       else
-        asset.category[level]='';
+        asset.category[level] = '';
 
 
     }
 
     console.log('new asset is')
     console.log(asset)
-    this.assetsService.createAsset(asset).subscribe((data)=>{
+    this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
-    },(err)=>{
+    }, (err)=> {
       console.log(err)
     })
   }

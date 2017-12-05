@@ -11,7 +11,7 @@ import {UploadPage} from "../upload/upload";
 })
 export class AssetInfoPage {
 
-  asset = {};
+  asset = {category:{}};
   assets = [];
   pet:string = "puppies";
 
@@ -27,5 +27,5 @@ export class AssetInfoPage {
   uploadPage() {
     this.navCtrl.push(UploadPage,{config:{uploadType:'field'}});
   }
-  
+
 }

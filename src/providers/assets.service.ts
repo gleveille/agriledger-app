@@ -77,7 +77,6 @@ export class AssetsService {
       console.log(categories)
       this.categories = categories;
     })
-      .retry(3)
       .catch((res) => {
         return this.errorHandler.handle(res);
       });

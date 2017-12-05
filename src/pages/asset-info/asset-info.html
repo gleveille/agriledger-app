@@ -24,10 +24,33 @@
         <ion-label floating>Asset Name</ion-label>
         <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label floating>Asset Category</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.category" text-capitalize disabled></ion-input>
-      </ion-item>
+      <ion-list>
+        <ion-label  style="margin-bottom: 0px;margin-left: 16px; opacity: .4; ">
+          Category
+        </ion-label>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize
+                     disabled></ion-input>
+          <button ion-button clear item-end>Level1</button>
+        </ion-item>
+        <ion-item *ngIf="asset.category.level2">
+          <ion-input type="text" [(ngModel)]="asset.category.level2" text-capitalize disabled></ion-input>
+          <button ion-button clear item-end>Level2</button>
+        </ion-item>
+        <ion-item *ngIf="asset.category.level3">
+          <ion-input type="text" [(ngModel)]="asset.category.level3" text-capitalize disabled></ion-input>
+          <button ion-button clear item-end>Level3</button>
+        </ion-item>
+        <ion-item *ngIf="asset.category.level4">
+          <ion-input type="text" [(ngModel)]="asset.category.level4" text-capitalize disabled></ion-input>
+          <button ion-button clear item-end>Level4</button>
+        </ion-item>
+        <ion-item *ngIf="asset.category.level5">
+          <ion-label floating>Asset Category L5</ion-label>
+          <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize disabled></ion-input>
+          <button ion-button clear item-end>Level5</button>
+        </ion-item>
+      </ion-list>
       <ion-item>
         <ion-label floating>Asset Quantity</ion-label>
         <ion-input type="text" [(ngModel)]="asset.quantity" text-capitalize disabled></ion-input>
