@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <form #f="ngForm" (ngSubmit)="login(f)">
 
     <ion-list padding style="padding-top:0px">
@@ -23,7 +23,7 @@
     </ion-list>
 
     <div padding>
-      <button ion-button color="primary" block large type="submit" [disabled]="!f.valid">Login</button>
+      <button ion-button color="primary" block type="submit" [disabled]="!f.valid">Login</button>
     </div>
   </form>
 

@@ -32,7 +32,7 @@ export class WelcomePage {
     this.showdropdown = false
     console.log(this.defaultLangauge)
   }
-  
+
   signIn() {
     this.navCtrl.push(LoginPage)
 

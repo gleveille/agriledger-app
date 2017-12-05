@@ -25,7 +25,7 @@
         <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
       </ion-item>
       <ion-list>
-        <ion-label  style="margin-bottom: 0px;margin-left: 16px; opacity: .4; ">
+        <ion-label style="margin-bottom: 0px;margin-left: 16px; opacity: .4; ">
           Category
         </ion-label>
         <ion-item>
@@ -46,7 +46,6 @@
           <button ion-button clear item-end>Level4</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level5">
-          <ion-label floating>Asset Category L5</ion-label>
           <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>Level5</button>
         </ion-item>
@@ -69,6 +68,16 @@
           </button>
         </ion-col>
       </ion-row>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <img src="assets/img/intro2_l.png" style="height: 120px; width: 49%"
+                 (click)="upload()">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-list>
   </div>
 </ion-content>

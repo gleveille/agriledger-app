@@ -34,6 +34,5 @@ export class LoginPage {
       console.log(err);
       this.toastService.presentToast('Login failed');
     })
-
   }
 }
