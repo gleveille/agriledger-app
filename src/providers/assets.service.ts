@@ -17,7 +17,7 @@ import {UserService} from "./user.service";
 export class AssetsService {
 
   assets:any[] = [];
-
+  categories:any[]=[];
   constructor(private http:HttpClient, private errorHandler:ErrorHandlerService, private userService:UserService) {
   }
 
@@ -41,7 +41,6 @@ export class AssetsService {
 
 
   getMyAssets() {
-
     console.log('isndie getmy aseetets')
     return this.userService.getUser().concatMap((user:Iuser)=> {
       console.log(user)

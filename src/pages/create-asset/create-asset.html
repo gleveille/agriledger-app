@@ -47,7 +47,8 @@
 
     <ion-item *ngIf="assetCategoriesLevelFive.length">
       <ion-label floating>Level 5</ion-label>
-      <ion-select (ionChange)="onAssetCategoryLevelChange($event,4)" [(ngModel)]="asset.category.level5" multiple="false" cancelText="Cancel" okText="OK">
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,4)" [(ngModel)]="asset.category.level5"
+                  multiple="false" cancelText="Cancel" okText="OK">
         <ion-option *ngFor="let c of assetCategoriesLevelFive" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
       </ion-select>
     </ion-item>
@@ -57,13 +58,24 @@
         Asset Information
       </h5>
       <ion-item>
-        <ion-label floating>Participant Name *</ion-label>
+        <ion-label floating>Asset Name *</ion-label>
         <ion-input type="text" [(ngModel)]="asset.name" text-capitalize name="name" required></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>Asset Quantity *</ion-label>
-        <ion-input type="number" [(ngModel)]="asset.quantity" text-capitalize name="currency" required></ion-input>
+        <ion-label floating>Input Details *</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.inputDetails" text-capitalize name="name" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Expected harvest amount *</ion-label>
+        <ion-input type="number" [(ngModel)]="asset.expectedHarvestAmount" text-capitalize name="currency"
+                   required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Expected harvest date</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
       </ion-item>
 
 

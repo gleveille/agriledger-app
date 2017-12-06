@@ -4,10 +4,13 @@
   <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
     <ion-segment [(ngModel)]="pet">
       <ion-segment-button value="puppies">
-        Assets
+        All
       </ion-segment-button>
       <ion-segment-button value="kittens">
-        Pooled Assets
+        Available
+      </ion-segment-button>
+      <ion-segment-button value="Pooled">
+        Pooled
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -81,7 +84,54 @@
                   <ion-col col-6>
                     <ion-item>
                       <ion-label floating>Asset Category:</ion-label>
-                      <ion-input type="tel" [(ngModel)]="asset.category" text-capitalize disabled></ion-input>
+                      <ion-input type="tel" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <!--<ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label floating>Asset Status:</ion-label>
+                      <ion-input type="tel" [(ngModel)]="asset.status" text-capitalize disabled></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label floating>Asset Quantity:</ion-label>
+                      <ion-input type="tel" [(ngModel)]="asset.quantity" text-capitalize disabled></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>-->
+              </ion-grid>
+
+            </ion-card-content>
+
+            <div text-right>
+              <ion-icon style="margin-right: 8px; margin-bottom: 8px; font-size: 25px; color: lightgray"
+                        name="arrow-forward"></ion-icon>
+            </div>
+          </div>
+        </ion-card>
+      </ion-list>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Pooled'">
+      <ion-list>
+        <ion-card *ngFor="let asset of assets">
+          <div (click)="assetInfo(asset)">
+            <ion-card-content style="padding: 0px;">
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col col-6>
+                    <ion-item>
+                      <ion-label floating>Asset Name:</ion-label>
+                      <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-6>
+                    <ion-item>
+                      <ion-label floating>Asset Category:</ion-label>
+                      <ion-input type="tel" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
                     </ion-item>
                   </ion-col>
                 </ion-row>

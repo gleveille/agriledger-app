@@ -18,18 +18,17 @@
 
       <ion-item class="paddingLeftRem">
         <ion-label floating>6 digit Password</ion-label>
-        <ion-input type="password" ngModel [(ngModel)]="password"  name="password" required></ion-input>
+        <ion-input type="password" ngModel [(ngModel)]="password" name="password" required></ion-input>
       </ion-item>
     </ion-list>
+
+    <ion-checkbox color="dark" style="float: left; margin-left: 16px; margin-right: 16px;"></ion-checkbox>
+    <ion-label style="font-weight: lighter">I agree to the <a (click)="termsAndConditions()">Terms and
+      Conditions</a></ion-label>
 
     <div padding>
       <button ion-button color="primary" block type="submit" [disabled]="!f.valid">Login</button>
     </div>
   </form>
-
-  <ion-item class="terms">
-    <ion-label>I agree to the Terms and Conditions</ion-label>
-    <ion-checkbox color="dark"></ion-checkbox>
-  </ion-item>
 
 </ion-content>

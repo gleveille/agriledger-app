@@ -1,11 +1,24 @@
 <ion-header>
+
   <page-header [title]="'Finance'"></page-header>
+
+  <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="puppies">
+        Loan
+      </ion-segment-button>
+      <ion-segment-button value="kittens">
+        Insurance
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
 
 <ion-content padding>
 
-  <ion-grid>
+  <!--<ion-grid>
     <ion-row>
       <ion-col>
         <ion-list>
@@ -22,6 +35,20 @@
         </ion-list>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid>-->
+
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'puppies'">
+
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'kittens'">
+
+
+    </ion-list>
+
+  </div>
+
 
 </ion-content>

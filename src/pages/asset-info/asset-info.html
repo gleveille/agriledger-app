@@ -51,8 +51,17 @@
         </ion-item>
       </ion-list>
       <ion-item>
-        <ion-label floating>Asset Quantity</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.quantity" text-capitalize disabled></ion-input>
+        <ion-label floating>Input Details *</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.inputDetails" text-capitalize name="name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Expected harvest amount *</ion-label>
+        <ion-input type="number" [(ngModel)]="asset.expectedHarvestAmount" text-capitalize name="currency"
+                   required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Expected harvest date</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label floating>Asset Status</ion-label>

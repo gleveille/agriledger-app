@@ -14,7 +14,9 @@ export class CreateAssetPage {
   asset:any = {
     name: null,
     categoryId: null,
-    quantity: null,
+    inputDetails: null,
+    expectedHarvestAmount: null,
+    expectedHarvestDate: null,
     category: {level1: {}, level2: {}, level3: {}, level4: {}, level5: {}},
   };
 
@@ -131,8 +133,10 @@ export class CreateAssetPage {
     console.log(asset)
     this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
+      this.toastService.presentToast('Saved Succesfully');
     }, (err)=> {
       console.log(err)
+      this.toastService.presentToast('Something went wrong');
     })
   }
 

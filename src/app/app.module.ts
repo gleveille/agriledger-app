@@ -48,6 +48,9 @@ import {AssetsService} from "../providers/assets.service";
 import {ErrorHandlerService} from "../providers/error-handler.service";
 import {HomePage} from "../pages/home/home";
 import {SocialSharing} from "@ionic-native/social-sharing";
+import {TermsPage} from "../pages/terms/terms";
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 /*export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http,'./assets/translate/', '.json');
@@ -76,7 +79,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssetsPage,
     AssetInfoPage,
     CreateAssetPage,
-    HomePage
+    HomePage,
+    TermsPage
   ],
   imports: [
     HttpClientModule,
@@ -119,7 +123,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssetsPage,
     AssetInfoPage,
     CreateAssetPage,
-    HomePage
+    HomePage,
+    TermsPage
   ],
   providers: [
     {
@@ -145,7 +150,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     WeatherProvider,
     UserService,
     AssetsService,
-    SocialSharing
+    SocialSharing,
+    Geolocation
   ]
 })
+
 export class AppModule {}

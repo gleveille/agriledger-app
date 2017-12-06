@@ -3,20 +3,21 @@ import 'rxjs/add/operator/map';
 import {FileUploader} from 'ng2-file-upload';
 import {Events} from "ionic-angular/index";
 import {HttpClient} from "@angular/common/http";
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 @Injectable()
 export class UploadProvider {
   uploader:FileUploader;
 
-  constructor(public http:HttpClient, private events:Events) {
+  constructor(public http:HttpClient, private events:Events, private geolocation: Geolocation) {
 
   }
 
-  initUploader(url, config) {
+  initUploader(url, config, lat, long) {
     this.uploader = new FileUploader({
       url: url,
-      headers: [{name: 'x-id', value: config.id}],
+      headers: [{name: 'x-id', value: config.id}, {name: 'lat', value: lat}, {name: 'long', value: long}],
     });
 
     this.uploader.onAfterAddingFile = (file:any)=> {
@@ -31,6 +32,8 @@ export class UploadProvider {
         this.uploader.queue.push(file);
       }
     };
+
+
 
     this.uploader.onSuccessItem = (item:any, response:any)=> {
       let data:any;
