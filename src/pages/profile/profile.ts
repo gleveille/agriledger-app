@@ -17,6 +17,7 @@ import {Iuser} from "../../interface/user.interface";
 export class ProfilePage {
   serverUrl=ServerUrl;
   user={profileUrl:{}} as Iuser
+  
   constructor(public navCtrl: NavController,private events:Events,public alertCtrl: AlertController, private socialSharing: SocialSharing,
               private toastCtrl: ToastProvider,private userService:UserService) {
 

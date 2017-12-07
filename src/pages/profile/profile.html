@@ -10,37 +10,35 @@
 
   <ion-row>
     <ion-col col-12 text-center>
-      <ion-item text-center color="headerColor">
+      <ion-item text-center>
         <img width="100"
              height="100"
              [src]="serverUrl+user?.profileUrl?.url"
              style="border-radius:50%;position: relative;width: 100px; height: 100px" (click)="upload()">
-
-
       </ion-item>
-      <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">User Name</p>
+      <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">{{user.name}}</p>
     </ion-col>
   </ion-row>
 
   <ion-list>
     <ion-item>
-      <ion-label floating>Agri Id number</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label floating>{{'Agri Id number'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="user.id"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Mobile Number</ion-label>
+      <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
+      <ion-input type="tel" [(ngModel)]="user.phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{'Wechat'|translate}}</ion-label>
       <ion-input type="tel"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Wechat</ion-label>
-      <ion-input type="tel"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Company name</ion-label>
+      <ion-label floating>{{'Company name'|translate}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Adderss</ion-label>
+      <ion-label floating>{{'Adderss'|translate}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
   </ion-list>
@@ -51,7 +49,7 @@
         <ion-icon name="ios-warning-outline"></ion-icon>
       </ion-col>
       <ion-col col-11>
-        <p style="opacity: .7"> To make changes to your Profile please contact us at agriledger@aglideger.co</p>
+        <p style="opacity: .7">{{'To make changes to your Profile please contact us at'|translate}} agriledger@aglideger.co</p>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -59,7 +57,7 @@
   <ion-grid style="position: sticky; bottom: 0px; background-color: white;">
     <ion-row>
       <ion-col text-center>
-        <button ion-button>Confirm profile is correct</button>
+        <button ion-button>{{'Confirm profile is correct'|translate}}</button>
       </ion-col>
     </ion-row>
   </ion-grid>

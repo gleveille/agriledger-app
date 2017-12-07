@@ -11,7 +11,7 @@ import {InformationPage} from "../information/information";
 export class FinancePage {
 
   city: string;
-  
+
   pet: string = "puppies";
 
   constructor(public navCtrl:NavController, public navParams:NavParams,

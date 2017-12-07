@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar color="headerColor">
     <ion-title>
-      <a href="#" style="text-decoration: none" (click)="dismiss()">{{'Cancel'|translate}}</a>
-      <span style="float: right">
+      <!--<a href="#" style="text-decoration: none" (click)="dismiss()">{{'Cancel'|translate}}</a>-->
+      <span>
               {{pageConfigData.headerName||'Upload' | translate}}
       </span>
     </ion-title>
@@ -26,10 +26,11 @@
 
   <ion-list>
     <ion-item *ngFor="let item of uploader.queue">
-      <!--        <ion-avatar item-start>
-                <img [src]="item.file">
-              </ion-avatar>
-  -->
+
+      <!--<ion-avatar item-start>
+        <img [src]="item?.file?.url">
+      </ion-avatar>-->
+
       {{ item?.file?.name }}
 
       <button *ngIf="item.isSuccess" ion-button outline item-end icon-left>
@@ -47,19 +48,11 @@
         {{'Upload'|translate}}
       </button>
 
-      <!--  <button ion-button outline item-end icon-left
-                (click)="item.cancel()" [disabled]="!item.isUploading">
-          <ion-icon name="md-close"></ion-icon>
-          Cancel
-        </button>-->
-
       <button ion-button outline item-end icon-left
               (click)="item.remove()">
         <ion-icon name="trash"></ion-icon>
         {{'Remove'|translate}}
       </button>
-
-
     </ion-item>
   </ion-list>
 

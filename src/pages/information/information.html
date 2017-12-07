@@ -4,16 +4,16 @@
   <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
     <ion-segment [(ngModel)]="pet">
       <ion-segment-button value="puppies">
-        Weather
+        {{'Weather'|translate}}
       </ion-segment-button>
       <ion-segment-button value="kittens">
-        Pricing
+        {{'Pricing'|translate}}
       </ion-segment-button>
       <ion-segment-button value="agnews">
-        Agnews
+        {{'Ag news'|translate}}
       </ion-segment-button>
       <ion-segment-button value="practice">
-        Market
+        {{'Market'|translate}}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -23,7 +23,30 @@
 <ion-content padding>
 
   <div [ngSwitch]="pet">
+
     <ion-list *ngSwitchCase="'puppies'">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <form (ngSubmit)="saveForm()">
+                <ion-item>
+                  <ion-label floating>
+                    City
+                  </ion-label>
+                  <ion-input [(ngModel)]="city" name="city" type="text" text-capitalize>
+                  </ion-input>
+                </ion-item>
+              </form>
+            </ion-list>
+          </ion-col>
+          <ion-col style="padding-top: 30px; text-align: right">
+            <button padding ion-button type="submit" outline >{{'Save'|translate}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <ion-grid *ngIf="weather" text-center>
         <ion-row>
           <ion-col width-50 offset-25>
@@ -67,19 +90,19 @@
           <ion-col col-3>CONV.</ion-col>
         </ion-row>
 
-        <ion-row >
+        <ion-row>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
         </ion-row>
-        <ion-row >
+        <ion-row>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
         </ion-row>
-        <ion-row >
+        <ion-row>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>

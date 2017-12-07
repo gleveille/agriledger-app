@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, Events, AlertController} from 'ionic-angular';
 import {AssetsPage} from "../assets/assets";
 import {InformationPage} from "../information/information";
-
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {UserService} from "../../providers/user.service";
+import {Iuser} from "../../interface/user.interface";
+import {ToastProvider} from "../../providers/toast";
+import {ServerUrl} from "../../app/api.config";
+import {UploadPage} from "../upload/upload";
 
 @IonicPage()
 @Component({
@@ -16,12 +14,34 @@ import {InformationPage} from "../information/information";
   templateUrl: 'home.html',
 })
 export class HomePage {
+  serverUrl = ServerUrl;
+  user = {profileUrl: {}} as Iuser;
+  totalAssets:number=null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl:NavController, public navParams:NavParams, private events:Events, public alertCtrl:AlertController,
+              private toastCtrl:ToastProvider, private userService:UserService) {
+
+    this.events.subscribe('profileImage:uploaded', (url)=> {
+      console.log(url)
+      this.user.profileUrl.url = url;
+    })
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+    this.userService.getUser().subscribe((user:Iuser)=> {
+      this.user = user;
+      console.log(this.user)
+    }, (err)=> {
+      console.log(err);
+    });
+
+    this.userService.getAssetsCount().subscribe((data:any)=> {
+      this.totalAssets=data.count;
+    }, (err)=> {
+      console.log(err);
+    });
+
   }
 
   assets() {
@@ -30,6 +50,10 @@ export class HomePage {
 
   information() {
     this.navCtrl.push(InformationPage);
+  }
+
+  upload() {
+    this.navCtrl.push(UploadPage, {config: {uploadType: 'profile', id: this.user.id}});
   }
 
 }

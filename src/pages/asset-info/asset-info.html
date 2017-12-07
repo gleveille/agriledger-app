@@ -1,17 +1,17 @@
 <ion-header>
   <ion-navbar no-border-bottom color="headerColor">
     <ion-title>
-      Asset Details
+      {{'Asset Details'|translate}}
     </ion-title>
   </ion-navbar>
 
   <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
     <ion-segment [(ngModel)]="pet">
       <ion-segment-button value="puppies">
-        Asset Info
+        {{'Asset Info'|translate}}
       </ion-segment-button>
       <ion-segment-button value="kittens">
-        Evidence
+        {{'Evidence'|translate}}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -21,50 +21,50 @@
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'puppies'">
       <ion-item>
-        <ion-label floating>Asset Name</ion-label>
+        <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
         <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
       </ion-item>
       <ion-list>
         <ion-label style="margin-bottom: 0px;margin-left: 16px; opacity: .4; ">
-          Category
+          {{'Asset category'|translate}}
         </ion-label>
         <ion-item>
           <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize
                      disabled></ion-input>
-          <button ion-button clear item-end>Level1</button>
+          <button ion-button clear item-end>{{'Level 1'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level2">
           <ion-input type="text" [(ngModel)]="asset.category.level2" text-capitalize disabled></ion-input>
-          <button ion-button clear item-end>Level2</button>
+          <button ion-button clear item-end>{{'Level 2'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level3">
           <ion-input type="text" [(ngModel)]="asset.category.level3" text-capitalize disabled></ion-input>
-          <button ion-button clear item-end>Level3</button>
+          <button ion-button clear item-end>{{'Level 3'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level4">
           <ion-input type="text" [(ngModel)]="asset.category.level4" text-capitalize disabled></ion-input>
-          <button ion-button clear item-end>Level4</button>
+          <button ion-button clear item-end>{{'Level 4'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level5">
           <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize disabled></ion-input>
-          <button ion-button clear item-end>Level5</button>
+          <button ion-button clear item-end>{{'Level 5'|translate}}</button>
         </ion-item>
       </ion-list>
       <ion-item>
-        <ion-label floating>Input Details *</ion-label>
+        <ion-label floating>{{'Input Details *'|translate}}</ion-label>
         <ion-input type="text" [(ngModel)]="asset.inputDetails" text-capitalize name="name" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Expected harvest amount *</ion-label>
+        <ion-label floating>{{'Expected harvest amount *'|translate}}</ion-label>
         <ion-input type="number" [(ngModel)]="asset.expectedHarvestAmount" text-capitalize name="currency"
                    required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Expected harvest date</ion-label>
+        <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
         <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label floating>Asset Status</ion-label>
+        <ion-label floating>{{'Asset Status'|translate}}</ion-label>
         <ion-input type="text" [(ngModel)]="asset.status" text-capitalize disabled></ion-input>
       </ion-item>
     </ion-list>
@@ -73,7 +73,7 @@
       <ion-row no-padding>
         <ion-col text-right>
           <button ion-button clear style="color: crimson; letter-spacing: 2px;" (click)="uploadPage()">
-            +&nbsp; Add Evidence
+            +&nbsp; {{'Add Evidence'|translate}}
           </button>
         </ion-col>
       </ion-row>
@@ -82,7 +82,7 @@
         <ion-row>
           <ion-col col-12>
             <img src="assets/img/intro2_l.png" style="height: 120px; width: 49%"
-                 (click)="upload()">
+                 >
           </ion-col>
         </ion-row>
       </ion-grid>

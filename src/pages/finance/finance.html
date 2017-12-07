@@ -5,10 +5,10 @@
   <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
     <ion-segment [(ngModel)]="pet">
       <ion-segment-button value="puppies">
-        Loan
+        {{'Loan'|translate}}
       </ion-segment-button>
       <ion-segment-button value="kittens">
-        Insurance
+        {{'Insurance'|translate}}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -17,25 +17,6 @@
 
 
 <ion-content padding>
-
-  <!--<ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <form (ngSubmit)="saveForm()">
-            <ion-item>
-              <ion-label>
-                City
-              </ion-label>
-              <ion-input [(ngModel)]="city" name="city" type="text">
-              </ion-input>
-            </ion-item>
-            <button padding ion-button type="submit" block>Save Changes</button>
-          </form>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>-->
 
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'puppies'">

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {ToastProvider} from "../../providers/toast";
+import {UploadPage} from "../upload/upload";
 
 
 @IonicPage()
@@ -107,10 +108,7 @@ export class CreateAssetPage {
   getCategories(level:number) {
     return this.assetsService.getCategories(level)
       .subscribe((assetCategory:Array<any>) => {
-
         this.assetCategoriesLevelOne = assetCategory;
-
-
       }, (err) => {
         this.toastService.presentToast('Category', 'Something went wrong');
       })
@@ -128,8 +126,6 @@ export class CreateAssetPage {
 
 
     }
-
-    console.log('new asset is')
     console.log(asset)
     this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
@@ -138,6 +134,10 @@ export class CreateAssetPage {
       console.log(err)
       this.toastService.presentToast('Something went wrong');
     })
+  }
+
+  uploadPage() {
+    this.navCtrl.push(UploadPage, {config: {uploadType: 'field'}});
   }
 
 

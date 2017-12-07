@@ -10,12 +10,14 @@ import {Storage} from '@ionic/storage';
 })
 export class InformationPage {
 
-  pet: string = "puppies";
+  pet:string = "puppies";
 
   weather:any;
   location:{
     city:string
   }
+
+  city: string;
 
   constructor(public navCtrl:NavController, public navParams:NavParams,
               private weatherProvider:WeatherProvider,
@@ -38,5 +40,13 @@ export class InformationPage {
         });
     });
   }
+  saveForm() {
+    let location = {
+      city: this.city
+    }
+    this.storage.set('location', JSON.stringify(location));
+    this.navCtrl.push(InformationPage);
+  }
+
 
 }

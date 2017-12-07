@@ -3,7 +3,6 @@
 
 import {environment} from './environments/environment';
 export const ServerUrl = environment.apiURL + ':' + environment.apiPORT;
-export const BlockChainServerUrl = environment.blockchainURL;
 
 
 const ContainerApi = {
@@ -29,7 +28,7 @@ const UserApi = {
   },
   findById: {
     url: ()=>ServerUrl + '/api/users',
-    method: 'POST'
+    method: 'GET'
 
   },
   list: {

@@ -15,6 +15,9 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
 import {HttpClient} from "@angular/common/http";
 import {ErrorHandlerService} from "./error-handler.service";
+
+
+
 @Injectable()
 export class UserService {
 
@@ -45,8 +48,6 @@ export class UserService {
     return this.storage.get('userId');
   }
   getUser(){
-
-
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
       .concatMap((userId)=>{
         console.log('userId ',userId)
@@ -67,6 +68,23 @@ export class UserService {
 
   };
 
+  getAssets(){
+    return this.getUser().concatMap((user:Iuser)=>{
+      return this.http.get(`${UserApi.list.url()}/${user.id}/assets`)
+        .catch((err)=>{
+          return this.errorHandler.handle(err);
+        })
+    })
+  }
+
+  getAssetsCount(){
+    return this.getUser().concatMap((user:Iuser)=>{
+      return this.http.get(`${UserApi.list.url()}/${user.id}/assets/count`)
+        .catch((err)=>{
+          return this.errorHandler.handle(err);
+        })
+    })
+  }
 
   changePassword(oldPassword:string,newPassword:string) {
       return this.http.post(`${UserApi.changePassword.url()}`,
