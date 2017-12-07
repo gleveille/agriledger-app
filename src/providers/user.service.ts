@@ -46,7 +46,7 @@ export class UserService {
   }
   getUser(){
 
-  
+
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
       .concatMap((userId)=>{
         console.log('userId ',userId)
@@ -88,7 +88,8 @@ export class UserService {
     }
 
     resetState(){
-      this.user={};
+
+      this.user=JSON.parse(JSON.stringify({profileUrl:{}}))
     }
 
 
