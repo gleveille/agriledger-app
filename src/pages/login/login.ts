@@ -24,7 +24,7 @@ export class LoginPage {
 
     this.userService.login({email: f.value.email, password: f.value.password}).subscribe((data:any)=> {
       console.log(data);
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.setRoot(TabsPage);
     }, (err)=> {
       console.log(err);
       this.toastService.presentToast('Login failed');
@@ -52,4 +52,7 @@ export class LoginPage {
     });
     confirm.present()
   }
+
+
+
 }

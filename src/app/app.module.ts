@@ -50,6 +50,7 @@ import {HomePage} from "../pages/home/home";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {TermsPage} from "../pages/terms/terms";
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -151,7 +152,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     AssetsService,
     SocialSharing,
-    Geolocation
+    Geolocation,
+    Camera
   ]
 })
 

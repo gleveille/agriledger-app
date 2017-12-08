@@ -15,30 +15,29 @@ import {Iuser} from "../../interface/user.interface";
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
-  serverUrl=ServerUrl;
-  user={profileUrl:{}} as Iuser
-  
-  constructor(public navCtrl: NavController,private events:Events,public alertCtrl: AlertController, private socialSharing: SocialSharing,
-              private toastCtrl: ToastProvider,private userService:UserService) {
+  serverUrl = ServerUrl;
+  user = {profileUrl: {}} as Iuser
 
-    this.events.subscribe('profileImage:uploaded',(url)=>{
+  constructor(public navCtrl:NavController, private events:Events, public alertCtrl:AlertController, private socialSharing:SocialSharing,
+              private toastCtrl:ToastProvider, private userService:UserService) {
+
+    this.events.subscribe('profileImage:uploaded', (url)=> {
       console.log(url)
-      this.user.profileUrl.url=url;
+      this.user.profileUrl.url = url;
     })
-
   }
 
-
-  ionViewDidLoad(){
-    this.userService.getUser().subscribe((user:Iuser)=>{
-      this.user=user;
+  ionViewDidLoad() {
+    this.userService.getUser().subscribe((user:Iuser)=> {
+      this.user = user;
       console.log(this.user)
-    },(err)=>{
+    }, (err)=> {
       console.log(err);
     });
   }
+
   upload() {
-    this.navCtrl.push(UploadPage,{config:{uploadType:'profile',id:this.user.id}});
+    this.navCtrl.push(UploadPage, {config: {uploadType: 'profile', id: this.user.id}});
   }
 
 }

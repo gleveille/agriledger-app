@@ -21,6 +21,39 @@
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'puppies'">
 
+      <ion-item>
+        <img width="60"
+             height="60"
+             [src]="serverUrl+user?.profileUrl?.url"
+             style="border-radius:50%;position: relative;">
+      </ion-item>
+
+      <ion-list>
+        <ion-item>
+          <ion-label floating>{{'Name'|translate}}</ion-label>
+          <ion-input type="text" [(ngModel)]="user.name" text-capitalize></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>{{'Agri Id number'|translate}}</ion-label>
+          <ion-input type="text" [(ngModel)]="user.id"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
+          <ion-input type="tel" [(ngModel)]="user.phone"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>{{'Account Details'|translate}}</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>{{'Company name'|translate}}</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>{{'Adderss'|translate}}</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-list>
 
     </ion-list>
 

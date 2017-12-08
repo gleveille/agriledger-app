@@ -17,7 +17,9 @@ export class UploadProvider {
   initUploader(url, config, lat, long) {
     this.uploader = new FileUploader({
       url: url,
-      headers: [{name: 'x-id', value: config.id}, {name: 'lat', value: lat}, {name: 'long', value: long}],
+      headers: [{name: 'x-id', value: config.id},
+        {name: 'x-assetId', value: config.assetId},
+        {name: 'lat', value: lat}, {name: 'long', value: long}],
     });
 
     this.uploader.onAfterAddingFile = (file:any)=> {
@@ -27,7 +29,7 @@ export class UploadProvider {
         this.uploader.clearQueue()
         this.uploader.queue.push(file);
       }
-      else if (config.uploadType === 'field') {
+      else if (config.uploadType === 'evidences') {
         this.uploader.clearQueue()
         this.uploader.queue.push(file);
       }
@@ -40,8 +42,13 @@ export class UploadProvider {
       let url = '';
       try {
         data = JSON.parse(response);
+        console.log(data)
         url = data.result.url;
+        if(config.uploadType === 'profile')
         this.events.publish('profileImage:uploaded', url);
+
+        if(config.uploadType === 'evidences')
+          this.events.publish('evidences:uploaded', url);
 
       }
       catch (e) {

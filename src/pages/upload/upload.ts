@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {Events} from 'ionic-angular';
+import {Events, AlertController} from 'ionic-angular';
 import {ContainerApi} from '../../../src/app/api.config'
 import {FileUploader} from 'ng2-file-upload';
 import {NavParams, ViewController} from "ionic-angular/index";
 import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
 import {UploadProvider} from "../../providers/upload";
-import { Geolocation } from '@ionic-native/geolocation';
+import {Geolocation} from '@ionic-native/geolocation';
+import {Camera, CameraOptions} from '@ionic-native/camera';
 
 
 @Component({
@@ -20,9 +21,15 @@ export class UploadPage {
   pageConfigData:IUploadPageConfig;
   uploader:FileUploader;
 
+  public photos:any;
+  public base64Image:string;
+  userData = {user_id: "", token: "", imageB64: ""};
+
   constructor(public params:NavParams,
               public viewCtrl:ViewController,
-              private events:Events, private uploadProvider:UploadProvider, private geolocation: Geolocation) {
+              private events:Events, private uploadProvider:UploadProvider, private geolocation:Geolocation,
+              private camera:Camera,
+              private alertCtrl:AlertController) {
 
     this.pageConfigData = params.get('config') || {};
     console.log('pageConfigData', params.get('config'));
@@ -42,15 +49,10 @@ export class UploadPage {
     });
   }
 
-  ionViewDidLoad() {
-
-
-  }
-
   getApi() {
     if (this.pageConfigData.uploadType === 'profile')
       return ContainerApi.ProfileUploadUrl();
-    else if (this.pageConfigData.uploadType === 'field')
+    else if (this.pageConfigData.uploadType === 'evidences')
       return ContainerApi.FieldUploadUrl();
   }
 
@@ -58,9 +60,73 @@ export class UploadPage {
     this.viewCtrl.dismiss();
   }
 
+  ngOnInit() {
+    this.photos = [];
+  }
 
+  deletePhoto(index) {
+    let confirm = this.alertCtrl.create({
+      title: "Sure you want to delete this photo? There is NO undo!",
+      message: "",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Disagree clicked");
+          }
+        },
+        {
+          text: "Yes",
+          handler: () => {
+            console.log("Agree clicked");
+            this.photos.splice(index, 1);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
+  takePhoto() {
+    console.log("coming here");
 
+    const options:CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 450,
+      targetHeight: 450,
+      saveToPhotoAlbum: false
+    };
 
+    this.camera.getPicture(options).then(
+      imageData => {
+        this.base64Image = "data:image/jpeg;base64," + imageData;
+        this.photos.push(this.base64Image);
+        this.photos.reverse();
+        /*this.sendData(imageData);*/
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+  }
+
+  /*sendData(imageData) {
+    this.userData.imageB64 = imageData;
+    this.userData.user_id = "1";
+    this.userData.token = "222";
+    console.log(this.userData);
+    this.authService.postData(this.userData, "userImage").then(
+      result => {
+        this.responseData = result;
+      },
+      err => {
+        // Error log
+      }
+    );
+  }*/
 
 }

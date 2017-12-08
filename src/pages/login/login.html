@@ -22,12 +22,14 @@
       </ion-item>
     </ion-list>
 
-    <ion-checkbox color="dark" style="float: left; margin-left: 16px; margin-right: 16px;"></ion-checkbox>
+    <input color="dark" style="float: left; margin-left: 16px; margin-right: 16px;" type="checkbox"
+                  name="checkbox" ngModel [(ngModel)]="checked" checked="true">
     <ion-label style="font-weight: lighter">{{'I agree to the' |translate}} <a (click)="termsAndConditions()">{{'Terms and Conditions'|translate}}
     </a></ion-label>
 
     <div padding>
-      <button ion-button color="primary" block type="submit" [disabled]="!f.valid">{{'Login'|translate}}</button>
+      <button ion-button color="primary" block type="submit" [disabled]="!checked">{{'Login'|translate}}
+      </button>
     </div>
   </form>
 

@@ -1,7 +1,11 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Events, AlertController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {InformationPage} from "../information/information";
+import {Iuser} from "../../interface/user.interface";
+import {ServerUrl} from "../../app/api.config";
+import {ToastProvider} from "../../providers/toast";
+import {UserService} from "../../providers/user.service";
 
 @IonicPage()
 @Component({
@@ -11,30 +15,25 @@ import {InformationPage} from "../information/information";
 export class FinancePage {
 
   city: string;
-
+  serverUrl = ServerUrl;
+  user = {profileUrl: {}} as Iuser
   pet: string = "puppies";
 
   constructor(public navCtrl:NavController, public navParams:NavParams,
-              private storage:Storage) {
-    this.storage.get('location').then((val) => {
-      if (val != null) {
-        let location = JSON.parse(val);
-        this.city = location.city;
-      } else {
-        this.city = 'Heilongji';
-      }
-    });
+              private storage:Storage, private events:Events, public alertCtrl:AlertController,
+              private toastCtrl:ToastProvider, private userService:UserService) {
+
+    
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FinancePage');
+    this.userService.getUser().subscribe((user:Iuser)=>{
+      this.user=user;
+      console.log(this.user)
+    },(err)=>{
+      console.log(err);
+    });
   }
 
-  saveForm() {
-    let location = {
-      city: this.city
-    }
-    this.storage.set('location', JSON.stringify(location));
-    this.navCtrl.push(InformationPage);
-  }
+
 }
