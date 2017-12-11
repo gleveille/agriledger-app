@@ -20,7 +20,6 @@ export class UploadPage {
   long = 0;
   pageConfigData:IUploadPageConfig;
   uploader:FileUploader;
-
   public photos:any;
   public base64Image:string;
   userData = {user_id: "", token: "", imageB64: ""};
@@ -45,7 +44,6 @@ export class UploadPage {
 
     }).catch((error) => {
       console.log('Error getting location', error);
-
     });
   }
 

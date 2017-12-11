@@ -29,7 +29,7 @@ export class InterceptorService implements HttpInterceptor {
 
           console.log('access token ', accessToken);
 
-          if(request.url.indexOf('http://api.wunderground.com')===-1)
+          if(request.url.indexOf('http://dataservice.accuweather.com')===-1)
           request = request.clone({
             setHeaders: {
               'X-Access-Token': `${accessToken}`

@@ -26,28 +26,20 @@
 
     <ion-list *ngSwitchCase="'puppies'">
 
-      <!--<ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-list>
-              <form (ngSubmit)="saveForm()">
-                <ion-item>
-                  <ion-label floating>
-                    City
-                  </ion-label>
-                  <ion-input [(ngModel)]="city" name="city" type="text" text-capitalize>
-                  </ion-input>
-                </ion-item>
-              </form>
-            </ion-list>
-          </ion-col>
-          <ion-col style="padding-top: 30px; text-align: right">
-            <button padding ion-button type="submit" outline >{{'Save'|translate}}</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>-->
+      <ion-item *ngIf="localWeather">
+        <h2>{{localWeather.AdministrativeArea.EnglishName}}</h2>
+        <h2>{{localWeather.ParentCity.EnglishName}}</h2>
+        <h2>{{currentWeather[0]?.WeatherText}}</h2>
+        <h2>{{currentWeather[0]?.Temperature.Metric.Value}} {{currentWeather[0]?.Temperature.Metric.Unit}}</h2>
 
-      <ion-grid *ngIf="weather" text-center>
+        <!--<ion-item-group>
+          <ion-item-divider color="light">A</ion-item-divider>
+          <ion-item>{{dailyWeatherOne[0]?.Headline.Text}}</ion-item>
+        </ion-item-group>-->
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <!--<ion-grid *ngIf="weather" text-center>
         <ion-row>
           <ion-col width-50 offset-25>
             <h2 class="location">{{weather.display_location.full}}</h2>
@@ -76,7 +68,7 @@
 
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid>-->
     </ion-list>
 
     <ion-list *ngSwitchCase="'kittens'">

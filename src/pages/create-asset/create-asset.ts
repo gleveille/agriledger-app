@@ -130,10 +130,12 @@ export class CreateAssetPage {
     this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
       this.toastService.presentToast('Saved Succesfully');
+      this.navCtrl.pop();
     }, (err)=> {
       console.log(err)
       this.toastService.presentToast('Something went wrong');
     })
+
   }
 
   uploadPage() {
