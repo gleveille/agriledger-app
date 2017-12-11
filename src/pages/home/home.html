@@ -7,12 +7,12 @@
 
   <ion-row>
     <ion-col col-12 text-center>
-      <ion-item text-center>
-        <img width="100"
-             height="100"
-             [src]="serverUrl+user?.profileUrl?.url"
+      <ion-item text-center *ngIf="user?.profileUrl?.url || user?.profileUrl?.url?.length">
+        <img width="100" height="100" [src]="serverUrl+user?.profileUrl?.url"
              style="border-radius:50%;position: relative;width: 100px; height: 100px" (click)="upload()">
       </ion-item>
+      <ion-icon *ngIf="!user?.profileUrl?.url || !user?.profileUrl?.url?.length"
+                style="font-size: 80px;" name="md-person" (click)="presentUploadModal()"></ion-icon>
       <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">{{user.name}}</p>
     </ion-col>
   </ion-row>
@@ -20,7 +20,8 @@
   <ion-card (click)="assets()">
     <img src="assets/img/rice.jpg"/>
     <div class="card-title">{{'Assets'|translate}}</div>
-    <div class="card-subtitle">{{'Total Assets Available'|translate}} <b style="font-size: 20px">&nbsp;{{totalAssets}}</b></div>
+    <div class="card-subtitle">{{'Total Assets Available'|translate}} <b style="font-size: 20px">
+      &nbsp;{{totalAssets}}</b></div>
   </ion-card>
 
   <ion-card (click)="information()">
