@@ -1,0 +1,14 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>completeWeather</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <h2 *ngFor="let forecast of dailyWeatherFive?.DailyForecasts">{{forecast.EpochDate}}</h2>
+
+</ion-content>

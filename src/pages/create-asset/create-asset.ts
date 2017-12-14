@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {ToastProvider} from "../../providers/toast";
 import {UploadPage} from "../upload/upload";
+import {FingerprintProvider} from "../../providers/fingerprint";
 
 
 @IonicPage()
@@ -11,6 +12,9 @@ import {UploadPage} from "../upload/upload";
   templateUrl: 'create-asset.html',
 })
 export class CreateAssetPage {
+
+  startDate: string = '2017-12-01';
+  endDate: string = '2100-12-01';
 
   asset:any = {
     name: null,
@@ -36,7 +40,8 @@ export class CreateAssetPage {
   deepestCategorySelected = false;
   lastCategoryId = null;
 
-  constructor(public navCtrl:NavController, public navParams:NavParams, private assetsService:AssetsService, private toastService:ToastProvider) {
+  constructor(public navCtrl:NavController, public navParams:NavParams, private assetsService:AssetsService, private toastService:ToastProvider,
+              private fingerprintProvider:FingerprintProvider) {
 
   }
 
@@ -114,7 +119,7 @@ export class CreateAssetPage {
       })
   }
 
-  registerAsset() {
+  verify() {
     let asset = JSON.parse(JSON.stringify(this.asset));
     console.log(this.asset)
     for (let level in this.asset.category) {
@@ -126,6 +131,16 @@ export class CreateAssetPage {
 
 
     }
+
+    this.fingerprintProvider.presentActionSheet(this.registerAsset,this,123456,asset);
+
+
+
+  }
+
+
+  registerAsset(asset:any){
+
     console.log(asset)
     this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
@@ -135,9 +150,7 @@ export class CreateAssetPage {
       console.log(err)
       this.toastService.presentToast('Something went wrong');
     })
-
   }
-
   uploadPage() {
     this.navCtrl.push(UploadPage, {config: {uploadType: 'field'}});
   }

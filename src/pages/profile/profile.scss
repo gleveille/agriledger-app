@@ -15,4 +15,13 @@ page-profile {
     transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .item-label-stacked .text-input-md, .item-label-floating .text-input-md {
+    margin-left: 0;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: calc(100% - 8px);
+    color: black;
+    opacity: 1;
+  }
+
 }

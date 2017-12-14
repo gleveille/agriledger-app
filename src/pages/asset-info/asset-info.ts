@@ -13,8 +13,8 @@ import {ServerUrl} from "../../app/api.config";
 })
 export class AssetInfoPage {
 
-  serverUrl=ServerUrl;
-  asset ={category:{}} as any;
+  serverUrl = ServerUrl;
+  asset = {category: {}} as any;
   assets = [];
   pet:string = "puppies";
   isAndroid:boolean = false;
@@ -22,18 +22,20 @@ export class AssetInfoPage {
 
   constructor(public navCtrl:NavController, private userService:UserService, public navParams:NavParams,
               private assetService:AssetsService, platform:Platform, private events:Events) {
-    this.isAndroid = platform.is('android');
 
-    this.events.subscribe('evidences:uploaded',(url)=>{
+    this.isAndroid = platform.is('android');
+    
+  }
+
+  ionViewDidLoad() {
+
+    this.events.subscribe('evidences:uploaded', (url)=> {
       console.log('test-----------------------' + url);
       //this.evidences.url=url;
 
       this.asset.evidences.push(url);
     })
 
-  }
-
-  ionViewDidLoad() {
     this.userService.getUser().subscribe((user:Iuser)=> {
       this.user = user;
       console.log(this.user)
@@ -44,10 +46,10 @@ export class AssetInfoPage {
     this.asset = this.navParams.get('asset');
     console.log(this.asset);
 
-    this.assetService.getMyAssets().subscribe((data)=>{
+    this.assetService.getMyAssets().subscribe((data)=> {
       console.log(data)
-      this.assets=data;
-    },(err)=>{
+      this.assets = data;
+    }, (err)=> {
       console.log(err)
     })
   }
@@ -59,10 +61,10 @@ export class AssetInfoPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-    this.assetService.getMyAssets().subscribe((data)=>{
+    this.assetService.getMyAssets().subscribe((data)=> {
       console.log(data)
-      this.assets=data;
-    },(err)=>{
+      this.assets = data;
+    }, (err)=> {
       console.log(err)
     })
 

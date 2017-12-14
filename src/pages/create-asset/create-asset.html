@@ -55,7 +55,7 @@
 
     <div *ngIf="deepestCategorySelected">
       <h5 text-center style="opacity: .8; letter-spacing: 4px;">
-       {{'Asset Information'|translate}}
+        {{'Asset Information'|translate}}
       </h5>
       <ion-item>
         <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
@@ -75,7 +75,12 @@
 
       <ion-item>
         <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
+        <ion-datetime
+          displayFormat="MMM DD, YYYY"
+          [min]="startDate"
+          [max]="endDate"
+          [(ngModel)]="asset.expectedHarvestDate">
+        </ion-datetime>
       </ion-item>
 
       <ion-grid>
@@ -87,7 +92,7 @@
           </ion-col>-->
           <ion-col text-right>
             <button ion-button color="primary" type="submit" [disabled]="false"
-                    (click)="registerAsset()">
+                    (click)="verify()">
               {{registerPromise==='pending'?'Registering' :'Register'|translate}}
             </button>
           </ion-col>

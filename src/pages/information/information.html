@@ -20,17 +20,20 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
+
+
 
   <div [ngSwitch]="pet">
 
     <ion-list *ngSwitchCase="'puppies'">
 
-      <ion-item *ngIf="localWeather">
+      <ion-item *ngIf="localWeather" (click)="weatherInfo(dailyWeatherFive)">
         <h2>{{localWeather.AdministrativeArea.EnglishName}}</h2>
         <h2>{{localWeather.ParentCity.EnglishName}}</h2>
         <h2>{{currentWeather[0]?.WeatherText}}</h2>
         <h2>{{currentWeather[0]?.Temperature.Metric.Value}} {{currentWeather[0]?.Temperature.Metric.Unit}}</h2>
+        <h2>{{dailyWeatherOne?.DailyForecasts[0]?.Date}}</h2>
 
         <!--<ion-item-group>
           <ion-item-divider color="light">A</ion-item-divider>
@@ -104,6 +107,22 @@
       </ion-grid>
 
     </ion-list>
+
+    <ion-list *ngSwitchCase="'agnews'" scroll="true" overflow-scroll="hidden" class="iframe-wrapper" style="height: 100%">
+
+        <div class="container" style="height: 100%">
+          <div class="row" style="height: 100%">
+            <iframe data-tap-disabled="true" src="http://www.agriledger.io/blog/" style="position: absolute; border: none"></iframe>
+          </div>
+        </div>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'practice'">
+
+
+    </ion-list>
+
   </div>
 
 </ion-content>

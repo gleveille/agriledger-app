@@ -1,8 +1,5 @@
 page-finance {
 
-  .list-md .item-block .item-inner {
-    border-bottom: 0px solid #dedede;
-  }
   .label-md {
     margin: 0px;
     margin-bottom: 10px;
@@ -25,19 +22,6 @@ page-finance {
     box-shadow: none;
     -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
     transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .button-clear-md {
-    border-color: transparent;
-    color: lightgrey;
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    opacity: 1;
-  }
-
-  .list-md .item-input:last-child {
-    border-bottom: 0px solid #dedede;
   }
 
   ion-card {

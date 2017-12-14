@@ -26,6 +26,11 @@ export class HomePage {
       this.user.profileUrl.url = url;
     })
 
+    this.events.subscribe('hello', (currentWeather)=>{
+      console.log('tessssssssssssssssssss')
+      console.log(currentWeather)
+    });
+
   }
 
   ionViewDidLoad() {
@@ -45,11 +50,11 @@ export class HomePage {
   }
 
   assets() {
-    this.navCtrl.push(AssetsPage);
+    /*this.navCtrl.push(AssetsPage);*/
   }
 
   information() {
-    this.navCtrl.push(InformationPage);
+    /*this.navCtrl.push(InformationPage);*/
   }
 
   upload() {

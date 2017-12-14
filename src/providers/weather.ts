@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
-import { Geolocation } from '@ionic-native/geolocation';
+import {Geolocation} from '@ionic-native/geolocation';
 
 
 @Injectable()
@@ -12,9 +12,9 @@ export class WeatherProvider {
   private baseUrl = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
 
 
-  constructor(public http: HttpClient, private geolocation: Geolocation) {
-    console.log('Hello WeatherProvider Provider');
+  constructor(public http:HttpClient, private geolocation:Geolocation) {
 
+    
   }
 
 
@@ -42,13 +42,16 @@ export class WeatherProvider {
   }
 
   currentCond(url) {
-       return this.http.get(url);
+    return this.http.get(url);
   }
 
-  /*dailyOne(url) {
+  dailyOne(url) {
     return this.http.get(url);
-  }*/
+  }
 
+  dailyFive(url) {
+    return this.http.get(url);
+  }
 
 
 }

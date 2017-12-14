@@ -22,23 +22,23 @@
   <ion-list>
     <ion-item>
       <ion-label floating>{{'Agri Id number'|translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="user.id"></ion-input>
+      <ion-input type="text" [(ngModel)]="user.id" disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
-      <ion-input type="tel" [(ngModel)]="user.phone"></ion-input>
+      <ion-input type="tel" [(ngModel)]="user.phone" disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Wechat'|translate}}</ion-label>
-      <ion-input type="tel"></ion-input>
+      <ion-input type="tel" disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Company name'|translate}}</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Address'|translate}}</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" disabled></ion-input>
     </ion-item>
   </ion-list>
 
@@ -53,9 +53,9 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid style="position: sticky; bottom: 0px; background-color: white;">
+  <ion-grid>
     <ion-row>
-      <ion-col text-center>
+      <ion-col text-right>
         <button ion-button>{{'Confirm profile is correct'|translate}}</button>
       </ion-col>
     </ion-row>

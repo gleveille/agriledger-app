@@ -51,6 +51,10 @@ import {SocialSharing} from "@ionic-native/social-sharing";
 import {TermsPage} from "../pages/terms/terms";
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {CompleteWeatherPage} from "../pages/complete-weather/complete-weather";
+import {HttpModule} from "@angular/http";
+import {CacheModule} from 'ionic-cache';
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -81,16 +85,19 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssetInfoPage,
     CreateAssetPage,
     HomePage,
-    TermsPage
+    TermsPage,
+    CompleteWeatherPage
   ],
   imports: [
     HttpClientModule,
+    HttpModule,
     ComponentsModule,
     BrowserModule,
     BrowserAnimationsModule,
     PipesModule,
     FileUploadModule,
     ClipboardModule,
+    CacheModule.forRoot(),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: '__mydb',
@@ -125,7 +132,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssetInfoPage,
     CreateAssetPage,
     HomePage,
-    TermsPage
+    TermsPage,
+    CompleteWeatherPage
   ],
   providers: [
     {
@@ -153,7 +161,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssetsService,
     SocialSharing,
     Geolocation,
-    Camera
+    Camera,
+    InAppBrowser
   ]
 })
 

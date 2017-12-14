@@ -20,4 +20,14 @@ page-information {
     border-style: double;
   }
 
+  .iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .overflow{
+    overflow: hidden;
+  }
+
 }
