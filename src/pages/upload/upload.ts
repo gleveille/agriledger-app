@@ -7,6 +7,8 @@ import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
 import {UploadProvider} from "../../providers/upload";
 import {Geolocation} from '@ionic-native/geolocation';
 import {Camera, CameraOptions} from '@ionic-native/camera';
+import {ToastProvider} from "../../providers/toast";
+import {FingerprintProvider} from "../../providers/fingerprint";
 
 
 @Component({
@@ -25,10 +27,11 @@ export class UploadPage {
   userData = {user_id: "", token: "", imageB64: ""};
 
   constructor(public params:NavParams,
+              private toastService:ToastProvider,
               public viewCtrl:ViewController,
               private events:Events, private uploadProvider:UploadProvider, private geolocation:Geolocation,
               private camera:Camera,
-              private alertCtrl:AlertController) {
+              private alertCtrl:AlertController, private fingerprintProvider:FingerprintProvider) {
 
     this.pageConfigData = params.get('config') || {};
     console.log('pageConfigData', params.get('config'));
@@ -86,8 +89,6 @@ export class UploadPage {
   }
 
   takePhoto() {
-    console.log("coming here");
-
     const options:CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -103,7 +104,6 @@ export class UploadPage {
         this.base64Image = "data:image/jpeg;base64," + imageData;
         this.photos.push(this.base64Image);
         this.photos.reverse();
-        /*this.sendData(imageData);*/
       },
       err => {
         console.log(err);
@@ -112,19 +112,32 @@ export class UploadPage {
 
   }
 
-  /*sendData(imageData) {
-    this.userData.imageB64 = imageData;
-    this.userData.user_id = "1";
-    this.userData.token = "222";
-    console.log(this.userData);
-    this.authService.postData(this.userData, "userImage").then(
-      result => {
-        this.responseData = result;
-      },
-      err => {
-        // Error log
-      }
-    );
-  }*/
+  verify(photo:any,index:number) {
+
+    this.fingerprintProvider.presentActionSheet(this.uploadFromCamera, this, 123456, photo,index);
+  }
+
+
+
+  async uploadFromCamera(params:any[]){
+    const photo=params[0];
+    const index=params[1];
+    console.log(photo)
+    console.log(this.url)
+    console.log(this.pageConfigData)
+    console.log(this.lat,this.long)
+    let url;
+    try{
+      url=await this.uploadProvider.uploadFromCamera(photo,this.url, this.pageConfigData, this.lat, this.long)
+      console.log('uploaded')
+      this.toastService.presentToast('Uploaded');
+      this.photos.splice(index, 1);
+    }
+    catch (err){
+      console.log(err)
+      this.toastService.presentToast(err);
+    }
+    console.log(url)
+  }
 
 }

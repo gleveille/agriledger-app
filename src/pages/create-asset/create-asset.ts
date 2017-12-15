@@ -13,8 +13,8 @@ import {FingerprintProvider} from "../../providers/fingerprint";
 })
 export class CreateAssetPage {
 
-  startDate: string = '2017-12-01';
-  endDate: string = '2100-12-01';
+  startDate:string = '2017-12-01';
+  endDate:string = '2100-12-01';
 
   asset:any = {
     name: null,
@@ -128,19 +128,15 @@ export class CreateAssetPage {
         asset.category[level] = this.asset.category[level].attrs[this.chosenLang];
       else
         asset.category[level] = '';
-
-
     }
 
-    this.fingerprintProvider.presentActionSheet(this.registerAsset,this,123456,asset);
-
-
-
+    this.fingerprintProvider.presentActionSheet(this.registerAsset, this, 123456, asset);
   }
 
 
-  registerAsset(asset:any){
+  registerAsset(params:any[]) {
 
+    const asset=params[0];
     console.log(asset)
     this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
@@ -151,6 +147,7 @@ export class CreateAssetPage {
       this.toastService.presentToast('Something went wrong');
     })
   }
+
   uploadPage() {
     this.navCtrl.push(UploadPage, {config: {uploadType: 'field'}});
   }

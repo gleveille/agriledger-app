@@ -55,6 +55,8 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {CompleteWeatherPage} from "../pages/complete-weather/complete-weather";
 import {HttpModule} from "@angular/http";
 import {CacheModule} from 'ionic-cache';
+import { FileTransfer } from '@ionic-native/file-transfer';
+
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -150,6 +152,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SpinnerProvider,
     UploadProvider,
     File,
+    FileTransfer,
     FingerprintAIO,
     PinDialog,
     FingerprintProvider,

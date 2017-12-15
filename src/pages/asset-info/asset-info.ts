@@ -24,18 +24,15 @@ export class AssetInfoPage {
               private assetService:AssetsService, platform:Platform, private events:Events) {
 
     this.isAndroid = platform.is('android');
-    
+
+    this.events.subscribe('evidences:uploaded', (url)=> {
+
+      this.asset.evidences.push(url);
+
+    })
   }
 
   ionViewDidLoad() {
-
-    this.events.subscribe('evidences:uploaded', (url)=> {
-      console.log('test-----------------------' + url);
-      //this.evidences.url=url;
-
-      this.asset.evidences.push(url);
-    })
-
     this.userService.getUser().subscribe((user:Iuser)=> {
       this.user = user;
       console.log(this.user)
@@ -45,13 +42,6 @@ export class AssetInfoPage {
 
     this.asset = this.navParams.get('asset');
     console.log(this.asset);
-
-    this.assetService.getMyAssets().subscribe((data)=> {
-      console.log(data)
-      this.assets = data;
-    }, (err)=> {
-      console.log(err)
-    })
   }
 
   uploadPage() {
@@ -59,19 +49,5 @@ export class AssetInfoPage {
     this.navCtrl.push(UploadPage, {config: {uploadType: 'evidences', assetId: this.asset.id, id: this.user.id}});
   }
 
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-    this.assetService.getMyAssets().subscribe((data)=> {
-      console.log(data)
-      this.assets = data;
-    }, (err)=> {
-      console.log(err)
-    })
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
-  }
 
 }

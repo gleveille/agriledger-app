@@ -40,7 +40,7 @@ export class FingerprintProvider {
     return this.pinService.show();
   }
 
-  async presentActionSheet(cb:{(params:any):void;}, scope, passcode:number, params:any) {
+  async presentActionSheet(cb:{(param:any[]):void;}, scope, passcode:number, ...params:any[]) {
 
     if (typeof cb !== 'function' || !scope || !passcode) {
 
@@ -48,7 +48,10 @@ export class FingerprintProvider {
       return false;
     }
 
-    params = params || null;
+    console.log('%c params are','color:red')
+    console.log(params)
+
+    params = params || [];
 
     try {
       await this.isFingerPrintAvailable();

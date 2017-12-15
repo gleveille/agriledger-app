@@ -41,14 +41,14 @@ export class AssetsPage {
     this.assetService.getMyAssets().subscribe((data)=>{
       console.log(data)
       this.assets=data;
+      refresher.complete();
+
     },(err)=>{
       console.log(err)
+      refresher.complete();
+
     })
 
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
   }
 
 
