@@ -5,6 +5,8 @@ import {ToastProvider} from "../../providers/toast";
 import {TabsPage} from "../tabs/tabs";
 import {UserService} from "../../providers/user.service";
 import {TermsPage} from "../terms/terms";
+import {ChangePasswordPage} from "../change-password/change-password";
+import {PasscodePage} from "../passcode/passcode";
 
 @Component({
   selector: 'page-login',
@@ -22,9 +24,16 @@ export class LoginPage {
 
   login(f:NgForm) {
 
-    this.userService.login({email: f.value.email, password: f.value.password}).subscribe((data:any)=> {
-      console.log(data);
-      this.navCtrl.setRoot(TabsPage);
+    this.userService.login({email: f.value.email, password: f.value.password}).subscribe((user:any)=> {
+      console.log(user);
+      if(!user.user.isPasswordChanged){
+        this.navCtrl.setRoot(ChangePasswordPage)
+      }
+      else if(!user.user.passcode){
+        this.navCtrl.setRoot(PasscodePage)
+      }
+      else
+        this.navCtrl.setRoot(TabsPage)
     }, (err)=> {
       console.log(err);
       this.toastService.presentToast('Login failed');
@@ -52,7 +61,5 @@ export class LoginPage {
     });
     confirm.present()
   }
-
-
 
 }

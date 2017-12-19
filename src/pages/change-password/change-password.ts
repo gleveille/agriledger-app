@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ChangePasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {UserService} from "../../providers/user.service";
+import {ToastProvider} from "../../providers/toast";
+import {PasscodePage} from "../passcode/passcode";
 
 @IonicPage()
 @Component({
@@ -15,11 +11,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChangePasswordPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  credential = {oldPassword: null, newPassword: null, rePassword: null};
+  passwordChangeRequestStatus = 'resolved';
+
+  constructor(public navCtrl:NavController, public navParams:NavParams, private toastService:ToastProvider,
+              private userService:UserService) {
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChangePasswordPage');
+  changePassword() {
+    if (this.credential.newPassword !== this.credential.rePassword) {
+      this.toastService.presentToast('Password', 'Password does not match');
+      return;
+    }
+
+    this.passwordChangeRequestStatus = 'pending';
+    this.userService.changePassword(this.credential.oldPassword, this.credential.newPassword)
+      .subscribe((data:any)=> {
+        this.passwordChangeRequestStatus = 'resolved';
+        this.credential.oldPassword = null;
+        this.credential.newPassword = null;
+        this.credential.rePassword = null;
+        this.navCtrl.setRoot(PasscodePage)
+        this.toastService.presentToast('Changed Sucessfully');
+
+      }, (err)=> {
+        console.log(err)
+        this.passwordChangeRequestStatus = 'rejected';
+
+        this.toastService.presentToast('Password', err.message);
+      });
   }
 
 }

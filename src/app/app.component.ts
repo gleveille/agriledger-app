@@ -7,6 +7,10 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {Storage} from '@ionic/storage';
 import {UserService} from "../providers/user.service";
 import {CacheService} from 'ionic-cache';
+import {FingerprintProvider} from "../providers/fingerprint";
+import {ChangePasswordPage} from "../pages/change-password/change-password";
+import {LoginPage} from "../pages/login/login";
+import {PasscodePage} from "../pages/passcode/passcode";
 
 declare var agrichainJS;
 @Component({
@@ -16,15 +20,15 @@ export class MyApp {
   rootPage:any = WelcomePage;
 
   constructor(platform:Platform, statusBar:StatusBar, splashScreen:SplashScreen, private storage:Storage,
-              public loadingCtrl:LoadingController, private userService:UserService,
+              public loadingCtrl:LoadingController, private userService:UserService, public fingerprintProvider: FingerprintProvider,
               public cache: CacheService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      cache.setDefaultTTL(60*60*12);
-      cache.setOfflineInvalidate(false);
 
       splashScreen.hide();
+      //this.fingerprintProvider.presentActionSheet(this.verify,this,123456,true,null);
+
       this.verify();
 
     });
@@ -40,7 +44,19 @@ export class MyApp {
     this.userService.getUser().subscribe((user)=> {
       console.log(user)
       loader.dismiss();
-      this.rootPage = TabsPage
+      if(user && user.id){
+       if(!user.isPasswordChanged){
+          this.rootPage = ChangePasswordPage
+        }
+        else if(!user.passcode){
+          this.rootPage = PasscodePage;
+        }
+       else
+         this.rootPage = TabsPage
+      }
+
+      else
+      this.rootPage = WelcomePage
     }, (err)=> {
       console.log(err);
       loader.dismiss();

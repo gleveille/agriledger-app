@@ -14,7 +14,7 @@
         <img width="100" height="100" [src]="serverUrl+user?.profileUrl?.url" style="border-radius:50%;position: relative;width: 100px; height: 100px" (click)="upload()">
       </ion-item>
       <ion-icon *ngIf="!user?.profileUrl?.url || !user?.profileUrl?.url?.length"
-                style="font-size: 80px;" name="md-person" (click)="presentUploadModal()"></ion-icon>
+                style="font-size: 80px;" name="md-person" (click)="upload()"></ion-icon>
       <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">{{user.name}}</p>
     </ion-col>
   </ion-row>
@@ -39,6 +39,10 @@
     <ion-item>
       <ion-label floating>{{'Address'|translate}}</ion-label>
       <ion-input type="text" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fingerprint Disabled</ion-label>
+      <ion-toggle></ion-toggle>
     </ion-item>
   </ion-list>
 

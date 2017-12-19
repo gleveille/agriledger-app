@@ -4,6 +4,7 @@ import {NavController} from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
 import {TranslateServiceProvider} from "../../providers/translate-service";
 import {LoginPage} from "../login/login";
+import {ChangePasswordPage} from "../change-password/change-password";
 
 
 declare var Mnemonic, agrichainJS;
@@ -34,8 +35,7 @@ export class WelcomePage {
   }
 
   signIn() {
-    this.navCtrl.push(LoginPage)
-
+    this.navCtrl.push(LoginPage);
   }
 
 

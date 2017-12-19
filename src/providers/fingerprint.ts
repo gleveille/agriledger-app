@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import {FingerprintAIO, FingerprintOptions} from '@ionic-native/fingerprint-aio';
 import {ToastProvider} from "./toast";
 import {PinDialogProvider} from "./pin-dialog";
-import {ActionSheetController} from 'ionic-angular';
+import {ActionSheetController, Platform} from 'ionic-angular';
 import {HttpClient} from "@angular/common/http";
 
 
@@ -18,7 +18,7 @@ export class FingerprintProvider {
     localizedReason: 'Please authenticate' //Only for iOS
   };
 
-  constructor(public http:HttpClient,
+  constructor(public http:HttpClient, public platform:Platform,
               public actionSheetCtrl:ActionSheetController,
               private faio:FingerprintAIO, private toastProvider:ToastProvider, private pinService:PinDialogProvider) {
     console.log('Hello FingerprintProvider Provider');
@@ -40,32 +40,28 @@ export class FingerprintProvider {
     return this.pinService.show();
   }
 
-  async presentActionSheet(cb:{(param:any[]):void;}, scope, passcode:number, ...params:any[]) {
+  async presentActionSheet(cb:{(param:any[]):void;}, scope, passcode:number,shouldExit=false, ...params:any[]) {
 
     if (typeof cb !== 'function' || !scope || !passcode) {
-
       this.toastProvider.presentToast('Invalid argument');
       return false;
     }
 
-    console.log('%c params are','color:red')
+    console.log('%c params are', 'color:red')
     console.log(params)
-
     params = params || [];
 
     try {
       await this.isFingerPrintAvailable();
-      this.presentActionSheetWithFingerprint(cb, scope, passcode, params);
+      this.presentActionSheetWithFingerprint(cb, scope, passcode,shouldExit, params);
     }
     catch (err) {
-      this.presentActionSheetWithoutFingerprint(cb, scope, passcode, params);
+      this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
     }
-
   }
 
 
-  presentActionSheetWithFingerprint(cb, scope, passcode, params) {
-
+  presentActionSheetWithFingerprint(cb, scope, passcode,shouldExit, params) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Authenticate using',
       buttons: [
@@ -76,8 +72,12 @@ export class FingerprintProvider {
             this.passcodeVerfication().then((pcode:string)=> {
               console.log(pcode)
 
-              if (pcode === null)
-                return;
+              if (pcode === null){
+                if(shouldExit)
+                  return this.platform.exitApp();
+                else
+                  return;
+              }
               if (pcode == '' + passcode) {
                 cb.call(scope, params);
 
@@ -98,6 +98,9 @@ export class FingerprintProvider {
             this.fingerprintVerification().then((data)=> {
               cb.call(scope, params);
             }).catch((err)=> {
+              if(shouldExit)
+                return this.platform.exitApp();
+              else
               console.log(err);
             })
           }
@@ -106,7 +109,10 @@ export class FingerprintProvider {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            if(shouldExit)
+              return this.platform.exitApp();
+            else
+              return;
           }
         }
       ]
@@ -114,7 +120,7 @@ export class FingerprintProvider {
     actionSheet.present();
   }
 
-  presentActionSheetWithoutFingerprint(cb, scope, passcode, params) {
+  presentActionSheetWithoutFingerprint(cb, scope, passcode,shouldExit, params) {
 
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Authenticate using',
@@ -125,8 +131,13 @@ export class FingerprintProvider {
           handler: () => {
             this.passcodeVerfication().then((pcode:string)=> {
               console.log(pcode)
-              if (pcode === null)
-                return;
+              if (pcode === null){
+                if(shouldExit)
+                  return this.platform.exitApp();
+                else
+                  return;
+              }
+
               if (pcode == '' + passcode) {
                 cb.call(scope, params);
 
@@ -141,7 +152,10 @@ export class FingerprintProvider {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            if(shouldExit)
+              return this.platform.exitApp();
+            else
+              return;
           }
         }
       ]

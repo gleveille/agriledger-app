@@ -4,6 +4,8 @@ import {AssetsService} from "../../providers/assets.service";
 import {ToastProvider} from "../../providers/toast";
 import {UploadPage} from "../upload/upload";
 import {FingerprintProvider} from "../../providers/fingerprint";
+import {UserService} from "../../providers/user.service";
+import {Iuser} from "../../interface/user.interface";
 
 
 @IonicPage()
@@ -39,18 +41,18 @@ export class CreateAssetPage {
   assetCategoriesLevelFive = [];
   deepestCategorySelected = false;
   lastCategoryId = null;
+  user={} as Iuser;
 
   constructor(public navCtrl:NavController, public navParams:NavParams, private assetsService:AssetsService, private toastService:ToastProvider,
-              private fingerprintProvider:FingerprintProvider) {
+              private fingerprintProvider:FingerprintProvider, public userService: UserService) {
 
   }
 
   ionViewDidLoad() {
     this.getCategories(0);
-  }
-
-  private updateAssets() {
-
+    this.userService.getUser().subscribe((user)=>{
+      this.user=user;
+    });
   }
 
   onAssetCategoryLevelChange(category:any, level:number, index:number) {
@@ -130,12 +132,11 @@ export class CreateAssetPage {
         asset.category[level] = '';
     }
 
-    this.fingerprintProvider.presentActionSheet(this.registerAsset, this, 123456, asset);
+    this.fingerprintProvider.presentActionSheet(this.registerAsset, this, this.user.passcode,false, asset);
   }
 
 
   registerAsset(params:any[]) {
-
     const asset=params[0];
     console.log(asset)
     this.assetsService.createAsset(asset).subscribe((data)=> {

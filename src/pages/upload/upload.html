@@ -41,7 +41,7 @@
 
 
   <ion-list>
-    <ion-item *ngFor="let item of uploader.queue">
+    <ion-item *ngFor="let item of uploader.queue;let i=index;">
 
       <!--<ion-avatar item-start>
         <img [src]="item?.file?.url">
@@ -59,7 +59,7 @@
         {{'Failed'|translate}}
       </button>
       <button ion-button outline item-end icon-left
-              (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+              (click)="verify(null,i,1)" [disabled]="item.isReady || item.isUploading || item.isSuccess">
         <ion-icon name="md-cloud-upload"></ion-icon>
         {{'Upload'|translate}}
       </button>
@@ -79,7 +79,7 @@
         <img [src]="photo">
       </ion-avatar>
       <button ion-button outline item-end icon-left
-              (click)="verify(photo,i)">
+              (click)="verify(photo,i,2)">
         <ion-icon name="md-cloud-upload"></ion-icon>
         {{'Upload'|translate}}
       </button>

@@ -96,7 +96,8 @@ export class UploadPage {
       mediaType: this.camera.MediaType.PICTURE,
       targetWidth: 450,
       targetHeight: 450,
-      saveToPhotoAlbum: false
+      saveToPhotoAlbum: false,
+      correctOrientation: true
     };
 
     this.camera.getPicture(options).then(
@@ -112,12 +113,21 @@ export class UploadPage {
 
   }
 
-  verify(photo:any,index:number) {
+  verify(photo:any,index:number,type:number) {
 
-    this.fingerprintProvider.presentActionSheet(this.uploadFromCamera, this, 123456, photo,index);
+    if(type===1){
+      this.fingerprintProvider.presentActionSheet(this.uploadFromGallary, this, 123456,false, index);
+
+    }
+    if(type===2)
+    this.fingerprintProvider.presentActionSheet(this.uploadFromCamera, this, 123456,false, photo,index);
   }
+  
+  uploadFromGallary(params:any[]){
 
-
+    const index=params[0];
+    this.uploader.queue[index].upload();
+  }
 
   async uploadFromCamera(params:any[]){
     const photo=params[0];

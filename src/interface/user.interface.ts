@@ -11,6 +11,7 @@ export interface Iuser {
     lat:string,
     long:string
   },
+  passcode?:number,
   walletAddress?:string,
   publicKey?:string,
   isPasswordChanged?:boolean,

@@ -26,6 +26,10 @@ const UserApi = {
     method: 'POST'
 
   },
+  changePasscode: {
+    url: ()=>ServerUrl + '/api/users/change-passcode',
+    method: 'POST'
+  },
   findById: {
     url: ()=>ServerUrl + '/api/users',
     method: 'GET'

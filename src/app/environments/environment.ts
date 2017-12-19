@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  apiURL: 'http://192.168.1.5',
+  apiURL: 'http://192.168.2.140',
   apiPORT: '8080'
 };

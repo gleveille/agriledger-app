@@ -24,13 +24,12 @@ export class UserService {
   user={} as Iuser;
   accessToken:string=null;
   constructor(private http:HttpClient,private errorHandler:ErrorHandlerService,private storage:Storage) {
-    console.log('access token is',localStorage.getItem('accessToken') ,'userId is ',localStorage.getItem('userId'));
   }
 
   login(user:Iuser){
     return this.http.post(`${UserApi.login.url()}?include=User`,user)
         .do((user:any)=>{
-          this.user=user;
+          this.user=user.user;
           this.accessToken=user.id;
           this.storage.set('userId',user.userId);
           this.storage.set('accessToken',user.id);
@@ -47,7 +46,28 @@ export class UserService {
   getUserIdFromLocalStorage(){
     return this.storage.get('userId');
   }
+
+  updatePasscode(passcode:any){
+    if(!passcode){
+      return Observable.throw('no passcode');
+    }
+    this.user.passcode=passcode;
+    return this.http.post(`${UserApi.changePasscode.url()}`,{passcode:passcode}).do((res)=>{
+    })
+      .catch((err)=>{
+        this.user.passcode=null;
+
+        return this.errorHandler.handle(err);
+      })
+
+  };
+
+
   getUser(){
+
+    if(this.user){
+      return Observable.of(this.user);
+    }
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
       .concatMap((userId)=>{
         console.log('userId ',userId)

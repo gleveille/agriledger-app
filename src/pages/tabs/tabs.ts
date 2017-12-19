@@ -5,6 +5,7 @@ import {AssetsPage} from "../assets/assets";
 import {CommunityPage} from "../community/community";
 import {FinancePage} from "../finance/finance";
 import {HomePage} from "../home/home";
+import {UserService} from "../../providers/user.service";
 
 @Component({
   templateUrl: 'tabs.html'
@@ -18,7 +19,7 @@ export class TabsPage {
   tab5Root = ProfilePage;
 
 
-  constructor() {
+  constructor(private userService:UserService) {
 
   }
 

@@ -56,6 +56,8 @@ import {CompleteWeatherPage} from "../pages/complete-weather/complete-weather";
 import {HttpModule} from "@angular/http";
 import {CacheModule} from 'ionic-cache';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import {ChangePasswordPage} from "../pages/change-password/change-password";
+import {PasscodePage} from "../pages/passcode/passcode";
 
 
 
@@ -88,7 +90,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateAssetPage,
     HomePage,
     TermsPage,
-    CompleteWeatherPage
+    CompleteWeatherPage,
+    ChangePasswordPage,
+    PasscodePage
   ],
   imports: [
     HttpClientModule,
@@ -135,7 +139,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateAssetPage,
     HomePage,
     TermsPage,
-    CompleteWeatherPage
+    CompleteWeatherPage,
+    ChangePasswordPage,
+    PasscodePage
   ],
   providers: [
     {

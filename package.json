@@ -35,7 +35,7 @@
     "@ionic-native/geolocation": "^4.4.2",
     "@ionic-native/in-app-browser": "^4.5.2",
     "@ionic-native/photo-viewer": "^4.4.2",
-    "@ionic-native/pin-dialog": "^4.4.0",
+    "@ionic-native/pin-dialog": "^4.5.2",
     "@ionic-native/screen-orientation": "^4.1.0",
     "@ionic-native/social-sharing": "^4.4.2",
     "@ionic-native/spinner-dialog": "^4.1.0",
