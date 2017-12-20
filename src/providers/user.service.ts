@@ -21,7 +21,7 @@ import {ErrorHandlerService} from "./error-handler.service";
 @Injectable()
 export class UserService {
 
-  user={} as Iuser;
+  user=null as Iuser;
   accessToken:string=null;
   constructor(private http:HttpClient,private errorHandler:ErrorHandlerService,private storage:Storage) {
   }
@@ -65,7 +65,7 @@ export class UserService {
 
   getUser(){
 
-    if(this.user){
+    if(this.user && this.user.id){
       return Observable.of(this.user);
     }
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
@@ -131,6 +131,11 @@ export class UserService {
     }
 
 
+
+  isFingerPrintEnabled(){
+
+    return this.storage.get('fingerPrintEnabled');
+  }
 
 
 

@@ -24,4 +24,49 @@ page-profile {
     opacity: 1;
   }
 
+  .language_text img, .language_option img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 5px 0 0 5px;
+  }
+  .language_text, .language_gather li {
+    width: 50px;
+    margin-bottom: 0px;
+  }
+
+  .down_icon {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid rgb(201,201,201);
+    width: 0px;
+    height: 0px;
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    left: 40px;
+  }
+
+  .dropdown {
+    position: absolute;
+    display: inline-block;
+    top: 0px;
+    z-index: 5;
+    right: 10px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  picToView:string= "assets/img/uk.png";
+
 }

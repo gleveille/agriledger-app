@@ -25,10 +25,11 @@ export class AssetInfoPage {
 
     this.isAndroid = platform.is('android');
 
+    this.userService.getAssets();
+
     this.events.subscribe('evidences:uploaded', (url)=> {
-
+      console.log(url);
       this.asset.evidences.push(url);
-
     })
   }
 

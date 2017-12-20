@@ -11,23 +11,26 @@ import {FingerprintProvider} from "../providers/fingerprint";
 import {ChangePasswordPage} from "../pages/change-password/change-password";
 import {LoginPage} from "../pages/login/login";
 import {PasscodePage} from "../pages/passcode/passcode";
+import {Iuser} from "../interface/user.interface";
 
 declare var agrichainJS;
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = WelcomePage;
+  rootPage:any = null;
+  user = {} as Iuser;
 
   constructor(platform:Platform, statusBar:StatusBar, splashScreen:SplashScreen, private storage:Storage,
-              public loadingCtrl:LoadingController, private userService:UserService, public fingerprintProvider: FingerprintProvider,
-              public cache: CacheService) {
+              public loadingCtrl:LoadingController, private userService:UserService, public fingerprintProvider:FingerprintProvider,
+              public cache:CacheService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
       splashScreen.hide();
-      //this.fingerprintProvider.presentActionSheet(this.verify,this,123456,true,null);
+
+      //this.fingerprintProvider.presentActionSheet(this.verify, this, this.user.passcode, true, null);
 
       this.verify();
 
@@ -44,25 +47,33 @@ export class MyApp {
     this.userService.getUser().subscribe((user)=> {
       console.log(user)
       loader.dismiss();
-      if(user && user.id){
-       if(!user.isPasswordChanged){
+      if (user && user.id) {
+        if (!user.isPasswordChanged) {
           this.rootPage = ChangePasswordPage
         }
-        else if(!user.passcode){
+        else if (!user.passcode) {
           this.rootPage = PasscodePage;
         }
-       else
-         this.rootPage = TabsPage
+        else
+          this.rootPage = TabsPage;
+        //this.fingerprintProvider.presentActionSheet(this.goToTab, this, user.passcode, true, null);
       }
 
       else
-      this.rootPage = WelcomePage
+        this.rootPage = WelcomePage
     }, (err)=> {
       console.log(err);
       loader.dismiss();
       this.rootPage = WelcomePage
     })
   }
+
   ionViewDidEnter() {
+  }
+
+  goToTab() {
+    this.rootPage = TabsPage;
+
+
   }
 }

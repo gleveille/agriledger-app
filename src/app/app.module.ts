@@ -58,6 +58,8 @@ import {CacheModule} from 'ionic-cache';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import {ChangePasswordPage} from "../pages/change-password/change-password";
 import {PasscodePage} from "../pages/passcode/passcode";
+import {ChartsModule} from "ng2-charts";
+import {ResetPasswordPage} from "../pages/reset-password/reset-password";
 
 
 
@@ -92,13 +94,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermsPage,
     CompleteWeatherPage,
     ChangePasswordPage,
-    PasscodePage
+    PasscodePage,
+    ResetPasswordPage
   ],
   imports: [
     HttpClientModule,
     HttpModule,
     ComponentsModule,
     BrowserModule,
+    ChartsModule,
     BrowserAnimationsModule,
     PipesModule,
     FileUploadModule,
@@ -141,7 +145,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermsPage,
     CompleteWeatherPage,
     ChangePasswordPage,
-    PasscodePage
+    PasscodePage,
+    ResetPasswordPage
   ],
   providers: [
     {

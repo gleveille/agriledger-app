@@ -121,7 +121,7 @@ export class CreateAssetPage {
       })
   }
 
-  verify() {
+  async verify() {
     let asset = JSON.parse(JSON.stringify(this.asset));
     console.log(this.asset)
     for (let level in this.asset.category) {
@@ -131,8 +131,8 @@ export class CreateAssetPage {
       else
         asset.category[level] = '';
     }
-
     this.fingerprintProvider.presentActionSheet(this.registerAsset, this, this.user.passcode,false, asset);
+
   }
 
 

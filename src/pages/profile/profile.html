@@ -41,8 +41,8 @@
       <ion-input type="text" disabled></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Fingerprint Disabled</ion-label>
-      <ion-toggle></ion-toggle>
+      <ion-label>Fingerprint Enabled</ion-label>
+      <ion-toggle [(ngModel)]="fingerPrintEnabled"  (ionChange)="changeToggle();"></ion-toggle>
     </ion-item>
   </ion-list>
 
@@ -52,7 +52,7 @@
         <ion-icon name="ios-warning-outline"></ion-icon>
       </ion-col>
       <ion-col col-11>
-        <p style="opacity: .7">{{'To make changes to your Profile please contact us at'|translate}} agriledger@aglideger.co</p>
+        <p style="opacity: .7">{{'To make changes to your Profile please contact us at'|translate}} help@aglideger.co</p>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -64,6 +64,20 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <div class="dropdown">
+    <p class="language_text">
+      <img (click)="showdropdown=true" [src]="defaultLangauge==='ch'?'assets/img/flag_china.png':'assets/img/uk.png'"
+           alt=""></p>
+    <em class="down_icon"></em>
+    <div class="dropdown-content">
+      <p class="language_text">
+        <img *ngIf="showdropdown"
+             [src]="defaultLangauge!=='ch'?'assets/img/flag_china.png':'assets/img/uk.png'" alt=""
+             (click)="changeLang()">
+      </p>
+    </div>
+  </div>
 
 </ion-content>
 

@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import {TranslateServiceProvider} from "../../providers/translate-service";
 import {LoginPage} from "../login/login";
 import {ChangePasswordPage} from "../change-password/change-password";
+import {Storage} from '@ionic/storage';
 
 
 declare var Mnemonic, agrichainJS;
@@ -23,7 +24,7 @@ export class WelcomePage {
   msg4 = 'Creating Transparency and Traceability';
 
   constructor(public navCtrl:NavController,
-              private translateService:TranslateServiceProvider) {
+              private translateService:TranslateServiceProvider, private storage:Storage) {
 
   }
 
@@ -32,6 +33,10 @@ export class WelcomePage {
     this.translateService.changeLang(this.defaultLangauge);
     this.showdropdown = false
     console.log(this.defaultLangauge)
+  }
+
+  ionViewDidLoad() {
+    this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
   }
 
   signIn() {

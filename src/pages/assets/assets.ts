@@ -4,6 +4,7 @@ import {AssetInfoPage} from "../asset-info/asset-info";
 import {CreateAssetPage} from "../create-asset/create-asset";
 import {AssetsService} from "../../providers/assets.service";
 import {UploadPage} from "../upload/upload";
+import {UserService} from "../../providers/user.service";
 
 @Component({
   selector: 'page-assets',
@@ -16,6 +17,7 @@ export class AssetsPage {
 
 
   constructor(public navCtrl:NavController, public navParams:NavParams, private assetService:AssetsService) {
+    
 
   }
 

@@ -9,6 +9,8 @@ import {Geolocation} from '@ionic-native/geolocation';
 import {Camera, CameraOptions} from '@ionic-native/camera';
 import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
+import {UserService} from "../../providers/user.service";
+import {Iuser} from "../../interface/user.interface";
 
 
 @Component({
@@ -25,13 +27,15 @@ export class UploadPage {
   public photos:any;
   public base64Image:string;
   userData = {user_id: "", token: "", imageB64: ""};
+  user={} as Iuser;
 
   constructor(public params:NavParams,
               private toastService:ToastProvider,
               public viewCtrl:ViewController,
               private events:Events, private uploadProvider:UploadProvider, private geolocation:Geolocation,
               private camera:Camera,
-              private alertCtrl:AlertController, private fingerprintProvider:FingerprintProvider) {
+              private alertCtrl:AlertController, private fingerprintProvider:FingerprintProvider,
+              public userService: UserService) {
 
     this.pageConfigData = params.get('config') || {};
     console.log('pageConfigData', params.get('config'));
@@ -47,6 +51,10 @@ export class UploadPage {
 
     }).catch((error) => {
       console.log('Error getting location', error);
+    });
+
+    this.userService.getUser().subscribe((user)=>{
+      this.user=user;
     });
   }
 
@@ -116,13 +124,13 @@ export class UploadPage {
   verify(photo:any,index:number,type:number) {
 
     if(type===1){
-      this.fingerprintProvider.presentActionSheet(this.uploadFromGallary, this, 123456,false, index);
+      this.fingerprintProvider.presentActionSheet(this.uploadFromGallary, this, this.user.passcode, false, index);
 
     }
     if(type===2)
-    this.fingerprintProvider.presentActionSheet(this.uploadFromCamera, this, 123456,false, photo,index);
+    this.fingerprintProvider.presentActionSheet(this.uploadFromCamera, this, this.user.passcode, false, photo, index);
   }
-  
+
   uploadFromGallary(params:any[]){
 
     const index=params[0];

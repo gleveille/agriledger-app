@@ -5,6 +5,7 @@ import {ToastProvider} from "./toast";
 import {PinDialogProvider} from "./pin-dialog";
 import {ActionSheetController, Platform} from 'ionic-angular';
 import {HttpClient} from "@angular/common/http";
+import {UserService} from "./user.service";
 
 
 @Injectable()
@@ -20,6 +21,7 @@ export class FingerprintProvider {
 
   constructor(public http:HttpClient, public platform:Platform,
               public actionSheetCtrl:ActionSheetController,
+              private userService:UserService,
               private faio:FingerprintAIO, private toastProvider:ToastProvider, private pinService:PinDialogProvider) {
     console.log('Hello FingerprintProvider Provider');
   }
@@ -41,16 +43,27 @@ export class FingerprintProvider {
   }
 
   async presentActionSheet(cb:{(param:any[]):void;}, scope, passcode:number,shouldExit=false, ...params:any[]) {
-
     if (typeof cb !== 'function' || !scope || !passcode) {
       this.toastProvider.presentToast('Invalid argument');
       return false;
     }
-
     console.log('%c params are', 'color:red')
     console.log(params)
     params = params || [];
 
+    let isEnabled;
+    try{
+
+      isEnabled=await this.userService.isFingerPrintEnabled();
+      if(!isEnabled){
+        this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
+        return;
+      }
+    }
+    catch (err){
+      this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
+      return;
+    }
     try {
       await this.isFingerPrintAvailable();
       this.presentActionSheetWithFingerprint(cb, scope, passcode,shouldExit, params);
@@ -58,6 +71,7 @@ export class FingerprintProvider {
     catch (err) {
       this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
     }
+    
   }
 
 

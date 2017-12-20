@@ -43,3 +43,8 @@
 .lighterFont{
   font-weight: lighter !important;
 }
+
+.tabs-md-dark .tab-button:hover:not(.disable-hover), .tabs-md-dark .tab-button[aria-selected=true],
+.tabs-md-dark .tab-button[aria-selected=true] .tab-button-icon {
+  color: #519a48;
+}

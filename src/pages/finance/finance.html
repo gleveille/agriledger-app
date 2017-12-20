@@ -60,7 +60,7 @@
 
     <ion-list *ngSwitchCase="'kittens'">
 
-      <ion-grid>
+      <!--<ion-grid>
         <ion-row>
           <ion-col no-padding>
             <ion-card>
@@ -87,7 +87,14 @@
 
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid>-->
+
+      <div style="display: block">
+        <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"></canvas>
+      </div>
 
 
     </ion-list>
