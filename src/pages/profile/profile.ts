@@ -11,6 +11,7 @@ import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
 import {TranslateServiceProvider} from "../../providers/translate-service";
 import {Storage} from '@ionic/storage';
+import {FingerprintProvider} from "../../providers/fingerprint";
 
 
 @Component({
@@ -26,9 +27,11 @@ export class ProfilePage {
   fingerPrintEnabled:boolean = false;
 
   constructor(public navCtrl:NavController, private events:Events, public alertCtrl:AlertController, private socialSharing:SocialSharing,
-              private toastCtrl:ToastProvider, private userService:UserService, private translateService:TranslateServiceProvider,
+              private toastCtrl:ToastProvider,private fingerprintService:FingerprintProvider,
+              private userService:UserService, private translateService:TranslateServiceProvider,
               private storage:Storage) {
 
+    this.isFingerPrintEnabled();
     this.events.subscribe('profileImage:uploaded', (url)=> {
       console.log(url)
       this.user.profileUrl.url = url;
@@ -49,10 +52,11 @@ export class ProfilePage {
 
   async isFingerPrintEnabled() {
     try {
-      this.isFingerPrintEnabled = await this.userService.isFingerPrintEnabled();
+      await this.fingerprintService.isFingerPrintEnabled();
+      this.fingerPrintEnabled=true;
     }
     catch (err) {
-
+      this.fingerPrintEnabled=false;
     }
   }
 
@@ -71,14 +75,14 @@ export class ProfilePage {
   async changeToggle() {
     let val;
     try {
-      val = await this.storage.get('fingerPrintEnabled');
+      val = await this.fingerprintService.isFingerPrintEnabled()
     }
     catch (err) {
 
     }
     if (val) {
       try {
-        await this.storage.remove('fingerPrintEnabled')
+        await this.fingerprintService.setFingerPrintDisabled();
         this.fingerPrintEnabled = false;
       }
       catch (err) {
@@ -87,7 +91,7 @@ export class ProfilePage {
     }
     else {
       try {
-        val = await this.storage.set('fingerPrintEnabled', true);
+        await this.fingerprintService.setFingerPrintEnabled();
         this.fingerPrintEnabled = true;
       }
       catch (err) {

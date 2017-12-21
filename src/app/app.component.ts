@@ -30,7 +30,6 @@ export class MyApp {
 
       splashScreen.hide();
 
-      //this.fingerprintProvider.presentActionSheet(this.verify, this, this.user.passcode, true, null);
 
       this.verify();
 
@@ -54,9 +53,10 @@ export class MyApp {
         else if (!user.passcode) {
           this.rootPage = PasscodePage;
         }
-        else
-          this.rootPage = TabsPage;
-        //this.fingerprintProvider.presentActionSheet(this.goToTab, this, user.passcode, true, null);
+        else{
+          this.fingerprintProvider.presentActionSheet(this.goToTab, this, user.passcode, true, null);
+
+        }
       }
 
       else

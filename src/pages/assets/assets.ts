@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {AssetInfoPage} from "../asset-info/asset-info";
-import {CreateAssetPage} from "../create-asset/create-asset";
+import {NavController, NavParams, Events, IonicPage} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
-import {UploadPage} from "../upload/upload";
 import {UserService} from "../../providers/user.service";
+import {CreateAssetPage} from "../create-asset/create-asset";
+import {AssetInfoPage} from "../asset-info/asset-info";
 
 @Component({
   selector: 'page-assets',
@@ -16,8 +15,15 @@ export class AssetsPage {
   pet: string = "puppies";
 
 
-  constructor(public navCtrl:NavController, public navParams:NavParams, private assetService:AssetsService) {
-    
+  constructor(public navCtrl:NavController,
+              private events:Events,
+              public navParams:NavParams, private assetService:AssetsService) {
+
+    this.events.subscribe('new-asset',(asset)=>{
+      console.log('asset got from event')
+      console.log(asset)
+      this.assets.unshift(asset)
+    })
 
   }
 

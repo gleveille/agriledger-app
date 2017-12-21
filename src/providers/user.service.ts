@@ -132,10 +132,6 @@ export class UserService {
 
 
 
-  isFingerPrintEnabled(){
-
-    return this.storage.get('fingerPrintEnabled');
-  }
 
 
 

@@ -5,6 +5,8 @@ import {UserService} from "../../providers/user.service";
 import {ToastProvider} from "../../providers/toast";
 import {Iuser} from "../../interface/user.interface";
 import {TabsPage} from "../tabs/tabs";
+import {FingerprintPage} from "../fingerprint/fingerprint";
+import {FingerprintProvider} from "../../providers/fingerprint";
 
 
 
@@ -15,10 +17,13 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class PasscodePage {
 
+  isFingerPrintAvailable:boolean=false;
   authForm:FormGroup;
 
   user={} as Iuser;
-  constructor(public nav:NavController, public navParams:NavParams,private toastService:ToastProvider,private userService:UserService,public formBuilder:FormBuilder) {
+  constructor(public nav:NavController, public navParams:NavParams,
+              private fingerprintService:FingerprintProvider,
+              private toastService:ToastProvider,private userService:UserService,public formBuilder:FormBuilder) {
 
 
     this.authForm = formBuilder.group({
@@ -30,15 +35,32 @@ export class PasscodePage {
   }
 
   ionViewDidLoad(){
+    this.checkIfFingerprintAvailable();
     this.userService.getUser().subscribe((user:Iuser)=>{
       this.user=user;
     })
   }
 
+
+  async checkIfFingerprintAvailable(){
+    try{
+      this.isFingerPrintAvailable= await this.fingerprintService.isFingerPrintAvailable();
+      console.log(this.isFingerPrintAvailable)
+
+    }
+    catch (err){
+      console.log(err)
+      this.isFingerPrintAvailable=false;
+    }
+  }
   onSubmit(value:any):void {
     if (this.authForm.valid) {
       this.userService.updatePasscode(value.passcode).subscribe(()=>{
-        this.nav.setRoot(TabsPage);
+        console.log(this.isFingerPrintAvailable)
+        if(this.isFingerPrintAvailable)
+        this.nav.setRoot(FingerprintPage);
+        else
+          this.nav.setRoot(TabsPage);
 
       },(err)=>{
         this.toastService.presentToast(err.message);

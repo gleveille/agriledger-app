@@ -1,14 +1,13 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Events} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {ToastProvider} from "../../providers/toast";
-import {UploadPage} from "../upload/upload";
 import {FingerprintProvider} from "../../providers/fingerprint";
 import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
+import {UploadPage} from "../upload/upload";
 
 
-@IonicPage()
 @Component({
   selector: 'page-create-asset',
   templateUrl: 'create-asset.html',
@@ -43,8 +42,13 @@ export class CreateAssetPage {
   lastCategoryId = null;
   user={} as Iuser;
 
-  constructor(public navCtrl:NavController, public navParams:NavParams, private assetsService:AssetsService, private toastService:ToastProvider,
-              private fingerprintProvider:FingerprintProvider, public userService: UserService) {
+  constructor(public navCtrl:NavController,
+              public navParams:NavParams,
+              private assetsService:AssetsService,
+              private events:Events,
+              private toastService:ToastProvider,
+              private fingerprintProvider:FingerprintProvider,
+              public userService: UserService) {
 
   }
 
@@ -141,6 +145,7 @@ export class CreateAssetPage {
     console.log(asset)
     this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
+      this.events.publish('new-asset',asset)
       this.toastService.presentToast('Saved Succesfully');
       this.navCtrl.pop();
     }, (err)=> {

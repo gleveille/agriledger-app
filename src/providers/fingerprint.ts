@@ -4,9 +4,8 @@ import {FingerprintAIO, FingerprintOptions} from '@ionic-native/fingerprint-aio'
 import {ToastProvider} from "./toast";
 import {PinDialogProvider} from "./pin-dialog";
 import {ActionSheetController, Platform} from 'ionic-angular';
-import {HttpClient} from "@angular/common/http";
-import {UserService} from "./user.service";
 
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class FingerprintProvider {
@@ -19,13 +18,29 @@ export class FingerprintProvider {
     localizedReason: 'Please authenticate' //Only for iOS
   };
 
-  constructor(public http:HttpClient, public platform:Platform,
+  constructor(public platform:Platform,
               public actionSheetCtrl:ActionSheetController,
-              private userService:UserService,
+              private storage:Storage,
               private faio:FingerprintAIO, private toastProvider:ToastProvider, private pinService:PinDialogProvider) {
     console.log('Hello FingerprintProvider Provider');
   }
 
+
+
+  isFingerPrintEnabled(){
+
+    return this.storage.get('fingerPrintEnabled');
+  }
+
+  setFingerPrintEnabled(){
+
+    return this.storage.set('fingerPrintEnabled',1);
+  }
+
+  setFingerPrintDisabled(){
+
+    return this.storage.set('fingerPrintEnabled',0);
+  }
 
   isFingerPrintAvailable() {
     return this.faio.isAvailable()
@@ -54,7 +69,7 @@ export class FingerprintProvider {
     let isEnabled;
     try{
 
-      isEnabled=await this.userService.isFingerPrintEnabled();
+      isEnabled=await this.isFingerPrintEnabled();
       if(!isEnabled){
         this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
         return;
@@ -71,7 +86,7 @@ export class FingerprintProvider {
     catch (err) {
       this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
     }
-    
+
   }
 
 

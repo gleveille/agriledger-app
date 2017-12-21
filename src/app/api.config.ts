@@ -61,5 +61,16 @@ const AssetApi = {
   }
 };
 
-
-export {UserApi, AssetApi, ContainerApi}
+const WeatherApi = {
+  getCurrent: {
+    url: ()=>ServerUrl + '/api/weather/current',
+    method: 'GET',
+    params: ['lat', 'long']
+  },
+  getForecast: {
+    url: ()=>ServerUrl + '/api/weather/forecast',
+    method: 'GET',
+    params: ['lat', 'long']
+  }
+};
+export {UserApi, AssetApi, ContainerApi,WeatherApi}
