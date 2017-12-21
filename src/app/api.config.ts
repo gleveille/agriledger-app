@@ -44,6 +44,11 @@ const UserApi = {
     url: ()=>ServerUrl + '/api/users',
     method: 'GET',
     params: ['filterType', 'filterName']
+  },
+  resetPassword: {
+    url: ()=>ServerUrl + '/api/users/reset',
+    method: 'GET',
+    params: ['filterType', 'filterName']
   }
 }
 

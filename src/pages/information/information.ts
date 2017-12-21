@@ -16,8 +16,8 @@ import {CompleteWeatherPage} from "../complete-weather/complete-weather";
 export class InformationPage {
 
   pet:string = "puppies";
-  currentWeather={};
-  currentForecast={};
+  currentWeather={weather:[]};
+  currentForecast=null;
 
 
   constructor(public navCtrl:NavController, public navParams:NavParams,
@@ -28,15 +28,20 @@ export class InformationPage {
 
   }
 
+  gotoComplete(){
+    this.navCtrl.push(CompleteWeatherPage,{currentForecast:this.currentForecast})
+  }
+
   ionViewDidLoad() {
     this.getCurrentWeather();
-    this.getCurrentWeather();
+    this.getCurrentForecast();
   }
 
   getCurrentWeather() {
     this.weatherProvider.getCurrentWeather().subscribe(
       data => {
        this.currentWeather=data;
+        console.log(this.currentWeather)
       }
     )
   }
@@ -45,6 +50,8 @@ export class InformationPage {
     this.weatherProvider.getCurrentForecast().subscribe(
       data => {
         this.currentForecast=data;
+        console.log(this.currentForecast)
+
       }
     )
   }

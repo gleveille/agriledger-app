@@ -45,16 +45,18 @@ export class PasscodePage {
   async checkIfFingerprintAvailable(){
     try{
       this.isFingerPrintAvailable= await this.fingerprintService.isFingerPrintAvailable();
-      console.log(this.isFingerPrintAvailable)
 
     }
     catch (err){
-      console.log(err)
       this.isFingerPrintAvailable=false;
     }
   }
+  
   onSubmit(value:any):void {
     if (this.authForm.valid) {
+      if(value.passcode !==value.passcode1){
+        return this.toastService.presentToast('Passcode does not match');
+      }
       this.userService.updatePasscode(value.passcode).subscribe(()=>{
         console.log(this.isFingerPrintAvailable)
         if(this.isFingerPrintAvailable)

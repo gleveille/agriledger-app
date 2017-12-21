@@ -28,12 +28,8 @@
 
     <ion-list *ngSwitchCase="'puppies'">
 
-      <ion-item *ngIf="localWeather" (click)="weatherInfo(dailyWeatherFive)">
-        <h2>{{localWeather.AdministrativeArea.EnglishName}}</h2>
-        <h2>{{localWeather.ParentCity.EnglishName}}</h2>
-        <h2>{{currentWeather[0]?.WeatherText}}</h2>
-        <h2>{{currentWeather[0]?.Temperature.Metric.Value}} {{currentWeather[0]?.Temperature.Metric.Unit}}</h2>
-        <h2>{{dailyWeatherOne?.DailyForecasts[0]?.Date}}</h2>
+      <ion-item (click)="gotoComplete()" >
+        <h2>{{currentWeather?.weather[0]?.description}}</h2>
 
         <!--<ion-item-group>
           <ion-item-divider color="light">A</ion-item-divider>

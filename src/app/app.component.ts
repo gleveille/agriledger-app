@@ -55,7 +55,6 @@ export class MyApp {
         }
         else{
           this.fingerprintProvider.presentActionSheet(this.goToTab, this, user.passcode, true, null);
-
         }
       }
 

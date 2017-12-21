@@ -7,31 +7,46 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
 
-  <form #f="ngForm" (ngSubmit)="login(f)">
+  <ion-card>
 
-    <ion-list padding style="padding-top:0px">
-      <ion-item class="paddingLeftRem">
-        <ion-label floating>{{'Username'|translate}}</ion-label>
-        <ion-input type="email" [(ngModel)]="email" name="email" required email id="email"></ion-input>
-      </ion-item>
+    <form #f="ngForm" (ngSubmit)="login(f)" padding>
 
-      <ion-item class="paddingLeftRem">
-        <ion-label floating>{{'Password'|translate}}</ion-label>
-        <ion-input type="password" ngModel [(ngModel)]="password" name="password" required></ion-input>
-      </ion-item>
-    </ion-list>
+      <ion-list style="padding-top:0px">
+        <ion-item >
+          <ion-label floating>{{'Username'|translate}}</ion-label>
+          <ion-input type="email" [(ngModel)]="email" name="email" required email id="email"></ion-input>
+        </ion-item>
 
-    <input color="dark" style="float: left; margin-left: 16px; margin-right: 16px;" type="checkbox"
-                  name="checkbox" ngModel [(ngModel)]="checked" checked="true">
-    <ion-label style="font-weight: lighter">{{'I agree to the' |translate}} <a (click)="termsAndConditions()">{{'Terms and Conditions'|translate}}
-    </a></ion-label>
+        <ion-item>
+          <ion-label floating>{{'Password'|translate}}</ion-label>
+          <ion-input type="password" ngModel [(ngModel)]="password" name="password" required></ion-input>
+        </ion-item>
+      </ion-list>
 
-    <div padding>
-      <button ion-button color="primary" block type="submit" [disabled]="!checked">{{'Login'|translate}}
-      </button>
-    </div>
-  </form>
+      <ion-row style="padding-top: 10px">
+        <input color="dark" style="float: left; margin-top: 16px; margin-right: 10px" type="checkbox"
+               name="checkbox" ngModel [(ngModel)]="checked" checked="true">
+        <ion-label style="font-weight: lighter">{{'I agree to the' |translate}} <a (click)="termsAndConditions()">{{'Terms and Conditions'|translate}}
+        </a></ion-label>
+      </ion-row>
+
+
+      <div>
+        <button ion-button color="primary" block type="submit" [disabled]="!checked">{{'Login'|translate}}
+        </button>
+      </div>
+
+      <ion-row text-right (click)="forgotPassword()" >
+        <ion-label><a style="text-decoration: underline;">{{'Forgot Password?'|translate}}
+        </a></ion-label>
+      </ion-row>
+
+    </form>
+
+
+
+  </ion-card>
 
 </ion-content>
