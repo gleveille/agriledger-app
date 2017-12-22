@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {NavController, AlertController, Events} from "ionic-angular/index";
-import {UploadPage} from "../upload/upload";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {ServerUrl} from '../../app/api.config'
 import {ToastProvider} from "../../providers/toast";
@@ -61,7 +60,6 @@ export class ProfilePage {
   }
 
   upload() {
-    this.navCtrl.push(UploadPage, {config: {uploadType: 'profile', id: this.user.id}});
   }
 
   changeLang() {

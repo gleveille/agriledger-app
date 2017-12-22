@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform, Events} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform, Events, ActionSheetController} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
-import {UploadPage} from "../upload/upload";
 import {Iuser} from "../../interface/user.interface";
 import {UserService} from "../../providers/user.service";
 import {ServerUrl} from "../../app/api.config";
+import {UploadProvider} from "../../providers/upload";
+import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
+import {ToastProvider} from "../../providers/toast";
 
 @IonicPage()
 @Component({
@@ -20,7 +22,12 @@ export class AssetInfoPage {
   isAndroid:boolean = false;
   user = {} as Iuser;
 
-  constructor(public navCtrl:NavController, private userService:UserService, public navParams:NavParams,
+  constructor(public navCtrl:NavController,
+              private actionSheetCtrl:ActionSheetController,
+              private uploadService:UploadProvider,
+              private toastService:ToastProvider,
+              private userService:UserService,
+              public navParams:NavParams,
               private assetService:AssetsService, platform:Platform, private events:Events) {
 
     this.isAndroid = platform.is('android');
@@ -46,8 +53,69 @@ export class AssetInfoPage {
   }
 
   uploadPage() {
-    console.log(this.asset)
-    this.navCtrl.push(UploadPage, {config: {uploadType: 'evidences', assetId: this.asset.id, id: this.user.id}});
+
+    this.presentActionSheet()
+  }
+
+
+  async upload(source:string){
+    const config:IUploadPageConfig={
+      assetId:this.asset.id,
+      uploadType:'evidences', //profile,field
+      id:this.user.id
+    };
+    let isUploaded;
+    if(source==='camera'){
+      isUploaded=await this.uploadService.takePhotoFromCamera(config);
+
+    }
+    else {
+      isUploaded=await this.uploadService.takePhotoFromAlbum(config);
+
+    }
+    if(isUploaded){
+      this.toastService.presentToast('Upload successfully');
+      return true;
+
+    }
+    else{
+      this.toastService.presentToast('Upload failed.try again');
+      return false;
+    }
+  }
+
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modify your album',
+      buttons: [
+        {
+          text: 'From Gallery',
+          handler: () => {
+            this.upload('album')
+            console.log('Destructive clicked');
+          }
+        },
+        {
+          text: 'From Camera',
+          handler: async() => {
+            await this.upload('camera')
+
+            console.log('Archive clicked');
+          }
+        },
+
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
   }
 
 

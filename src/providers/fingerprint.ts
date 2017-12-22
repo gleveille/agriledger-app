@@ -24,7 +24,31 @@ export class FingerprintProvider {
               private faio:FingerprintAIO, private toastProvider:ToastProvider, private pinService:PinDialogProvider) {
     console.log('Hello FingerprintProvider Provider');
   }
+  async securityCheck(passcode:number){
+    // uncomment if not in browser env
+    return true;
+/*    let isEnabled=await this.isFingerPrintEnabled();
+    if(isEnabled){
+      let isVerified=await this.fingerprintVerification();
+      if(isVerified){
+        return true;
+      }
+      else {
+        return false;
+      }
 
+    }
+
+    else{
+      let isVerified=await this.passcodeVerfication(passcode);
+      if(isVerified){
+        return true;
+      }
+      else {
+        return false;
+      }
+    }*/
+  }
 
   async isFingerPrintAvailable() {
     try {

@@ -5,7 +5,6 @@ import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
 import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
-import {UploadPage} from "../upload/upload";
 
 
 @Component({
@@ -139,21 +138,13 @@ export class CreateAssetPage {
         asset.category[level] = '';
     }
 
-    let isEnabled=await this.fingerprintProvider.isFingerPrintEnabled();
-    if(isEnabled){
-      let isVerified=await this.fingerprintProvider.fingerprintVerification();
-      if(isVerified){
-        this.registerAsset(asset);
-      }
+    let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
+    if(isVerified){
+      this.registerAsset(asset);
     }
-
     else{
-      let isVerified=await this.fingerprintProvider.passcodeVerfication(this.user.passcode);
-      if(isVerified){
-        this.registerAsset(asset);
-      }
-    }
 
+    }
 
   }
 
@@ -172,7 +163,7 @@ export class CreateAssetPage {
   }
 
   uploadPage() {
-    this.navCtrl.push(UploadPage, {config: {uploadType: 'field'}});
+    //this.navCtrl.push(UploadPage, {config: {uploadType: 'field'}});
   }
 
 

@@ -36,7 +36,7 @@ export class MyApp {
     });
   }
 
-  verify() {
+  async verify() {
     let loader = this.loadingCtrl.create({
       content: "Please wait checking credentials...",
       spinner: 'crescent'
@@ -55,7 +55,8 @@ export class MyApp {
         }
         else{
           this.user=user;
-          this.securityCheck();
+          this.rootPage = TabsPage;
+          //this.securityCheck();
         }
       }
 
@@ -71,23 +72,14 @@ export class MyApp {
   }
 
   async securityCheck(){
-    let isEnabled=await this.fingerprintProvider.isFingerPrintEnabled();
-    if(isEnabled){
-      let isVerified=await this.fingerprintProvider.fingerprintVerification();
-      if(isVerified){
-        this.rootPage = TabsPage;
-      }
-    }
+    let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
+    if(isVerified){
+      this.rootPage = TabsPage;
 
+    }
     else{
-      let isVerified=await this.fingerprintProvider.passcodeVerfication(this.user.passcode);
-      if(isVerified){
-        this.rootPage = TabsPage;
-      }
     }
-  }
-  goToTab() {
-
 
   }
+
 }

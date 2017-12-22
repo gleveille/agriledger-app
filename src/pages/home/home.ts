@@ -6,7 +6,6 @@ import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
 import {ToastProvider} from "../../providers/toast";
 import {ServerUrl} from "../../app/api.config";
-import {UploadPage} from "../upload/upload";
 
 @IonicPage()
 @Component({
@@ -58,7 +57,7 @@ export class HomePage {
   }
 
   upload() {
-    this.navCtrl.push(UploadPage, {config: {uploadType: 'profile', id: this.user.id}});
+    //this.navCtrl.push(UploadPage, {config: {uploadType: 'profile', id: this.user.id}});
   }
 
 }

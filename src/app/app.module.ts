@@ -9,7 +9,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import {AlertPage} from "../pages/alert/alert";
-import {UploadPage} from "../pages/upload/upload";
 import {SpinnerDialog} from "@ionic-native/spinner-dialog";
 import {FileUploadModule} from "ng2-file-upload/index";
 import { IonicStorageModule } from '@ionic/storage';
@@ -24,7 +23,6 @@ import {ComingsoonComponent} from "../components/comingsoon/comingsoon";
 import {InformationPage} from "../pages/information/information";
 import {LoginPage} from "../pages/login/login";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {File} from '@ionic-native/file';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { FingerprintProvider } from '../providers/fingerprint';
 import {CommunityPage} from "../pages/community/community";
@@ -36,7 +34,6 @@ import { TranslateServiceProvider } from '../providers/translate-service';
 import { HeaderPage } from '../pages/header/header';
 import {FinancePage} from "../pages/finance/finance";
 import {AssetsPage} from "../pages/assets/assets";
-import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {AssetInfoPage} from "../pages/asset-info/asset-info";
 import {CreateAssetPage} from "../pages/create-asset/create-asset";
 import { WeatherProvider } from '../providers/weather';
@@ -80,7 +77,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TabsPage,
     WelcomePage,
     AlertPage,
-    UploadPage,
     ProfilePage,
     WalletPage,
     InformationPage,
@@ -131,7 +127,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TabsPage,
     WelcomePage,
     AlertPage,
-    UploadPage,
     ProfilePage,
     WalletPage,
     ComingsoonComponent,
@@ -167,14 +162,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastProvider,
     SpinnerProvider,
     UploadProvider,
-    File,
     FileTransfer,
     FingerprintAIO,
     PinDialog,
     FingerprintProvider,
     PinDialogProvider,
     TranslateServiceProvider,
-    PhotoViewer,
     WeatherProvider,
     UserService,
     AssetsService,

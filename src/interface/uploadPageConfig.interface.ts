@@ -1,5 +1,5 @@
 export interface IUploadPageConfig{
-  headerName?:string,
+  assetId?:string,
   uploadType?:string //profile,field
   id?:string
 }
