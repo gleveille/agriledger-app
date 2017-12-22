@@ -21,7 +21,7 @@ export class ChangePasswordPage {
 
   changePassword() {
     if (this.credential.newPassword !== this.credential.rePassword) {
-      this.toastService.presentToast('Password', 'Password does not match');
+      this.toastService.presentToast('Password does not match');
       return;
     }
 

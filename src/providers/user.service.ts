@@ -35,12 +35,10 @@ export class UserService {
         this.storage.set('accessToken', user.id);
       });
   }
-
-
+  
   getAccessTokenFromLocalStorage() {
     return this.storage.get('accessToken');
   }
-
 
   getUserIdFromLocalStorage() {
     return this.storage.get('userId');
@@ -60,7 +58,6 @@ export class UserService {
       })
 
   };
-
 
   getUser() {
 
@@ -133,7 +130,7 @@ export class UserService {
       return Observable.throw('no email');
     }
     return this.http.post(`${UserApi.resetPassword.url()}`, {email: email}).do((res)=> {
-      
+
     })
       .catch((err)=> {
         return this.errorHandler.handle(err);

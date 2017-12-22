@@ -7,6 +7,7 @@ import {ServerUrl} from "../../app/api.config";
 import {UploadProvider} from "../../providers/upload";
 import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
 import {ToastProvider} from "../../providers/toast";
+import {FingerprintProvider} from "../../providers/fingerprint";
 
 @IonicPage()
 @Component({
@@ -28,7 +29,8 @@ export class AssetInfoPage {
               private toastService:ToastProvider,
               private userService:UserService,
               public navParams:NavParams,
-              private assetService:AssetsService, platform:Platform, private events:Events) {
+              private assetsService: AssetsService, platform:Platform, private events:Events,
+              public fingerprintProvider: FingerprintProvider) {
 
     this.isAndroid = platform.is('android');
 
@@ -116,6 +118,38 @@ export class AssetInfoPage {
     });
 
     actionSheet.present();
+  }
+
+  async verify() {
+    let asset = JSON.parse(JSON.stringify(this.asset));
+    console.log(this.asset)
+    for (let level in this.asset.category) {
+
+      if (this.asset.category[level].attrs && this.asset.category[level].attrs.length)
+        asset.category[level] = this.asset.category[level].attrs[this.chosenLang];
+      else
+        asset.category[level] = '';
+    }
+
+    let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
+    if(isVerified){
+      this.updateAsset(asset);
+    }
+    else{
+
+    }
+
+  }
+
+  updateAsset(asset:any) {
+    console.log(asset)
+    this.assetsService.updateAsset(asset).subscribe((data)=> {
+      console.log('saved succesfully')
+      this.toastService.presentToast('Saved Succesfully');
+    }, (err)=> {
+      console.log(err)
+      this.toastService.presentToast('Something went wrong');
+    })
   }
 
 

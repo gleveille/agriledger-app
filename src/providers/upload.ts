@@ -15,7 +15,7 @@ export class UploadProvider {
   constructor(public http:HttpClient, private events:Events,
               private camera:Camera,
               private geolocation:Geolocation,
-              private transfer:FileTransfer, private file:File) {
+              private transfer:FileTransfer) {
 
   }
 

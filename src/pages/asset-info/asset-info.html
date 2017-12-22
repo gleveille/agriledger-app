@@ -22,7 +22,7 @@
     <ion-list *ngSwitchCase="'puppies'">
       <ion-item>
         <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
+        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize></ion-input>
       </ion-item>
       <ion-list>
         <ion-label style="margin-bottom: 0px;margin-left: 16px; opacity: .4; ">
@@ -67,6 +67,21 @@
         <ion-label floating>{{'Asset Status'|translate}}</ion-label>
         <ion-input type="text" [(ngModel)]="asset.status" text-capitalize disabled></ion-input>
       </ion-item>
+
+      <ion-grid>
+        <ion-row>
+          <!--<ion-col>
+            <button ion-button clear style="color: crimson; letter-spacing: 2px;" (click)="uploadPage()">
+              +&nbsp; {{'Add Evidence'|translate}}
+            </button>
+          </ion-col>-->
+          <ion-col text-right>
+            <button ion-button color="primary" type="submit" [disabled]="false" (click)="verify()">
+              {{registerPromise==='pending'?'Registering' :'Save'|translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-list>
 
     <ion-list class="evidence" *ngSwitchCase="'kittens'">

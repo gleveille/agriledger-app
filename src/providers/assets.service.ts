@@ -67,6 +67,18 @@ export class AssetsService {
     })
   }
 
+  updateAsset(asset:any) {
+
+    return this.userService.getUser().concatMap((user:Iuser)=> {
+      console.log(user)
+      const url = `${UserApi.getAssets.url()}/${user.id}/assets/${asset.id}`;
+      return this.http.put(`${url}`, asset)
+        .catch((res) => {
+          return this.errorHandler.handle(res);
+        });
+    })
+  }
+
   getCategories(level:number) {
     const url = `${AssetApi.getCategories.url()}?level=${level}`;
     console.log(url)

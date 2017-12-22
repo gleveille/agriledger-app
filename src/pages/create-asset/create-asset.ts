@@ -109,7 +109,7 @@ export class CreateAssetPage {
 
 
       }, (err) => {
-        this.toastService.presentToast('Category', 'Something went wrong');
+        this.toastService.presentToast('Something went wrong');
       })
 
 
@@ -120,7 +120,7 @@ export class CreateAssetPage {
       .subscribe((assetCategory:Array<any>) => {
         this.assetCategoriesLevelOne = assetCategory;
       }, (err) => {
-        this.toastService.presentToast('Category', 'Something went wrong');
+        this.toastService.presentToast('Something went wrong');
       })
   }
   async securityCheck(){
