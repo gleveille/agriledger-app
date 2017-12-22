@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform, Events, ActionSheetController} from 'ionic-angular';
+import {
+  IonicPage, NavController, NavParams, Platform, Events, ActionSheetController,
+  LoadingController
+} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {Iuser} from "../../interface/user.interface";
 import {UserService} from "../../providers/user.service";
@@ -17,6 +20,7 @@ import {FingerprintProvider} from "../../providers/fingerprint";
 export class AssetInfoPage {
 
   serverUrl = ServerUrl;
+  chosenLang='en';
   asset = {category: {}} as any;
   assets = [];
   pet:string = "puppies";
@@ -24,6 +28,7 @@ export class AssetInfoPage {
   user = {} as Iuser;
 
   constructor(public navCtrl:NavController,
+              private loadingCtrl:LoadingController,
               private actionSheetCtrl:ActionSheetController,
               private uploadService:UploadProvider,
               private toastService:ToastProvider,
@@ -38,7 +43,12 @@ export class AssetInfoPage {
 
     this.events.subscribe('evidences:uploaded', (url)=> {
       console.log(url);
+      if(this.asset.evidences)
       this.asset.evidences.push(url);
+      else{
+        this.asset.evidences=[];
+        this.asset.evidences.push(url);
+      }
     })
   }
 
@@ -60,6 +70,7 @@ export class AssetInfoPage {
   }
 
 
+
   async upload(source:string){
     const config:IUploadPageConfig={
       assetId:this.asset.id,
@@ -71,7 +82,7 @@ export class AssetInfoPage {
       isUploaded=await this.uploadService.takePhotoFromCamera(config);
 
     }
-    else {
+    else if(source==='album') {
       isUploaded=await this.uploadService.takePhotoFromAlbum(config);
 
     }
@@ -81,29 +92,35 @@ export class AssetInfoPage {
 
     }
     else{
-      this.toastService.presentToast('Upload failed.try again');
-      return false;
+      if(isUploaded===null)
+        return false;
+      else{
+        this.toastService.presentToast('Upload failed.try again');
+        return false;
+
+      }
     }
   }
 
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Modify your album',
+      title: 'Upload Evidences',
       buttons: [
         {
           text: 'From Gallery',
+          icon: 'folder-open',
           handler: () => {
             this.upload('album')
-            console.log('Destructive clicked');
+            return;
           }
         },
         {
           text: 'From Camera',
-          handler: async() => {
-            await this.upload('camera')
+          icon: 'camera',
+          handler: () => {
+             this.upload('camera')
 
-            console.log('Archive clicked');
           }
         },
 
