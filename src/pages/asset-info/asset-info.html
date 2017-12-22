@@ -26,23 +26,23 @@
           {{'Asset category'|translate}}
         </ion-label>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 1'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level2">
-          <ion-input type="text" [(ngModel)]="asset.category.level2" text-capitalize></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level2" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 2'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level3">
-          <ion-input type="text" [(ngModel)]="asset.category.level3" text-capitalize></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level3" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 3'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level4">
-          <ion-input type="text" [(ngModel)]="asset.category.level4" text-capitalize></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level4" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 4'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level5">
-          <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 5'|translate}}</button>
         </ion-item>
       </ion-list>
