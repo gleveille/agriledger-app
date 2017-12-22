@@ -1,4 +1,17 @@
 page-asset-info {
+  ion-slides {
+    display: block;
+    height: 30%;
+  }
+
+  .list-header-md {
+    padding-left: 16px;
+    margin-bottom: 0px;
+    min-height: 4.5rem;
+    border-top: 1px solid #dedede;
+    font-size: 1.4rem;
+    color: #757575;
+  }
 
   .text-input[disabled] {
     opacity: 1;
@@ -56,12 +69,6 @@ page-asset-info {
     margin: 13px 0px;
     padding: 0;
     width: calc(100% - 8px - 8px);
-  }
-
-  :required{
-    content:"*";
-    color:red;
-    background: red;
   }
 
 }

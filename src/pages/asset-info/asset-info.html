@@ -106,32 +106,40 @@
 
     <ion-list class="evidence" *ngSwitchCase="'kittens'">
 
-      <ion-row no-padding>
-        <ion-col text-right>
-          <button ion-button clear style="color: #519a48; letter-spacing: 2px;" (click)="uploadPage()">
-            +&nbsp; {{'Add Evidence'|translate}}
-          </button>
+      <ion-row>
+        <ion-col>
+            <ion-list-header >
+              <div float-right>
+                <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px" (click)="uploadPage()">
+                  +&nbsp; {{'Add Evidences'}}
+                </button>
+              </div>
+            </ion-list-header>
+
+            <ion-slides #slides  loop="false" slidesPerView="2"  spaceBetween="10px">
+              <ion-slide *ngFor="let evidence of asset.evidences">
+                  <img [src]="serverUrl+evidence?.url" imageViewer/>
+
+<!--
+                  <figcaption>{{evidence?.date|moment}}</figcaption>
+-->
+
+
+              </ion-slide>
+            </ion-slides>
+
+          <ion-list-header>
+            <div float-right>
+              <button ion-button clear style="color: #519a48; letter-spacing: 2px;font-size: 16px; padding: 0px;" (click)="uploadPage()">
+                +&nbsp; {{'Add Documents'}}
+              </button>
+            </div>
+          </ion-list-header>
+
         </ion-col>
       </ion-row>
-      <ion-grid *ngFor="let evidence of asset.evidences">
-        <ion-row>
-          <ion-col col-6 text-center>
-            <img [src]="serverUrl+evidence?.url" style="height: 120px;">
-          </ion-col>
-          <ion-col col-6 style="border-bottom: 0px solid #dedede;" no-margin>
-            <ion-item no-margin class="evidences" style="padding: 0px; border-bottom: 0px solid #dedede; opacity: 0.8; letter-spacing: 0.5px;">
-              <h5 style="word-break: break-all;
-    white-space: normal;">Lat: {{evidence?.lat}}</h5>
-              <h5 style="word-break: break-all;
-    white-space: normal;">Long: {{evidence?.long}}</h5>
-              <h5 style="border-bottom: 0px solid #dedede;word-break: break-all;
-    white-space: normal;">Hash: {{evidence?.hash}}</h5>
-              <h5 style="border-bottom: 0px solid #dedede;word-break: break-all;
-    white-space: normal;">Date: {{evidence?.date | date: 'mediumDate'}}</h5>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+
+
 
     </ion-list>
   </div>

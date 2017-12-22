@@ -60,6 +60,7 @@ import {FingerprintPage} from "../pages/fingerprint/fingerprint";
 import { SettingsPage } from '../pages/settings/settings';
 import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -107,6 +108,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     PipesModule,
     FileUploadModule,
+    IonicImageViewerModule,
     CacheModule.forRoot(),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({

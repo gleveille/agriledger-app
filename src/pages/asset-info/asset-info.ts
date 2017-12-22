@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {
   IonicPage, NavController, NavParams, Platform, Events, ActionSheetController,
-  LoadingController
+  LoadingController, Slides
 } from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {Iuser} from "../../interface/user.interface";
@@ -18,6 +18,7 @@ import {FingerprintProvider} from "../../providers/fingerprint";
   templateUrl: 'asset-info.html',
 })
 export class AssetInfoPage {
+  @ViewChild(Slides) slides: Slides;
 
   serverUrl = ServerUrl;
   chosenLang='en';
@@ -25,6 +26,7 @@ export class AssetInfoPage {
   assets = [];
   pet:string = "puppies";
   isAndroid:boolean = false;
+  isSecurityCheckPassed:boolean=false;
   user = {} as Iuser;
 
   constructor(public navCtrl:NavController,
@@ -43,11 +45,15 @@ export class AssetInfoPage {
 
     this.events.subscribe('evidences:uploaded', (url)=> {
       console.log(url);
-      if(this.asset.evidences)
-      this.asset.evidences.push(url);
-      else{
+      if(this.asset.evidences){
+        this.asset.evidences.unshift(url);
+        this.slides.slideTo(0, 500);
+      }
+
+    else{
         this.asset.evidences=[];
-        this.asset.evidences.push(url);
+        this.asset.evidences.unshift(url);
+        this.slides.slideTo(0, 500);
       }
     })
   }
@@ -72,6 +78,15 @@ export class AssetInfoPage {
 
 
   async upload(source:string){
+    if(!this.isSecurityCheckPassed){
+      let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
+      if(!isVerified){
+        return false;
+      }
+      else{
+        this.isSecurityCheckPassed=true;
+      }
+    }
     const config:IUploadPageConfig={
       assetId:this.asset.id,
       uploadType:'evidences', //profile,field

@@ -32,13 +32,13 @@ export class SettingsPage {
   }
 
   async isFingerPrintEnabled() {
-    try {
-      await this.fingerprintService.isFingerPrintEnabled();
+      let isAvailable=await this.fingerprintService.isFingerPrintEnabled();
+    if(isAvailable){
       this.fingerPrintEnabled=true;
     }
-    catch (err) {
+    else
       this.fingerPrintEnabled=false;
-    }
+
   }
 
   displayLang(){
@@ -81,7 +81,7 @@ export class SettingsPage {
         checked: true
       });
     }
-    
+
     alert.addButton(this.translateService.dynamicTranslation('CANCEL'));
     alert.addButton({
       text: this.translateService.dynamicTranslation('OK'),

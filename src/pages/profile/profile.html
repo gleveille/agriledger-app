@@ -11,7 +11,8 @@
   <ion-row>
     <ion-col col-12 text-center>
       <ion-item text-center *ngIf="user?.profileUrl?.url || user?.profileUrl?.url?.length">
-        <img width="100" height="100" [src]="serverUrl+user?.profileUrl?.url" style="border-radius:50%;position: relative;width: 100px; height: 100px" (click)="upload()">
+        <img width="100" height="100" [src]="serverUrl+user?.profileUrl?.url"
+             style="border-radius:50%;position: relative;width: 100px; height: 100px" (click)="upload()">
       </ion-item>
       <ion-icon *ngIf="!user?.profileUrl?.url || !user?.profileUrl?.url?.length"
                 style="font-size: 80px;" name="md-person" (click)="upload()"></ion-icon>
@@ -44,12 +45,6 @@
         <ion-label floating>{{'Registration number'|translate}}</ion-label>
         <ion-input type="number"></ion-input>
     </ion-item>
-
-    
-    <!-- <ion-item>
-      <ion-label>Fingerprint Enabled</ion-label>
-      <ion-toggle [(ngModel)]="fingerPrintEnabled"  (ionChange)="changeToggle();"></ion-toggle>
-    </ion-item> -->
   </ion-list>
 
   <ion-grid>
@@ -58,7 +53,8 @@
         <ion-icon name="ios-warning-outline"></ion-icon>
       </ion-col>
       <ion-col col-11>
-        <p style="opacity: .7">{{'To make changes to your Profile please contact us at'|translate}} help@aglideger.co</p>
+        <p style="opacity: .7">{{'To make changes to your Profile please contact us at'|translate}}
+          help@aglideger.co</p>
       </ion-col>
     </ion-row>
   </ion-grid>

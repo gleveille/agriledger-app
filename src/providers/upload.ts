@@ -123,6 +123,8 @@ export class UploadProvider {
 
       this.uploadInProgress();
       const result= await fileTransfer.upload(base64, url, options);
+      console.log('result is')
+      console.log(result)
       let data:any = JSON.parse(result.response);
       url = data.result.url;
       if (config.uploadType === 'profile')
@@ -136,6 +138,8 @@ export class UploadProvider {
       return true;
     }
     catch (err){
+      console.log('from catch ')
+      console.log(err);
       this.uploadFinish();
 
       return false;
