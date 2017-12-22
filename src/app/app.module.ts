@@ -95,11 +95,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasscodePage,
     ResetPasswordPage,
     FingerprintPage,
-<<<<<<< HEAD
-    SettingsPage
-=======
+    SettingsPage,
     ForgotPasswordPage
->>>>>>> 31b321ac10fe2c11661c8f308216b50fee366a0f
   ],
   imports: [
     HttpClientModule,
@@ -150,11 +147,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasscodePage,
     ResetPasswordPage,
     FingerprintPage,
-<<<<<<< HEAD
-    SettingsPage
-=======
+    SettingsPage,
     ForgotPasswordPage
->>>>>>> 31b321ac10fe2c11661c8f308216b50fee366a0f
 
   ],
   providers: [

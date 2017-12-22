@@ -54,15 +54,8 @@ export class MyApp {
           this.rootPage = PasscodePage;
         }
         else{
-<<<<<<< HEAD
-          this.goToTab();
-          //this.fingerprintProvider.presentActionSheet(this.goToTab, this, user.passcode, true, null);
-
-=======
           this.user=user;
-          this.rootPage = TabsPage;
-          //this.securityCheck();
->>>>>>> 31b321ac10fe2c11661c8f308216b50fee366a0f
+          this.securityCheck();
         }
       }
 
