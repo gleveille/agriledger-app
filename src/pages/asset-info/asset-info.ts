@@ -46,13 +46,13 @@ export class AssetInfoPage {
       console.log(url);
       if(this.asset.evidences){
         this.asset.evidences.unshift(url);
-        this.slides.slideTo(1, 500);
+        this.slides.slideTo(0, 500);
       }
 
     else{
         this.asset.evidences=[];
         this.asset.evidences.unshift(url);
-        this.slides.slideTo(1, 500);
+        this.slides.slideTo(0, 500);
       }
     })
   }

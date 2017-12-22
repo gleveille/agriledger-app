@@ -98,12 +98,10 @@
 
             <ion-slides #slides  loop="false" slidesPerView="2"  spaceBetween="10px">
               <ion-slide *ngFor="let evidence of asset.evidences">
-                <div class="image">
                   <img [src]="serverUrl+evidence?.url" imageViewer/>
 
-                  <h2><span>{{evidence?.date|moment}}</span></h2>
+                  <figcaption>{{evidence?.date|moment}}</figcaption>
 
-                </div>
 
               </ion-slide>
             </ion-slides>
