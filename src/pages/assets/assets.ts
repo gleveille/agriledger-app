@@ -20,9 +20,7 @@ export class AssetsPage {
               public navParams:NavParams, private assetService:AssetsService) {
 
     this.events.subscribe('new-asset',(asset)=>{
-      console.log('asset got from event')
-      console.log(asset)
-      this.assets.unshift(asset)
+      this.getAsset();
     })
 
   }
@@ -36,6 +34,11 @@ export class AssetsPage {
   }
 
   ionViewDidLoad() {
+    this.getAsset();
+  }
+
+
+  getAsset(){
     this.assetService.getMyAssets().subscribe((data)=>{
       console.log(data)
       this.assets=data;
@@ -43,7 +46,6 @@ export class AssetsPage {
       console.log(err)
     })
   }
-
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
     this.assetService.getMyAssets().subscribe((data)=>{

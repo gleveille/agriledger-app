@@ -47,7 +47,7 @@ export class CreateAssetPage {
               private events:Events,
               private toastService:ToastProvider,
               private fingerprintProvider:FingerprintProvider,
-              public userService: UserService,  private loadingCtrl: LoadingController,) {
+              public userService: UserService,  private loadingCtrl: LoadingController) {
 
   }
 

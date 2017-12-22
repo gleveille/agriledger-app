@@ -116,7 +116,7 @@
               </div>
             </ion-list-header>
 
-          <div text-center *ngIf="asset.evidences && !asset.evidences.length" >
+          <div text-center *ngIf="!asset.evidences || (asset.evidences && !asset.evidences.length)" >
             <h4 style="opacity: 0.6">No Evidences uploaded</h4>
           </div>
 
