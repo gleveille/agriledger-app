@@ -63,14 +63,13 @@
       </ion-item>
 
       <ion-item>
-        <ion-label floating>{{'Input Details *'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.inputDetails" text-capitalize name="name" required></ion-input>
+        <ion-label floating>{{'Expected Yield *'|translate}}</ion-label>
+        <ion-input type="number" [(ngModel)]="asset.expectedYield" text-capitalize name="expectedYield" required></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>{{'Expected harvest amount *'|translate}}</ion-label>
-        <ion-input type="number" [(ngModel)]="asset.expectedHarvestAmount" text-capitalize name="currency"
-                   required></ion-input>
+        <ion-label floating>{{'Packaging *'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.packaging" text-capitalize name="packaging" required></ion-input>
       </ion-item>
 
       <ion-item>
@@ -81,6 +80,25 @@
           [max]="endDate"
           [(ngModel)]="asset.expectedHarvestDate">
         </ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Health of Soil'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.healthOfSoil" text-capitalize name="healthOfSoil"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Land History'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.landHistory" text-capitalize name="landHistory"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Farm Investments'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.farmInvestments" text-capitalize name="farmInvestments"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Additional Information'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.additionalInformation" text-capitalize name="additionalInformation"></ion-input>
       </ion-item>
 
       <ion-grid>

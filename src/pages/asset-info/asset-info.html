@@ -20,48 +20,68 @@
 <ion-content>
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'puppies'">
-      <ion-item>
-        <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize></ion-input>
-      </ion-item>
+
       <ion-list>
         <ion-label style="margin-bottom: 0px;margin-left: 16px; opacity: .4; ">
           {{'Asset category'|translate}}
         </ion-label>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize
-                     disabled></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize></ion-input>
           <button ion-button clear item-end>{{'Level 1'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level2">
-          <ion-input type="text" [(ngModel)]="asset.category.level2" text-capitalize disabled></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level2" text-capitalize></ion-input>
           <button ion-button clear item-end>{{'Level 2'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level3">
-          <ion-input type="text" [(ngModel)]="asset.category.level3" text-capitalize disabled></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level3" text-capitalize></ion-input>
           <button ion-button clear item-end>{{'Level 3'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level4">
-          <ion-input type="text" [(ngModel)]="asset.category.level4" text-capitalize disabled></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level4" text-capitalize></ion-input>
           <button ion-button clear item-end>{{'Level 4'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level5">
-          <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize disabled></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize></ion-input>
           <button ion-button clear item-end>{{'Level 5'|translate}}</button>
         </ion-item>
       </ion-list>
       <ion-item>
-        <ion-label floating>{{'Input Details *'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.inputDetails" text-capitalize name="name" required></ion-input>
+        <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>{{'Expected harvest amount *'|translate}}</ion-label>
-        <ion-input type="number" [(ngModel)]="asset.expectedHarvestAmount" text-capitalize name="currency"
+        <ion-label floating>{{'Expected Yield *'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.expectedYield" text-capitalize name="expectedYield" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Packaging *'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.packaging" text-capitalize name="packaging"
                    required></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
         <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Health of Soil'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.healthOfSoil" text-capitalize name="healthOfSoil"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Land History'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.landHistory" text-capitalize name="landHistory"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Farm Investments'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.farmInvestments" text-capitalize name="farmInvestments"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Additional Information'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.additionalInformation" text-capitalize name="additionalInformation"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Asset Status'|translate}}</ion-label>
@@ -93,13 +113,6 @@
           </button>
         </ion-col>
       </ion-row>
-
-      <ion-item-group>
-        <ion-item-divider color="secondary">A</ion-item-divider>
-        <ion-item>Angola</ion-item>
-        <ion-item>Argentina</ion-item>
-      </ion-item-group>
-
 
       <ion-grid *ngFor="let evidence of asset.evidences">
         <ion-row>

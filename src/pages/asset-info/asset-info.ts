@@ -123,13 +123,13 @@ export class AssetInfoPage {
   async verify() {
     let asset = JSON.parse(JSON.stringify(this.asset));
     console.log(this.asset)
-    for (let level in this.asset.category) {
+    /*for (let level in this.asset.category) {
 
       if (this.asset.category[level].attrs && this.asset.category[level].attrs.length)
         asset.category[level] = this.asset.category[level].attrs[this.chosenLang];
       else
         asset.category[level] = '';
-    }
+    }*/
 
     let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
     if(isVerified){
