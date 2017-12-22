@@ -109,9 +109,9 @@
             </button>
           </ion-col>-->
           <ion-col text-right>
-            <button ion-button color="primary" type="submit" [disabled]="false"
+            <button ion-button color="primary" type="submit" [disabled]="!asset.name || !asset.expectedYield || !asset.packaging "
                     (click)="verify()">
-              {{registerPromise==='pending'?'Registering' :'Register'|translate}}
+              {{'Create Asset'|translate}}
             </button>
           </ion-col>
         </ion-row>

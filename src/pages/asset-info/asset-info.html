@@ -116,6 +116,10 @@
               </div>
             </ion-list-header>
 
+          <div text-center *ngIf="asset.evidences && !asset.evidences.length" >
+            <h4 style="opacity: 0.6">No Evidences uploaded</h4>
+          </div>
+
             <ion-slides #slides  loop="false" slidesPerView="2"  spaceBetween="10px">
               <ion-slide *ngFor="let evidence of asset.evidences">
                   <img [src]="serverUrl+evidence?.url" imageViewer/>
@@ -135,6 +139,11 @@
               </button>
             </div>
           </ion-list-header>
+
+          <div text-center>
+            <h4 style="opacity: 0.6">No Documents uploaded</h4>
+          </div>
+
 
         </ion-col>
       </ion-row>

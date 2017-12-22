@@ -40,7 +40,6 @@ export class AssetInfoPage {
 
     this.isAndroid = platform.is('android');
 
-    this.userService.getAssets();
 
     this.events.subscribe('evidences:uploaded', (url)=> {
       console.log(url);
@@ -101,18 +100,10 @@ export class AssetInfoPage {
 
     }
     if(isUploaded){
-      this.toastService.presentToast('Upload successfully');
       return true;
-
     }
     else{
-      if(isUploaded===null)
-        return false;
-      else{
-        this.toastService.presentToast('Upload failed.try again');
-        return false;
-
-      }
+      return false;
     }
   }
 

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {NavController, AlertController, Events} from "ionic-angular/index";
+import {NavController, AlertController, Events, ActionSheetController} from "ionic-angular/index";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {ServerUrl} from '../../app/api.config'
 import {ToastProvider} from "../../providers/toast";
@@ -24,17 +24,16 @@ export class ProfilePage {
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
 
-  fingerPrintEnabled:boolean = false;
 
-  constructor(public navCtrl:NavController, private events:Events, public alertCtrl:AlertController, private socialSharing:SocialSharing,
+  constructor(public navCtrl:NavController,
+              private actionSheetCtrl:ActionSheetController,
+              private events:Events, public alertCtrl:AlertController, private socialSharing:SocialSharing,
               private toastService:ToastProvider,private fingerprintService:FingerprintProvider,
               private uploadService:UploadProvider,
               private userService:UserService, private translateService:TranslateServiceProvider,
               private storage:Storage) {
 
-    this.isFingerPrintEnabled();
     this.events.subscribe('profileImage:uploaded', (url)=> {
-      console.log(url)
       this.user.profileUrl.url = url;
     })
   }
@@ -44,34 +43,22 @@ export class ProfilePage {
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
     this.userService.getUser().subscribe((user:Iuser)=> {
       this.user = user;
-      console.log(this.user)
     }, (err)=> {
-      console.log(err);
     });
   }
 
 
-  async isFingerPrintEnabled() {
-    try {
-      await this.fingerprintService.isFingerPrintEnabled();
-      this.fingerPrintEnabled=true;
-    }
-    catch (err) {
-      this.fingerPrintEnabled=false;
-    }
-  }
 
   async upload(source:string){
       let isVerified=await  this.fingerprintService.securityCheck(this.user.passcode);
       if(!isVerified){
         return false;
       }
+
     const config:IUploadPageConfig={
-      assetId:null,
-      uploadType:'profile', //profile,evidences
+      uploadType:'profile', //profile,field
       id:this.user.id
     };
-
     let isUploaded;
     if(source==='camera'){
       isUploaded=await this.uploadService.takePhotoFromCamera(config);
@@ -82,19 +69,46 @@ export class ProfilePage {
 
     }
     if(isUploaded){
-      this.toastService.presentToast('Upload successfully');
       return true;
-
     }
     else{
-      if(isUploaded===null)
-        return false;
-      else{
-        this.toastService.presentToast('Upload failed.try again');
-        return false;
-
-      }
+      return false;
     }
+  }
+
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Change Profile',
+      buttons: [
+        {
+          text: 'From Gallery',
+          icon: 'folder-open',
+          handler: () => {
+            this.upload('album')
+            return;
+          }
+        },
+        {
+          text: 'From Camera',
+          icon: 'camera',
+          handler: () => {
+            this.upload('camera')
+
+          }
+        },
+
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
   }
 
   changeLang() {
