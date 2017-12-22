@@ -4,15 +4,12 @@ import {FingerprintAIO, FingerprintOptions} from '@ionic-native/fingerprint-aio'
 import {ToastProvider} from "./toast";
 import {PinDialogProvider} from "./pin-dialog";
 import {ActionSheetController, Platform} from 'ionic-angular';
-import {HttpClient} from "@angular/common/http";
-import {UserService} from "./user.service";
 
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class FingerprintProvider {
 
-  fingerPrintAvailable:boolean=false;
-  fingerprintEnabled:boolean=false;
   fingerprintOption:FingerprintOptions = {
     clientId: 'agriledger',
     disableBackup: false,
@@ -21,35 +18,121 @@ export class FingerprintProvider {
     localizedReason: 'Please authenticate' //Only for iOS
   };
 
-  constructor(public http:HttpClient, public platform:Platform,
+  constructor(public platform:Platform,
               public actionSheetCtrl:ActionSheetController,
-              private userService:UserService,
+              private storage:Storage,
               private faio:FingerprintAIO, private toastProvider:ToastProvider, private pinService:PinDialogProvider) {
     console.log('Hello FingerprintProvider Provider');
   }
 
 
   async isFingerPrintAvailable() {
-    try{
-      await this.faio.isAvailable();
-      this.fingerPrintAvailable=true;
+    try {
+      let isAvailable=await this.faio.isAvailable();
+      console.log(isAvailable)
       return true;
     }
+    catch (err) {
+      console.log(err)
+      return false;
+    }
+  }
+  async isFingerPrintEnabled(){
+
+    let isAvailable;
+
+    try{
+      await this.isFingerPrintAvailable();
+      isAvailable=true
+    }
+
     catch (err){
-      this.fingerPrintAvailable=false;
+      isAvailable=false
+    }
+
+    if(!isAvailable){
+      try{
+        await this.setFingerPrintDisabled();
+        return false;
+      }
+
+      catch (err){
+        return false;
+
+      }
+    }
+    else {
+      try {
+        let val=await this.storage.get('fingerPrintEnabled');
+        if(val==1){
+          return true;
+        }
+        else {
+          return false;
+        }
+
+      }
+      catch (err) {
+        return false;
+      }
+    }
+
+  }
+
+  async setFingerPrintEnabled(){
+    try {
+      await this.storage.set('fingerPrintEnabled',1);
+      return true;
+    }
+    catch (err) {
+      return false;
+    }
+
+  }
+
+  async setFingerPrintDisabled(){
+
+    try {
+      await this.storage.set('fingerPrintEnabled',0);
+      return true;
+    }
+    catch (err) {
       return false;
     }
   }
 
-  fingerprintVerification() {
 
-    return this.faio.show(this.fingerprintOption);
+
+  async fingerprintVerification() {
+    try {
+      await this.faio.show(this.fingerprintOption);
+      return true;
+    }
+    catch (err) {
+      return false;
+    }
 
   }
 
 
-  passcodeVerfication() {
-    return this.pinService.show();
+  async passcodeVerfication(passcode:number) {
+    try {
+      const code:any=await this.pinService.show();
+      if (code === null){
+        return false;
+      }
+      if (code == '' + passcode) {
+        return true;
+      }
+      else {
+        return false;
+      }
+
+    }
+    catch (err) {
+      return false;
+    }
+
   }
 
   async presentActionSheet(cb:{(param:any[]):void;}, scope, passcode:number,shouldExit=false, ...params:any[]) {
@@ -64,7 +147,7 @@ export class FingerprintProvider {
     let isEnabled;
     try{
 
-      isEnabled=await this.userService.isFingerPrintEnabled();
+      isEnabled=await this.isFingerPrintEnabled();
       if(!isEnabled){
         this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
         return;
@@ -93,7 +176,7 @@ export class FingerprintProvider {
           text: '6 digit Passcode',
           icon: 'unlock',
           handler: () => {
-            this.passcodeVerfication().then((pcode:string)=> {
+            this.passcodeVerfication(1).then((pcode:any)=> {
               console.log(pcode)
 
               if (pcode === null){
@@ -153,7 +236,7 @@ export class FingerprintProvider {
           text: '6 digit Passcode',
           icon: 'unlock',
           handler: () => {
-            this.passcodeVerfication().then((pcode:string)=> {
+            this.passcodeVerfication(1).then((pcode:any)=> {
               console.log(pcode)
               if (pcode === null){
                 if(shouldExit)

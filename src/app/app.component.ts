@@ -30,7 +30,6 @@ export class MyApp {
 
       splashScreen.hide();
 
-      //this.fingerprintProvider.presentActionSheet(this.verify, this, this.user.passcode, true, null);
 
       this.verify();
 
@@ -54,15 +53,15 @@ export class MyApp {
         else if (!user.passcode) {
           this.rootPage = PasscodePage;
         }
-        else
-          this.rootPage = TabsPage;
-        //this.fingerprintProvider.presentActionSheet(this.goToTab, this, user.passcode, true, null);
+        else{
+          this.user=user;
+          this.securityCheck();
+        }
       }
 
       else
         this.rootPage = WelcomePage
     }, (err)=> {
-      console.log(err);
       loader.dismiss();
       this.rootPage = WelcomePage
     })
@@ -71,8 +70,23 @@ export class MyApp {
   ionViewDidEnter() {
   }
 
+  async securityCheck(){
+    let isEnabled=await this.fingerprintProvider.isFingerPrintEnabled();
+    if(isEnabled){
+      let isVerified=await this.fingerprintProvider.fingerprintVerification();
+      if(isVerified){
+        this.rootPage = TabsPage;
+      }
+    }
+
+    else{
+      let isVerified=await this.fingerprintProvider.passcodeVerfication(this.user.passcode);
+      if(isVerified){
+        this.rootPage = TabsPage;
+      }
+    }
+  }
   goToTab() {
-    this.rootPage = TabsPage;
 
 
   }

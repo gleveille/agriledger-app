@@ -8,14 +8,15 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 })
 export class CompleteWeatherPage {
 
-  dailyWeatherFive:any;
+  currentForecast:any;
 
   constructor(public navCtrl:NavController, public navParams:NavParams) {
 
   }
 
   ionViewDidLoad() {
-    this.dailyWeatherFive = this.navParams.get('dailyWeatherFive');
+    this.currentForecast = this.navParams.get('currentForecast');
+    console.log(this.currentForecast)
   }
 
 }

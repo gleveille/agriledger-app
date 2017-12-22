@@ -5,6 +5,8 @@ import {UserService} from "../../providers/user.service";
 import {ToastProvider} from "../../providers/toast";
 import {Iuser} from "../../interface/user.interface";
 import {TabsPage} from "../tabs/tabs";
+import {FingerprintPage} from "../fingerprint/fingerprint";
+import {FingerprintProvider} from "../../providers/fingerprint";
 
 
 
@@ -15,10 +17,13 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class PasscodePage {
 
+  isFingerPrintAvailable:boolean=false;
   authForm:FormGroup;
 
   user={} as Iuser;
-  constructor(public nav:NavController, public navParams:NavParams,private toastService:ToastProvider,private userService:UserService,public formBuilder:FormBuilder) {
+  constructor(public nav:NavController, public navParams:NavParams,
+              private fingerprintService:FingerprintProvider,
+              private toastService:ToastProvider,private userService:UserService,public formBuilder:FormBuilder) {
 
 
     this.authForm = formBuilder.group({
@@ -35,10 +40,26 @@ export class PasscodePage {
     })
   }
 
+
+  async checkIfFingerprintAvailable(){
+      let isAvailable=await this.fingerprintService.isFingerPrintAvailable();
+      if(isAvailable){
+        this.nav.setRoot(FingerprintPage);
+
+      }
+      else{
+        this.nav.setRoot(TabsPage);
+      }
+  }
+
   onSubmit(value:any):void {
     if (this.authForm.valid) {
+      if(value.passcode !==value.passcode1){
+        return this.toastService.presentToast('Passcode does not match');
+      }
       this.userService.updatePasscode(value.passcode).subscribe(()=>{
-        this.nav.setRoot(TabsPage);
+
+        this.checkIfFingerprintAvailable();
 
       },(err)=>{
         this.toastService.presentToast(err.message);

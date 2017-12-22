@@ -7,6 +7,7 @@ import {UserService} from "../../providers/user.service";
 import {TermsPage} from "../terms/terms";
 import {ChangePasswordPage} from "../change-password/change-password";
 import {PasscodePage} from "../passcode/passcode";
+import {ForgotPasswordPage} from "../forgot-password/forgot-password";
 
 @Component({
   selector: 'page-login',
@@ -60,6 +61,10 @@ export class LoginPage {
       ]
     });
     confirm.present()
+  }
+
+  forgotPassword() {
+    this.navCtrl.push(ForgotPasswordPage)
   }
 
 }

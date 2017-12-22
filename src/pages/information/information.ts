@@ -16,22 +16,8 @@ import {CompleteWeatherPage} from "../complete-weather/complete-weather";
 export class InformationPage {
 
   pet:string = "puppies";
-  public localWeather:any;
-  public currentWeather:any = [];
-  public dailyWeatherOne:any;
-  public dailyWeatherFive:any;
-  public DailyForecasts:any = [];
-  weather:any;
-  location:{
-    city:string
-  }
-  city:string;
-  url:string;
-
-  private appId = 'PGa0BTAnTqEI0mb9MsYSVMH6lM4rG40d';
-  private currentConditions = 'http://dataservice.accuweather.com/currentconditions/v1/';
-  private dayOne = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/';
-  private dayFive = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
+  currentWeather={weather:[]};
+  currentForecast=null;
 
 
   constructor(public navCtrl:NavController, public navParams:NavParams,
@@ -42,59 +28,34 @@ export class InformationPage {
 
   }
 
+  gotoComplete(){
+    this.navCtrl.push(CompleteWeatherPage,{currentForecast:this.currentForecast})
+  }
+
   ionViewDidLoad() {
-    this.getLocalWeather();
+    this.getCurrentWeather();
+    this.getCurrentForecast();
   }
 
-  getLocalWeather() {
-    this.weatherProvider.local().subscribe(
+  getCurrentWeather() {
+    this.weatherProvider.getCurrentWeather().subscribe(
       data => {
-        this.localWeather = data;
-        this.current();
-        this.OneDayWeatherDetails();
-        this.FiveDayWeatherDetails();
+       this.currentWeather=data;
+        console.log(this.currentWeather)
       }
     )
   }
 
-  current() {
-    let url = `${this.currentConditions}${this.localWeather.Key}?apikey=${this.appId}`
-
-    this.weatherProvider.currentCond(url).subscribe(
+  getCurrentForecast() {
+    this.weatherProvider.getCurrentForecast().subscribe(
       data => {
-        this.currentWeather = data;
-        this.events.publish('hello',{currentWeather:data});
+        this.currentForecast=data;
+        console.log(this.currentForecast)
+
       }
     )
   }
 
-  OneDayWeatherDetails() {
-    let url = `${this.dayOne}${this.localWeather.Key}?apikey=${this.appId}`
-
-    this.weatherProvider.dailyOne(url).subscribe(
-      data => {
-        console.log('1 day weather');
-        console.log(data);
-        this.dailyWeatherOne = data;
-      }
-    )
-  }
-
-  FiveDayWeatherDetails() {
-    let url = `${this.dayFive}${this.localWeather.Key}?apikey=${this.appId}`
-
-    this.weatherProvider.dailyFive(url).subscribe(
-      data => {
-        console.log('5 day weather');
-        console.log(data);
-        this.dailyWeatherFive = data;
-      }
-    )
-  }
-
-  weatherInfo(dailyWeatherFive) {
-    this.navCtrl.push(CompleteWeatherPage, {dailyWeatherFive: dailyWeatherFive})
-  }
 
 
 

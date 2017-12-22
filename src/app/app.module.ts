@@ -22,7 +22,6 @@ import { UploadProvider } from '../providers/upload';
 import {ComponentsModule} from "../components/components.module";
 import {ComingsoonComponent} from "../components/comingsoon/comingsoon";
 import {InformationPage} from "../pages/information/information";
-import {ClipboardModule} from "ngx-clipboard/dist/src";
 import {LoginPage} from "../pages/login/login";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {File} from '@ionic-native/file';
@@ -60,6 +59,8 @@ import {ChangePasswordPage} from "../pages/change-password/change-password";
 import {PasscodePage} from "../pages/passcode/passcode";
 import {ChartsModule} from "ng2-charts";
 import {ResetPasswordPage} from "../pages/reset-password/reset-password";
+import {FingerprintPage} from "../pages/fingerprint/fingerprint";
+import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 
 
 
@@ -95,7 +96,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CompleteWeatherPage,
     ChangePasswordPage,
     PasscodePage,
-    ResetPasswordPage
+    ResetPasswordPage,
+    FingerprintPage,
+    ForgotPasswordPage
   ],
   imports: [
     HttpClientModule,
@@ -106,7 +109,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     PipesModule,
     FileUploadModule,
-    ClipboardModule,
     CacheModule.forRoot(),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
@@ -146,7 +148,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     CompleteWeatherPage,
     ChangePasswordPage,
     PasscodePage,
-    ResetPasswordPage
+    ResetPasswordPage,
+    FingerprintPage,
+    ForgotPasswordPage
+
   ],
   providers: [
     {

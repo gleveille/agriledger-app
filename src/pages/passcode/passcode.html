@@ -9,40 +9,46 @@
 
 <ion-content padding>
 
-  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+  <ion-card>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)" padding>
 
-    <ion-item [ngClass]="{'error-border':!authForm.controls.passcode.valid && authForm.controls.passcode.touched}">
-      <ion-label floating>Enter 6 Digit passcode</ion-label>
-      <ion-input formControlName="passcode" type="number"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="authForm.controls.passcode.hasError('required') && authForm.controls.passcode.touched">
-      <p>Sorry, field Passcode is required!</p>
-    </ion-item>
-    <ion-item *ngIf="authForm.controls.passcode.hasError('minlength') && authForm.controls.passcode.touched">
-      <p>Sorry, Passcode length is 6</p>
-    </ion-item>
-    <ion-item *ngIf="authForm.controls.passcode.hasError('pattern') && authForm.controls.passcode.touched">
-      <p>Sorry, 6 Digit Passcode needed</p>
-    </ion-item>
+      <ion-item [ngClass]="{'error-border':!authForm.controls.passcode.valid && authForm.controls.passcode.touched}">
+        <ion-label floating>Enter 6 Digit passcode</ion-label>
+        <ion-input formControlName="passcode" type="number"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.passcode.hasError('required') && authForm.controls.passcode.touched">
+        <p>Sorry, field Passcode is required!</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.passcode.hasError('minlength') && authForm.controls.passcode.touched">
+        <p>Sorry, Passcode length is 6</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.passcode.hasError('pattern') && authForm.controls.passcode.touched">
+        <p>Sorry, 6 Digit Passcode needed</p>
+      </ion-item>
 
-    <ion-item [ngClass]="{'error-border':!authForm.controls.passcode1.valid && authForm.controls.passcode1.touched}">
-      <ion-label floating>Re-Enter 6 Digit passcode</ion-label>
-      <ion-input formControlName="passcode1" type="number"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="authForm.controls.passcode1.hasError('required') && authForm.controls.passcode1.touched">
-      <p>Sorry, field Passcode is required!</p>
-    </ion-item>
-    <ion-item *ngIf="authForm.controls.passcode1.hasError('minlength') && authForm.controls.passcode1.touched">
-      <p>Sorry, Passcode length is 6</p>
-    </ion-item>
-    <ion-item *ngIf="authForm.controls.passcode1.hasError('pattern') && authForm.controls.passcode1.touched">
-      <p>Sorry, 6 Digit Passcode needed</p>
-    </ion-item>
+      <ion-item [ngClass]="{'error-border':!authForm.controls.passcode1.valid && authForm.controls.passcode1.touched}">
+        <ion-label floating>Re-Enter 6 Digit passcode</ion-label>
+        <ion-input formControlName="passcode1" type="number"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.passcode1.hasError('required') && authForm.controls.passcode1.touched">
+        <p>Sorry, field Passcode is required!</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.passcode1.hasError('minlength') && authForm.controls.passcode1.touched">
+        <p>Sorry, Passcode length is 6</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.passcode1.hasError('pattern') && authForm.controls.passcode1.touched">
+        <p>Sorry, 6 Digit Passcode needed</p>
+      </ion-item>
 
-    <button ion-button full color="buttonColor" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">
-      Authorize
-    </button>
-  </form>
+      <ion-list text-right>
+        <button ion-button color="primary" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">
+          Authorize
+        </button>
+      </ion-list>
+
+
+    </form>
+  </ion-card>
 
 </ion-content>
 
