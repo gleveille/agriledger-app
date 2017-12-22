@@ -6,6 +6,7 @@ import {WelcomePage} from '../welcome/welcome';
 import {WalletPage} from "../wallet/wallet";
 import {UserService} from "../../providers/user.service";
 import {CommunityPage} from "../community/community";
+import { SettingsPage } from '../settings/settings';
 
 
 @Component({
@@ -23,6 +24,10 @@ export class HeaderPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HeaderPage');
+  }
+
+  onSettings(){
+    this.navCtrl.push(SettingsPage);
   }
 
   /*logout() {

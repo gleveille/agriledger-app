@@ -55,8 +55,7 @@ export class MyApp {
         }
         else{
           this.user=user;
-          this.rootPage = TabsPage;
-          //this.securityCheck();
+          this.securityCheck();
         }
       }
 

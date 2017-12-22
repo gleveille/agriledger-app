@@ -15,4 +15,8 @@ page-create-asset {
     transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .list-md .item-block .item-inner {
+    border-bottom: 1px solid #dedede !important;
+  }
+
 }
