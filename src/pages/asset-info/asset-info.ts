@@ -154,13 +154,6 @@ export class AssetInfoPage {
   async verify() {
     let asset = JSON.parse(JSON.stringify(this.asset));
     console.log(this.asset)
-    /*for (let level in this.asset.category) {
-
-      if (this.asset.category[level].attrs && this.asset.category[level].attrs.length)
-        asset.category[level] = this.asset.category[level].attrs[this.chosenLang];
-      else
-        asset.category[level] = '';
-    }*/
 
     let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
     if(isVerified){
@@ -174,11 +167,17 @@ export class AssetInfoPage {
 
   updateAsset(asset:any) {
     console.log(asset)
+    let loader = this.loadingCtrl.create({
+      content: 'Updating Asset Details..'
+    });
+    loader.present();
     this.assetsService.updateAsset(asset).subscribe((data)=> {
       console.log('saved succesfully')
+      loader.dismiss();
       this.toastService.presentToast('Saved Succesfully');
     }, (err)=> {
       console.log(err)
+      loader.dismiss();
       this.toastService.presentToast('Something went wrong');
     })
   }

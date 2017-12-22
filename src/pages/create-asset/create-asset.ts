@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Events} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Events, LoadingController} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
@@ -47,7 +47,7 @@ export class CreateAssetPage {
               private events:Events,
               private toastService:ToastProvider,
               private fingerprintProvider:FingerprintProvider,
-              public userService: UserService) {
+              public userService: UserService,  private loadingCtrl: LoadingController,) {
 
   }
 
@@ -151,14 +151,22 @@ export class CreateAssetPage {
 
   registerAsset(asset:any) {
     console.log(asset)
+    let loader = this.loadingCtrl.create({
+      content: 'Creating Asset..'
+    });
+    loader.present();
+
     this.assetsService.createAsset(asset).subscribe((data)=> {
       console.log('saveed succesfully')
+
       this.events.publish('new-asset',asset)
-      this.toastService.presentToast('Saved Succesfully');
+      loader.dismiss();
+      this.toastService.presentToast('Created Succesfully');
       this.navCtrl.pop();
     }, (err)=> {
       console.log(err)
-      this.toastService.presentToast('Something went wrong');
+      loader.dismiss();
+      this.toastService.presentToast('Asset could not be created');
     })
   }
 
