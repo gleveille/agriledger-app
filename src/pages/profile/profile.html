@@ -40,10 +40,10 @@
       <ion-label floating>{{'Address'|translate}}</ion-label>
       <ion-input type="text" disabled></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label>Fingerprint Enabled</ion-label>
       <ion-toggle [(ngModel)]="fingerPrintEnabled"  (ionChange)="changeToggle();"></ion-toggle>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 
   <ion-grid>
@@ -65,7 +65,7 @@
     </ion-row>
   </ion-grid>
 
-  <div class="dropdown">
+  <!-- <div class="dropdown">
     <p class="language_text">
       <img (click)="showdropdown=true" [src]="defaultLangauge==='ch'?'assets/img/flag_china.png':'assets/img/uk.png'"
            alt=""></p>
@@ -77,7 +77,7 @@
              (click)="changeLang()">
       </p>
     </div>
-  </div>
+  </div> -->
 
 </ion-content>
 

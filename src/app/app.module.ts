@@ -57,6 +57,7 @@ import {PasscodePage} from "../pages/passcode/passcode";
 import {ChartsModule} from "ng2-charts";
 import {ResetPasswordPage} from "../pages/reset-password/reset-password";
 import {FingerprintPage} from "../pages/fingerprint/fingerprint";
+import { SettingsPage } from '../pages/settings/settings';
 import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 
 
@@ -94,7 +95,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasscodePage,
     ResetPasswordPage,
     FingerprintPage,
+<<<<<<< HEAD
+    SettingsPage
+=======
     ForgotPasswordPage
+>>>>>>> 31b321ac10fe2c11661c8f308216b50fee366a0f
   ],
   imports: [
     HttpClientModule,
@@ -145,7 +150,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasscodePage,
     ResetPasswordPage,
     FingerprintPage,
+<<<<<<< HEAD
+    SettingsPage
+=======
     ForgotPasswordPage
+>>>>>>> 31b321ac10fe2c11661c8f308216b50fee366a0f
 
   ],
   providers: [
