@@ -157,6 +157,15 @@
   "To make changes to your Profile please contact us at": "要更改您的个人资料，请与我们联系",
   "Confirm profile is correct": "确认配置文件是否正确",
   "Current Temperature": "当前温度",
-  "Total Assets Available": "总资产可用"
+  "Total Assets Available": "总资产可用",
+  "LOG OUT":"登出",
+  "Settings":"设置",
+  "Touch ID":"触摸ID",
+  "Languages":"语言",
+  "OK":"好",
+  "CANCEL":"取消",
+  "ok":"好",
+  "cancel":"取消",
+  "Chinese":"中文"
 
 }

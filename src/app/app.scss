@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -17,11 +16,11 @@
 .centered-spinner {
   width: 28px;
   height: 28px;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-left:-14px;
-  margin-right:-14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -14px;
+  margin-right: -14px;
   z-index: 100000;
 }
 
@@ -35,12 +34,15 @@
   pointer-events: none;
 }
 
-.btnHeight40Px{
-  height:40px !important;
+.btnHeight40Px {
+  height: 40px !important;
 }
-.bgColor{background-color:rgba(0, 0, 0, 0.05)}
 
-.lighterFont{
+.bgColor {
+  background-color: rgba(0, 0, 0, 0.05)
+}
+
+.lighterFont {
   font-weight: lighter !important;
 }
 
@@ -53,4 +55,8 @@
   color: #fff;
   background-color: #519a48;
   letter-spacing: 2px;
+}
+
+.primary-text {
+  color: black;
 }
