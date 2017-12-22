@@ -8,6 +8,7 @@ import {ContainerApi} from '../app/api.config';
 
 import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
 import {Camera,CameraOptions} from "@ionic-native/camera";
+import {ToastProvider} from "./toast";
 
 @Injectable()
 export class UploadProvider {
@@ -16,6 +17,7 @@ export class UploadProvider {
   constructor(public http:HttpClient, private events:Events,
               private loadingCtrl:LoadingController,
               private camera:Camera,
+              private toastService:ToastProvider,
               private geolocation:Geolocation,
               private transfer:FileTransfer) {
 
@@ -125,19 +127,33 @@ export class UploadProvider {
       const result= await fileTransfer.upload(base64, url, options);
       console.log('result is')
       console.log(result)
-      let data:any = JSON.parse(result.response);
-      url = data.result.url;
-      if (config.uploadType === 'profile')
-        this.events.publish('profileImage:uploaded', url);
+      let data;
+      try{
+        data = JSON.parse(result.response);
+        if(data && data.result && data.result.url){
+          if (config.uploadType === 'profile')
+            this.events.publish('profileImage:uploaded', data.result.url);
 
-      if (config.uploadType === 'evidences')
-        this.events.publish('evidences:uploaded', url);
+          if (config.uploadType === 'evidences')
+            this.events.publish('evidences:uploaded', data.result.url);
+        }
+
+        this.toastService.presentToast('Uploaded');
+
+      }
+      catch (err){
+        this.toastService.presentToast('Uploaded please refresh to view it');
+
+      }
+
 
       this.uploadFinish();
 
       return true;
     }
     catch (err){
+      this.toastService.presentToast('upload failed');
+
       console.log('from catch ')
       console.log(err);
       this.uploadFinish();

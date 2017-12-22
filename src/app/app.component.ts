@@ -21,7 +21,7 @@ export class MyApp {
   rootPage:any = null;
   user = {} as Iuser;
 
-  constructor(platform:Platform, statusBar:StatusBar, splashScreen:SplashScreen, private storage:Storage,
+  constructor(private platform:Platform, statusBar:StatusBar, splashScreen:SplashScreen, private storage:Storage,
               public loadingCtrl:LoadingController, private userService:UserService, public fingerprintProvider:FingerprintProvider,
               public cache:CacheService) {
     platform.ready().then(() => {
@@ -77,6 +77,7 @@ export class MyApp {
 
     }
     else{
+      this.platform.exitApp();
     }
 
   }
