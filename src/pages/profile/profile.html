@@ -26,24 +26,26 @@
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
-      <ion-input type="tel" [(ngModel)]="user.phone" disabled></ion-input>
+      <ion-input type="tel" [(ngModel)]="user.phone" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Wechat'|translate}}</ion-label>
-      <ion-input type="tel" disabled></ion-input>
+      <ion-input type="tel" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Company name'|translate}}</ion-label>
-      <ion-input type="text" disabled></ion-input>
+      <ion-input type="text" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{'Address'|translate}}</ion-label>
-      <ion-input type="text" disabled></ion-input>
+      <ion-textarea type="text"></ion-textarea>
     </ion-item>
     <ion-item>
         <ion-label floating>{{'Registration number'|translate}}</ion-label>
-        <ion-input type="number" disabled></ion-input>
-      </ion-item>
+        <ion-input type="number"></ion-input>
+    </ion-item>
+
+    
     <!-- <ion-item>
       <ion-label>Fingerprint Enabled</ion-label>
       <ion-toggle [(ngModel)]="fingerPrintEnabled"  (ionChange)="changeToggle();"></ion-toggle>
@@ -64,7 +66,7 @@
   <ion-grid>
     <ion-row>
       <ion-col text-right>
-        <button ion-button>{{'Confirm profile is correct'|translate}}</button>
+        <button ion-button>{{'Update'|translate}}</button>
       </ion-col>
     </ion-row>
   </ion-grid>

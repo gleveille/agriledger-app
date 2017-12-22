@@ -58,4 +58,10 @@ page-asset-info {
     width: calc(100% - 8px - 8px);
   }
 
+  :required{
+    content:"*";
+    color:red;
+    background: red;
+  }
+
 }
