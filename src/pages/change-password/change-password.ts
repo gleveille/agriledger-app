@@ -4,7 +4,6 @@ import {UserService} from "../../providers/user.service";
 import {ToastProvider} from "../../providers/toast";
 import {PasscodePage} from "../passcode/passcode";
 
-@IonicPage()
 @Component({
   selector: 'page-change-password',
   templateUrl: 'change-password.html',

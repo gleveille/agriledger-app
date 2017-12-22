@@ -7,7 +7,6 @@ import {Iuser} from "../../interface/user.interface";
 import {ToastProvider} from "../../providers/toast";
 import {ServerUrl} from "../../app/api.config";
 
-@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -56,8 +55,6 @@ export class HomePage {
     /*this.navCtrl.push(InformationPage);*/
   }
 
-  upload() {
-    //this.navCtrl.push(UploadPage, {config: {uploadType: 'profile', id: this.user.id}});
-  }
+
 
 }

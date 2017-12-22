@@ -10,7 +10,6 @@ import {FingerprintProvider} from "../../providers/fingerprint";
 
 
 
-@IonicPage()
 @Component({
   selector: 'page-passcode',
   templateUrl: 'passcode.html',

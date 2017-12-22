@@ -8,7 +8,6 @@ import {ToastProvider} from "../../providers/toast";
 import {UserService} from "../../providers/user.service";
 import { Chart } from 'chart.js';
 
-@IonicPage()
 @Component({
   selector: 'page-finance',
   templateUrl: 'finance.html',

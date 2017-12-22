@@ -6,7 +6,6 @@ import { FingerprintProvider } from '../../providers/fingerprint';
 
 
 
-@IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',

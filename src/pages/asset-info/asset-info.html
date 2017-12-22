@@ -97,7 +97,7 @@
           </ion-col>-->
           <ion-col text-right>
             <button ion-button color="primary" type="submit" [disabled]="false" (click)="verify()">
-              {{registerPromise==='pending'?'Registering' :'Save'|translate}}
+              {{registerPromise==='pending'?'Registering' :'Update'|translate}}
             </button>
           </ion-col>
         </ion-row>
@@ -120,7 +120,9 @@
               <ion-slide *ngFor="let evidence of asset.evidences">
                   <img [src]="serverUrl+evidence?.url" imageViewer/>
 
+<!--
                   <figcaption>{{evidence?.date|moment}}</figcaption>
+-->
 
 
               </ion-slide>
