@@ -4,7 +4,6 @@ import {UserService} from "../../providers/user.service";
 import {ToastProvider} from "../../providers/toast";
 
 
-@IonicPage()
 @Component({
   selector: 'page-reset-password',
   templateUrl: 'reset-password.html',

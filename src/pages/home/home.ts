@@ -7,7 +7,6 @@ import {Iuser} from "../../interface/user.interface";
 import {ToastProvider} from "../../providers/toast";
 import {ServerUrl} from "../../app/api.config";
 
-@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',

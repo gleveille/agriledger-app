@@ -12,7 +12,6 @@ import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
 import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
 
-@IonicPage()
 @Component({
   selector: 'page-asset-info',
   templateUrl: 'asset-info.html',
