@@ -11,6 +11,7 @@ import {Iuser} from "../../interface/user.interface";
 import {TranslateServiceProvider} from "../../providers/translate-service";
 import {Storage} from '@ionic/storage';
 import {FingerprintProvider} from "../../providers/fingerprint";
+import {UploadProvider} from "../../providers/upload";
 
 
 @Component({
@@ -26,7 +27,8 @@ export class ProfilePage {
   fingerPrintEnabled:boolean = false;
 
   constructor(public navCtrl:NavController, private events:Events, public alertCtrl:AlertController, private socialSharing:SocialSharing,
-              private toastCtrl:ToastProvider,private fingerprintService:FingerprintProvider,
+              private toastService:ToastProvider,private fingerprintService:FingerprintProvider,
+              private uploadService:UploadProvider,
               private userService:UserService, private translateService:TranslateServiceProvider,
               private storage:Storage) {
 
@@ -59,7 +61,40 @@ export class ProfilePage {
     }
   }
 
-  upload() {
+  async upload(source:string){
+      let isVerified=await  this.fingerprintService.securityCheck(this.user.passcode);
+      if(!isVerified){
+        return false;
+      }
+    const config:IUploadPageConfig={
+      assetId:null,
+      uploadType:'profile', //profile,evidences
+      id:this.user.id
+    };
+
+    let isUploaded;
+    if(source==='camera'){
+      isUploaded=await this.uploadService.takePhotoFromCamera(config);
+
+    }
+    else if(source==='album') {
+      isUploaded=await this.uploadService.takePhotoFromAlbum(config);
+
+    }
+    if(isUploaded){
+      this.toastService.presentToast('Upload successfully');
+      return true;
+
+    }
+    else{
+      if(isUploaded===null)
+        return false;
+      else{
+        this.toastService.presentToast('Upload failed.try again');
+        return false;
+
+      }
+    }
   }
 
   changeLang() {
@@ -70,33 +105,6 @@ export class ProfilePage {
 
   }
 
-  async changeToggle() {
-    let val;
-    try {
-      val = await this.fingerprintService.isFingerPrintEnabled()
-    }
-    catch (err) {
-
-    }
-    if (val) {
-      try {
-        await this.fingerprintService.setFingerPrintDisabled();
-        this.fingerPrintEnabled = false;
-      }
-      catch (err) {
-
-      }
-    }
-    else {
-      try {
-        await this.fingerprintService.setFingerPrintEnabled();
-        this.fingerPrintEnabled = true;
-      }
-      catch (err) {
-
-      }
-    }
-  }
 
 
 }

@@ -26,8 +26,8 @@ export class FingerprintProvider {
   }
   async securityCheck(passcode:number){
     // uncomment if not in browser env
-    return true;
-/*    let isEnabled=await this.isFingerPrintEnabled();
+    //return true;
+    let isEnabled=await this.isFingerPrintEnabled();
     if(isEnabled){
       let isVerified=await this.fingerprintVerification();
       if(isVerified){
@@ -47,7 +47,7 @@ export class FingerprintProvider {
       else {
         return false;
       }
-    }*/
+    }
   }
 
   async isFingerPrintAvailable() {

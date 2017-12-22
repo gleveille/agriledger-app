@@ -56,8 +56,6 @@ export class HomePage {
     /*this.navCtrl.push(InformationPage);*/
   }
 
-  upload() {
-    //this.navCtrl.push(UploadPage, {config: {uploadType: 'profile', id: this.user.id}});
-  }
+
 
 }

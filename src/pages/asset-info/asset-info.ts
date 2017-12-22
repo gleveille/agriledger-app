@@ -26,6 +26,7 @@ export class AssetInfoPage {
   assets = [];
   pet:string = "puppies";
   isAndroid:boolean = false;
+  isSecurityCheckPassed:boolean=false;
   user = {} as Iuser;
 
   constructor(public navCtrl:NavController,
@@ -77,6 +78,15 @@ export class AssetInfoPage {
 
 
   async upload(source:string){
+    if(!this.isSecurityCheckPassed){
+      let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
+      if(!isVerified){
+        return false;
+      }
+      else{
+        this.isSecurityCheckPassed=true;
+      }
+    }
     const config:IUploadPageConfig={
       assetId:this.asset.id,
       uploadType:'evidences', //profile,field
