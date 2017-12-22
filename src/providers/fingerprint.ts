@@ -11,6 +11,8 @@ import {UserService} from "./user.service";
 @Injectable()
 export class FingerprintProvider {
 
+  fingerPrintAvailable:boolean=false;
+  fingerprintEnabled:boolean=false;
   fingerprintOption:FingerprintOptions = {
     clientId: 'agriledger',
     disableBackup: false,
@@ -27,8 +29,16 @@ export class FingerprintProvider {
   }
 
 
-  isFingerPrintAvailable() {
-    return this.faio.isAvailable()
+  async isFingerPrintAvailable() {
+    try{
+      await this.faio.isAvailable();
+      this.fingerPrintAvailable=true;
+      return true;
+    }
+    catch (err){
+      this.fingerPrintAvailable=false;
+      return false;
+    }
   }
 
   fingerprintVerification() {
@@ -71,7 +81,7 @@ export class FingerprintProvider {
     catch (err) {
       this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
     }
-    
+
   }
 
 
