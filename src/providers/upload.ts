@@ -101,7 +101,7 @@ export class UploadProvider {
     if (config.uploadType === 'profile')
       url= ContainerApi.ProfileUploadUrl();
     else if (config.uploadType === 'evidences')
-      url= ContainerApi.FieldUploadUrl();
+      url= ContainerApi.EvidencesUploadUrl();
 
     let lat='',long='';
 
@@ -128,20 +128,30 @@ export class UploadProvider {
       console.log('result is')
       console.log(result)
       let data;
+
       try{
         data = JSON.parse(result.response);
-        if(data && data.result && data.result.url){
+        let obj={url:null};
+        console.log('..................')
+        console.log(data)
+        if(data.result.files && data.result.files.file[0].data) {
+          obj=data.result.files.file[0].data
+        }
+        console.log(obj)
+
+
+        console.log(config.uploadType)
           if (config.uploadType === 'profile')
-            this.events.publish('profileImage:uploaded', ServerUrl+data.result.url);
+            this.events.publish('profileImage:uploaded', obj);
 
           if (config.uploadType === 'evidences')
-            this.events.publish('evidences:uploaded', ServerUrl+data.result.url);
-        }
+            this.events.publish('evidences:uploaded', obj);
 
         this.toastService.presentToast('Uploaded');
 
       }
       catch (err){
+        console.log(err);
         this.toastService.presentToast('Uploaded please refresh to view it');
 
       }

@@ -30,7 +30,7 @@ export class LoginPage {
       if(!user.user.isPasswordChanged){
         this.navCtrl.setRoot(ChangePasswordPage)
       }
-      else if(!user.user.passcode){
+      else if(!user.user.profiles.passcode){
         this.navCtrl.setRoot(PasscodePage)
       }
       else

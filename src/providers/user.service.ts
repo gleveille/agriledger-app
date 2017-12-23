@@ -27,7 +27,7 @@ export class UserService {
   }
 
   login(user:Iuser) {
-    return this.http.post(`${UserApi.login.url()}?filter[include]=User&filter[include]=profile`, user)
+    return this.http.post(`${UserApi.login.url()}?filter[include][user]=profiles`, user)
       .do((user:any)=> {
         this.user = user.user;
         this.accessToken = user.id;
@@ -44,15 +44,38 @@ export class UserService {
     return this.storage.get('userId');
   }
 
-  updatePasscode(passcode:any) {
-    if (!passcode) {
-      return Observable.throw('no passcode');
-    }
-    this.user.passcode = passcode;
-    return this.http.post(`${UserApi.changePasscode.url()}`, {passcode: passcode}).do((res)=> {
+  createProfile(user:Iuser) {
+
+    let profile=user.profiles;
+    console.log('creating profile is')
+    console.log(profile)
+    return this.http.post(`${UserApi.updateProfile.url()}/${user.id}/profiles`, profile).do((res)=> {
+      this.user.profiles=profile;
+      console.log('created')
+      console.log(res);
     })
       .catch((err)=> {
-        this.user.passcode = null;
+
+        console.log(err)
+        return this.errorHandler.handle(err);
+      })
+
+  };
+
+  updateProfile(user:Iuser) {
+
+    let profiles=user.profiles;
+    if(!profiles.id)
+    {
+      return this.createProfile(user);
+    }
+    console.log('updating profile is')
+    console.log(profiles)
+    return this.http.put(`${UserApi.updateProfile.url()}/${user.id}/profiles`, profiles).do((profile:any)=> {
+      this.user.profiles=profile;
+      console.log('updated')
+    })
+      .catch((err)=> {
 
         return this.errorHandler.handle(err);
       })
@@ -71,13 +94,14 @@ export class UserService {
           return Observable.throw('no userId')
         }
         else {
-          return this.http.get(`${UserApi.findById.url()}/${userId}?filter[include]=profile`)
+          return this.http.get(`${UserApi.findById.url()}/${userId}?filter[include]=profiles`)
         }
       }).map((user)=>{
         let user2=user;
-        if(user2.profileUrl &&user2.profileUrl.url ){
-          user2.profileUrl.url=ServerUrl+user2.profileUrl.url;
-        }
+
+        if(!user2.profiles)
+          user2.profiles={};
+
         return user2;
       })
       .do((user)=> {

@@ -36,6 +36,7 @@ export class PasscodePage {
   ionViewDidLoad(){
     this.userService.getUser().subscribe((user:Iuser)=>{
       this.user=user;
+      console.log(this.user)
     })
   }
 
@@ -56,7 +57,11 @@ export class PasscodePage {
       if(value.passcode !==value.passcode1){
         return this.toastService.presentToast('Passcode does not match');
       }
-      this.userService.updatePasscode(value.passcode).subscribe(()=>{
+
+      console.log(this.user)
+
+      this.user.profiles.passcode=value.passcode;
+      this.userService.updateProfile(this.user).subscribe(()=>{
 
         this.checkIfFingerprintAvailable();
 

@@ -21,7 +21,7 @@ import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 })
 export class ProfilePage {
   serverUrl = ServerUrl;
-  user = {profileUrl: {}} as Iuser;
+  user:Iuser={profiles:{}};
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
 
@@ -35,23 +35,36 @@ export class ProfilePage {
               private userService:UserService, private translateService:TranslateServiceProvider,
               private storage:Storage) {
 
-    this.events.subscribe('profileImage:uploaded', (url)=> {
-      this.user.profileUrl.url = url;
+    this.events.subscribe('profileImage:uploaded', (data)=> {
+      this.user.profiles.profileUrl= data;
     })
   }
 
   ionViewDidLoad() {
 
+    this.getUser();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
+
+  }
+
+  updateProfile(){
+
+    this.userService.updateProfile(this.user).subscribe((data)=>{
+      this.toastService.presentToast('Profile Updated...')
+    },(err)=>{
+      this.toastService.presentToast(err.message || 'Profile could not be Updated...')
+
+    })
+  }
+  getUser(){
     this.userService.getUser().subscribe((user:Iuser)=> {
       this.user = user;
     }, (err)=> {
     });
   }
 
-
   verify(source:string){
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
@@ -68,7 +81,7 @@ export class ProfilePage {
 
     const config:IUploadPageConfig={
       uploadType:'profile', //profile,field
-      id:this.user.id
+      id:this.user.profiles.id
     };
     let isUploaded;
     if(source==='camera'){

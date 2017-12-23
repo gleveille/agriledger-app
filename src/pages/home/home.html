@@ -3,13 +3,15 @@
 </ion-header>
 
 
-<ion-content style="background-color: lightgray">
+<ion-content  style="background-color: lightgray">
 
       <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
       <div class="main-content" text-wrap text-center>
-        <img class="circular" [src]="user.profileUrl.url||'assets/img/default-avatar.png'">
+        <img class="circular" *ngIf="user.profiles.profileUrl && user.profiles.profileUrl.url" [src]="serverUrl+user.profiles.profileUrl.url">
+        <img class="circular" *ngIf="!user.profiles.profileUrl || !user.profiles.profileUrl.url" [src]="'assets/img/default-avatar.png'">
 
-          <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">{{user?.name}}</p>
+          <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
+            {{user.email}}</p>
         <hr>
         <p no-lines style="font-size: 18px !important;font-weight: lighter !important; " >Total Assets <span *ngIf="assetHttpStatus==='resolved'"> ({{assets.length}})</span></p>
           <ion-spinner class="centered-spinner"
@@ -28,32 +30,9 @@
         <hr>
         <p no-lines style="font-size: 18px !important;font-weight: lighter !important;" >Weather next 5 days</p>
 
-        <canvas *ngIf="assetHttpStatus==='resolved'"
-                baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [chartType]="barChartType"
 
-        </canvas>
 
       </div>
 
-
-
-
-<!--  <ion-card (click)="assets()">
-    <img src="assets/img/rice.jpg"/>
-    <div class="card-title">{{'Assets'|translate}}</div>
-    <div class="card-subtitle">{{'Total Assets Available'|translate}} <b style="font-size: 20px">
-      &nbsp;{{totalAssets}}</b></div>
-  </ion-card>
-
-  <ion-card (click)="information()">
-    <img src="assets/img/ContentAnalytics_illustration2.jpg"/>
-    <div class="card-title">{{'Information'|translate}}</div>
-    <div class="card-subtitle">{{'Current Temperature'|translate}}<b style="font-size: 20px">&nbsp;{{Date}}</b></div>
-  </ion-card>-->
 
 </ion-content>

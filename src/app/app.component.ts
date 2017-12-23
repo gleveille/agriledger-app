@@ -53,12 +53,12 @@ export class MyApp {
         if (!user.isPasswordChanged) {
           this.rootPage = ChangePasswordPage
         }
-        else if (!user.passcode) {
+        else if (!user.profiles.passcode) {
           this.rootPage = PasscodePage;
         }
         else{
           this.user=user;
-          let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+          let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
           passcodeModal.present();
           passcodeModal.onDidDismiss(data => {
             console.log(data);

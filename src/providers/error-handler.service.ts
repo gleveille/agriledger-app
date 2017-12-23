@@ -15,7 +15,6 @@ export class ErrorHandlerService {
       if(res.error){
           try{
               const data=JSON.parse(res.error);
-              console.log(data)
               if(data && data.error && data.error.message){
                   msg=data.error.message;
 
@@ -34,9 +33,13 @@ export class ErrorHandlerService {
           msg=res.statusText||'Server error.Try again';
       }
 
+      if(res.error.error){
+        msg=res.error.error.message ||'Server error.Try again';
+
+      }
+
       msg= msg ? msg :'Something went wrong';
 
-      console.log(msg);
       return Observable.throw({message:msg,status:res.status});
 
   }

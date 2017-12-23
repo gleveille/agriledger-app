@@ -7,7 +7,7 @@ export const ServerUrl = environment.apiURL + ':' + environment.apiPORT;
 
 const ContainerApi = {
   ProfileUploadUrl: ()=>ServerUrl + '/api/containers/profiles/upload',
-  FieldUploadUrl: ()=>ServerUrl + '/api/containers/fields/upload'
+  EvidencesUploadUrl: ()=>ServerUrl + '/api/containers/evidences/upload'
 
 };
 const UserApi = {
@@ -26,8 +26,8 @@ const UserApi = {
     method: 'POST'
 
   },
-  changePasscode: {
-    url: ()=>ServerUrl + '/api/users/change-passcode',
+  updateProfile: {
+    url: ()=>ServerUrl + '/api/users',
     method: 'POST'
   },
   findById: {

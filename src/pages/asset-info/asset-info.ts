@@ -6,12 +6,12 @@ import {
 import {AssetsService} from "../../providers/assets.service";
 import {Iuser} from "../../interface/user.interface";
 import {UserService} from "../../providers/user.service";
-import {ServerUrl} from "../../app/api.config";
 import {UploadProvider} from "../../providers/upload";
 import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
 import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
+import {ServerUrl} from '../../app/api.config'
 
 @Component({
   selector: 'page-asset-info',
@@ -19,8 +19,8 @@ import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 })
 export class AssetInfoPage {
   @ViewChild(Slides) slides: Slides;
+  serverUrl=ServerUrl;
 
-  serverUrl = ServerUrl;
   chosenLang='en';
   asset = {category: {}} as any;
   assets = [];
@@ -43,18 +43,21 @@ export class AssetInfoPage {
     this.isAndroid = platform.is('android');
 
 
-    this.events.subscribe('evidences:uploaded', (url)=> {
-      console.log(url);
+    this.events.subscribe('evidences:uploaded', (data)=> {
+      console.log(data);
       if(this.asset.evidences){
-        this.asset.evidences.unshift(url);
+        this.asset.evidences.unshift(data);
         this.slides.slideTo(0, 500);
       }
 
     else{
         this.asset.evidences=[];
-        this.asset.evidences.unshift(url);
+        this.asset.evidences.unshift(data);
         this.slides.slideTo(0, 500);
       }
+
+      console.log('ttttttttttt')
+      console.log(this.asset)
     })
   }
 
@@ -74,7 +77,7 @@ export class AssetInfoPage {
 
 
   verifyBeforeUpload(source:string){
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
@@ -87,7 +90,7 @@ export class AssetInfoPage {
   }
 
   verifyBeforeUpdate(){
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
@@ -103,7 +106,7 @@ export class AssetInfoPage {
     const config:IUploadPageConfig={
       assetId:this.asset.id,
       uploadType:'evidences', //profile,field
-      id:this.user.id
+      id:this.user.profiles.id
     };
     let isUploaded;
     if(source==='camera'){

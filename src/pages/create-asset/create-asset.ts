@@ -129,7 +129,7 @@ export class CreateAssetPage {
 
 
   verifyBeforeregister(){
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);

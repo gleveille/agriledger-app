@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Iuser} from "../interface/user.interface";
-import {UserApi, AssetApi} from '../app/api.config';
+import {UserApi, AssetApi, ServerUrl} from '../app/api.config';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/concatMap';

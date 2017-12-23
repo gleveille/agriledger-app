@@ -9,12 +9,14 @@ import {AssetsService} from "../../providers/assets.service";
 import { Chart } from 'chart.js';
 import {WeatherProvider} from "../../providers/weather";
 
+import {ServerUrl} from '../../app/api.config'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
 })
 export class HomePage {
-  user = {profileUrl: {}} as Iuser;
+  serverUrl=ServerUrl;
+  user:Iuser = {profiles:{}};
   currentWeather={weather:[]};
   currentForecast=null;
 
@@ -46,9 +48,9 @@ export class HomePage {
               public alertCtrl:AlertController,
               private toastCtrl:ToastProvider, private userService:UserService) {
 
-    this.events.subscribe('profileImage:uploaded', (url)=> {
-      console.log(url)
-      this.user.profileUrl.url = url;
+    this.events.subscribe('profileImage:uploaded', (data)=> {
+      console.log(data)
+      this.user.profiles.profileUrl = data;
     })
 
     this.events.subscribe('hello', (currentWeather)=>{
@@ -68,7 +70,7 @@ export class HomePage {
 
   getUser(){
     this.userService.getUser().subscribe((user:Iuser)=> {
-      this.user = user;
+      this.user = user || this.user;
       console.log(this.user)
     }, (err)=> {
       console.log(err);
