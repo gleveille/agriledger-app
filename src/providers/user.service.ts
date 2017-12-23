@@ -13,7 +13,7 @@ import {Storage} from '@ionic/storage';
 
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ErrorHandlerService} from "./error-handler.service";
 
 
@@ -26,14 +26,24 @@ export class UserService {
   constructor(private http:HttpClient, private errorHandler:ErrorHandlerService, private storage:Storage) {
   }
 
-  login(user:Iuser) {
-    return this.http.post(`${UserApi.login.url()}?filter[include][user]=profiles`, user)
+  login(credential:any) {
+    let accessToken=null;
+    return this.http.post(`${UserApi.login.url()}`, credential)
+      .concatMap((result:any)=> {
+      accessToken=result.id;
+        return this.http.get(`${UserApi.findById.url()}/${result.userId}?access_token=${accessToken}&filter[include]=profiles`)
+      })
       .do((user:any)=> {
-        this.user = user.user;
-        this.accessToken = user.id;
-        this.storage.set('userId', user.userId);
-        this.storage.set('accessToken', user.id);
-      });
+      console.log(user);
+        this.user = user;
+        this.storage.set('userId', user.id);
+        this.storage.set('accessToken', accessToken);
+      })
+      .catch((err)=> {
+
+        console.log(err)
+        return this.errorHandler.handle(err);
+      })
   }
 
   getAccessTokenFromLocalStorage() {

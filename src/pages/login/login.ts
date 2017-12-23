@@ -27,17 +27,17 @@ export class LoginPage {
 
     this.userService.login({email: f.value.email, password: f.value.password}).subscribe((user:any)=> {
       console.log(user);
-      if(!user.user.isPasswordChanged){
+      if(!user.isPasswordChanged){
         this.navCtrl.setRoot(ChangePasswordPage)
       }
-      else if(!user.user.profiles.passcode){
+      else if(!user.profiles.passcode){
         this.navCtrl.setRoot(PasscodePage)
       }
       else
         this.navCtrl.setRoot(TabsPage)
     }, (err)=> {
       console.log(err);
-      this.toastService.presentToast('Login failed');
+      this.toastService.presentToast(err.message || 'Login failed');
     })
   }
 
