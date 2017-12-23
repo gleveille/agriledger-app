@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Iuser} from "../interface/user.interface";
-import {UserApi} from '../../src/app/api.config';
+import {UserApi,ServerUrl} from '../../src/app/api.config';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/concatMap';
@@ -35,7 +35,7 @@ export class UserService {
         this.storage.set('accessToken', user.id);
       });
   }
-  
+
   getAccessTokenFromLocalStorage() {
     return this.storage.get('accessToken');
   }
@@ -73,9 +73,17 @@ export class UserService {
         else {
           return this.http.get(`${UserApi.findById.url()}/${userId}`)
         }
+      }).map((user)=>{
+        let user2=user;
+        if(user2.profileUrl &&user2.profileUrl.url ){
+          user2.profileUrl.url=ServerUrl+user2.profileUrl.url;
+        }
+        return user2;
       })
       .do((user)=> {
         this.user = user;
+        console.log(this.user)
+
       })
       .catch((err)=> {
         return this.errorHandler.handle(err);

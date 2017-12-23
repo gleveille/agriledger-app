@@ -3,21 +3,50 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background-color: lightgray">
 
-  <ion-row>
-    <ion-col col-12 text-center>
-      <ion-item text-center *ngIf="user?.profileUrl?.url || user?.profileUrl?.url?.length">
-        <img width="100" height="100" [src]="serverUrl+user?.profileUrl?.url"
-             style="border-radius:50%;position: relative;width: 100px; height: 100px" >
-      </ion-item>
-      <ion-icon *ngIf="!user?.profileUrl?.url || !user?.profileUrl?.url?.length"
-                style="font-size: 80px;" name="md-person" ></ion-icon>
-      <h1 text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;margin-top: 0px">{{user.name}}</h1>
-    </ion-col>
-  </ion-row>
+      <div class="header-image"></div>
+      <div class="main-content" text-wrap text-center>
+        <img class="circular" [src]="user?.profileUrl?.url||'assets/img/default-avatar.png'">
 
-  <ion-card (click)="assets()">
+          <p class="profile-description" text-capitalize>{{user?.name}}</p>
+        <hr>
+        <p no-lines style="font-size: 18px !important;font-weight: lighter !important;" >Total Assets <span *ngIf="assetHttpStatus==='resolved'"> ({{assets.length}})</span></p>
+          <ion-spinner class="centered-spinner"
+                       *ngIf="assetHttpStatus==='pending'">
+
+          </ion-spinner>
+
+
+            <canvas *ngIf="assetHttpStatus==='resolved'"
+                    baseChart
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType">
+
+            </canvas>
+        <hr>
+        <p no-lines style="font-size: 18px !important;font-weight: lighter !important;" >Weather next 5 days</p>
+
+              <canvas *ngIf="assetHttpStatus==='resolved'"
+                      baseChart
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
+                      [options]="lineChartOptions"
+                      [colors]="lineChartColors"
+                      [legend]="lineChartLegend"
+                      [chartType]="lineChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+
+              </canvas>
+
+      </div>
+
+
+
+
+<!--  <ion-card (click)="assets()">
     <img src="assets/img/rice.jpg"/>
     <div class="card-title">{{'Assets'|translate}}</div>
     <div class="card-subtitle">{{'Total Assets Available'|translate}} <b style="font-size: 20px">
@@ -28,6 +57,6 @@
     <img src="assets/img/ContentAnalytics_illustration2.jpg"/>
     <div class="card-title">{{'Information'|translate}}</div>
     <div class="card-subtitle">{{'Current Temperature'|translate}}<b style="font-size: 20px">&nbsp;{{Date}}</b></div>
-  </ion-card>
+  </ion-card>-->
 
 </ion-content>
