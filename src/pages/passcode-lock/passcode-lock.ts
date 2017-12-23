@@ -11,7 +11,7 @@ export class PasscodeLockPage {
   passcode:number=null;
   enteredPasscode = '';
   passcodeWrong:boolean=false;
-  passcodeLabel:string='Enter passcode';
+  passcodeLabel:string='Enter Passcode To Verify';
 
   constructor(public navCtrl: NavController,private viewController:ViewController,public navParams: NavParams,private fingerprintService:FingerprintProvider) {
     this.passcode=navParams.get('passcode');

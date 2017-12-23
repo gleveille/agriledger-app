@@ -16,6 +16,7 @@ import { SettingsPage } from '../settings/settings';
 export class HeaderPage {
 
   @Input('title') title:string = '';
+  @Input ('showIcons') showIcons:boolean=true;
 
   constructor(public navCtrl:NavController, private loadingCtrl:LoadingController,
               private toastService:ToastProvider,
