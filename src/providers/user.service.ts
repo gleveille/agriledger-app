@@ -27,7 +27,7 @@ export class UserService {
   }
 
   login(user:Iuser) {
-    return this.http.post(`${UserApi.login.url()}?include=User`, user)
+    return this.http.post(`${UserApi.login.url()}?filter[include]=User&filter[include]=profile`, user)
       .do((user:any)=> {
         this.user = user.user;
         this.accessToken = user.id;
@@ -71,7 +71,7 @@ export class UserService {
           return Observable.throw('no userId')
         }
         else {
-          return this.http.get(`${UserApi.findById.url()}/${userId}`)
+          return this.http.get(`${UserApi.findById.url()}/${userId}?filter[include]=profile`)
         }
       }).map((user)=>{
         let user2=user;
