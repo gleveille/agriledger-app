@@ -6,81 +6,70 @@
 
   <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
   <div class="main-content" text-wrap text-center>
-    <img class="circular" [src]="user?.profileUrl?.url||'assets/img/default-avatar.png'" (click)="presentActionSheet('camera')">
+    <img class="circular" [src]="user.profileUrl.url||'assets/img/default-avatar.png'"
+         (click)="presentActionSheet('camera')">
 
-    <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">{{user?.name}}</p>
+    <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
+      {{user?.name}}</p>
 
-  <!--<ion-row>
-    <ion-col col-12 text-center>
-      <ion-item text-center *ngIf="user.profileUrl || user.profileUrl">
-        <img width="100" height="100" [src]="user.profileUrl.url ||'assets/img/default-avatar.png'"
-             style="border-radius:50%;position: relative;width: 100px; height: 100px" (click)="presentActionSheet('camera')">
+    <!--<ion-row>
+      <ion-col col-12 text-center>
+        <ion-item text-center *ngIf="user.profileUrl || user.profileUrl">
+          <img width="100" height="100" [src]="user.profileUrl.url ||'assets/img/default-avatar.png'"
+               style="border-radius:50%;position: relative;width: 100px; height: 100px" (click)="presentActionSheet('camera')">
+        </ion-item>
+
+        <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">{{user.name}}</p>
+      </ion-col>
+    </ion-row>-->
+
+    <ion-list>
+      <ion-item>
+        <ion-label floating>{{'Agri Id number'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="user.id" disabled></ion-input>
       </ion-item>
-
-      <p text-capitalize text-center style="color:#484748;letter-spacing: 4px;font-size: 16px;">{{user.name}}</p>
-    </ion-col>
-  </ion-row>-->
-
-  <ion-list>
-    <ion-item>
-      <ion-label floating>{{'Agri Id number'|translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="user.id" disabled></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
-      <ion-input type="tel" [(ngModel)]="user.phone" ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>{{'Wechat'|translate}}</ion-label>
-      <ion-input type="tel" ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>{{'Company name'|translate}}</ion-label>
-      <ion-input type="text" ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>{{'Address'|translate}}</ion-label>
-      <ion-textarea type="text"></ion-textarea>
-    </ion-item>
-    <ion-item>
+      <ion-item>
+        <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
+        <ion-input type="tel" [(ngModel)]="user.phone"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Wechat'|translate}}</ion-label>
+        <ion-input type="tel"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Company name'|translate}}</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Address'|translate}}</ion-label>
+        <ion-textarea type="text"></ion-textarea>
+      </ion-item>
+      <ion-item>
         <ion-label floating>{{'Registration number'|translate}}</ion-label>
         <ion-input type="number"></ion-input>
-    </ion-item>
-  </ion-list>
+      </ion-item>
+    </ion-list>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col col-1 style="top: 20px">
-        <ion-icon name="ios-warning-outline"></ion-icon>
-      </ion-col>
-      <ion-col col-11>
-        <p style="opacity: .7">{{'To make changes to your Profile please contact us at'|translate}}
-          help@aglideger.co</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-1 style="top: 20px">
+          <ion-icon name="ios-warning-outline"></ion-icon>
+        </ion-col>
+        <ion-col col-11>
+          <p style="opacity: .7">{{'To make changes to your Profile please contact us at'|translate}}
+            help@aglideger.co</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col text-right>
-        <button ion-button>{{'Update'|translate}}</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col text-right>
+          <button ion-button>{{'Update'|translate}}</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <!-- <div class="dropdown">
-    <p class="language_text">
-      <img (click)="showdropdown=true" [src]="defaultLangauge==='ch'?'assets/img/flag_china.png':'assets/img/uk.png'"
-           alt=""></p>
-    <em class="down_icon"></em>
-    <div class="dropdown-content">
-      <p class="language_text">
-        <img *ngIf="showdropdown"
-             [src]="defaultLangauge!=='ch'?'assets/img/flag_china.png':'assets/img/uk.png'" alt=""
-             (click)="changeLang()">
-      </p>
-    </div>
-  </div> -->
-    </div>
+  </div>
 </ion-content>
 
