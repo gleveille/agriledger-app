@@ -1,6 +1,6 @@
 import {WelcomePage} from './../pages/welcome/welcome';
 import {Component, ViewChild} from '@angular/core';
-import {Platform, LoadingController, Content} from 'ionic-angular';
+import {Platform, LoadingController, Content, ModalController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -12,8 +12,8 @@ import {ChangePasswordPage} from "../pages/change-password/change-password";
 import {LoginPage} from "../pages/login/login";
 import {PasscodePage} from "../pages/passcode/passcode";
 import {Iuser} from "../interface/user.interface";
+import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
 
-declare var agrichainJS;
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,7 +21,10 @@ export class MyApp {
   rootPage:any = null;
   user = {} as Iuser;
 
-  constructor(private platform:Platform, statusBar:StatusBar, splashScreen:SplashScreen, private storage:Storage,
+  constructor(private platform:Platform,
+              private modalController:ModalController,
+              statusBar:StatusBar, splashScreen:SplashScreen,
+              private storage:Storage,
               public loadingCtrl:LoadingController, private userService:UserService, public fingerprintProvider:FingerprintProvider,
               public cache:CacheService) {
     platform.ready().then(() => {
@@ -55,7 +58,17 @@ export class MyApp {
         }
         else{
           this.user=user;
-          this.securityCheck();
+          let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+          passcodeModal.present();
+          passcodeModal.onDidDismiss(data => {
+            console.log(data);
+            if(data && data.success===true){
+              this.rootPage=TabsPage;
+            }
+            else{
+              this.platform.exitApp();
+            }
+          });
         }
       }
 
@@ -67,19 +80,6 @@ export class MyApp {
     })
   }
 
-  ionViewDidEnter() {
-  }
 
-  async securityCheck(){
-    let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
-    if(isVerified){
-      this.rootPage = TabsPage;
-
-    }
-    else{
-      this.platform.exitApp();
-    }
-
-  }
 
 }

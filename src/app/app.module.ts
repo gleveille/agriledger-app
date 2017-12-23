@@ -10,7 +10,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import {AlertPage} from "../pages/alert/alert";
 import {SpinnerDialog} from "@ionic-native/spinner-dialog";
-import {FileUploadModule} from "ng2-file-upload/index";
 import { IonicStorageModule } from '@ionic/storage';
 import {ProfilePage} from "../pages/profile/profile";
 import {PipesModule} from "../pipes/pipes.module";
@@ -61,6 +60,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -97,7 +97,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResetPasswordPage,
     FingerprintPage,
     SettingsPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    PasscodeLockPage
   ],
   imports: [
     HttpClientModule,
@@ -107,7 +108,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChartsModule,
     BrowserAnimationsModule,
     PipesModule,
-    FileUploadModule,
     IonicImageViewerModule,
     CacheModule.forRoot(),
     IonicModule.forRoot(MyApp),
@@ -150,7 +150,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResetPasswordPage,
     FingerprintPage,
     SettingsPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    PasscodeLockPage
 
   ],
   providers: [

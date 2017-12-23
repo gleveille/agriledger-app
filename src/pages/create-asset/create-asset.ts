@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Events, LoadingController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Events, LoadingController, ModalController} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
 import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
+import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 
 
 @Component({
@@ -42,6 +43,7 @@ export class CreateAssetPage {
   user={} as Iuser;
 
   constructor(public navCtrl:NavController,
+              private modalController:ModalController,
               public navParams:NavParams,
               private assetsService:AssetsService,
               private events:Events,
@@ -123,11 +125,24 @@ export class CreateAssetPage {
         this.toastService.presentToast('Something went wrong');
       })
   }
-  async securityCheck(){
 
+
+
+  verifyBeforeregister(){
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    passcodeModal.present();
+    passcodeModal.onDidDismiss(data => {
+      console.log(data);
+      if(data && data.success===true){
+        this.registerAsset();
+      }
+      else{
+      }
+    });
   }
 
-  async verify() {
+
+  registerAsset() {
     let asset = JSON.parse(JSON.stringify(this.asset));
     console.log(this.asset)
     for (let level in this.asset.category) {
@@ -137,20 +152,6 @@ export class CreateAssetPage {
       else
         asset.category[level] = '';
     }
-
-    let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
-    if(isVerified){
-      this.registerAsset(asset);
-    }
-    else{
-
-    }
-
-  }
-
-
-  registerAsset(asset:any) {
-    console.log(asset)
     let loader = this.loadingCtrl.create({
       content: 'Creating Asset..'
     });

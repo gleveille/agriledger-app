@@ -24,31 +24,7 @@ export class FingerprintProvider {
               private faio:FingerprintAIO, private toastProvider:ToastProvider, private pinService:PinDialogProvider) {
     console.log('Hello FingerprintProvider Provider');
   }
-  async securityCheck(passcode:number){
-    // uncomment if not in browser env
-    //return true;
-    let isEnabled=await this.isFingerPrintEnabled();
-    if(isEnabled){
-      let isVerified=await this.fingerprintVerification();
-      if(isVerified){
-        return true;
-      }
-      else {
-        return false;
-      }
 
-    }
-
-    else{
-      let isVerified=await this.passcodeVerfication(passcode);
-      if(isVerified){
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
-  }
 
   async isFingerPrintAvailable() {
     try {
@@ -129,169 +105,17 @@ export class FingerprintProvider {
 
   async fingerprintVerification() {
     try {
-      await this.faio.show(this.fingerprintOption);
+      let result=await this.faio.show(this.fingerprintOption);
+      console.log('finger print result')
+      console.log(result)
       return true;
     }
     catch (err) {
+      console.log('xxx')
+      console.log(err)
       return false;
     }
 
-  }
-
-
-  async passcodeVerfication(passcode:number) {
-    try {
-      const code:any=await this.pinService.show();
-      if (code === null){
-        return false;
-      }
-      if (code == '' + passcode) {
-        return true;
-      }
-      else {
-        return false;
-      }
-
-    }
-    catch (err) {
-      return false;
-    }
-
-  }
-
-  async presentActionSheet(cb:{(param:any[]):void;}, scope, passcode:number,shouldExit=false, ...params:any[]) {
-    if (typeof cb !== 'function' || !scope || !passcode) {
-      this.toastProvider.presentToast('Invalid argument');
-      return false;
-    }
-    console.log('%c params are', 'color:red')
-    console.log(params)
-    params = params || [];
-
-    let isEnabled;
-    try{
-
-      isEnabled=await this.isFingerPrintEnabled();
-      if(!isEnabled){
-        this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
-        return;
-      }
-    }
-    catch (err){
-      this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
-      return;
-    }
-    try {
-      await this.isFingerPrintAvailable();
-      this.presentActionSheetWithFingerprint(cb, scope, passcode,shouldExit, params);
-    }
-    catch (err) {
-      this.presentActionSheetWithoutFingerprint(cb, scope, passcode, shouldExit,params);
-    }
-
-  }
-
-
-  presentActionSheetWithFingerprint(cb, scope, passcode,shouldExit, params) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Authenticate using',
-      buttons: [
-        {
-          text: '6 digit Passcode',
-          icon: 'unlock',
-          handler: () => {
-            this.passcodeVerfication(1).then((pcode:any)=> {
-              console.log(pcode)
-
-              if (pcode === null){
-                if(shouldExit)
-                  return this.platform.exitApp();
-                else
-                  return;
-              }
-              if (pcode == '' + passcode) {
-                cb.call(scope, params);
-
-              }
-              else {
-                this.toastProvider.presentToast('Invalid passcode');
-              }
-            }).catch((err)=> {
-              this.toastProvider.presentToast('Something went wrong.restart the app and try again');
-
-            })
-          }
-        },
-        {
-          text: 'Fingerprint',
-          icon: 'finger-print',
-          handler: () => {
-            this.fingerprintVerification().then((data)=> {
-              cb.call(scope, params);
-            }).catch((err)=> {
-              if(shouldExit)
-                return this.platform.exitApp();
-              else
-              console.log(err);
-            })
-          }
-        }
-        , {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            if(shouldExit)
-              return this.platform.exitApp();
-            else
-              return;
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-
-  presentActionSheetWithoutFingerprint(cb, scope, passcode,shouldExit, params) {
-
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Authenticate using',
-      buttons: [
-        {
-          text: '6 digit Passcode',
-          icon: 'unlock',
-          handler: () => {
-            this.passcodeVerfication(1).then((pcode:any)=> {
-              console.log(pcode)
-              if (pcode === null){
-                if(shouldExit)
-                  return this.platform.exitApp();
-                else
-                  return;
-              }
-
-              if (pcode == '' + passcode) {
-                cb.call(scope, params);
-
-              }
-              else {
-                this.toastProvider.presentToast('Invalid passcode');
-              }
-            })
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            if(shouldExit)
-              return this.platform.exitApp();
-            else
-              return;
-          }
-        }
-      ]
-    });
-    actionSheet.present();
   }
 
 

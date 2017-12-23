@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {NavController, AlertController, Events, ActionSheetController} from "ionic-angular/index";
+import {NavController, AlertController, Events, ActionSheetController, ModalController} from "ionic-angular/index";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {ServerUrl} from '../../app/api.config'
 import {ToastProvider} from "../../providers/toast";
@@ -12,6 +12,7 @@ import {TranslateServiceProvider} from "../../providers/translate-service";
 import {Storage} from '@ionic/storage';
 import {FingerprintProvider} from "../../providers/fingerprint";
 import {UploadProvider} from "../../providers/upload";
+import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 
 
 @Component({
@@ -27,6 +28,7 @@ export class ProfilePage {
 
   constructor(public navCtrl:NavController,
               private actionSheetCtrl:ActionSheetController,
+              private modalController:ModalController,
               private events:Events, public alertCtrl:AlertController, private socialSharing:SocialSharing,
               private toastService:ToastProvider,private fingerprintService:FingerprintProvider,
               private uploadService:UploadProvider,
@@ -48,12 +50,21 @@ export class ProfilePage {
   }
 
 
+  verify(source:string){
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    passcodeModal.present();
+    passcodeModal.onDidDismiss(data => {
+      console.log(data);
+      if(data && data.success===true){
+        this.upload(source);
+      }
+      else{
+      }
+    });
+  }
 
   async upload(source:string){
-      let isVerified=await  this.fingerprintService.securityCheck(this.user.passcode);
-      if(!isVerified){
-        return false;
-      }
+
 
     const config:IUploadPageConfig={
       uploadType:'profile', //profile,field
@@ -85,7 +96,7 @@ export class ProfilePage {
           text: 'From Gallery',
           icon: 'folder-open',
           handler: () => {
-            this.upload('album')
+            this.verify('album')
             return;
           }
         },
@@ -93,7 +104,7 @@ export class ProfilePage {
           text: 'From Camera',
           icon: 'camera',
           handler: () => {
-            this.upload('camera')
+            this.verify('camera')
 
           }
         },

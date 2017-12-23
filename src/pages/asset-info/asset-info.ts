@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {
   IonicPage, NavController, NavParams, Platform, Events, ActionSheetController,
-  LoadingController, Slides
+  LoadingController, Slides, ModalController
 } from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {Iuser} from "../../interface/user.interface";
@@ -11,6 +11,7 @@ import {UploadProvider} from "../../providers/upload";
 import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
 import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
+import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 
 @Component({
   selector: 'page-asset-info',
@@ -33,6 +34,7 @@ export class AssetInfoPage {
               private actionSheetCtrl:ActionSheetController,
               private uploadService:UploadProvider,
               private toastService:ToastProvider,
+              private modalController:ModalController,
               private userService:UserService,
               public navParams:NavParams,
               private assetsService: AssetsService, platform:Platform, private events:Events,
@@ -75,16 +77,33 @@ export class AssetInfoPage {
 
 
 
-  async upload(source:string){
-    if(!this.isSecurityCheckPassed){
-      let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
-      if(!isVerified){
-        return false;
+  verifyBeforeUpload(source:string){
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    passcodeModal.present();
+    passcodeModal.onDidDismiss(data => {
+      console.log(data);
+      if(data && data.success===true){
+        this.upload(source);
       }
       else{
-        this.isSecurityCheckPassed=true;
       }
-    }
+    });
+  }
+
+  verifyBeforeUpdate(){
+    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.passcode });
+    passcodeModal.present();
+    passcodeModal.onDidDismiss(data => {
+      console.log(data);
+      if(data && data.success===true){
+        this.updateAsset();
+      }
+      else{
+      }
+    });
+  }
+
+  async upload(source:string){
     const config:IUploadPageConfig={
       assetId:this.asset.id,
       uploadType:'evidences', //profile,field
@@ -116,7 +135,7 @@ export class AssetInfoPage {
           text: 'From Gallery',
           icon: 'folder-open',
           handler: () => {
-            this.upload('album')
+            this.verifyBeforeUpload('album')
             return;
           }
         },
@@ -124,7 +143,7 @@ export class AssetInfoPage {
           text: 'From Camera',
           icon: 'camera',
           handler: () => {
-             this.upload('camera')
+             this.verifyBeforeUpload('camera')
 
           }
         },
@@ -142,27 +161,14 @@ export class AssetInfoPage {
     actionSheet.present();
   }
 
-  async verify() {
-    let asset = JSON.parse(JSON.stringify(this.asset));
-    console.log(this.asset)
 
-    let isVerified=await  this.fingerprintProvider.securityCheck(this.user.passcode);
-    if(isVerified){
-      this.updateAsset(asset);
-    }
-    else{
 
-    }
-
-  }
-
-  updateAsset(asset:any) {
-    console.log(asset)
+  updateAsset() {
     let loader = this.loadingCtrl.create({
       content: 'Updating Asset Details..'
     });
     loader.present();
-    this.assetsService.updateAsset(asset).subscribe((data)=> {
+    this.assetsService.updateAsset(this.asset).subscribe((data)=> {
       console.log('saved succesfully')
       loader.dismiss();
       this.toastService.presentToast('Saved Succesfully');

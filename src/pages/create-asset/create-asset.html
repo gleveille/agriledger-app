@@ -110,7 +110,7 @@
           </ion-col>-->
           <ion-col text-right>
             <button ion-button color="primary" type="submit" [disabled]="!asset.name || !asset.expectedYield || !asset.packaging "
-                    (click)="verify()">
+                    (click)="verifyBeforeregister()">
               {{'Create Asset'|translate}}
             </button>
           </ion-col>
