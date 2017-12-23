@@ -96,7 +96,7 @@
             </button>
           </ion-col>-->
           <ion-col text-right>
-            <button ion-button color="primary" type="submit" [disabled]="false" (click)="verifyBeforeUpload()">
+            <button ion-button color="primary" type="submit" [disabled]="false" (click)="verifyBeforeUpdate()">
               {{registerPromise==='pending'?'Registering' :'Update'|translate}}
             </button>
           </ion-col>
@@ -110,7 +110,7 @@
         <ion-col>
             <ion-list-header >
               <div float-right>
-                <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px" (click)="uploadPage()">
+                <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px" (click)="presentActionSheet()">
                   +&nbsp; {{'Add Evidences'}}
                 </button>
               </div>
@@ -134,7 +134,7 @@
 
           <ion-list-header>
             <div float-right>
-              <button ion-button clear style="color: #519a48; letter-spacing: 2px;font-size: 16px; padding: 0px;" (click)="uploadPage()">
+              <button ion-button clear style="color: #519a48; letter-spacing: 2px;font-size: 16px; padding: 0px;" (click)="presentActionSheet()">
                 +&nbsp; {{'Add Documents'}}
               </button>
             </div>

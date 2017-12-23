@@ -70,10 +70,6 @@ export class AssetInfoPage {
     console.log(this.asset);
   }
 
-  uploadPage() {
-
-    this.presentActionSheet()
-  }
 
 
 
