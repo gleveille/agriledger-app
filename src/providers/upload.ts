@@ -4,7 +4,7 @@ import {Events, LoadingController} from "ionic-angular/index";
 import {HttpClient} from "@angular/common/http";
 import {Geolocation} from '@ionic-native/geolocation';
 
-import {ContainerApi} from '../app/api.config';
+import {ContainerApi,ServerUrl} from '../app/api.config';
 
 import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
 import {Camera,CameraOptions} from "@ionic-native/camera";
@@ -132,10 +132,10 @@ export class UploadProvider {
         data = JSON.parse(result.response);
         if(data && data.result && data.result.url){
           if (config.uploadType === 'profile')
-            this.events.publish('profileImage:uploaded', data.result.url);
+            this.events.publish('profileImage:uploaded', ServerUrl+data.result.url);
 
           if (config.uploadType === 'evidences')
-            this.events.publish('evidences:uploaded', data.result.url);
+            this.events.publish('evidences:uploaded', ServerUrl+data.result.url);
         }
 
         this.toastService.presentToast('Uploaded');

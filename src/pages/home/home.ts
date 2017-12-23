@@ -7,6 +7,7 @@ import {Iuser} from "../../interface/user.interface";
 import {ToastProvider} from "../../providers/toast";
 import {AssetsService} from "../../providers/assets.service";
 import { Chart } from 'chart.js';
+import {WeatherProvider} from "../../providers/weather";
 
 @Component({
   selector: 'page-home',
@@ -14,12 +15,11 @@ import { Chart } from 'chart.js';
 })
 export class HomePage {
   user = {profileUrl: {}} as Iuser;
-  availableAssetNumber:number=null;
-  pooledAssetNumber:number=null;
-  rejectedAssetNumber:number=null;
+  currentWeather={weather:[]};
+  currentForecast=null;
+
   assetHttpStatus:string='resolved';
   assets:any[]=[];
-  totalAssets:number=null;
   doughnutChartLabels:string[] = [];
   doughnutChartData:number[] = [];
   doughnutChartType:string = 'doughnut';
@@ -66,6 +66,7 @@ export class HomePage {
 
   constructor(public navCtrl:NavController,
               private assetService:AssetsService,
+              private weatherService:WeatherProvider,
               public navParams:NavParams, private events:Events,
               public alertCtrl:AlertController,
               private toastCtrl:ToastProvider, private userService:UserService) {
@@ -84,6 +85,13 @@ export class HomePage {
 
   }
   ionViewDidLoad() {
+    this.getUser();
+    this.getCurrentWeather();
+    this.getCurrentForecast();
+    this.getAsset();
+  }
+
+  getUser(){
     this.userService.getUser().subscribe((user:Iuser)=> {
       this.user = user;
       console.log(this.user)
@@ -91,13 +99,13 @@ export class HomePage {
       console.log(err);
     });
 
+  }
+
+  getAssetsCount(){
     this.userService.getAssetsCount().subscribe((data:any)=> {
-      this.totalAssets=data.count;
     }, (err)=> {
       console.log(err);
     });
-
-    this.getAsset();
 
   }
   public randomize():void {
@@ -111,14 +119,7 @@ export class HomePage {
     this.lineChartData = _lineChartData;
   }
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
   getAsset(){
     this.assetHttpStatus='pending';
     this.assetService.getMyAssets().subscribe((assets:any[])=>{
@@ -167,7 +168,24 @@ export class HomePage {
     })
   }
 
+  getCurrentWeather() {
+    this.weatherService.getCurrentWeather().subscribe(
+      data => {
+        this.currentWeather=data;
+        console.log(this.currentWeather)
+      }
+    )
+  }
 
+  getCurrentForecast() {
+    this.weatherService.getCurrentForecast().subscribe(
+      data => {
+        this.currentForecast=data;
+        console.log(this.currentForecast)
+
+      }
+    )
+  }
 
   information() {
     /*this.navCtrl.push(InformationPage);*/
