@@ -27,7 +27,7 @@ export class WeatherProvider {
   }
 
 
-  getCurrentWeather() {
+  async getCurrentWeather() {
 
     if(this.currentWeather){
       return Observable.of(this.currentWeather);
