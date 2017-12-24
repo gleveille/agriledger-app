@@ -36,7 +36,7 @@ export class AssetsService {
       return this.http.get(`${url}`)
          .do((assets:any[])=>{
            this.dataStore.myAssets=assets;
-           this._myAssets.next(this.dataStore.myAssets);
+           this._myAssets.next(this.dataStore.myAssets.slice());
          })
         .retry(3)
         .catch((err) => {
@@ -53,7 +53,7 @@ export class AssetsService {
       return this.http.post(`${url}`, asset)
         .do((createdAsset:any)=>{
         this.dataStore.myAssets.push(createdAsset);
-        this._myAssets.next(this.dataStore.myAssets);
+        this._myAssets.next(this.dataStore.myAssets.slice());
 
         })
         .catch((res) => {
@@ -72,7 +72,7 @@ export class AssetsService {
               this.dataStore.myAssets[i] = asset;
             }
           });
-          this._myAssets.next(this.dataStore.myAssets);
+          this._myAssets.next(this.dataStore.myAssets.slice());
 
         })
         .catch((res) => {

@@ -22,12 +22,9 @@ export class InterceptorService implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-      console.log(request.url)
       return Observable.fromPromise(this.storage.get('accessToken'))
         .concatMap((accessToken)=>{
-          console.log('interceptor')
 
-          console.log('access token ', accessToken);
 
           if(request.url.indexOf('http://dataservice.accuweather.com')===-1)
           request = request.clone({
@@ -44,7 +41,6 @@ export class InterceptorService implements HttpInterceptor {
           }, (err: any) => {
             if (err instanceof HttpErrorResponse) {
               if (err.status === 401) {
-                console.log('interceptor 401')
                 // redirect to the login route
                 // or show a modal
 

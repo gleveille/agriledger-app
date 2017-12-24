@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, NgZone, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, NgZone, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, Events, AlertController} from 'ionic-angular';
 import {AssetsPage} from "../assets/assets";
 import {InformationPage} from "../information/information";
@@ -17,7 +17,7 @@ import {BaseChartDirective} from "ng2-charts";
   templateUrl: 'home.html',
 })
 export class HomePage {
-  @ViewChild("mychart") chart: BaseChartDirective;
+
 
   serverUrl=ServerUrl;
   user:Iuser = {profiles:{}};
@@ -47,8 +47,8 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+
     this.subscribeUser();
-    this.subscribeMyAssets();
     this.loadMyAssets();
     this.getCurrentWeather();
     this.getCurrentForecast();
@@ -58,6 +58,8 @@ export class HomePage {
   loadMyAssets(){
     this.loadingAssetHttpRequest='pending';
     this.assetService.loadMyAssets().subscribe((assets:any[])=>{
+      this.subscribeMyAssets();
+
     },(err)=>{
       this.loadingAssetHttpRequest='rejected';
 
@@ -74,7 +76,7 @@ export class HomePage {
 
   drawChart(assets:any[]) {
 
-    if(!this.assets.length){
+    if(!assets.length){
       return;
     }
     let availableAssetNumber:number=0;
@@ -103,15 +105,24 @@ export class HomePage {
     doughnutChartData.push(availableAssetNumber);
     doughnutChartData.push(pooledAssetNumber);
     doughnutChartData.push(rejectedAssetNumber);
-    this.doughnutChartData = doughnutChartData;
-    this.doughnutChartLabels = doughnutChartLabels;
+    this.doughnutChartData = doughnutChartData.slice();
+    this.doughnutChartLabels = doughnutChartLabels.slice();
+
+    this.ref.detectChanges();
+    console.log(this.doughnutChartData )
+    console.log(this.doughnutChartLabels )
 
   }
   subscribeMyAssets(){
     this.assetService.myAssets.subscribe((assets:any[])=>{
-      this.loadingAssetHttpRequest='resolved';
+      this.loadingAssetHttpRequest='pending';
+
       this.assets=assets;
       this.drawChart(assets)
+      setTimeout(()=>{
+        this.loadingAssetHttpRequest='resolved';
+
+      },500)
 
     },(err)=>{
 

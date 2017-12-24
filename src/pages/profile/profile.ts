@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {NavController, AlertController, Events, ActionSheetController, ModalController} from "ionic-angular/index";
+import {
+  NavController, AlertController, Events, ActionSheetController, ModalController,
+  LoadingController
+} from "ionic-angular/index";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {ServerUrl} from '../../app/api.config'
 import {ToastProvider} from "../../providers/toast";
@@ -29,11 +32,11 @@ export class ProfilePage {
   constructor(public navCtrl:NavController,
               private actionSheetCtrl:ActionSheetController,
               private modalController:ModalController,
-              private events:Events, public alertCtrl:AlertController, private socialSharing:SocialSharing,
-              private toastService:ToastProvider,private fingerprintService:FingerprintProvider,
+              private loadingCtrl:LoadingController,
+              private toastService:ToastProvider,
               private uploadService:UploadProvider,
-              private userService:UserService, private translateService:TranslateServiceProvider,
-              private storage:Storage) {
+              private userService:UserService,
+              private translateService:TranslateServiceProvider,) {
 
   }
 
@@ -44,10 +47,17 @@ export class ProfilePage {
   }
 
   updateProfile(){
+    let loader = this.loadingCtrl.create({
+      content: 'Upading profile..'
+    });
+    loader.present();
 
     this.userService.updateProfile(this.user).subscribe((data)=>{
+      loader.dismiss();
+
       this.toastService.presentToast('Profile Updated...')
     },(err)=>{
+      loader.dismiss();
       this.toastService.presentToast(err.message || 'Profile could not be Updated...')
 
     })
