@@ -58,10 +58,6 @@ export class HomePage {
   loadMyAssets(){
     this.loadingAssetHttpRequest='pending';
     this.assetService.loadMyAssets().subscribe((assets:any[])=>{
-      this.loadingAssetHttpRequest='resolved';
-      console.log(assets)
-      this.assets=assets;
-      this.drawChart(assets);
     },(err)=>{
       this.loadingAssetHttpRequest='rejected';
 
@@ -113,9 +109,10 @@ export class HomePage {
   }
   subscribeMyAssets(){
     this.assetService.myAssets.subscribe((assets:any[])=>{
-
+      this.loadingAssetHttpRequest='resolved';
       this.assets=assets;
-      this.drawChart(assets);
+      this.drawChart(assets)
+
     },(err)=>{
 
     })
