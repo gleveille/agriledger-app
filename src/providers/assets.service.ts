@@ -13,47 +13,45 @@ import 'rxjs/add/observable/throw';
 import {HttpClient} from "@angular/common/http";
 import {ErrorHandlerService} from "./error-handler.service";
 import {UserService} from "./user.service";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 @Injectable()
 export class AssetsService {
+  private _myAssets: BehaviorSubject<any[]>;
+  private dataStore = { myAssets: [],categories:[] };
 
-  assets:any[] = [];
+  myAssets: Observable<any[]>;
+
+
   categories:any[]=[];
+
   constructor(private http:HttpClient, private errorHandler:ErrorHandlerService, private userService:UserService) {
-  }
+    this._myAssets = <BehaviorSubject<any[]>>new BehaviorSubject([]);
+    this.myAssets = this._myAssets.asObservable();
 
-  getAssets(filterType, filterName) {
-
-    let url;
-    if (!filterName || !filterType) {
-      url = `${AssetApi.getAssets.url()}?filter[include]=user`;
-
-    }
-    else {
-      url = `${AssetApi.getAssets.url()}?filter[where][${filterType}]=${filterName}&filter[include]=user`;
-
-    }
-    return this.http.get(`${url}`)
-      .retry(3)
-      .catch((res) => {
-        return this.errorHandler.handle(res);
-      });
   }
 
 
-  getMyAssets() {
-    console.log('isndie getmy aseetets')
-    return this.userService.getUser().concatMap((user:Iuser)=> {
-      console.log(user)
+
+  loadMyAssets(){
+    this.userService.getUser().concatMap((user:Iuser)=> {
       const url = `${UserApi.getAssets.url()}/${user.id}/assets`;
 
       return this.http.get(`${url}`)
         .retry(3)
-        .catch((res) => {
-          return this.errorHandler.handle(res);
+        .catch((err) => {
+          return this.errorHandler.handle(err);
         });
     })
+      .subscribe((assets:any[])=>{
+        this.dataStore.myAssets=assets;
+        this._myAssets.next(this.dataStore.myAssets);
+      },(err)=>{
 
+      })
   }
+
+
+
 
   createAsset(asset:any) {
 
@@ -61,6 +59,11 @@ export class AssetsService {
       console.log(user)
       const url = `${UserApi.getAssets.url()}/${user.id}/assets`;
       return this.http.post(`${url}`, asset)
+        .do((createdAsset:any)=>{
+        this.dataStore.myAssets.push(createdAsset);
+        this._myAssets.next(this.dataStore.myAssets);
+
+        })
         .catch((res) => {
           return this.errorHandler.handle(res);
         });
@@ -73,11 +76,23 @@ export class AssetsService {
       console.log(user)
       const url = `${UserApi.getAssets.url()}/${user.id}/assets/${asset.id}`;
       return this.http.put(`${url}`, asset)
+        .do((asset:any)=>{
+          this.dataStore.myAssets.forEach((t, i) => {
+            if (t.id === asset.id)
+            {
+              this.dataStore.myAssets[i] = asset;
+            }
+          });
+          this._myAssets.next(this.dataStore.myAssets);
+
+        })
         .catch((res) => {
           return this.errorHandler.handle(res);
         });
     })
   }
+
+
 
   getCategories(level:number) {
     const url = `${AssetApi.getCategories.url()}?level=${level}`;

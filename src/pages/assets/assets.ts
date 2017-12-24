@@ -12,19 +12,36 @@ import {AssetInfoPage} from "../asset-info/asset-info";
 export class AssetsPage {
 
   assets = [];
-  pet: string = "puppies";
+  status: string = "all";
 
+  availableAssets:any[]=[];
+  pooledAssets:any[]=[];
+  rejectedAssets:any[]=[];
 
   constructor(public navCtrl:NavController,
               private events:Events,
               public navParams:NavParams, private assetService:AssetsService) {
-
-    this.events.subscribe('new-asset',(asset)=>{
-      this.getAsset();
-    })
-
+    this.subscribeMyAssets();
   }
 
+  subscribeMyAssets(){
+    this.assetService.myAssets.subscribe((assets:any[])=>{
+      this.assets=assets;
+
+      assets.forEach((asset)=>{
+        if(asset.status==='available'){
+          this.availableAssets.push(asset);
+        }
+        else if(asset.status==='pooled'){
+          this.pooledAssets.push(asset);
+        }
+        else if(asset.status==='rejected'){
+          this.rejectedAssets.push(asset);
+        }
+      });
+
+    });
+  }
   assetInfo(asset) {
     this.navCtrl.push(AssetInfoPage,{asset:asset});
   }
@@ -34,32 +51,11 @@ export class AssetsPage {
   }
 
   ionViewDidLoad() {
-    this.getAsset();
-  }
-
-
-  getAsset(){
-    this.assetService.getMyAssets().subscribe((data)=>{
-      console.log(data)
-      this.assets=data;
-    },(err)=>{
-      console.log(err)
-    })
-  }
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-    this.assetService.getMyAssets().subscribe((data)=>{
-      console.log(data)
-      this.assets=data;
-      refresher.complete();
-
-    },(err)=>{
-      console.log(err)
-      refresher.complete();
-
-    })
 
   }
+
+
+
 
 
 }

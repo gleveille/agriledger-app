@@ -3,36 +3,67 @@
 </ion-header>
 
 
-<ion-content  style="background-color: lightgray">
+<ion-content text-center >
 
       <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
-      <div class="main-content" text-wrap text-center>
-        <img class="circular" *ngIf="user.profiles.profileUrl && user.profiles.profileUrl.url" [src]="serverUrl+user.profiles.profileUrl.url">
-        <img class="circular" *ngIf="!user.profiles.profileUrl || !user.profiles.profileUrl.url" [src]="'assets/img/default-avatar.png'">
 
-          <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
-            {{user.email}}</p>
-        <hr>
-        <p no-lines style="font-size: 18px !important;font-weight: lighter !important; " >Total Assets <span *ngIf="assetHttpStatus==='resolved'"> ({{assets.length}})</span></p>
-          <ion-spinner class="centered-spinner"
-                       *ngIf="assetHttpStatus==='pending'">
-
-          </ion-spinner>
+  <ion-row>
+    <ion-col>
+      <img class="circular"
+           [src]="serverUrl+user.profiles?.profileUrl?.url"
+           onError="this.src='assets/img/default-avatar.png';">
 
 
-            <canvas *ngIf="assetHttpStatus==='resolved'"
-                    baseChart
-                    [data]="doughnutChartData"
-                    [labels]="doughnutChartLabels"
-                    [chartType]="doughnutChartType">
+    </ion-col>
+  </ion-row>
 
-            </canvas>
-        <hr>
-        <p no-lines style="font-size: 18px !important;font-weight: lighter !important;" >Weather next 5 days</p>
+  <ion-row>
+    <ion-col>
 
+      <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
+        {{user.email}}</p>
+      <hr>
+      <!--   <ion-spinner class="centered-spinner"
+                      *ngIf="assetHttpStatus==='pending'">
+
+         </ion-spinner>-->
+
+      <p no-lines style="font-size: 18px !important;font-weight: lighter !important; " >Total Assets
+        <span > ({{assets.length}})
+        </span>
+      </p>
+      <div>
+
+
+
+        <button *ngIf="!assets.length" (click)="goToCreateAssetPage()" ion-button outline style="letter-spacing: 2px;">
+          {{'Add Assets'|translate}}
+        </button>
+
+
+        <canvas
+          *ngIf="assets.length"
+          baseChart
+          [data]="doughnutChartData"
+          [labels]="doughnutChartLabels"
+          [chartType]="doughnutChartType">
+
+        </canvas>
 
 
       </div>
+
+
+
+      <hr>
+      <p no-lines style="font-size: 18px !important;font-weight: lighter !important;" >Weather next 5 days</p>
+
+      <hr>
+    </ion-col>
+  </ion-row>
+
+
+
 
 
 </ion-content>

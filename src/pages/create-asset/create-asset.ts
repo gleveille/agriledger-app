@@ -158,9 +158,6 @@ export class CreateAssetPage {
     loader.present();
 
     this.assetsService.createAsset(asset).subscribe((data)=> {
-      console.log('saveed succesfully')
-
-      this.events.publish('new-asset',asset)
       loader.dismiss();
       this.toastService.presentToast('Created Succesfully');
       this.navCtrl.pop();

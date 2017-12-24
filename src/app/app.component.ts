@@ -13,6 +13,7 @@ import {LoginPage} from "../pages/login/login";
 import {PasscodePage} from "../pages/passcode/passcode";
 import {Iuser} from "../interface/user.interface";
 import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
+import {AssetsService} from "../providers/assets.service";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +26,7 @@ export class MyApp {
               private modalController:ModalController,
               statusBar:StatusBar, splashScreen:SplashScreen,
               private storage:Storage,
+              private assetService:AssetsService,
               public loadingCtrl:LoadingController, private userService:UserService, public fingerprintProvider:FingerprintProvider,
               public cache:CacheService) {
     platform.ready().then(() => {
@@ -58,6 +60,9 @@ export class MyApp {
         }
         else{
           this.user=user;
+
+          this.assetService.loadMyAssets();
+
           let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
           passcodeModal.present();
           passcodeModal.onDidDismiss(data => {

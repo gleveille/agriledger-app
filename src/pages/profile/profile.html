@@ -7,11 +7,9 @@
   <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
   <div class="main-content" text-wrap text-center>
 
-    <img class="circular" *ngIf="user.profiles.profileUrl && user.profiles.profileUrl.url"
-         [src]="serverUrl+user.profiles.profileUrl.url"
-         (click)="presentActionSheet('camera')">
-    <img class="circular" *ngIf="!user.profiles.profileUrl || !user.profiles.profileUrl.url"
-         [src]="'assets/img/default-avatar.png'"
+    <img class="circular"
+         [src]="serverUrl+user.profiles?.profileUrl?.url"
+         onError="this.src='assets/img/default-avatar.png'"
          (click)="presentActionSheet('camera')">
 
     <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
@@ -27,7 +25,7 @@
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Full Name'|translate}}</ion-label>
-        <ion-input type="tel" [(ngModel)]="user.profiles.name"></ion-input>
+        <ion-input type="text" [(ngModel)]="user.profiles.name"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -36,7 +34,7 @@
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Wechat'|translate}}</ion-label>
-        <ion-input type="tel" [disabled]="true"></ion-input>
+        <ion-input type="text" [disabled]="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Company name'|translate}}</ion-label>

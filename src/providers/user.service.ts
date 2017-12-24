@@ -21,7 +21,6 @@ import {ErrorHandlerService} from "./error-handler.service";
 export class UserService {
 
   user = null as Iuser;
-  accessToken:string = null;
 
   constructor(private http:HttpClient, private errorHandler:ErrorHandlerService, private storage:Storage) {
   }
@@ -36,6 +35,9 @@ export class UserService {
       .do((user:any)=> {
       console.log(user);
         this.user = user;
+        if(!this.user.profiles || !this.user.profiles.id)
+          this.user.profiles={};
+
         this.storage.set('userId', user.id);
         this.storage.set('accessToken', accessToken);
       })
@@ -59,10 +61,9 @@ export class UserService {
     let profile=user.profiles;
     console.log('creating profile is')
     console.log(profile)
-    return this.http.post(`${UserApi.updateProfile.url()}/${user.id}/profiles`, profile).do((res)=> {
-      this.user.profiles=profile;
+    return this.http.post(`${UserApi.updateProfile.url()}/${user.id}/profiles`, profile).do((data)=> {
+      this.user.profiles=data;
       console.log('created')
-      console.log(res);
     })
       .catch((err)=> {
 
@@ -75,7 +76,7 @@ export class UserService {
   updateProfile(user:Iuser) {
 
     let profiles=user.profiles;
-    if(!profiles.id)
+    if(!this.user.profiles.id)
     {
       return this.createProfile(user);
     }
@@ -109,7 +110,7 @@ export class UserService {
       }).map((user)=>{
         let user2=user;
 
-        if(!user2.profiles)
+        if(!user2.profiles || !user2.profiles.id)
           user2.profiles={};
 
         return user2;

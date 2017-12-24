@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import {UserService} from "../../providers/user.service";
 import {ToastProvider} from "../../providers/toast";
@@ -20,7 +20,7 @@ export class PasscodePage {
   authForm:FormGroup;
 
   user={} as Iuser;
-  constructor(public nav:NavController, public navParams:NavParams,
+  constructor(public nav:NavController, public navParams:NavParams,private loadingCtrl:LoadingController,
               private fingerprintService:FingerprintProvider,
               private toastService:ToastProvider,private userService:UserService,public formBuilder:FormBuilder) {
 
@@ -61,12 +61,20 @@ export class PasscodePage {
       console.log(this.user)
 
       this.user.profiles.passcode=value.passcode;
+      let loader = this.loadingCtrl.create({
+        content: 'Setting Passcode..'
+      });
+      loader.present();
+
       this.userService.updateProfile(this.user).subscribe(()=>{
+        loader.dismiss();
 
         this.checkIfFingerprintAvailable();
 
       },(err)=>{
-        this.toastService.presentToast(err.message);
+        loader.dismiss();
+
+        this.toastService.presentToast(err.message || 'Passcode could not be set');
       })
 
     }

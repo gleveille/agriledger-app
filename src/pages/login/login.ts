@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, Form, AlertController} from 'ionic-angular';
+import {NavController, NavParams, Form, AlertController, LoadingController} from 'ionic-angular';
 import {NgForm} from "@angular/forms/forms";
 import {ToastProvider} from "../../providers/toast";
 import {TabsPage} from "../tabs/tabs";
@@ -15,7 +15,8 @@ import {ForgotPasswordPage} from "../forgot-password/forgot-password";
 })
 export class LoginPage {
 
-  constructor(public navCtrl:NavController, public navParams:NavParams, private userService:UserService,
+  constructor(public navCtrl:NavController, public navParams:NavParams,private loadingCtrl:LoadingController,
+              private userService:UserService,
               private toastService:ToastProvider, public alerCtrl: AlertController) {
   }
 
@@ -24,8 +25,12 @@ export class LoginPage {
   }
 
   login(f:NgForm) {
-
+    let loader = this.loadingCtrl.create({
+      content: 'Logging you..'
+    });
+    loader.present();
     this.userService.login({email: f.value.email, password: f.value.password}).subscribe((user:any)=> {
+      loader.dismiss();
       console.log(user);
       if(!user.isPasswordChanged){
         this.navCtrl.setRoot(ChangePasswordPage)
@@ -36,7 +41,7 @@ export class LoginPage {
       else
         this.navCtrl.setRoot(TabsPage)
     }, (err)=> {
-      console.log(err);
+      loader.dismiss();
       this.toastService.presentToast(err.message || 'Login failed');
     })
   }
