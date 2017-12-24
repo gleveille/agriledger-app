@@ -1,17 +1,13 @@
 import {WelcomePage} from './../pages/welcome/welcome';
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {Platform, LoadingController, Content, ModalController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from '../pages/tabs/tabs';
-import {Storage} from '@ionic/storage';
 import {UserService} from "../providers/user.service";
 import {CacheService} from 'ionic-cache';
-import {FingerprintProvider} from "../providers/fingerprint";
 import {ChangePasswordPage} from "../pages/change-password/change-password";
-import {LoginPage} from "../pages/login/login";
 import {PasscodePage} from "../pages/passcode/passcode";
-import {Iuser} from "../interface/user.interface";
 import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
 import {AssetsService} from "../providers/assets.service";
 
@@ -20,21 +16,17 @@ import {AssetsService} from "../providers/assets.service";
 })
 export class MyApp {
   rootPage:any = null;
-  user = {} as Iuser;
 
   constructor(private platform:Platform,
               private modalController:ModalController,
               statusBar:StatusBar, splashScreen:SplashScreen,
-              private storage:Storage,
+              public loadingCtrl:LoadingController,
+              private userService:UserService,
               private assetService:AssetsService,
-              public loadingCtrl:LoadingController, private userService:UserService, public fingerprintProvider:FingerprintProvider,
               public cache:CacheService) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
 
       splashScreen.hide();
-
 
       this.verify();
 
@@ -48,7 +40,7 @@ export class MyApp {
     });
     loader.present();
 
-    this.userService.getUser().subscribe((user)=> {
+    this.userService.loadUser().subscribe((user)=> {
       console.log(user)
       loader.dismiss();
       if (user && user.id) {
@@ -59,11 +51,7 @@ export class MyApp {
           this.rootPage = PasscodePage;
         }
         else{
-          this.user=user;
-
-          this.assetService.loadMyAssets();
-
-          let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
+          let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: user.profiles.passcode });
           passcodeModal.present();
           passcodeModal.onDidDismiss(data => {
             console.log(data);

@@ -8,6 +8,7 @@ import {TermsPage} from "../terms/terms";
 import {ChangePasswordPage} from "../change-password/change-password";
 import {PasscodePage} from "../passcode/passcode";
 import {ForgotPasswordPage} from "../forgot-password/forgot-password";
+import {AssetsService} from "../../providers/assets.service";
 
 @Component({
   selector: 'page-login',
@@ -17,6 +18,7 @@ export class LoginPage {
 
   constructor(public navCtrl:NavController, public navParams:NavParams,private loadingCtrl:LoadingController,
               private userService:UserService,
+              private assetService:AssetsService,
               private toastService:ToastProvider, public alerCtrl: AlertController) {
   }
 
@@ -31,15 +33,16 @@ export class LoginPage {
     loader.present();
     this.userService.login({email: f.value.email, password: f.value.password}).subscribe((user:any)=> {
       loader.dismiss();
-      console.log(user);
       if(!user.isPasswordChanged){
         this.navCtrl.setRoot(ChangePasswordPage)
       }
       else if(!user.profiles.passcode){
         this.navCtrl.setRoot(PasscodePage)
       }
-      else
+      else{
         this.navCtrl.setRoot(TabsPage)
+
+      }
     }, (err)=> {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Login failed');

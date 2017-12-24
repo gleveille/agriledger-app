@@ -35,14 +35,10 @@ export class ProfilePage {
               private userService:UserService, private translateService:TranslateServiceProvider,
               private storage:Storage) {
 
-    this.events.subscribe('profileImage:uploaded', (data)=> {
-      this.user.profiles.profileUrl= data;
-    })
   }
 
   ionViewDidLoad() {
-
-    this.getUser();
+    this.subscribeUser();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
 
   }
@@ -56,10 +52,9 @@ export class ProfilePage {
 
     })
   }
-  getUser(){
-    this.userService.getUser().subscribe((user:Iuser)=> {
+  subscribeUser(){
+    this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
-    }, (err)=> {
     });
   }
 

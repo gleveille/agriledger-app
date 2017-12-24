@@ -9,8 +9,9 @@ export interface Iuser {
     company?:string,
     profileUrl?: {
       url: string,
-      lat: string,
-      long: string
+      lat: number,
+      long: number,
+      hash:string
     },
   },
   id?:string,

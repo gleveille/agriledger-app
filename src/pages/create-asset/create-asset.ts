@@ -55,7 +55,7 @@ export class CreateAssetPage {
 
   ionViewDidLoad() {
     this.getCategories(0);
-    this.userService.getUser().subscribe((user)=>{
+    this.userService.user.subscribe((user)=>{
       this.user=user;
     });
   }

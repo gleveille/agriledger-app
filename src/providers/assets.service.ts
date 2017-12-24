@@ -31,23 +31,17 @@ export class AssetsService {
   }
 
 
-
   loadMyAssets(){
-    this.userService.getUser().concatMap((user:Iuser)=> {
-      const url = `${UserApi.getAssets.url()}/${user.id}/assets`;
-
+      const url = `${UserApi.getAssets.url()}/${this.userService.dataStore.user.id}/assets`;
       return this.http.get(`${url}`)
+         .do((assets:any[])=>{
+           this.dataStore.myAssets=assets;
+           this._myAssets.next(this.dataStore.myAssets);
+         })
         .retry(3)
         .catch((err) => {
           return this.errorHandler.handle(err);
-        });
-    })
-      .subscribe((assets:any[])=>{
-        this.dataStore.myAssets=assets;
-        this._myAssets.next(this.dataStore.myAssets);
-      },(err)=>{
-
-      })
+        })
   }
 
 
@@ -55,9 +49,7 @@ export class AssetsService {
 
   createAsset(asset:any) {
 
-    return this.userService.getUser().concatMap((user:Iuser)=> {
-      console.log(user)
-      const url = `${UserApi.getAssets.url()}/${user.id}/assets`;
+      const url = `${UserApi.getAssets.url()}/${this.userService.dataStore.user.id}/assets`;
       return this.http.post(`${url}`, asset)
         .do((createdAsset:any)=>{
         this.dataStore.myAssets.push(createdAsset);
@@ -67,14 +59,11 @@ export class AssetsService {
         .catch((res) => {
           return this.errorHandler.handle(res);
         });
-    })
   }
 
   updateAsset(asset:any) {
 
-    return this.userService.getUser().concatMap((user:Iuser)=> {
-      console.log(user)
-      const url = `${UserApi.getAssets.url()}/${user.id}/assets/${asset.id}`;
+      const url = `${UserApi.getAssets.url()}/${this.userService.dataStore.user.id}/assets/${asset.id}`;
       return this.http.put(`${url}`, asset)
         .do((asset:any)=>{
           this.dataStore.myAssets.forEach((t, i) => {
@@ -89,7 +78,6 @@ export class AssetsService {
         .catch((res) => {
           return this.errorHandler.handle(res);
         });
-    })
   }
 
 

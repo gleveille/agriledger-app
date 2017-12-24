@@ -19,10 +19,16 @@ export class AssetsPage {
   rejectedAssets:any[]=[];
 
   constructor(public navCtrl:NavController,
-              private events:Events,
               public navParams:NavParams, private assetService:AssetsService) {
+
+  }
+
+
+  ionViewDidLoad() {
+    this.assetService.loadMyAssets();
     this.subscribeMyAssets();
   }
+
 
   subscribeMyAssets(){
     this.assetService.myAssets.subscribe((assets:any[])=>{
@@ -49,12 +55,6 @@ export class AssetsPage {
   createAsset() {
     this.navCtrl.push(CreateAssetPage);
   }
-
-  ionViewDidLoad() {
-
-  }
-
-
 
 
 

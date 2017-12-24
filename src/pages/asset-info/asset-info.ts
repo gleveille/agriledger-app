@@ -44,7 +44,6 @@ export class AssetInfoPage {
 
 
     this.events.subscribe('evidences:uploaded', (data)=> {
-      console.log(data);
       if(this.asset.evidences){
         this.asset.evidences.unshift(data);
         this.slides.slideTo(0, 500);
@@ -55,22 +54,15 @@ export class AssetInfoPage {
         this.asset.evidences.unshift(data);
         this.slides.slideTo(0, 500);
       }
-
-      console.log('ttttttttttt')
-      console.log(this.asset)
     })
   }
 
   ionViewDidLoad() {
-    this.userService.getUser().subscribe((user:Iuser)=> {
+    this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
-      console.log(this.user)
-    }, (err)=> {
-      console.log(err);
     });
 
     this.asset = this.navParams.get('asset');
-    console.log(this.asset);
   }
 
 

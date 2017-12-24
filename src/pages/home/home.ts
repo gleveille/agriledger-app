@@ -24,6 +24,7 @@ export class HomePage {
   currentWeather={weather:[]};
   currentForecast=null;
 
+  loadingAssetHttpRequest:string='resolved';
   assets:any[]=[];
   doughnutChartLabels:string[] = [];
   doughnutChartData:number[] = [];
@@ -36,7 +37,6 @@ export class HomePage {
               private assetService:AssetsService,
               private weatherService:WeatherProvider,
               public navParams:NavParams, private events:Events,
-              public alertCtrl:AlertController,
               private ref:ChangeDetectorRef,
               private toastCtrl:ToastProvider, private userService:UserService) {
 
@@ -44,29 +44,43 @@ export class HomePage {
       this.user.profiles.profileUrl = data;
     });
 
-    this.subscribeMyAssets();
-    this.getUser();
-    this.getCurrentWeather();
-    this.getCurrentForecast();
   }
 
   ionViewDidLoad() {
-
+    this.subscribeUser();
+    this.subscribeMyAssets();
+    this.loadMyAssets();
+    this.getCurrentWeather();
+    this.getCurrentForecast();
 
   }
 
-  getUser(){
-    this.userService.getUser().subscribe((user:Iuser)=> {
-      this.user = user || this.user;
+  loadMyAssets(){
+    this.loadingAssetHttpRequest='pending';
+    this.assetService.loadMyAssets().subscribe((assets:any[])=>{
+      this.loadingAssetHttpRequest='resolved';
+      console.log(assets)
+      this.assets=assets;
+      this.drawChart(assets);
+    },(err)=>{
+      this.loadingAssetHttpRequest='rejected';
+
+    })
+
+  }
+  subscribeUser(){
+    this.userService.user.subscribe((user:Iuser)=> {
+      this.user = user;
       console.log(this.user)
-    }, (err)=> {
-      console.log(err);
     });
 
   }
 
   drawChart(assets:any[]) {
 
+    if(!this.assets.length){
+      return;
+    }
     let availableAssetNumber:number=0;
     let pooledAssetNumber:number=0;
     let rejectedAssetNumber:number=0;

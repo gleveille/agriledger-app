@@ -34,7 +34,7 @@ export class PasscodePage {
   }
 
   ionViewDidLoad(){
-    this.userService.getUser().subscribe((user:Iuser)=>{
+    this.userService.user.subscribe((user:Iuser)=>{
       this.user=user;
       console.log(this.user)
     })

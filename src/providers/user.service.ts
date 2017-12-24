@@ -1,28 +1,34 @@
 import {Injectable} from '@angular/core';
 import {Iuser} from "../interface/user.interface";
-import {UserApi,ServerUrl} from '../../src/app/api.config';
+import {UserApi, AssetApi, ServerUrl} from '../app/api.config';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/concatMap';
-import 'rxjs/add/observable/of';
 
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/retry';
-import 'rxjs/add/observable/fromPromise';
-import {Storage} from '@ionic/storage';
 
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {ErrorHandlerService} from "./error-handler.service";
-
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Storage} from '@ionic/storage'
 
 @Injectable()
 export class UserService {
+  private _user: BehaviorSubject<Iuser>;
+  dataStore:{user:Iuser} = { user:{} };
 
-  user = null as Iuser;
+  user: Observable<Iuser>;
+
+
 
   constructor(private http:HttpClient, private errorHandler:ErrorHandlerService, private storage:Storage) {
+    this._user = <BehaviorSubject<Iuser>>new BehaviorSubject(null);
+    this.user = this._user.asObservable();
+
+
   }
 
   login(credential:any) {
@@ -34,9 +40,10 @@ export class UserService {
       })
       .do((user:any)=> {
       console.log(user);
-        this.user = user;
-        if(!this.user.profiles || !this.user.profiles.id)
-          this.user.profiles={};
+        this.dataStore.user = user;
+        if(!this.dataStore.user.profiles || !this.dataStore.user.profiles.id)
+          this.dataStore.user.profiles={};
+        this._user.next(this.dataStore.user);
 
         this.storage.set('userId', user.id);
         this.storage.set('accessToken', accessToken);
@@ -48,9 +55,7 @@ export class UserService {
       })
   }
 
-  getAccessTokenFromLocalStorage() {
-    return this.storage.get('accessToken');
-  }
+
 
   getUserIdFromLocalStorage() {
     return this.storage.get('userId');
@@ -61,8 +66,9 @@ export class UserService {
     let profile=user.profiles;
     console.log('creating profile is')
     console.log(profile)
-    return this.http.post(`${UserApi.updateProfile.url()}/${user.id}/profiles`, profile).do((data)=> {
-      this.user.profiles=data;
+    return this.http.post(`${UserApi.updateProfile.url()}/${this.dataStore.user.id}/profiles`, profile).do((data)=> {
+      this.dataStore.user.profiles=data;
+      this._user.next(this.dataStore.user);
       console.log('created')
     })
       .catch((err)=> {
@@ -76,14 +82,15 @@ export class UserService {
   updateProfile(user:Iuser) {
 
     let profiles=user.profiles;
-    if(!this.user.profiles.id)
+    if(!this.dataStore.user.profiles.id)
     {
       return this.createProfile(user);
     }
     console.log('updating profile is')
     console.log(profiles)
-    return this.http.put(`${UserApi.updateProfile.url()}/${user.id}/profiles`, profiles).do((profile:any)=> {
-      this.user.profiles=profile;
+    return this.http.put(`${UserApi.updateProfile.url()}/${this.dataStore.user.id}/profiles`, profiles).do((profile:any)=> {
+      this.dataStore.user.profiles=profile;
+      this._user.next(this.dataStore.user);
       console.log('updated')
     })
       .catch((err)=> {
@@ -93,11 +100,7 @@ export class UserService {
 
   };
 
-  getUser() {
-
-    if (this.user && this.user.id) {
-      return Observable.of(this.user);
-    }
+  loadUser() {
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
       .concatMap((userId)=> {
         console.log('userId ', userId)
@@ -107,18 +110,16 @@ export class UserService {
         else {
           return this.http.get(`${UserApi.findById.url()}/${userId}?filter[include]=profiles`)
         }
-      }).map((user)=>{
-        let user2=user;
-
-        if(!user2.profiles || !user2.profiles.id)
-          user2.profiles={};
-
-        return user2;
       })
-      .do((user)=> {
-        this.user = user;
-        console.log(this.user)
 
+      .map((user:Iuser)=>{
+        if(!user.profiles || !user.profiles.id)
+          user.profiles={};
+        return user;
+      })
+      .do((user:Iuser)=>{
+        this.dataStore.user=user;
+        this._user.next(this.dataStore.user);
       })
       .catch((err)=> {
         return this.errorHandler.handle(err);
@@ -126,28 +127,13 @@ export class UserService {
 
   };
 
-  getAssets() {
-    return this.getUser().concatMap((user:Iuser)=> {
-      return this.http.get(`${UserApi.list.url()}/${user.id}/assets`)
-        .catch((err)=> {
-          return this.errorHandler.handle(err);
-        })
-    })
-  }
 
-  getAssetsCount() {
-    return this.getUser().concatMap((user:Iuser)=> {
-      return this.http.get(`${UserApi.list.url()}/${user.id}/assets/count`)
-        .catch((err)=> {
-          return this.errorHandler.handle(err);
-        })
-    })
-  }
 
   changePassword(oldPassword:string, newPassword:string) {
     return this.http.post(`${UserApi.changePassword.url()}`,
       {oldPassword: oldPassword, newPassword: newPassword}).do((data)=> {
-      this.user.isPasswordChanged = true;
+      this.dataStore.user.isPasswordChanged = true;
+      this._user.next(this.dataStore.user);
     }).catch((res)=> {
       return this.errorHandler.handle(res);
     });
