@@ -15,6 +15,7 @@ import {AssetsService} from "../providers/assets.service";
 })
 export class MyApp {
   rootPage:any = null;
+  confirmation:string='resolved';
 
   constructor(private platform:Platform,
               private modalController:ModalController,
@@ -26,7 +27,11 @@ export class MyApp {
               public cache:CacheService) {
     platform.ready().then(() => {
       platform.registerBackButtonAction(() => {
+        if(this.confirmation==='resolved'){
+          this.confirmation='pending';
           this.presentConfirm();
+
+        }
       }, 0)
 
 
@@ -45,20 +50,24 @@ export class MyApp {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            this.confirmation='resolved'
+
           }
         },
         {
           text: 'Yes',
           handler: () => {
-            console.log('Yes clicked');
+            this.confirmation='resolved'
+
             this.platform.exitApp();
           }
         }
       ]
     });
     alert.present().then(()=>{
-    });
+    }).catch((err)=>{
+
+    })
   }
   async verify() {
     let loader = this.loadingCtrl.create({

@@ -7,9 +7,8 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-card>
 
     <form #f="ngForm" (ngSubmit)="login(f)" padding>
 
@@ -33,10 +32,12 @@
       </ion-row>
 
 
-      <div>
-        <button ion-button color="primary" block type="submit" [disabled]="!checked">{{'Login'|translate}}
-        </button>
-      </div>
+      <ion-row>
+        <ion-col>
+          <button ion-button block class="btnHeight40Px"  [disabled]="!checked || !email || !password">{{'Login'|translate}}</button>
+        </ion-col>
+      </ion-row>
+
 
       <ion-row text-right (click)="forgotPassword()" >
         <ion-label><a style="text-decoration: underline;">{{'Forgot Password?'|translate}}
@@ -47,6 +48,5 @@
 
 
 
-  </ion-card>
 
 </ion-content>
