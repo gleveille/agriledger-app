@@ -28,8 +28,10 @@ export class ErrorHandlerService {
           catch(err) {
           }
 
+        if(res.error.error){
+          msg=res.error.error.message ||'Server error.Try again';
 
-
+        }
       }
       else{
 

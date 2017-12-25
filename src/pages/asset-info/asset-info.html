@@ -123,7 +123,7 @@
 
                   <img width="150" height="150" [src]="serverUrl+evidence.url" imageViewer/>
 
-                  <span *ngIf="evidence.date">{{evidence.date|moment}}</span>
+                  <span *ngIf="evidence.date">{{evidence.date|moment:true}} ago</span>
 
                 </div>
 
