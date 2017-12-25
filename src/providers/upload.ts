@@ -9,6 +9,8 @@ import {ContainerApi,ServerUrl} from '../app/api.config';
 import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
 import {Camera,CameraOptions} from "@ionic-native/camera";
 import {ToastProvider} from "./toast";
+import {UserService} from "./user.service";
+import {AssetsService} from "./assets.service";
 
 @Injectable()
 export class UploadProvider {
@@ -17,6 +19,8 @@ export class UploadProvider {
   constructor(public http:HttpClient, private events:Events,
               private loadingCtrl:LoadingController,
               private camera:Camera,
+              private userService:UserService,
+              private assetService:AssetsService,
               private toastService:ToastProvider,
               private geolocation:Geolocation,
               private transfer:FileTransfer) {
@@ -131,7 +135,7 @@ export class UploadProvider {
 
       try{
         data = JSON.parse(result.response);
-        let obj={url:null};
+        let obj={url:null,lat:null,long:null,hash:null};
         console.log('..................')
         console.log(data)
         if(data.result.files && data.result.files.file[0].data) {
@@ -141,11 +145,13 @@ export class UploadProvider {
 
 
         console.log(config.uploadType)
-          if (config.uploadType === 'profile')
-            this.events.publish('profileImage:uploaded', obj);
+          if (config.uploadType === 'profile'){
+          this.userService.profilePicChanged(obj);
+          }
 
-          if (config.uploadType === 'evidences')
-            this.events.publish('evidences:uploaded', obj);
+          if (config.uploadType === 'evidences'){
+            this.assetService.evidencesUploaded(config.assetId,obj);
+          }
 
         this.toastService.presentToast('Uploaded');
 

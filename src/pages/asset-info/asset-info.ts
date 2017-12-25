@@ -38,36 +38,41 @@ export class AssetInfoPage {
               private userService:UserService,
               public navParams:NavParams,
               private assetsService: AssetsService, platform:Platform, private events:Events,
-              public fingerprintProvider: FingerprintProvider) {
+              public assetService: AssetsService) {
 
     this.isAndroid = platform.is('android');
 
+    this.asset = this.navParams.get('asset');
 
-    this.events.subscribe('evidences:uploaded', (data)=> {
-      if(this.asset.evidences && this.asset.evidences.length){
-        this.asset.evidences.unshift(data);
-        if(this.slides)
-        this.slides.slideTo(0, 500);
-      }
 
-    else{
-        this.asset.evidences=[];
-        this.asset.evidences.push(data);
-        if(this.slides)
-          this.slides.slideTo(0, 500);
-      }
-    })
   }
 
   ionViewDidLoad() {
+    this.subscribeMyAssets();
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
     });
 
-    this.asset = this.navParams.get('asset');
   }
 
 
+  subscribeMyAssets(){
+    this.assetService.myAssets.subscribe((assets:any[])=>{
+      this.assets=assets;
+
+      console.log(this.assets)
+      console.log('asset info subscription')
+      assets.forEach((asset)=>{
+
+        if(asset.id===this.asset.id){
+          this.asset=asset;
+          if(this.slides)
+            this.slides.slideTo(0, 500);
+        }
+      });
+
+    });
+  }
 
 
   verifyBeforeUpload(source:string){

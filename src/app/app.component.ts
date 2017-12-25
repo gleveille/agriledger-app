@@ -29,7 +29,6 @@ export class MyApp {
           this.presentConfirm();
       }, 0)
 
-      this.statusBar.overlaysWebView(true)
 
       splashScreen.hide();
 
@@ -87,7 +86,7 @@ export class MyApp {
             if(data && data.success===true){
               this.rootPage=TabsPage;
             }
-           
+
           });
         }
       }

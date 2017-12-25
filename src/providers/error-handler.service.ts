@@ -27,16 +27,15 @@ export class ErrorHandlerService {
 
           catch(err) {
           }
+
+
+
       }
       else{
 
           msg=res.statusText||'Server error.Try again';
       }
 
-      if(res.error.error){
-        msg=res.error.error.message ||'Server error.Try again';
-
-      }
 
       msg= msg ? msg :'Something went wrong';
 

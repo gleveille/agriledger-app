@@ -37,9 +37,6 @@ export class HomePage {
               private ref:ChangeDetectorRef,
               private toastCtrl:ToastProvider, private userService:UserService) {
 
-    this.events.subscribe('profileImage:uploaded', (data)=> {
-      this.user.profiles.profileUrl = data;
-    });
 
   }
 

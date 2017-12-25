@@ -116,17 +116,32 @@
             <h4 style="opacity: 0.6">No Evidences uploaded</h4>
           </div>
 
-            <ion-slides #slides  loop="false" slidesPerView="2"  spaceBetween="10px">
+          <ion-grid>
+            <ion-row align-items-center justify-content-center>
+              <ion-col col-auto align-self-center *ngFor="let evidence of asset.evidences">
+                <div class="image">
+
+                  <img width="150" height="150" [src]="serverUrl+evidence.url" imageViewer/>
+
+                  <span *ngIf="evidence.date">{{evidence.date|moment}}</span>
+
+                </div>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+       <!--     <ion-slides #slides  loop="false" slidesPerView="2"  spaceBetween="10px" style="position: relative;top: -30px;">
               <ion-slide *ngFor="let evidence of asset.evidences">
                   <img [src]="serverUrl+evidence.url" imageViewer/>
 
-<!--
+&lt;!&ndash;
                   <figcaption>{{evidence?.date|moment}}</figcaption>
--->
+&ndash;&gt;
 
 
               </ion-slide>
-            </ion-slides>
+            </ion-slides>-->
 
           <ion-list-header>
             <div float-right>

@@ -79,6 +79,11 @@ export class UserService {
 
   };
 
+
+  profilePicChanged(data:any){
+    this.dataStore.user.profiles.profileUrl=data;
+    this._user.next(this.dataStore.user);
+  }
   updateProfile(user:Iuser) {
 
     let profiles=user.profiles;
