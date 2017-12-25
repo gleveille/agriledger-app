@@ -1,6 +1,6 @@
 import {WelcomePage} from './../pages/welcome/welcome';
 import {Component} from '@angular/core';
-import {Platform, LoadingController, Content, ModalController} from 'ionic-angular';
+import {Platform, LoadingController, Content, ModalController, AlertController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -18,12 +18,18 @@ export class MyApp {
 
   constructor(private platform:Platform,
               private modalController:ModalController,
-              statusBar:StatusBar, splashScreen:SplashScreen,
+              private alertCtrl:AlertController,
+              private statusBar:StatusBar, splashScreen:SplashScreen,
               public loadingCtrl:LoadingController,
               private userService:UserService,
               private assetService:AssetsService,
               public cache:CacheService) {
     platform.ready().then(() => {
+      platform.registerBackButtonAction(() => {
+          this.presentConfirm();
+      }, 0)
+
+      this.statusBar.overlaysWebView(true)
 
       splashScreen.hide();
 
@@ -31,7 +37,30 @@ export class MyApp {
 
     });
   }
-
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm Exit',
+      message: 'Do you want Exit?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Yes clicked');
+            this.platform.exitApp();
+          }
+        }
+      ]
+    });
+    alert.present().then(()=>{
+    });
+  }
   async verify() {
     let loader = this.loadingCtrl.create({
       content: "Please wait checking credentials...",
@@ -58,9 +87,7 @@ export class MyApp {
             if(data && data.success===true){
               this.rootPage=TabsPage;
             }
-            else{
-              this.platform.exitApp();
-            }
+           
           });
         }
       }

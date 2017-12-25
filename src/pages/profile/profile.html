@@ -2,19 +2,30 @@
   <page-header [title]="'Profile'"></page-header>
 </ion-header>
 
-<ion-content>
+<ion-content text-center>
 
   <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
-  <div class="main-content" text-wrap text-center>
+  <ion-row>
+    <ion-col>
+      <img class="circular"
+           [src]="serverUrl+user.profiles?.profileUrl?.url"
+           onError="this.src='assets/img/default-avatar.png'"
+           (click)="presentActionSheet('camera')">
 
-    <img class="circular"
-         [src]="serverUrl+user.profiles?.profileUrl?.url"
-         onError="this.src='assets/img/default-avatar.png'"
-         (click)="presentActionSheet('camera')">
 
-    <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
-    {{user.email}}
-    </p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+
+
+      <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
+        {{user.email}}
+      </p>
+    </ion-col>
+  </ion-row>
+
 
 
 
@@ -62,14 +73,10 @@
       </ion-row>
     </ion-grid>-->
 
-    <ion-grid>
       <ion-row>
         <ion-col>
           <button (click)="updateProfile()" ion-button block class="btnHeight40Px">{{'Update'|translate}}</button>
         </ion-col>
       </ion-row>
-    </ion-grid>
-
-  </div>
 </ion-content>
 
