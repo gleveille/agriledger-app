@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Events, LoadingController, ModalController} from 'ionic-angular';
+import { NavController, NavParams, Events, LoadingController, ModalController} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
 import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";

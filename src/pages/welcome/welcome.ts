@@ -1,14 +1,11 @@
-import {TabsPage} from './../tabs/tabs';
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
 import {TranslateServiceProvider} from "../../providers/translate-service";
 import {LoginPage} from "../login/login";
-import {ChangePasswordPage} from "../change-password/change-password";
 import {Storage} from '@ionic/storage';
 
 
-declare var Mnemonic, agrichainJS;
 @Component({
   selector: 'page-welcome',
   templateUrl: 'welcome.html',

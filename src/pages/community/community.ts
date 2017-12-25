@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import {ToastProvider} from "../../providers/toast";
-import {WelcomePage} from "../welcome/welcome";
 
 
 @Component({

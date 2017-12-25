@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {
-  IonicPage, NavController, NavParams, Platform, Events, ActionSheetController,
+   NavController, NavParams, Platform, Events, ActionSheetController,
   LoadingController, Slides, ModalController
 } from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
@@ -44,15 +44,17 @@ export class AssetInfoPage {
 
 
     this.events.subscribe('evidences:uploaded', (data)=> {
-      if(this.asset.evidences){
+      if(this.asset.evidences && this.asset.evidences.length){
         this.asset.evidences.unshift(data);
+        if(this.slides)
         this.slides.slideTo(0, 500);
       }
 
     else{
         this.asset.evidences=[];
-        this.asset.evidences.unshift(data);
-        this.slides.slideTo(0, 500);
+        this.asset.evidences.push(data);
+        if(this.slides)
+          this.slides.slideTo(0, 500);
       }
     })
   }

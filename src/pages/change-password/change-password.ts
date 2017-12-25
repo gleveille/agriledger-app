@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {UserService} from "../../providers/user.service";
 import {ToastProvider} from "../../providers/toast";
-import {PasscodePage} from "../passcode/passcode";
+import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 
 @Component({
   selector: 'page-change-password',
@@ -39,7 +39,7 @@ export class ChangePasswordPage {
         this.credential.oldPassword = null;
         this.credential.newPassword = null;
         this.credential.rePassword = null;
-        this.navCtrl.setRoot(PasscodePage)
+        this.navCtrl.setRoot(PasscodeLockPage)
         this.toastService.presentToast('Password Changed Sucessfully');
 
       }, (err)=> {

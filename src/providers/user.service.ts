@@ -92,6 +92,7 @@ export class UserService {
       this.dataStore.user.profiles=profile;
       this._user.next(this.dataStore.user);
       console.log('updated')
+      console.log(this.dataStore.user)
     })
       .catch((err)=> {
 

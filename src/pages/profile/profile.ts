@@ -2,18 +2,15 @@ import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {
-  NavController, AlertController, Events, ActionSheetController, ModalController,
+  NavController,  ActionSheetController, ModalController,
   LoadingController
 } from "ionic-angular/index";
-import {SocialSharing} from "@ionic-native/social-sharing";
 import {ServerUrl} from '../../app/api.config'
 import {ToastProvider} from "../../providers/toast";
 import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
 import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
 import {TranslateServiceProvider} from "../../providers/translate-service";
-import {Storage} from '@ionic/storage';
-import {FingerprintProvider} from "../../providers/fingerprint";
 import {UploadProvider} from "../../providers/upload";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 

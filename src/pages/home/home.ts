@@ -1,7 +1,5 @@
-import {ChangeDetectorRef, Component, ElementRef, NgZone, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Events, AlertController} from 'ionic-angular';
-import {AssetsPage} from "../assets/assets";
-import {InformationPage} from "../information/information";
+import {ChangeDetectorRef, Component} from '@angular/core';
+import {NavController, NavParams, Events,} from 'ionic-angular';
 import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
 import {ToastProvider} from "../../providers/toast";
@@ -11,7 +9,6 @@ import {WeatherProvider} from "../../providers/weather";
 
 import {ServerUrl} from '../../app/api.config'
 import {CreateAssetPage} from "../create-asset/create-asset";
-import {BaseChartDirective} from "ng2-charts";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -48,6 +45,7 @@ export class HomePage {
 
   ionViewDidLoad() {
 
+    console.log(setTimeout)
     this.subscribeUser();
     this.loadMyAssets();
     this.getCurrentWeather();

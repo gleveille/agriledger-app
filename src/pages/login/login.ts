@@ -4,11 +4,10 @@ import {NgForm} from "@angular/forms/forms";
 import {ToastProvider} from "../../providers/toast";
 import {TabsPage} from "../tabs/tabs";
 import {UserService} from "../../providers/user.service";
-import {TermsPage} from "../terms/terms";
 import {ChangePasswordPage} from "../change-password/change-password";
-import {PasscodePage} from "../passcode/passcode";
 import {ForgotPasswordPage} from "../forgot-password/forgot-password";
 import {AssetsService} from "../../providers/assets.service";
+import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 
 @Component({
   selector: 'page-login',
@@ -37,7 +36,7 @@ export class LoginPage {
         this.navCtrl.setRoot(ChangePasswordPage)
       }
       else if(!user.profiles.passcode){
-        this.navCtrl.setRoot(PasscodePage)
+        this.navCtrl.setRoot(PasscodeLockPage)
       }
       else{
         this.navCtrl.setRoot(TabsPage)

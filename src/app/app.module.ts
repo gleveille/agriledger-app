@@ -52,7 +52,6 @@ import {HttpModule} from "@angular/http";
 import {CacheModule} from 'ionic-cache';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import {ChangePasswordPage} from "../pages/change-password/change-password";
-import {PasscodePage} from "../pages/passcode/passcode";
 import {ChartsModule} from "ng2-charts";
 import {ResetPasswordPage} from "../pages/reset-password/reset-password";
 import {FingerprintPage} from "../pages/fingerprint/fingerprint";
@@ -93,7 +92,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermsPage,
     CompleteWeatherPage,
     ChangePasswordPage,
-    PasscodePage,
     ResetPasswordPage,
     FingerprintPage,
     SettingsPage,
@@ -145,7 +143,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermsPage,
     CompleteWeatherPage,
     ChangePasswordPage,
-    PasscodePage,
     ResetPasswordPage,
     FingerprintPage,
     SettingsPage,

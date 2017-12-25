@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, Events, IonicPage} from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
-import {UserService} from "../../providers/user.service";
 import {CreateAssetPage} from "../create-asset/create-asset";
 import {AssetInfoPage} from "../asset-info/asset-info";
 

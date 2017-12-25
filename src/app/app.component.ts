@@ -7,7 +7,6 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {UserService} from "../providers/user.service";
 import {CacheService} from 'ionic-cache';
 import {ChangePasswordPage} from "../pages/change-password/change-password";
-import {PasscodePage} from "../pages/passcode/passcode";
 import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
 import {AssetsService} from "../providers/assets.service";
 
@@ -48,10 +47,11 @@ export class MyApp {
           this.rootPage = ChangePasswordPage
         }
         else if (!user.profiles.passcode) {
-          this.rootPage = PasscodePage;
+          console.log('go to passcode lock page')
+          this.rootPage = PasscodeLockPage;
         }
         else{
-          let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: user.profiles.passcode });
+          let passcodeModal = this.modalController.create(PasscodeLockPage);
           passcodeModal.present();
           passcodeModal.onDidDismiss(data => {
             console.log(data);
