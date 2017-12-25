@@ -103,13 +103,9 @@
 
       <ion-grid>
         <ion-row>
-          <!--<ion-col>
-            <button ion-button clear style="color: crimson; letter-spacing: 2px;" (click)="uploadPage()">
-              +&nbsp; {{'Add Evidence'|translate}}
-            </button>
-          </ion-col>-->
-          <ion-col text-right>
-            <button ion-button color="primary" type="submit" [disabled]="!asset.name || !asset.expectedYield || !asset.packaging "
+
+          <ion-col>
+            <button ion-button block class="btnHeight40Px" [disabled]="!asset.name || !asset.expectedYield || !asset.packaging "
                     (click)="verifyBeforeregister()">
               {{'Create Asset'|translate}}
             </button>

@@ -98,11 +98,9 @@ export class HomePage {
     let doughnutChartData=[];
     doughnutChartLabels.push(`Available (${availableAssetNumber})`);
     doughnutChartLabels.push(`Pooled (${pooledAssetNumber})`);
-    doughnutChartLabels.push(`Rejected (${rejectedAssetNumber})`);
 
     doughnutChartData.push(availableAssetNumber);
     doughnutChartData.push(pooledAssetNumber);
-    doughnutChartData.push(rejectedAssetNumber);
     this.doughnutChartData = doughnutChartData.slice();
     this.doughnutChartLabels = doughnutChartLabels.slice();
 

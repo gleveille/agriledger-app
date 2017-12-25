@@ -90,14 +90,10 @@
 
       <ion-grid>
         <ion-row>
-          <!--<ion-col>
-            <button ion-button clear style="color: crimson; letter-spacing: 2px;" (click)="uploadPage()">
-              +&nbsp; {{'Add Evidence'|translate}}
-            </button>
-          </ion-col>-->
-          <ion-col text-right>
-            <button ion-button color="primary" type="submit" [disabled]="false" (click)="verifyBeforeUpdate()">
-              {{registerPromise==='pending'?'Registering' :'Update'|translate}}
+
+          <ion-col>
+            <button ion-button block class="btnHeight40Px" [disabled]="false" (click)="verifyBeforeUpdate()">
+              {{registerPromise==='pending'?'Registering' :'CREATE'|translate}}
             </button>
           </ion-col>
         </ion-row>
