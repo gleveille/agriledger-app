@@ -21,15 +21,15 @@ export class WeatherProvider {
   private _currentWeather: BehaviorSubject<any[]>;
   private _currentForecast: BehaviorSubject<any[]>;
 
-  private dataStore = { currentWeather:{},currentForecast:{}};
+  private dataStore:any = { currentWeather:null,currentForecast:null};
 
   currentWeather: Observable<any[]>;
   currentForecast: Observable<any[]>;
 
   constructor(public http:HttpClient, private geolocation:Geolocation,private errorHandler:ErrorHandlerService) {
-    this._currentWeather = <BehaviorSubject<any[]>>new BehaviorSubject({});
+    this._currentWeather = <BehaviorSubject<any[]>>new BehaviorSubject(null);
     this.currentWeather = this._currentWeather.asObservable();
-    this._currentForecast = <BehaviorSubject<any[]>>new BehaviorSubject({});
+    this._currentForecast = <BehaviorSubject<any[]>>new BehaviorSubject(null);
     this.currentForecast = this._currentForecast.asObservable();
   }
 
@@ -51,13 +51,14 @@ export class WeatherProvider {
       .do((data:any)=>{
         if(data && data.main){
           data.main.temp=(data.main.temp-273.15).toFixed(1);
-        }
-        if(data && data.wind){
-          data.wind.speed=(data.wind.speed*3.6).toFixed(1);
-        }
+          if(data && data.wind){
+            data.wind.speed=(data.wind.speed*3.6).toFixed(1);
+          }
 
-        this.dataStore.currentWeather=data;
-        this._currentWeather.next(this.dataStore.currentWeather);
+          this.dataStore.currentWeather=data;
+          this._currentWeather.next(this.dataStore.currentWeather);
+
+        }
 
       })
       .catch((err)=>{

@@ -8,7 +8,7 @@ import {WeatherProvider} from "../../providers/weather";
   templateUrl: 'weather.html',
 })
 export class WeatherPage {
-  currentWeather:any={};
+  currentWeather:any=null;
   currentForecast=null;
   weatherHttpStatus:string='pending';
 

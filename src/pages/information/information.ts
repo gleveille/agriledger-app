@@ -27,11 +27,11 @@ export class InformationPage {
   }
 
   gotoComplete(){
-    this.navCtrl.push(CompleteWeatherPage,{currentForecast:this.currentForecast})
+    this.navCtrl.push(CompleteWeatherPage)
   }
 
   ionViewDidLoad() {
-   
+
   }
 
 
