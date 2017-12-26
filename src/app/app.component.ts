@@ -10,6 +10,7 @@ import {ChangePasswordPage} from "../pages/change-password/change-password";
 import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
 import {AssetsService} from "../providers/assets.service";
 import {TranslateServiceProvider} from "../providers/translate-service";
+import {WeatherProvider} from "../providers/weather";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,10 +26,16 @@ export class MyApp {
               splashScreen:SplashScreen,
               public loadingCtrl:LoadingController,
               private userService:UserService,
+              private weatherService:WeatherProvider,
               private translationService:TranslateServiceProvider,
               private assetService:AssetsService,
               public cache:CacheService) {
     platform.ready().then(() => {
+      this.weatherService.loadCurrentWeather().subscribe(()=>{
+
+      },(err)=>{
+
+      });
       this.translationService.setLanguage();
       platform.registerBackButtonAction(() => {
         if(this.confirmation==='resolved'){
