@@ -1,0 +1,102 @@
+<ion-content>
+
+  <ion-slides pager loop autoplay="4500" showWhen="portrait" style="color: white">
+    <ion-slide class="Slide2">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 style="color: white" text-center>{{'Agriledger, Revolutionising the Supply Chain'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="Slide3">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 text-center style="color: white">{{'Creating opportunities across the value chain'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="Slide4">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 text-center style="color: white">{{'Guaranteeing Authenticity and Quantity'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="Slide5">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 text-center style="color: white">{{'Creating Transparency and Traceability'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+  </ion-slides>
+
+
+  <ion-slides pager loop autoplay="4500" showWhen="landscape">
+    <ion-slide class="Slide2a">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 text-center style="color: white">{{'Agriledger, Revolutionising the Supply Chain'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="Slide3a">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 text-center style="color: white">{{'Creating opportunities across the value chain'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="Slide4a">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 text-center style="color: white">{{'Guaranteeing Authenticity and Quantity'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="Slide5a">
+      <ion-card class="WelcomeBtn" style="position: absolute; bottom: 90px">
+        <ion-card-content class="WelcomeBtn">
+          <h1 text-center style="color: white">{{'Creating Transparency and Traceability'|translate}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-grid class="btnPosition">
+    <ion-row>
+      <ion-col col-12 text-center type="button" (click)="signIn()">
+        <ion-icon name="ios-arrow-forward-outline" style="font-size: 30px" color="primary"></ion-icon>
+        <!--<button ion-button block color="primary" class="btnHeight40Px" type="button" (click)="signIn()">
+          {{'SIGN IN'|translate}}
+        </button>-->
+        <p style="color: white; letter-spacing: 7px; margin: 0px; font-size: 18px;">{{'Skip'|translate}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="dropdown">
+    <p class="language_text">
+      <img (click)="showdropdown=true" [src]="defaultLangauge==='ch'?'assets/img/flag_china.png':'assets/img/uk.png'"
+           alt=""></p>
+    <em class="down_icon"></em>
+    <div class="dropdown-content">
+      <p class="language_text">
+        <img *ngIf="showdropdown"
+             [src]="defaultLangauge!=='ch'?'assets/img/flag_china.png':'assets/img/uk.png'" alt=""
+             (click)="changeLang()">
+      </p>
+    </div>
+  </div>
+
+</ion-content>
+
+
+

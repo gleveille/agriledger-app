@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>5 Day Weather</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <h5>Maximum Temperature</h5>
+  <h6 *ngFor="let forecast of dailyWeatherFive?.DailyForecasts">{{forecast.Temperature.Maximum.Value}}
+    {{forecast.Temperature.Maximum.Unit}}</h6>
+  <h5>Minimum Temperature</h5>
+  <h6 *ngFor="let forecast of dailyWeatherFive?.DailyForecasts">{{forecast.Temperature.Minimum.Value}}
+    {{forecast.Temperature.Minimum.Unit}}</h6>
+
+</ion-content>

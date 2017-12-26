@@ -1,0 +1,24 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{'Settings'|translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-label>{{'Touch ID'|translate}}</ion-label>
+      <ion-toggle [(ngModel)]="fingerPrintEnabled"  (ionChange)="changeToggle()"></ion-toggle>
+    </ion-item>
+    <hr>
+    <ion-item (click)="changeLang()">
+      <ion-label>{{'Languages'|translate}}</ion-label>
+      <ion-note item-end>
+          {{language|translate}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

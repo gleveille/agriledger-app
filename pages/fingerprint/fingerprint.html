@@ -1,0 +1,32 @@
+<ion-content>
+
+  <ion-row>
+    <div style="background-color: #519a48; width: 100%; height: 180px; text-align: center">
+      <ion-icon name="md-finger-print" style="font-size: 8em; color: white; padding-top: 33px"></ion-icon>
+    </div>
+  </ion-row>
+
+  <ion-card-content text-center>
+    <ion-card-title>
+      Fingerprint Login
+    </ion-card-title>
+    <p>
+      Use fingerprint login instead of your PIN to authenticate.
+    </p>
+  </ion-card-content>
+
+  <div text-center style="bottom: 20px;
+    position: absolute;
+    width: 100%;">
+    <div >
+      <button (click)="enable()" ion-button color="primary" style="width: 80%">ENABLE FINGERPRINT</button>
+    </div>
+
+    <div >
+      <button (click)="skip()" ion-button color="dark" clear>I'll do it later</button>
+    </div>
+  </div>
+
+
+
+</ion-content>

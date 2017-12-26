@@ -1,0 +1,176 @@
+<ion-header>
+  <page-header [title]="'Assets'"></page-header>
+
+  <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
+    <ion-segment [(ngModel)]="status">
+      <ion-segment-button value="all">
+        {{'All'|translate}}
+      </ion-segment-button>
+      <ion-segment-button value="available">
+        {{'Available'|translate}}
+      </ion-segment-button>
+      <ion-segment-button value="pooled">
+        {{'Pooled'|translate}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+  <div [ngSwitch]="status">
+    <ion-list *ngSwitchCase="'all'">
+      <ion-row no-padding (click)="createAsset()">
+        <ion-col text-right no-padding>
+          <button ion-button clear style="color: #519a48; margin-right: 8px; letter-spacing: 2px;">
+            +&nbsp; {{'Add Assets'|translate}}
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-list style="margin-top: -10px;">
+        <div text-center *ngIf="!assets.length" class="centered-content">
+          <img src="assets/icon/no-record.png">
+          <h4 style="opacity: 0.6">No Assets created!</h4>
+        </div>
+
+        <ion-card *ngFor="let asset of assets" >
+          <div (click)="assetInfo(asset)">
+            <ion-card-content style="padding: 0px;">
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col col-6>
+                    <ion-item>
+                      <ion-label floating>{{'Asset Name:'|translate}}</ion-label>
+                      <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
+                      <ion-icon style="color: lightgray" name="arrow-forward"></ion-icon>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-6>
+                    <ion-item>
+                      <ion-label floating>{{'Asset Category:'|translate}}</ion-label>
+                      <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
+                      <!--<ion-icon style="color: lightgray" name="arrow-forward"></ion-icon>-->
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+
+            <div text-left *ngIf="asset.status==='pooled'">
+              <ion-icon style="font-size: 25px; color: #66bb6a; float: left; margin-left: 8px"
+                        name="ios-link-outline"></ion-icon>
+            </div>
+
+            <div text-right>
+              <ion-icon style="margin-right: 8px; margin-bottom: 8px; font-size: 25px; color: lightgray"
+                        name="arrow-forward"></ion-icon>
+            </div>
+          </div>
+        </ion-card>
+      </ion-list>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'available'">
+      <ion-list>
+        <div text-center *ngIf="!availableAssets.length" class="centered-content">
+          <img src="assets/icon/no-record.png">
+          <h4 style="opacity: 0.6">No Assets created!</h4>
+        </div>
+
+        <ion-card *ngFor="let asset of availableAssets">
+            <div (click)="assetInfo(asset)">
+              <ion-card-content style="padding: 0px;">
+                <ion-grid no-padding>
+                  <ion-row>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label floating>Asset Name:</ion-label>
+                        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label floating>Asset Category:</ion-label>
+                        <ion-input type="tel" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <!--<ion-row>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label floating>Asset Status:</ion-label>
+                        <ion-input type="tel" [(ngModel)]="asset.status" text-capitalize disabled></ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label floating>Asset Quantity:</ion-label>
+                        <ion-input type="tel" [(ngModel)]="asset.quantity" text-capitalize disabled></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>-->
+                </ion-grid>
+
+              </ion-card-content>
+
+              <div text-right>
+                <ion-icon style="margin-right: 8px; margin-bottom: 8px; font-size: 25px; color: lightgray"
+                          name="arrow-forward"></ion-icon>
+              </div>
+            </div>
+
+        </ion-card>
+      </ion-list>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'pooled'">
+      <ion-list>
+        <div text-center *ngIf="!pooledAssets.length" class="centered-content">
+          <img src="assets/icon/no-record.png">
+          <h4 style="opacity: 0.6">No Asset has been pooled!</h4>
+        </div>
+
+        <ion-card *ngFor="let asset of pooledAssets">
+            <div (click)="assetInfo(asset)">
+              <ion-card-content style="padding: 0px;">
+                <ion-grid no-padding>
+                  <ion-row>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label floating>Asset Name:</ion-label>
+                        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label floating>Asset Category:</ion-label>
+                        <ion-input type="tel" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+              </ion-card-content>
+
+              <div text-left *ngIf="asset.isPutOnBlockchain">
+                <ion-icon style="font-size: 25px; color: #66bb6a; float: left; margin-left: 8px"
+                          name="ios-link-outline"></ion-icon>
+              </div>
+
+              <div text-right>
+                <ion-icon style="margin-right: 8px; margin-bottom: 8px; font-size: 25px; color: lightgray"
+                          name="arrow-forward"></ion-icon>
+              </div>
+            </div>
+
+        </ion-card>
+      </ion-list>
+    </ion-list>
+  </div>
+
+
+
+</ion-content>

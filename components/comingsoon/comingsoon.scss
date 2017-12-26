@@ -1,0 +1,20 @@
+comingsoon {
+  .bgimg {
+    background-image: url('../../assets/img/coming-soon2.png');
+    height: 100%;
+    background-position: center;
+    background-size:cover;
+    position: relative;
+    font-family: "Courier New", Courier, monospace;
+  }
+
+
+  .middle {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+}

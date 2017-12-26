@@ -1,0 +1,86 @@
+<ion-header>
+  <page-header [title]="'Information'"></page-header>
+
+  <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="puppies">
+        {{'Weather'|translate}}
+      </ion-segment-button>
+      <ion-segment-button value="kittens">
+        {{'Pricing'|translate}}
+      </ion-segment-button>
+      <ion-segment-button value="agnews">
+        {{'Ag news'|translate}}
+      </ion-segment-button>
+      <ion-segment-button value="practice">
+        {{'Market'|translate}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content no-padding>
+
+
+  <div [ngSwitch]="pet">
+
+
+    <section *ngSwitchCase="'puppies'">
+      <page-weather></page-weather>
+    </section>
+
+    <ion-list *ngSwitchCase="'kittens'">
+
+      <ion-grid style="text-align: center;">
+
+        <ion-row>
+          <ion-col col-3>Name</ion-col>
+          <ion-col col-3>QUANTITY</ion-col>
+          <ion-col col-3>CERTIFIED</ion-col>
+          <ion-col col-3>CONV.</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
+          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'agnews'" scroll="true" overflow-scroll="hidden" class="iframe-wrapper"
+              style="height: 100%">
+
+      <div class="container" style="height: 100%">
+        <div class="row" style="height: 100%">
+          <iframe data-tap-disabled="true" src="http://www.agriledger.io/blog/"
+                  style="position: absolute; border: none"></iframe>
+        </div>
+      </div>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'practice'">
+
+
+    </ion-list>
+
+  </div>
+
+</ion-content>
