@@ -27,6 +27,10 @@ export class HomePage {
   doughnutChartData:number[] = [];
   doughnutChartType:string = 'doughnut';
 
+  loanAmount:number=0;
+  loanInterest:number=0;
+  loanTenure:number=0;
+  emiCalculated:number=0;
 
 
 
@@ -93,8 +97,11 @@ export class HomePage {
 
     let doughnutChartLabels=[];
     let doughnutChartData=[];
+    doughnutChartLabels.push(`Total (${assets.length})`);
+
     doughnutChartLabels.push(`Available (${availableAssetNumber})`);
     doughnutChartLabels.push(`Pooled (${pooledAssetNumber})`);
+    doughnutChartData.push(assets.length);
 
     doughnutChartData.push(availableAssetNumber);
     doughnutChartData.push(pooledAssetNumber);

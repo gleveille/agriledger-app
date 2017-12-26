@@ -31,7 +31,11 @@ export class AssetsService {
   }
 
 
-  loadMyAssets(){
+  loadMyAssets(refresh:boolean=false){
+    console.log('load my asset')
+    if(!refresh && this.dataStore.myAssets && this.dataStore.myAssets.length){
+      return Observable.of(this.dataStore.myAssets.slice())
+    }
       const url = `${UserApi.getAssets.url()}/${this.userService.dataStore.user.id}/assets`;
       return this.http.get(`${url}`)
          .do((assets:any[])=>{

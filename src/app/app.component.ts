@@ -77,7 +77,6 @@ export class MyApp {
     loader.present();
 
     this.userService.loadUser().subscribe((user)=> {
-      console.log(user)
       loader.dismiss();
       if (user && user.id) {
         if (!user.isPasswordChanged) {
@@ -88,6 +87,11 @@ export class MyApp {
           this.rootPage = PasscodeLockPage;
         }
         else{
+          this.assetService.loadMyAssets().subscribe(()=>{
+
+          },(err)=>{
+
+          })
           let passcodeModal = this.modalController.create(PasscodeLockPage);
           passcodeModal.present();
           passcodeModal.onDidDismiss(data => {

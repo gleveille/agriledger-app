@@ -24,7 +24,6 @@ export class AssetsPage {
 
 
   ionViewDidLoad() {
-    this.assetService.loadMyAssets();
     this.subscribeMyAssets();
   }
 

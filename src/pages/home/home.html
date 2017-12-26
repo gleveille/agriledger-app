@@ -13,56 +13,162 @@
            [src]="serverUrl+user.profiles?.profileUrl?.url"
            onError="this.src='assets/img/default-avatar.png';">
 
-
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col>
-
       <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
-        {{user.email}}</p>
-      <hr>
-         <ion-spinner class="centered-spinner"
-                      *ngIf="loadingAssetHttpRequest==='pending'">
-
-         </ion-spinner>
-
-      <p no-lines style="font-size: 18px !important;font-weight: lighter !important; " >Total Assets
-        <span *ngIf="loadingAssetHttpRequest==='resolved'"> ({{assets.length}})
-        </span>
+        {{user.email}}
       </p>
-      <div>
-
-        <button *ngIf="loadingAssetHttpRequest==='resolved' && !assets.length" (click)="goToCreateAssetPage()"
-                ion-button outline style="letter-spacing: 2px;">
-          {{'Add Assets'|translate}}
-        </button>
-
-
-        <canvas
-          *ngIf="loadingAssetHttpRequest==='resolved' && assets.length"
-          baseChart
-          [data]="doughnutChartData"
-          [labels]="doughnutChartLabels"
-          [chartType]="doughnutChartType">
-
-        </canvas>
-
-
-      </div>
-<!--
-
-
-      <hr>
-      <p no-lines style="font-size: 18px !important;font-weight: lighter !important;" >Weather next 5 days</p>
-
-      <hr>-->
     </ion-col>
   </ion-row>
 
 
 
+  <ion-spinner class="centered-spinner" *ngIf="loadingAssetHttpRequest==='pending'"></ion-spinner>
+
+
+  <section  *ngIf="loadingAssetHttpRequest==='resolved'">
+    <ion-card style="background-color: #f8f8f8e8" class="transitionE">
+      <ion-card-header>
+        Assets Summary
+      </ion-card-header>
+      <hr>
+
+      <ion-card-content>
+
+
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12 no-padding>
+
+              <canvas
+                *ngIf="loadingAssetHttpRequest==='resolved' && assets.length"
+                baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType">
+
+              </canvas>
+            </ion-col>
+
+            <ion-col col-12 no-padding>
+              <hr>
+
+              <div>
+                <button ion-button clear>VIEW ASSET</button>
+                <button ion-button clear (click)="goToCreateAssetPage()">CREATE ASSET</button>
+
+              </div>
+
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card style="background-color: #f8f8f8e8">
+      <ion-card-header>
+        Loan Calculator
+      </ion-card-header>
+      <hr>
+
+      <ion-card-content>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12 no-padding>
+
+              <p text-left>Loan Amount</p>
+              <ion-range min="1000" max="500000" [(ngModel)]="loanAmount">
+                <ion-label range-right>{{loanAmount}}</ion-label>
+
+              </ion-range>
+
+              <p text-left>Interest Rate</p>
+              <ion-range min="1" max="10" [(ngModel)]="loanInterest">
+                <ion-label range-right>{{loanInterest}}%</ion-label>
+
+              </ion-range>
+
+              <p text-left>Tenure</p>
+              <ion-range min="1" max="36" [(ngModel)]="loanTenure">
+
+                <ion-label range-right>{{loanTenure}} Month</ion-label>
+
+              </ion-range>
+            </ion-col>
+
+          </ion-row>
+
+          <ion-row justify-content-center align-items-center>
+            <ion-col col-auto align-self-center >
+              <div class="circle">
+                <p  class="circle-content" >
+                  <ion-icon class="circle-content-icon" name="logo-yen"></ion-icon>
+                  <span class="circle-content-text">1440</span>
+                <p>
+                  EMI / MONTH
+                </p>
+
+              </div>
+
+            </ion-col>
+          </ion-row>
+
+          <br>
+          <ion-row>
+            <ion-col col-12 no-padding>
+              <ion-row align-items-center>
+                <ion-col col-4 style="border-right: 1px solid gray">
+
+                  <h4>PRINCIPAL</h4>
+                  <p class="loan-content">
+                    <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
+                    <span class="loan-content-text">1440</span>
+                  </p>
+
+                </ion-col>
+                <ion-col col-4 style="border-right: 1px solid gray" >
+
+                  <h4>INTEREST</h4>
+                  <p class="loan-content">
+                    <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
+                    <span class="loan-content-text">21</span>
+
+                  </p>
+                </ion-col>
+                <ion-col col-4>
+
+                  <h4>FEE</h4>
+                  <p class="loan-content">
+                    <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
+                    <span class="loan-content-text">30</span>
+
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+          </ion-row>
+          <hr>
+
+          <ion-row>
+            <ion-col col-12 no-padding>
+              <hr>
+
+              <button ion-button clear>APPLY</button>
+
+
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
+
+      </ion-card-content>
+    </ion-card>
+
+  </section>
 
 
 </ion-content>
