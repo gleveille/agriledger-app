@@ -21,10 +21,10 @@
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'puppies'">
 
-      <ion-item text-center *ngIf="user?.profileUrl?.url || user?.profileUrl?.url?.length">
-        <img width="60"
-             height="60" [src]="serverUrl+user?.profileUrl?.url"
-             style="border-radius:50%;position: relative;">
+      <ion-item text-center *ngIf="user.profileUrl?.url || user?.profileUrl?.url?.length">
+        <img class="circular"
+              [src]="serverUrl+user.profiles?.profileUrl?.url"
+              onError="this.src='assets/img/default-avatar.png'">
       </ion-item>
       <ion-icon *ngIf="!user?.profileUrl?.url || !user?.profileUrl?.url?.length"
                 style="font-size: 50px; margin-left: 16px" name="md-person"></ion-icon>

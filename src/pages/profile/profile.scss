@@ -89,15 +89,16 @@ page-profile {
   .circular {
     width: 100px;
     height: 100px;
-    position: inherit;
+    //position: absolute;
     border-radius: 50%;
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     border: solid white;
     background-size: 100%;
-    margin-top: -70px;
-    margin-left: auto;
-    margin-right: auto;
+    //margin-top: -70px;
+    //margin-left: auto;
+    //margin-right: auto;
+    
     // margin-bottom: 50px;
   }
   .profile-description {
@@ -105,4 +106,38 @@ page-profile {
     color: #888;
   }
 
+  //here i am adding css for edit button over profile image
+
+
+
+  .img-wrapper {
+    position: relative;
+    margin-top: -70px;
+    width: 100px;
+    height:100px;
+    //margin: 0 auto;
+    //margin-left: auto;
+    //margin-right: auto;
+   }
+
+   .img-div-container{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+   }
+   .button-div-container{
+    width: 25px;
+    height: 25px;
+    right: 0;
+    top: 0;
+    border-radius: 50%;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    background-color: color($colors, primary);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
 }

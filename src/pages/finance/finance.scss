@@ -46,5 +46,18 @@ page-finance {
     color: #fff;
   }
 
+  .circular {
+    width: 100px;
+    height: 100px;
+    position: inherit;
+    border-radius: 50%;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    border: solid white;
+    background-size: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    // margin-bottom: 50px;
+  }
 
 }
