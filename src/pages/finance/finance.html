@@ -3,11 +3,11 @@
   <page-header [title]="'Finance'"></page-header>
 
   <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
-    <ion-segment [(ngModel)]="pet">
-      <ion-segment-button value="puppies">
+    <ion-segment [(ngModel)]="segmentName">
+      <ion-segment-button value="loan">
         {{'Loan'|translate}}
       </ion-segment-button>
-      <ion-segment-button value="kittens">
+      <ion-segment-button value="insurance">
         {{'Insurance'|translate}}
       </ion-segment-button>
     </ion-segment>
@@ -18,47 +18,14 @@
 
 <ion-content>
 
-  <div [ngSwitch]="pet">
-    <ion-list *ngSwitchCase="'puppies'">
+  <div [ngSwitch]="segmentName">
+    <section *ngSwitchCase="'loan'">
 
-      <ion-item text-center *ngIf="user.profileUrl?.url || user?.profileUrl?.url?.length">
-        <img class="circular"
-              [src]="serverUrl+user.profiles?.profileUrl?.url"
-              onError="this.src='assets/img/default-avatar.png'">
-      </ion-item>
-      <ion-icon *ngIf="!user?.profileUrl?.url || !user?.profileUrl?.url?.length"
-                style="font-size: 50px; margin-left: 16px" name="md-person"></ion-icon>
+     <page-loan></page-loan>
 
-      <ion-list>
-        <ion-item>
-          <ion-label floating>{{'Name'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.name" text-capitalize disabled></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>{{'Agri Id number'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.id" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
-          <ion-input type="tel" [(ngModel)]="user.phone" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>{{'Account Details'|translate}}</ion-label>
-          <ion-input type="text" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>{{'Company name'|translate}}</ion-label>
-          <ion-input type="text" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>{{'Address'|translate}}</ion-label>
-          <ion-input type="text" disabled></ion-input>
-        </ion-item>
-      </ion-list>
+    </section>
 
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'kittens'">
+    <section *ngSwitchCase="'insurance'">
 
       <!--<ion-grid>
         <ion-row>
@@ -91,7 +58,7 @@
 
 
 
-    </ion-list>
+    </section>
 
   </div>
 

@@ -17,7 +17,7 @@ export class FinancePage {
   city: string;
   serverUrl = ServerUrl;
   user = {profileUrl: {}} as Iuser
-  pet: string = "puppies";
+  segmentName: string = "loan";
 
   // Doughnut
   public doughnutChartLabels:string[] = ['All Assets', 'Available Assets', 'Pooled Assets'];
