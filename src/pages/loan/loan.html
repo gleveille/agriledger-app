@@ -1,5 +1,5 @@
-  <ion-card style="background-color: #f8f8f8e8">
-    <ion-card-header>
+<ion-card class="card-background" >
+  <ion-card-header>
       Loan Calculator
     </ion-card-header>
     <hr>
@@ -56,7 +56,7 @@
                 <h4>PRINCIPAL</h4>
                 <p class="loan-content">
                   <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
-                  <span class="loan-content-text">1440</span>
+                  <span class="loan-content-text">{{loanAmount}}</span>
                 </p>
 
               </ion-col>
@@ -65,7 +65,7 @@
                 <h4>INTEREST</h4>
                 <p class="loan-content">
                   <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
-                  <span class="loan-content-text">21</span>
+                  <span class="loan-content-text">{{loanInterest}}</span>
 
                 </p>
               </ion-col>
@@ -74,7 +74,7 @@
                 <h4>FEE</h4>
                 <p class="loan-content">
                   <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
-                  <span class="loan-content-text">30</span>
+                  <span class="loan-content-text">{{loanFee}}</span>
 
                 </p>
               </ion-col>

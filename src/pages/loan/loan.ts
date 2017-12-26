@@ -11,10 +11,12 @@ export class LoanPage {
   loanAmount:number=100;
   loanInterest:number=1;
   loanTenure:number=1;
+  loanFee:number=12;
   emiCalculated:number=0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.emiCalculated=(this.loanAmount*this.loanInterest*this.loanTenure)/100;
+    this.emiCalculated=this.emiCalculated+this.loanFee;
     console.log(this.emiCalculated)
   }
 
@@ -33,6 +35,7 @@ export class LoanPage {
 
     let emi=(this.loanAmount*this.loanInterest*this.loanTenure)/100;
     this.emiCalculated=emi;
+    this.emiCalculated=this.emiCalculated+this.loanFee;
 
     console.log($event)
     console.log(type)
