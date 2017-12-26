@@ -51,13 +51,8 @@
 
             <ion-col col-12 no-padding>
               <hr>
-
-              <div>
-                <button ion-button clear>VIEW ASSET</button>
-                <button ion-button clear (click)="goToCreateAssetPage()">CREATE ASSET</button>
-
-              </div>
-
+              <button ion-button clear (click)="goToViewAssetPage()">VIEW ASSET</button>
+              <button ion-button clear (click)="goToCreateAssetPage()">CREATE ASSET</button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -79,19 +74,19 @@
             <ion-col col-12 no-padding>
 
               <p text-left>Loan Amount</p>
-              <ion-range min="1000" max="500000" [(ngModel)]="loanAmount">
-                <ion-label range-right>{{loanAmount}}</ion-label>
+              <ion-range no-padding min="1000" max="50000"  [(ngModel)]="loanAmount" (ionChange)="sliderChange($event,'amount')">
+                <ion-label range-right>{{loanAmount}}&euro;</ion-label>
 
               </ion-range>
 
               <p text-left>Interest Rate</p>
-              <ion-range min="1" max="10" [(ngModel)]="loanInterest">
+              <ion-range no-padding min="1" max="10"  [(ngModel)]="loanInterest" (ionChange)="sliderChange($event,'rate')">
                 <ion-label range-right>{{loanInterest}}%</ion-label>
 
               </ion-range>
 
               <p text-left>Tenure</p>
-              <ion-range min="1" max="36" [(ngModel)]="loanTenure">
+              <ion-range no-padding min="1" max="36"  [(ngModel)]="loanTenure" (ionChange)="sliderChange($event,'tenure')">
 
                 <ion-label range-right>{{loanTenure}} Month</ion-label>
 
@@ -105,7 +100,7 @@
               <div class="circle">
                 <p  class="circle-content" >
                   <ion-icon class="circle-content-icon" name="logo-yen"></ion-icon>
-                  <span class="circle-content-text">1440</span>
+                  <span class="circle-content-text">{{emiCalculated}}</span>
                 <p>
                   EMI / MONTH
                 </p>
@@ -149,19 +144,13 @@
               </ion-row>
             </ion-col>
 
-          </ion-row>
-          <hr>
-
-          <ion-row>
             <ion-col col-12 no-padding>
               <hr>
-
               <button ion-button clear>APPLY</button>
-
-
             </ion-col>
-
           </ion-row>
+
+
         </ion-grid>
 
 

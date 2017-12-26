@@ -9,6 +9,7 @@ import {WeatherProvider} from "../../providers/weather";
 
 import {ServerUrl} from '../../app/api.config'
 import {CreateAssetPage} from "../create-asset/create-asset";
+import {AssetsPage} from "../assets/assets";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -28,8 +29,8 @@ export class HomePage {
   doughnutChartType:string = 'doughnut';
 
   loanAmount:number=0;
-  loanInterest:number=0;
-  loanTenure:number=0;
+  loanInterest:number=1;
+  loanTenure:number=1;
   emiCalculated:number=0;
 
 
@@ -54,6 +55,24 @@ export class HomePage {
 
   }
 
+  sliderChange($event,type:string){
+
+    if(type==='rate'){
+      this.loanInterest=$event._value;
+    }
+    if(type==='tenure'){
+      this.loanTenure=$event._value;
+    }
+    if(type==='amount'){
+      this.loanAmount=$event._value;
+    }
+
+    let emi=(this.loanAmount*this.loanInterest*this.loanTenure)/100;
+    this.emiCalculated=emi;
+
+    console.log($event)
+    console.log(type)
+  }
   loadMyAssets(){
     this.loadingAssetHttpRequest='pending';
     this.assetService.loadMyAssets().subscribe((assets:any[])=>{
@@ -161,6 +180,11 @@ export class HomePage {
 
   goToCreateAssetPage(){
     this.navCtrl.push(CreateAssetPage);
+
+  }
+
+  goToViewAssetPage(){
+    this.navCtrl.push(AssetsPage);
 
   }
 }
