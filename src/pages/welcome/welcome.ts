@@ -34,6 +34,7 @@ export class WelcomePage {
 
   ionViewDidLoad() {
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
+    this.translateService.changeLang(this.defaultLangauge)
   }
 
   signIn() {
