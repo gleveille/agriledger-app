@@ -8,16 +8,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LoanPage {
 
-  loanAmount:number=0;
+  loanAmount:number=100;
   loanInterest:number=1;
   loanTenure:number=1;
   emiCalculated:number=0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoanPage');
+    this.emiCalculated=(this.loanAmount*this.loanInterest*this.loanTenure)/100;
+    console.log(this.emiCalculated)
   }
 
 

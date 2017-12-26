@@ -95,7 +95,7 @@ export class HomePage {
 
     let doughnutChartLabels=[];
     let doughnutChartData=[];
-    doughnutChartLabels.push(`Total (${assets.length})`);
+    doughnutChartLabels.push(`All (${assets.length})`);
 
     doughnutChartLabels.push(`Available (${availableAssetNumber})`);
     doughnutChartLabels.push(`Pooled (${pooledAssetNumber})`);
@@ -120,7 +120,7 @@ export class HomePage {
       setTimeout(()=>{
         this.loadingAssetHttpRequest='resolved';
 
-      },100)
+      },200)
 
     },(err)=>{
 
