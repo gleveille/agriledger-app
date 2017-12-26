@@ -7,11 +7,23 @@
   <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
   <ion-row>
     <ion-col>
-      <img class="circular"
+      <!-- <img class="circular"
            [src]="serverUrl+user.profiles?.profileUrl?.url"
            onError="this.src='assets/img/default-avatar.png'"
-           (click)="presentActionSheet('camera')">
+           (click)="presentActionSheet('camera')"> -->
 
+           <div class="img-wrapper" (click)="presentActionSheet('camera')">
+              <!-- <img class="img-responsive" src="assets/imgs/profile.jpg"> -->
+              <div class="img-div-container">
+                  <img class="circular"
+                  [src]="serverUrl+user.profiles?.profileUrl?.url"
+                  onError="this.src='assets/img/default-avatar.png'"
+                  (click)="presentActionSheet('camera')">
+              </div>
+              <div class="button-div-container">
+              <ion-icon color="white" name="create"></ion-icon>
+              </div>
+           </div>
 
     </ion-col>
   </ion-row>
@@ -25,8 +37,6 @@
       </p>
     </ion-col>
   </ion-row>
-
-
 
 
     <ion-list>
