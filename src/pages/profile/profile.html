@@ -5,8 +5,8 @@
 <ion-content text-center>
 
   <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
-  <ion-row>
-    <ion-col>
+  <ion-row justify-content-center>
+    <ion-col align-self-center col-auto no-padding>
       <!-- <img class="circular"
            [src]="serverUrl+user.profiles?.profileUrl?.url"
            onError="this.src='assets/img/default-avatar.png'"
@@ -32,7 +32,7 @@
     <ion-col>
 
 
-      <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
+      <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px;">
         {{user.email}}
       </p>
 
