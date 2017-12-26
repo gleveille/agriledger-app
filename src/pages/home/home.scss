@@ -1,47 +1,7 @@
 page-home {
-  .circle {
-    background-color:transparent;
-    border:1px solid #6a51bd;
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
-    width:150px;
-    height:150px;
 
-    text-align: center;
-  }
-
-
-
-
-  .circle-content{
-    padding-top: 38px;
-    color: green;
-  }
-
-  .circle-content-icon{
-    font-size: 15px;
-    position: relative;;top: -3px;
-
-  }
-
-  .circle-content-text{
-    font-size: 26px;
-  }
-
-  .loan-content{
-    padding-top: 10px;
-  }
-  .loan-content-icon{
-    font-size: 15px;
-    position: relative;;top: -2px;
-    color: gray;
-
-  }
-
-  .loan-content-text{
-    font-size: 25px;
-    color: gray;
+  .card-background{
+    background-color: rgba(243, 243, 243, 0.91)
   }
   .card-header-md{
     font-size: 1.9rem;

@@ -28,10 +28,7 @@ export class HomePage {
   doughnutChartData:number[] = [];
   doughnutChartType:string = 'doughnut';
 
-  loanAmount:number=0;
-  loanInterest:number=1;
-  loanTenure:number=1;
-  emiCalculated:number=0;
+
 
 
 
@@ -55,24 +52,6 @@ export class HomePage {
 
   }
 
-  sliderChange($event,type:string){
-
-    if(type==='rate'){
-      this.loanInterest=$event._value;
-    }
-    if(type==='tenure'){
-      this.loanTenure=$event._value;
-    }
-    if(type==='amount'){
-      this.loanAmount=$event._value;
-    }
-
-    let emi=(this.loanAmount*this.loanInterest*this.loanTenure)/100;
-    this.emiCalculated=emi;
-
-    console.log($event)
-    console.log(type)
-  }
   loadMyAssets(){
     this.loadingAssetHttpRequest='pending';
     this.assetService.loadMyAssets().subscribe((assets:any[])=>{
@@ -116,7 +95,7 @@ export class HomePage {
 
     let doughnutChartLabels=[];
     let doughnutChartData=[];
-    doughnutChartLabels.push(`Total (${assets.length})`);
+    doughnutChartLabels.push(`All (${assets.length})`);
 
     doughnutChartLabels.push(`Available (${availableAssetNumber})`);
     doughnutChartLabels.push(`Pooled (${pooledAssetNumber})`);
@@ -141,7 +120,7 @@ export class HomePage {
       setTimeout(()=>{
         this.loadingAssetHttpRequest='resolved';
 
-      },100)
+      },200)
 
     },(err)=>{
 

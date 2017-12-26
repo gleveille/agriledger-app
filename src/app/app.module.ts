@@ -60,6 +60,7 @@ import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
+import {LoanPage} from "../pages/loan/loan";
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -96,7 +97,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FingerprintPage,
     SettingsPage,
     ForgotPasswordPage,
-    PasscodeLockPage
+    PasscodeLockPage,
+    LoanPage
   ],
   imports: [
     HttpClientModule,
@@ -147,7 +149,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FingerprintPage,
     SettingsPage,
     ForgotPasswordPage,
-    PasscodeLockPage
+    PasscodeLockPage,
+    LoanPage
+
 
   ],
   providers: [
