@@ -6,23 +6,27 @@ import {TranslateService} from '@ngx-translate/core';
 export class TranslateServiceProvider {
 
   constructor(private translate:TranslateService, private storage:Storage) {
+
+
+  }
+
+  setLanguage(){
     this.storage.get('appLanguage').then((lang)=> {
       console.log('val us is ', lang)
       if (lang) {
-        translate.setDefaultLang(lang);
+        this.translate.setDefaultLang(lang);
         this.translate.use(lang);
       }
       else {
-        translate.setDefaultLang('ch');
+        this.translate.setDefaultLang('ch');
         this.translate.use('ch');
       }
 
     }).catch((err)=> {
       console.log(err)
-      translate.setDefaultLang('ch');
+      this.translate.setDefaultLang('ch');
       this.translate.use('ch');
     })
-
   }
 
   changeLang(lang:string) {
@@ -36,9 +40,9 @@ export class TranslateServiceProvider {
     let msg = this.translate.instant(name);
     return msg;
   }
-  
+
   getDefaultLanguage(){
-    return this.translate.getDefaultLang();
+    return this.translate.getDefaultLang()
   }
 
 }
