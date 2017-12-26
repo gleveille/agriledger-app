@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="headerColor">
+    <ion-title>
+      {{'Create Asset'|translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list no-padding>
+
+    <h5 text-center style="opacity: .8; letter-spacing: 4px;">
+      {{'Asset category'|translate}}
+    </h5>
+
+    <ion-item>
+      <ion-label floating>{{'Level 1'|translate}}</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,0)" [(ngModel)]="asset.category.level1"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelOne" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="assetCategoriesLevelTwo.length">
+      <ion-label floating>{{'Level 2'|translate}}</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,1)" [(ngModel)]="asset.category.level2"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelTwo" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="assetCategoriesLevelThree.length">
+      <ion-label floating>{{'Level 3'|translate}}</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,2)" [(ngModel)]="asset.category.level3"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelThree" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="assetCategoriesLevelFour.length">
+      <ion-label floating>{{'Level 4'|translate}}</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,3)" [(ngModel)]="asset.category.level4"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelFour" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="assetCategoriesLevelFive.length">
+      <ion-label floating>{{'Level 5'|translate}}</ion-label>
+      <ion-select (ionChange)="onAssetCategoryLevelChange($event,4)" [(ngModel)]="asset.category.level5"
+                  multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let c of assetCategoriesLevelFive" [value]="c">{{c.attrs[chosenLang]}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <div *ngIf="deepestCategorySelected">
+      <h5 text-center style="opacity: .8; letter-spacing: 4px;">
+        {{'Asset Information'|translate}}
+      </h5>
+      <ion-item>
+        <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize name="name" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Expected Yield *'|translate}}</ion-label>
+        <ion-input type="number" [(ngModel)]="asset.expectedYield" text-capitalize name="expectedYield" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Packaging *'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.packaging" text-capitalize name="packaging" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
+        <ion-datetime
+          displayFormat="MMM DD, YYYY"
+          [min]="startDate"
+          [max]="endDate"
+          [(ngModel)]="asset.expectedHarvestDate">
+        </ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Health of Soil'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.healthOfSoil" text-capitalize name="healthOfSoil"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Land History'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.landHistory" text-capitalize name="landHistory"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Farm Investments'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.farmInvestments" text-capitalize name="farmInvestments"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{'Additional Information'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.additionalInformation" text-capitalize name="additionalInformation"></ion-input>
+      </ion-item>
+
+      <ion-grid>
+        <ion-row>
+
+          <ion-col>
+            <button ion-button block class="btnHeight40Px" [disabled]="!asset.name || !asset.expectedYield || !asset.packaging "
+                    (click)="verifyBeforeregister()">
+              {{'Create Asset'|translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+
+  </ion-list>
+</ion-content>
