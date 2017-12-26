@@ -12,13 +12,13 @@
 
             <p text-left>Loan Amount</p>
             <ion-range no-padding min="100" max="50000"  [(ngModel)]="loanAmount" (ionChange)="sliderChange($event,'amount')">
-              <ion-label range-right>{{loanAmount}}&euro;</ion-label>
+              <ion-label range-right>{{loanAmount}} &euro;</ion-label>
 
             </ion-range>
 
             <p text-left>Interest Rate</p>
             <ion-range no-padding min="1" max="20"  [(ngModel)]="loanInterest" (ionChange)="sliderChange($event,'rate')">
-              <ion-label range-right>{{loanInterest}}%</ion-label>
+              <ion-label range-right>{{loanInterest}} %</ion-label>
 
             </ion-range>
 
