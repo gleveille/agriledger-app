@@ -23,52 +23,34 @@
 <ion-content no-padding>
 
 
-
   <div [ngSwitch]="pet">
 
-    <ion-list *ngSwitchCase="'puppies'">
+    <ion-card text-center>
+      <ion-card-content text-center no-padding>
+        <ion-card-title>
+          <h6 class="temp" *ngIf="currentWeather?.main?.temp">{{currentWeather.name}},
+            {{currentWeather.sys.country}}</h6>
+        </ion-card-title>
+        <h3 text-capitalize style="opacity: .6">{{currentWeather?.weather[0]?.description}}</h3>
+      </ion-card-content>
+      <hr>
+      <ion-row align-items-center justify-content-center style="padding-bottom: 10px">
+        <ion-col align-self-center no-padding>
+          <div class="icon"><img style="display: inline; width: 50px;" [src]="'http://openweathermap.org/img/w/'+currentWeather?.weather[0]?.icon+'.png'"
+                                 alt=""></div>
+          <h3 class="temp" *ngIf="currentWeather?.main?.temp">{{currentWeather.main.temp}}&deg;</h3>
+        </ion-col>
+        <ion-col align-self-center no-padding>
+          <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/windy.png">
+          <h3 class="temp" *ngIf="currentWeather?.main?.temp" style="padding-top: 10px">{{currentWeather?.wind?.speed}} Km/hr</h3>
+        </ion-col>
+        <ion-col align-self-center no-padding>
+          <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
+          <h3 class="temp" *ngIf="currentWeather?.main?.temp" style="padding-top: 10px">{{currentWeather?.main?.humidity}} %</h3>
+        </ion-col>
+      </ion-row>
+    </ion-card>
 
-      <ion-item (click)="gotoComplete()" >
-        <h2>{{currentWeather?.weather[0]?.description}}</h2>
-
-        <!--<ion-item-group>
-          <ion-item-divider color="light">A</ion-item-divider>
-          <ion-item>{{dailyWeatherOne[0]?.Headline.Text}}</ion-item>
-        </ion-item-group>-->
-        <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>
-
-      <!--<ion-grid *ngIf="weather" text-center>
-        <ion-row>
-          <ion-col width-50 offset-25>
-            <h2 class="location">{{weather.display_location.full}}</h2>
-            <div class="icon"><img src="{{weather.icon_url}}" alt=""></div>
-            <h3 class="desc">{{weather.weather}}</h3>
-            <h1 class="temp">{{weather.temp_f}}&deg;</h1>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col width-100>
-            <ion-item>
-              <strong>Temp: </strong> {{weather.temperature_string}}
-            </ion-item>
-            <ion-item>
-              <strong>Relative Humidity: </strong> {{weather.relative_humidity}}
-            </ion-item>
-            <ion-item>
-              <strong>Dewpoint: </strong> {{weather.dewpoint_string}}
-            </ion-item>
-            <ion-item>
-              <strong>Visibility: </strong> {{weather.visibility_km}}
-            </ion-item>
-            <ion-item>
-              <strong>Heat Index: </strong> {{weather.heat_index_c}}
-            </ion-item>
-
-          </ion-col>
-        </ion-row>
-      </ion-grid>-->
-    </ion-list>
 
     <ion-list *ngSwitchCase="'kittens'">
 
@@ -104,13 +86,15 @@
 
     </ion-list>
 
-    <ion-list *ngSwitchCase="'agnews'" scroll="true" overflow-scroll="hidden" class="iframe-wrapper" style="height: 100%">
+    <ion-list *ngSwitchCase="'agnews'" scroll="true" overflow-scroll="hidden" class="iframe-wrapper"
+              style="height: 100%">
 
-        <div class="container" style="height: 100%">
-          <div class="row" style="height: 100%">
-            <iframe data-tap-disabled="true" src="http://www.agriledger.io/blog/" style="position: absolute; border: none"></iframe>
-          </div>
+      <div class="container" style="height: 100%">
+        <div class="row" style="height: 100%">
+          <iframe data-tap-disabled="true" src="http://www.agriledger.io/blog/"
+                  style="position: absolute; border: none"></iframe>
         </div>
+      </div>
 
     </ion-list>
 

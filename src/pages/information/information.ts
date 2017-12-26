@@ -16,7 +16,7 @@ import {CompleteWeatherPage} from "../complete-weather/complete-weather";
 export class InformationPage {
 
   pet:string = "puppies";
-  currentWeather={weather:[]};
+  currentWeather:any;
   currentForecast=null;
 
 
@@ -42,6 +42,10 @@ export class InformationPage {
       data => {
        this.currentWeather=data;
         console.log(this.currentWeather)
+        this.currentWeather.main.temp=(this.currentWeather.main.temp-273.15).toFixed(1);
+        this.currentWeather.main.temp=(this.currentWeather.wind.speed*3.6).toFixed(1);
+      },(err)=>{
+        console.log(err)
       }
     )
   }
@@ -52,6 +56,8 @@ export class InformationPage {
         this.currentForecast=data;
         console.log(this.currentForecast)
 
+      },(err)=>{
+        console.log(err)
       }
     )
   }

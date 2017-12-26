@@ -18,22 +18,53 @@ import {ErrorHandlerService} from "./error-handler.service";
 export class WeatherProvider {
 
 
-  currentWeather=null;
-  currentForecast=null;
+  currentWeather = null;
+  currentForecast = null;
 
-  constructor(public http:HttpClient, private geolocation:Geolocation,private errorHandler:ErrorHandlerService) {
+  constructor(public http:HttpClient, private geolocation:Geolocation, private errorHandler:ErrorHandlerService) {
 
 
   }
 
+  getCurrentWeatherWithoutLat() {
+
+
+    let url = `${WeatherApi.getCurrent.url()}?lat=12.9716&long=77.5946`;
+
+    return this.http.get(url)
+      .do((data:any)=> {
+        this.currentWeather = data;
+      })
+      .catch((err)=> {
+        return this.errorHandler.handle(err);
+      });
+
+
+  }
+
+  getCurrentForecastWithoutLat() {
+
+
+    let url = `${WeatherApi.getForecast.url()}?lat=12.9716&long=77.5946`;
+
+    return this.http.get(url)
+      .do((data:any)=> {
+        this.currentWeather = data;
+      })
+      .catch((err)=> {
+        return this.errorHandler.handle(err);
+      });
+
+
+  }
 
   getCurrentWeather() {
 
-    if(this.currentWeather){
+    if (this.currentWeather) {
       return Observable.of(this.currentWeather);
     }
     return Observable.fromPromise(this.geolocation.getCurrentPosition())
-      .concatMap((resp)=>{
+      .concatMap((resp)=> {
         let lat = resp.coords.latitude;
         let lng = resp.coords.longitude;
 
@@ -41,24 +72,23 @@ export class WeatherProvider {
 
         return this.http.get(url)
       })
-      .do((data:any)=>{
-        this.currentWeather=data;
+      .do((data:any)=> {
+        this.currentWeather = data;
       })
-      .catch((err)=>{
+      .catch((err)=> {
         return this.errorHandler.handle(err);
       });
-
 
 
   }
 
   getCurrentForecast() {
 
-    if(this.currentForecast){
+    if (this.currentForecast) {
       return Observable.of(this.currentForecast);
     }
     return Observable.fromPromise(this.geolocation.getCurrentPosition())
-      .concatMap((resp)=>{
+      .concatMap((resp)=> {
         let lat = resp.coords.latitude;
         let lng = resp.coords.longitude;
 
@@ -66,13 +96,12 @@ export class WeatherProvider {
 
         return this.http.get(url)
       })
-      .do((data:any)=>{
-        this.currentForecast=data;
+      .do((data:any)=> {
+        this.currentForecast = data;
       })
-      .catch((err)=>{
+      .catch((err)=> {
         return this.errorHandler.handle(err);
       });
-
 
 
   }
