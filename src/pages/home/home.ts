@@ -141,7 +141,7 @@ export class HomePage {
       setTimeout(()=>{
         this.loadingAssetHttpRequest='resolved';
 
-      },500)
+      },100)
 
     },(err)=>{
 
