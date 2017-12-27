@@ -4,11 +4,10 @@
     </ion-card-header>
     <hr>
 
-    <ion-card-content>
+    <ion-card-content no-padding text-center>
 
-      <ion-grid>
         <ion-row>
-          <ion-col col-12 no-padding>
+          <ion-col col-12 padding>
 
             <p text-left>Loan Amount</p>
             <ion-range no-padding min="100" max="50000"  [(ngModel)]="loanAmount" (ionChange)="sliderChange($event,'amount')">
@@ -55,8 +54,8 @@
 
                 <h4>PRINCIPAL</h4>
                 <p class="loan-content">
-                  <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
-                  <span class="loan-content-text">{{loanAmount}}</span>
+                  <ion-icon class="loan-content-icon" style="color: #917cbd" name="logo-yen"></ion-icon>
+                  <span class="loan-content-text" style="color: #917cbd">{{loanAmount}}</span>
                 </p>
 
               </ion-col>
@@ -64,8 +63,8 @@
 
                 <h4>INTEREST</h4>
                 <p class="loan-content">
-                  <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
-                  <span class="loan-content-text">{{loanInterest}}</span>
+                  <ion-icon class="loan-content-icon" style="color: #ff5b74" name="logo-yen"></ion-icon>
+                  <span class="loan-content-text" style="color: #ff5b74">{{loanInterest}}</span>
 
                 </p>
               </ion-col>
@@ -81,14 +80,13 @@
             </ion-row>
           </ion-col>
 
-          <ion-col col-12 no-padding>
+          <ion-col col-12 text-right>
             <hr>
-            <button ion-button clear>APPLY</button>
+            <button ion-button clear no-padding>APPLY NOW</button>
           </ion-col>
         </ion-row>
 
 
-      </ion-grid>
 
 
     </ion-card-content>

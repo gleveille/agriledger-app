@@ -15,6 +15,9 @@ import {CompleteWeatherPage} from "../complete-weather/complete-weather";
 export class InformationPage {
 
   pet:string = "puppies";
+  currentWeather:any = null;
+  currentForecast:any = null;
+  weatherHttpStatus:string = 'pending';
 
   constructor(public navCtrl:NavController, public navParams:NavParams,
               private weatherService:WeatherProvider, public events:Events,

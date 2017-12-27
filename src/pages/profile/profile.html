@@ -32,10 +32,9 @@
     <ion-col>
 
 
-      <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px;">
-        {{user.email}}
+      <p class="profile-description" text-capitalize style="margin: 0px; margin-bottom: 15px;">
+        {{user?.profiles?.name || user?.name}}
       </p>
-
     </ion-col>
   </ion-row>
 
