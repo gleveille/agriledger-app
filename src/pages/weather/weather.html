@@ -34,14 +34,23 @@
 
 
 <ion-card text-center class="card-background" *ngIf="weatherHttpStatus==='rejected' || (weatherHttpStatus==='resolved' && !currentWeather)">
-  <ion-card-content text-center>
     <ion-card-header>
       Weather
     </ion-card-header>
+  <hr>
 
     <p text-center style="opacity: 0.6">We could not get the weather. Make sure you have turned on your GPS</p>
-  </ion-card-content>
 
 </ion-card>
 
 
+<ion-card *ngIf="weatherHttpStatus==='pending'" class="card-background">
+  <ion-card-header>
+    Weather
+  </ion-card-header>
+  <hr>
+
+  <ion-card-content text-center>
+    <ion-spinner></ion-spinner>
+  </ion-card-content>
+</ion-card>
