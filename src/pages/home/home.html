@@ -3,19 +3,21 @@
 </ion-header>
 
 
-<ion-content text-center >
+<ion-content text-center>
 
-      <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
+  <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
 
   <ion-row>
-    <ion-col>
+    <ion-col style="padding-bottom:0px">
       <img class="circular"
            [src]="serverUrl+user.profiles?.profileUrl?.url"
            onError="this.src='assets/img/default-avatar.png';">
 
-      <p class="profile-description" text-capitalize style="letter-spacing: 3px; margin: 0px; margin-bottom: 15px;">
-        {{user.email}}
+      <p class="profile-description" text-capitalize style=" margin: 0px; margin-bottom: 15px;">
+        {{user?.profiles?.name || user?.name}}
       </p>
+      <p text-center style="opacity: 0.6">Member since {{user.createdAt|moment:true}}</p>
+
     </ion-col>
   </ion-row>
 
@@ -23,18 +25,21 @@
 
   <ion-spinner class="centered-spinner" *ngIf="loadingAssetHttpRequest==='pending'"></ion-spinner>
 
+  <section>
+
+    <page-weather></page-weather>
+  </section>
 
   <section>
     <ion-card class="card-background" >
       <ion-card-header>
-        Assets Summary
+        Asset Summary
       </ion-card-header>
       <hr>
 
-      <ion-card-content *ngIf="loadingAssetHttpRequest==='resolved'">
+      <ion-card-content *ngIf="loadingAssetHttpRequest==='resolved'" text-center no-padding>
 
-        <ion-grid>
-          <ion-row>
+          <ion-row no-padding>
             <ion-col col-12 no-padding *ngIf="assets.length">
 
               <canvas
@@ -51,23 +56,23 @@
 
             </ion-col>
 
-            <ion-col col-12 no-padding>
-              <hr>
-              <button ion-button clear (click)="goToViewAssetPage()" *ngIf="assets.length">VIEW ASSET</button>
-              <button ion-button clear (click)="goToCreateAssetPage()">CREATE ASSET</button>
-            </ion-col>
+
           </ion-row>
-        </ion-grid>
+
+        <ion-row>
+          <ion-col col-12 text-right>
+            <hr>
+            <button ion-button clear  (click)="goToViewAssetPage()" *ngIf="assets.length">VIEW ASSET</button>
+            <button ion-button clear  no-padding (click)="goToCreateAssetPage()">CREATE ASSET</button>
+          </ion-col>
+        </ion-row>
 
       </ion-card-content>
     </ion-card>
 
   </section>
 
-  <section>
 
-    <page-weather></page-weather>
-  </section>
 
 
   <section>

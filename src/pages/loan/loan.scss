@@ -4,12 +4,12 @@ page-loan {
   }
   .circle {
     background-color:transparent;
-    border:1px solid #6a51bd;
+    border:2px solid #917cbd;
     border-radius:50%;
     -moz-border-radius:50%;
     -webkit-border-radius:50%;
-    width:150px;
-    height:150px;
+    width:130px;
+    height:130px;
 
     text-align: center;
   }
@@ -18,18 +18,18 @@ page-loan {
 
 
   .circle-content{
-    padding-top: 45px;
+    padding-top: 35px;
     color: green;
   }
 
   .circle-content-icon{
-    font-size: 15px;
+    font-size: 12px;
     position: relative;;top: -3px;
 
   }
 
   .circle-content-text{
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .loan-content{
