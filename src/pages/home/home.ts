@@ -19,8 +19,7 @@ export class HomePage {
 
   serverUrl=ServerUrl;
   user:Iuser = {profiles:{}};
-  currentWeather={weather:[]};
-  currentForecast=null;
+  currentWeather={};
 
   loadingAssetHttpRequest:string='resolved';
   assets:any[]=[];
@@ -44,11 +43,8 @@ export class HomePage {
 
   ionViewDidLoad() {
 
-    console.log(setTimeout)
     this.subscribeUser();
     this.loadMyAssets();
-    this.getCurrentWeather();
-    this.getCurrentForecast();
 
   }
 
@@ -124,33 +120,6 @@ export class HomePage {
     })
   }
 
-  getCurrentWeather() {
-    this.weatherService.getCurrentWeather().subscribe(
-      data => {
-        this.currentWeather=data;
-        console.log(this.currentWeather)
-      },(err)=>{
-        console.log(err)
-      }
-    )
-  }
-
-  getCurrentForecast() {
-    this.weatherService.getCurrentForecast().subscribe(
-      data => {
-        this.currentForecast=data;
-        console.log(this.currentForecast)
-
-      }
-      ,(err)=>{
-        console.log(err)
-      }
-    )
-  }
-
-  information() {
-    /*this.navCtrl.push(InformationPage);*/
-  }
 
 
 

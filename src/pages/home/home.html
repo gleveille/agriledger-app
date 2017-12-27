@@ -24,23 +24,20 @@
   <ion-spinner class="centered-spinner" *ngIf="loadingAssetHttpRequest==='pending'"></ion-spinner>
 
 
-  <section  *ngIf="loadingAssetHttpRequest==='resolved'">
+  <section>
     <ion-card class="card-background" >
       <ion-card-header>
         Assets Summary
       </ion-card-header>
       <hr>
 
-      <ion-card-content>
-
-
+      <ion-card-content *ngIf="loadingAssetHttpRequest==='resolved'">
 
         <ion-grid>
           <ion-row>
-            <ion-col col-12 no-padding>
+            <ion-col col-12 no-padding *ngIf="assets.length">
 
               <canvas
-                *ngIf="loadingAssetHttpRequest==='resolved' && assets.length"
                 baseChart
                 [data]="doughnutChartData"
                 [labels]="doughnutChartLabels"
@@ -49,9 +46,14 @@
               </canvas>
             </ion-col>
 
+            <ion-col text-center *ngIf="!assets.length">
+              <p text-center style="opacity: 0.6">Assets not available.</p>
+
+            </ion-col>
+
             <ion-col col-12 no-padding>
               <hr>
-              <button ion-button clear (click)="goToViewAssetPage()">VIEW ASSET</button>
+              <button ion-button clear (click)="goToViewAssetPage()" *ngIf="assets.length">VIEW ASSET</button>
               <button ion-button clear (click)="goToCreateAssetPage()">CREATE ASSET</button>
             </ion-col>
           </ion-row>
@@ -61,6 +63,12 @@
     </ion-card>
 
   </section>
+
+  <section>
+
+    <page-weather></page-weather>
+  </section>
+
 
   <section>
     <page-loan></page-loan>
