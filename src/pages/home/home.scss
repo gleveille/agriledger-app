@@ -1,7 +1,7 @@
 page-home {
 
   .card-background{
-    background-color: rgba(243, 243, 243, 0.91)
+    background-color: rgba(243, 243, 243, 0.46);
   }
   .card-header-md{
     font-size: 1.9rem;
@@ -24,15 +24,15 @@ page-home {
     position: relative !important;
   }
   .circular {
-    width: 100px;
-    height: 100px;
+    width: 175px;
+    height: 175px;
     position: inherit;
     border-radius: 50%;
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     border: solid white;
     background-size: 100%;
-    margin-top: -70px;
+    margin-top: -135px;
     margin-left: auto;
     margin-right: auto;
     // margin-bottom: 50px;

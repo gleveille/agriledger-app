@@ -6,14 +6,8 @@
       <ion-segment-button value="puppies">
         {{'Weather'|translate}}
       </ion-segment-button>
-      <ion-segment-button value="kittens">
-        {{'Pricing'|translate}}
-      </ion-segment-button>
       <ion-segment-button value="agnews">
         {{'Ag news'|translate}}
-      </ion-segment-button>
-      <ion-segment-button value="practice">
-        {{'Market'|translate}}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -28,41 +22,33 @@
 
     <section *ngSwitchCase="'puppies'">
       <page-weather></page-weather>
+
+      <!--<ion-card text-center class="card-background" *ngIf="weatherHttpStatus==='resolved' && currentForecast ">
+        <ion-card-content text-center padding>
+          <h3>Next Five Days Weather</h3>
+        </ion-card-content>
+        <hr>
+        <ion-row align-items-center justify-content-center style="padding-bottom: 10px">
+          <ion-col align-self-center no-padding>
+            <div class="icon"><img style="display: inline; width: 50px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[0]?.weather.icon+'.png'"
+                                   alt=""></div>
+            <h3 class="temp">{{currentForecast?.list[0]?.main?.temp_max}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/windy.png">
+            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[0]?.wind?.speed}}
+              Km/hr</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
+            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[0]?.main?.humidity}}
+              %</h3>
+          </ion-col>
+        </ion-row>
+      </ion-card>-->
+
     </section>
-
-    <ion-list *ngSwitchCase="'kittens'">
-
-      <ion-grid style="text-align: center;">
-
-        <ion-row>
-          <ion-col col-3>Name</ion-col>
-          <ion-col col-3>QUANTITY</ion-col>
-          <ion-col col-3>CERTIFIED</ion-col>
-          <ion-col col-3>CONV.</ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>Rice</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>14CT</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.95</ion-col>
-          <ion-col style="display: flex; align-items: center; justify-content: center;" col-3>R1.80</ion-col>
-        </ion-row>
-
-      </ion-grid>
-
-    </ion-list>
 
     <ion-list *ngSwitchCase="'agnews'" scroll="true" overflow-scroll="hidden" class="iframe-wrapper"
               style="height: 100%">
@@ -73,11 +59,6 @@
                   style="position: absolute; border: none"></iframe>
         </div>
       </div>
-
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'practice'">
-
 
     </ion-list>
 

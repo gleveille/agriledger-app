@@ -12,29 +12,26 @@ import {CompleteWeatherPage} from "../complete-weather/complete-weather";
   templateUrl: 'information.html',
 })
 
-
 export class InformationPage {
 
   pet:string = "puppies";
 
-
   constructor(public navCtrl:NavController, public navParams:NavParams,
-              private weatherProvider:WeatherProvider, public events:Events,
+              private weatherService:WeatherProvider, public events:Events,
               private storage:Storage, private inAppBrowser:InAppBrowser) {
 
+    this.weatherService.loadCurrentForecast().subscribe(()=> {
+      this.weatherHttpStatus = 'resolved';
+    }, (err)=> {
+      this.weatherHttpStatus = 'rejected';
+    });
+
+    this.weatherService.currentForecast.subscribe((data)=> {
+      this.currentForecast = data;
+      console.log(data);
+    });
 
 
   }
-
-  gotoComplete(){
-    this.navCtrl.push(CompleteWeatherPage)
-  }
-
-  ionViewDidLoad() {
-
-  }
-
-
-
 
 }

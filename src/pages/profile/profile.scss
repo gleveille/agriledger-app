@@ -87,8 +87,8 @@ page-profile {
     position: relative !important;
   }
   .circular {
-    width: 100px;
-    height: 100px;
+    width: 175px;
+    height: 175px;
     //position: absolute;
     border-radius: 50%;
     -webkit-border-radius: 150px;
@@ -112,24 +112,18 @@ page-profile {
 
   .img-wrapper {
     position: relative;
-    margin-top: -70px;
-    width: 100px;
-    height:100px;
+    margin-top: -135px;
+    width: 175px;
+    height: 175px;
     //margin: 0 auto;
     //margin-left: auto;
     //margin-right: auto;
    }
 
-   .img-div-container{
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    z-index: -1;
-   }
    .button-div-container{
     width: 30px;
     height: 30px;
-    right: 0;
+    right: 15px;
     top: 0;
     border-radius: 50%;
     -webkit-border-radius: 150px;

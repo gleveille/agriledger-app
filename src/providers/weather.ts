@@ -18,15 +18,15 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 @Injectable()
 export class WeatherProvider {
 
-  private _currentWeather: BehaviorSubject<any[]>;
-  private _currentForecast: BehaviorSubject<any[]>;
+  private _currentWeather:BehaviorSubject<any[]>;
+  private _currentForecast:BehaviorSubject<any[]>;
 
-  private dataStore:any = { currentWeather:null,currentForecast:null};
+  private dataStore:any = {currentWeather: null, currentForecast: null};
 
-  currentWeather: Observable<any[]>;
-  currentForecast: Observable<any[]>;
+  currentWeather:Observable<any[]>;
+  currentForecast:Observable<any[]>;
 
-  constructor(public http:HttpClient, private geolocation:Geolocation,private errorHandler:ErrorHandlerService) {
+  constructor(public http:HttpClient, private geolocation:Geolocation, private errorHandler:ErrorHandlerService) {
     this._currentWeather = <BehaviorSubject<any[]>>new BehaviorSubject(null);
     this.currentWeather = this._currentWeather.asObservable();
     this._currentForecast = <BehaviorSubject<any[]>>new BehaviorSubject(null);
@@ -35,107 +35,49 @@ export class WeatherProvider {
 
 
   loadCurrentWeather() {
-
-    if(this.dataStore.currentWeather && this.dataStore.currentWeather.main){
+    if (this.dataStore.currentWeather && this.dataStore.currentWeather.main) {
       return Observable.of(this.dataStore.currentWeather);
     }
     return Observable.fromPromise(this.geolocation.getCurrentPosition())
-      .concatMap((resp)=>{
+      .concatMap((resp)=> {
         let lat = resp.coords.latitude;
         let lng = resp.coords.longitude;
-
         let url = `${WeatherApi.getCurrent.url()}?lat=${lat}&long=${lng}`;
-
         return this.http.get(url)
       })
-      .do((data:any)=>{
-        if(data && data.main){
-          data.main.temp=(data.main.temp-273.15).toFixed(1);
-          if(data && data.wind){
-            data.wind.speed=(data.wind.speed*3.6).toFixed(1);
+      .do((data:any)=> {
+        if (data && data.main) {
+          data.main.temp = (data.main.temp - 273.15).toFixed(1);
+          if (data && data.wind) {
+            data.wind.speed = (data.wind.speed * 3.6).toFixed(1);
           }
-
-          this.dataStore.currentWeather=data;
+          this.dataStore.currentWeather = data;
           this._currentWeather.next(this.dataStore.currentWeather);
-
         }
-
       })
-      .catch((err)=>{
+      .catch((err)=> {
         return this.errorHandler.handle(err);
       });
-
-
-
-  }
-
-
-  loadCurrentWeatherWithoutLat() {
-    let url = `${WeatherApi.getCurrent.url()}?lat=12.9716&long=77.5946`;
-
-        return this.http.get(url)
-      .do((data:any)=>{
-        if(data && data.main){
-          data.main.temp=(data.main.temp-273.15).toFixed(1);
-        }
-        if(data && data.wind){
-          data.wind.speed=(data.wind.speed*3.6).toFixed(1);
-        }
-        this.dataStore.currentWeather=data;
-        this._currentWeather.next(this.dataStore.currentWeather);
-      })
-      .catch((err)=>{
-        return this.errorHandler.handle(err);
-      });
-
-
-
   }
 
   loadCurrentForecast() {
-
-    if(this.currentForecast){
-      return Observable.of(this.currentForecast);
+    if (this.dataStore.currentForecast && this.dataStore.currentForecast.main) {
+      return Observable.of(this.dataStore.currentForecast);
     }
     return Observable.fromPromise(this.geolocation.getCurrentPosition())
-      .concatMap((resp)=>{
+      .concatMap((resp)=> {
         let lat = resp.coords.latitude;
         let lng = resp.coords.longitude;
-
         let url = `${WeatherApi.getForecast.url()}?lat=${lat}&long=${lng}`;
-
         return this.http.get(url)
       })
-      .do((data:any)=>{
-        this.dataStore.currentForecast=data;
+      .do((data:any)=> {
+        this.dataStore.currentForecast = data;
         this._currentForecast.next(this.dataStore.currentForecast);
-
       })
-      .catch((err)=>{
+      .catch((err)=> {
         return this.errorHandler.handle(err);
       });
-
-
-
   }
-
-
-  loadCurrentForecastWithoutLat() {
-
-    let url = `${WeatherApi.getForecast.url()}?lat=12.9716&long=77.5946`;
-
-    return this.http.get(url)
-      .do((data:any)=>{
-        this.dataStore.currentWeather=data;
-        this._currentWeather.next(this.dataStore.currentWeather);
-      })
-      .catch((err)=>{
-        return this.errorHandler.handle(err);
-      });
-
-
-
-  }
-
 
 }

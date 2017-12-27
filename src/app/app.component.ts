@@ -17,7 +17,7 @@ import {WeatherProvider} from "../providers/weather";
 })
 export class MyApp {
   rootPage:any = null;
-  confirmation:string='resolved';
+  confirmation:string = 'resolved';
 
   constructor(private platform:Platform,
               private modalController:ModalController,
@@ -31,15 +31,20 @@ export class MyApp {
               private assetService:AssetsService,
               public cache:CacheService) {
     platform.ready().then(() => {
-      this.weatherService.loadCurrentWeather().subscribe(()=>{
+      this.weatherService.loadCurrentWeather().subscribe(()=> {
 
-      },(err)=>{
+      }, (err)=> {
+        console.log(err);
+      });
+      this.weatherService.loadCurrentForecast().subscribe(()=> {
 
+      }, (err)=> {
+        console.log(err);
       });
       this.translationService.setLanguage();
       platform.registerBackButtonAction(() => {
-        if(this.confirmation==='resolved'){
-          this.confirmation='pending';
+        if (this.confirmation === 'resolved') {
+          this.confirmation = 'pending';
           this.presentConfirm();
 
         }
@@ -52,6 +57,7 @@ export class MyApp {
 
     });
   }
+
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Confirm Exit',
@@ -61,25 +67,26 @@ export class MyApp {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            this.confirmation='resolved'
+            this.confirmation = 'resolved'
 
           }
         },
         {
           text: 'Yes',
           handler: () => {
-            this.confirmation='resolved'
+            this.confirmation = 'resolved'
 
             this.platform.exitApp();
           }
         }
       ]
     });
-    alert.present().then(()=>{
-    }).catch((err)=>{
+    alert.present().then(()=> {
+    }).catch((err)=> {
 
     })
   }
+
   async verify() {
     let loader = this.loadingCtrl.create({
       content: "Please wait checking credentials...",
@@ -97,18 +104,18 @@ export class MyApp {
           console.log('go to passcode lock page')
           this.rootPage = PasscodeLockPage;
         }
-        else{
-          this.assetService.loadMyAssets().subscribe(()=>{
+        else {
+          this.assetService.loadMyAssets().subscribe(()=> {
 
-          },(err)=>{
+          }, (err)=> {
 
           })
           let passcodeModal = this.modalController.create(PasscodeLockPage);
           passcodeModal.present();
           passcodeModal.onDidDismiss(data => {
             console.log(data);
-            if(data && data.success===true){
-              this.rootPage=TabsPage;
+            if (data && data.success === true) {
+              this.rootPage = TabsPage;
             }
 
           });
@@ -122,7 +129,6 @@ export class MyApp {
       this.rootPage = WelcomePage
     })
   }
-
 
 
 }

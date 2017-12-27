@@ -14,7 +14,7 @@
 
    <div class="img-wrapper" (click)="presentActionSheet('camera')">
               <!-- <img class="img-responsive" src="assets/imgs/profile.jpg"> -->
-              <div class="img-div-container">
+              <div>
                   <img class="circular"
                   [src]="serverUrl+user.profiles?.profileUrl?.url"
                   onError="this.src='assets/img/default-avatar.png'"
@@ -41,32 +41,32 @@
 
     <ion-list>
       <ion-item>
-        <ion-label floating>{{'Agri Id number'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="user.id" [disabled]="true" ></ion-input>
+        <ion-label floating text-capitalize>{{'Agri Id'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="user.id" disabled></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>{{'Full Name'|translate}}</ion-label>
+        <ion-label floating text-capitalize>{{'Full Name'|translate}}</ion-label>
         <ion-input type="text" [(ngModel)]="user.profiles.name"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>{{'Mobile Number'|translate}}</ion-label>
+        <ion-label floating text-capitalize>{{'Mobile Number'|translate}}</ion-label>
         <ion-input type="tel" [(ngModel)]="user.profiles.phone"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>{{'Wechat'|translate}}</ion-label>
-        <ion-input type="text" ></ion-input>
+        <ion-label floating text-capitalize>{{'Wechat ID'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="user.profiles.weChat"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>{{'Company name'|translate}}</ion-label>
+        <ion-label floating text-capitalize>{{'Company name'|translate}}</ion-label>
         <ion-input [(ngModel)]="user.profiles.company" type="text"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>{{'Address'|translate}}</ion-label>
+        <ion-label floating text-capitalize>{{'Address'|translate}}</ion-label>
         <ion-textarea type="text" [(ngModel)]="user.profiles.address"></ion-textarea>
       </ion-item>
       <ion-item>
-        <ion-label floating>{{'Registration number'|translate}}</ion-label>
+        <ion-label floating text-capitalize>{{'Registration number'|translate}}</ion-label>
         <ion-input type="number" [(ngModel)]="user.profiles.registration"></ion-input>
       </ion-item>
     </ion-list>
@@ -85,7 +85,7 @@
 
       <ion-row>
         <ion-col>
-          <button (click)="updateProfile()" ion-button block class="btnHeight40Px">{{'Update'|translate}}</button>
+          <button (click)="updateProfile()" ion-button block class="btnHeight40Px">{{'Save'|translate}}</button>
         </ion-col>
       </ion-row>
 </ion-content>
