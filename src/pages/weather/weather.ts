@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {WeatherProvider} from "../../providers/weather";
+import {InformationPage} from "../information/information";
 
 
 @Component({
@@ -8,6 +9,7 @@ import {WeatherProvider} from "../../providers/weather";
   templateUrl: 'weather.html',
 })
 export class WeatherPage {
+  @Input()showViewMoreButton:boolean=true;
   currentWeather:any = null;
   currentForecast:any = null;
   weatherHttpStatus:string = 'pending';
@@ -24,6 +26,10 @@ export class WeatherPage {
       this.currentWeather = data;
     });
 
+  }
+
+  goToInfo() {
+    this.navCtrl.push(InformationPage);
   }
 
 

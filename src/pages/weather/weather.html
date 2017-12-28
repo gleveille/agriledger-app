@@ -1,48 +1,47 @@
 <ion-card text-center class="card-background" *ngIf="weatherHttpStatus==='resolved' && currentWeather ">
-    <ion-card-header>
-        {{currentWeather?.name}},{{currentWeather?.sys?.country}}
-    </ion-card-header>
-    <hr>
+  <ion-card-header style="text-align: left !important;">
+    {{currentWeather?.name}}, {{currentWeather?.sys?.country}}
+  </ion-card-header>
   <ion-card-content text-center no-padding>
 
-  <h3 text-capitalize style="opacity: .6">{{currentWeather?.weather[0]?.description}}</h3>
-  <ion-row align-items-center justify-content-center style="padding-bottom: 10px">
-    <ion-col align-self-center no-padding>
-      <div class="icon"><img style="display: inline; width: 50px;"
-                             [src]="'http://openweathermap.org/img/w/'+currentWeather?.weather[0]?.icon+'.png'"
-                             alt=""></div>
-      <h3 class="temp" *ngIf="currentWeather?.main?.temp">{{currentWeather?.main?.temp}}&deg; C</h3>
-    </ion-col>
-    <ion-col align-self-center no-padding>
-      <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/windy.png">
-      <h3 class="temp" *ngIf="currentWeather?.main?.temp" style="padding-top: 10px">{{currentWeather?.wind?.speed}}
-        Km/hr</h3>
-    </ion-col>
-    <ion-col align-self-center no-padding>
-      <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
-      <h3 class="temp" *ngIf="currentWeather?.main?.temp" style="padding-top: 10px">{{currentWeather?.main?.humidity}}
-        %</h3>
-    </ion-col>
-  </ion-row>
+    <h3 text-capitalize style="opacity: .6;text-align: left; padding-left: 1.2em;">{{currentWeather?.weather[0]?.description}}</h3>
+    <hr>
+    <ion-row align-items-center justify-content-center style="margin-bottom: 10px">
+      <ion-col align-self-center no-padding>
+        <div class="icon"><img style="display: inline; width: 90px;"
+                               [src]="'http://openweathermap.org/img/w/'+currentWeather?.weather[0]?.icon+'.png'"
+                               alt=""></div>
+        <h1 class="temp" style="color: #519a48" *ngIf="currentWeather?.main?.temp">{{currentWeather?.main?.temp}}&deg; C</h1>
+      </ion-col>
+      <ion-col align-self-center no-padding>
+        <img style="width: 20px; display: inline" src="assets/icon/windy.png">
+        <h6 class="temp" *ngIf="currentWeather?.main?.temp" style="padding-top: 10px">{{currentWeather?.wind?.speed}}
+          Km/hr</h6>
+      </ion-col>
+      <ion-col align-self-center no-padding>
+        <img style="width: 20px; display: inline" src="assets/icon/humidity.png">
+        <h6 class="temp" *ngIf="currentWeather?.main?.temp" style="padding-top: 10px; padding-left: 10px">{{currentWeather?.main?.humidity}}
+          %</h6>
+      </ion-col>
+    </ion-row>
 
-  <ion-row>
-    <ion-col col-12 text-right>
-      <hr>
-      <button ion-button clear no-padding>VIEW MORE</button>
-    </ion-col>
-  </ion-row>
+    <ion-row *ngIf="showViewMoreButton" >
+      <ion-col col-12 text-right>
+        <button ion-button clear no-padding style="padding-right: 12px;" (click)="goToInfo()">VIEW MORE</button>
+      </ion-col>
+    </ion-row>
   </ion-card-content>
 
 </ion-card>
 
 
-
-<ion-card text-center class="card-background" *ngIf="weatherHttpStatus==='rejected' || (weatherHttpStatus==='resolved' && !currentWeather)">
-    <ion-card-header>
-      Weather
-    </ion-card-header>
+<ion-card text-center class="card-background"
+          *ngIf="weatherHttpStatus==='rejected' || (weatherHttpStatus==='resolved' && !currentWeather)">
+  <ion-card-header>
+    Weather
+  </ion-card-header>
   <hr>
-    <p text-center style="opacity: 0.6">We could not get the weather. Make sure you have turned on your GPS</p>
+  <p text-center style="opacity: 0.6">We could not get the weather. Make sure you have turned on your GPS</p>
 
 </ion-card>
 

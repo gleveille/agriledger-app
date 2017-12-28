@@ -21,32 +21,148 @@
 
 
     <section *ngSwitchCase="'puppies'">
-      <page-weather></page-weather>
+      <page-weather [showViewMoreButton]="false"></page-weather>
 
-      <!--<ion-card text-center class="card-background" *ngIf="weatherHttpStatus==='resolved' && currentForecast ">
-        <ion-card-content text-center padding>
-          <h3>Next Five Days Weather</h3>
-        </ion-card-content>
+      <ion-item text-center class="card-background" *ngIf="weatherHttpStatus==='resolved' && currentForecast ">
+        <ion-card-header style="text-align: left !important;">
+          Forecast
+        </ion-card-header>
+        <h3 text-capitalize style="opacity: .6; text-align: left; padding-left: 1.2em">Today</h3>
         <hr>
-        <ion-row align-items-center justify-content-center style="padding-bottom: 10px">
+        <ion-row align-items-center justify-content-center style="padding: 16px 0px;">
           <ion-col align-self-center no-padding>
+            <h3>6AM</h3>
             <div class="icon"><img style="display: inline; width: 50px;"
-                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[0]?.weather.icon+'.png'"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[0]?.weather[0]?.icon+'.png'"
                                    alt=""></div>
-            <h3 class="temp">{{currentForecast?.list[0]?.main?.temp_max}}&deg; C</h3>
+            <h3 class="temp">{{currentForecast?.list[0]?.main?.temp}}&deg; C</h3>
           </ion-col>
           <ion-col align-self-center no-padding>
-            <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/windy.png">
-            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[0]?.wind?.speed}}
-              Km/hr</h3>
+            <h3>12PM</h3>
+            <div class="icon"><img style="display: inline; width: 50px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[1]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+            <h3 class="temp">{{currentForecast?.list[1]?.main?.temp}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <h3>6PM</h3>
+            <div class="icon"><img style="display: inline; width: 50px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[4]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+            <h3 class="temp">{{currentForecast?.list[4]?.main?.temp}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <h3>12AM</h3>
+            <div class="icon"><img style="display: inline; width: 50px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[5]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+            <h3 class="temp">{{currentForecast?.list[5]?.main?.temp}}&deg; C</h3>
+          </ion-col>
+        </ion-row>
+
+        <h3 text-capitalize style="opacity: .6; text-align: left; padding-left: 1.2em">Next 5 Days</h3>
+        <hr>
+        <ion-row align-items-center justify-content-center>
+          <ion-col align-self-center no-padding>
+            <div class="icon"><img style="display: inline; width: 80px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[0]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+          </ion-col>
+          <ion-col>
+            <h3 class="temp">{{currentForecast?.list[0]?.main?.temp}}&deg; C</h3>
+            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[0]?.main?.temp_min}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <h3 class="temp" text-capitalize>{{currentForecast?.list[0]?.weather[0]?.description}}</h3>
           </ion-col>
           <ion-col align-self-center no-padding>
             <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
-            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[0]?.main?.humidity}}
+            <h3 class="temp" style="padding-top: 10px; padding-left: 10px" >{{currentForecast?.list[0]?.main?.humidity}}
               %</h3>
           </ion-col>
         </ion-row>
-      </ion-card>-->
+        <hr style="margin-left: 2em; margin-right: 2em;">
+        <ion-row align-items-center justify-content-center >
+          <ion-col align-self-center no-padding>
+            <div class="icon"><img style="display: inline; width: 80px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[5]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+          </ion-col>
+          <ion-col>
+            <h3 class="temp">{{currentForecast?.list[5]?.main?.temp}}&deg; C</h3>
+            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[5]?.main?.temp_min}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <h3 class="temp" text-capitalize>{{currentForecast?.list[5]?.weather[0]?.description}}</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
+            <h3 class="temp" style="padding-top: 10px; padding-left: 10px" >{{currentForecast?.list[5]?.main?.humidity}}
+              %</h3>
+          </ion-col>
+        </ion-row>
+        <hr style="margin-left: 2em; margin-right: 2em;">
+        <ion-row align-items-center justify-content-center >
+          <ion-col align-self-center no-padding>
+            <div class="icon"><img style="display: inline; width: 80px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[10]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+          </ion-col>
+          <ion-col>
+            <h3 class="temp">{{currentForecast?.list[10]?.main?.temp}}&deg; C</h3>
+            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[10]?.main?.temp_min}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <h3 class="temp" text-capitalize>{{currentForecast?.list[10]?.weather[0]?.description}}</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
+            <h3 class="temp" style="padding-top: 10px; padding-left: 10px" >{{currentForecast?.list[10]?.main?.humidity}}
+              %</h3>
+          </ion-col>
+        </ion-row>
+        <hr style="margin-left: 2em; margin-right: 2em;">
+        <ion-row align-items-center justify-content-center >
+          <ion-col align-self-center no-padding>
+            <div class="icon"><img style="display: inline; width: 80px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[15]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+          </ion-col>
+          <ion-col>
+            <h3 class="temp">{{currentForecast?.list[15]?.main?.temp}}&deg; C</h3>
+            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[15]?.main?.temp_min}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <h3 class="temp" text-capitalize>{{currentForecast?.list[15]?.weather[0]?.description}}</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
+            <h3 class="temp" style="padding-top: 10px; padding-left: 10px" >{{currentForecast?.list[15]?.main?.humidity}}
+              %</h3>
+          </ion-col>
+        </ion-row>
+        <hr style="margin-left: 2em; margin-right: 2em;">
+        <ion-row align-items-center justify-content-center >
+          <ion-col align-self-center no-padding>
+            <div class="icon"><img style="display: inline; width: 80px;"
+                                   [src]="'http://openweathermap.org/img/w/'+currentForecast?.list[20]?.weather[0]?.icon+'.png'"
+                                   alt=""></div>
+          </ion-col>
+          <ion-col>
+            <h3 class="temp">{{currentForecast?.list[20]?.main?.temp}}&deg; C</h3>
+            <h3 class="temp" style="padding-top: 10px">{{currentForecast?.list[20]?.main?.temp_min}}&deg; C</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <h3 class="temp" text-capitalize>{{currentForecast?.list[20]?.weather[0]?.description}}</h3>
+          </ion-col>
+          <ion-col align-self-center no-padding>
+            <img style="width: 25px; padding-top: 14px; display: inline" src="assets/icon/humidity.png">
+            <h3 class="temp" style="padding-top: 10px; padding-left: 10px" >{{currentForecast?.list[20]?.main?.humidity}}
+              %</h3>
+          </ion-col>
+        </ion-row>
+
+      </ion-item>
 
     </section>
 

@@ -72,9 +72,20 @@ export class WeatherProvider {
         return this.http.get(url)
       })
       .do((data:any)=> {
-        this.dataStore.currentForecast = data;
-        this._currentForecast.next(this.dataStore.currentForecast);
+        if (data && data.list && data.list.length) {
+          data.list=data.list.map((list)=>{
+            list.main.temp=(list.main.temp-273).toFixed(1);
+            list.main.temp_min=(list.main.temp_min-273.15).toFixed(1);
+            list.main.temp_max=(list.main.temp_max-273.15).toFixed(1);
+
+            return list;
+          })
+          this.dataStore.currentForecast = data;
+          this._currentForecast.next(this.dataStore.currentForecast);
+        }
       })
+
+
       .catch((err)=> {
         return this.errorHandler.handle(err);
       });
