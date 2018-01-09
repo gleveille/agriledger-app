@@ -145,6 +145,13 @@ export class UserService {
     });
   };
 
+  forgotPassword(email:any) {
+    return this.http.post(`${UserApi.sendResetPasswordToken.url()}`, {email: email}).do((res)=> {
+    })
+      .catch((err)=> {
+        return this.errorHandler.handle(err);
+      })
+  };
   resetPassword(accessToken:string, newPassword:string) {
     return this.http.post(`${UserApi.resetPassword.url()}?access_token=${accessToken}`,
       {newPassword: newPassword}).do((data)=> {
@@ -167,13 +174,7 @@ export class UserService {
     this.user = JSON.parse(JSON.stringify({profileUrl: {}}))
   }
 
-  forgotPassword(email:any) {
-    return this.http.post(`${UserApi.sendResetPasswordToken.url()}`, {email: email}).do((res)=> {
-    })
-      .catch((err)=> {
-        return this.errorHandler.handle(err);
-      })
-  };
+
 
 
 }

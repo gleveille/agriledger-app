@@ -5,6 +5,8 @@ import {ToastProvider} from "../../providers/toast";
 import {WelcomePage} from "../welcome/welcome";
 import {NgForm} from "@angular/forms/forms";
 import {UserService} from "../../providers/user.service";
+import {LoginPage} from "../login/login";
+import {EmailSentPage} from "../email-sent/email-sent";
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -19,6 +21,7 @@ import {UserService} from "../../providers/user.service";
 })
 export class ForgotPasswordPage {
 
+  email:string='';
   constructor(public navCtrl:NavController,
               private loadingCtrl:LoadingController,
               public userService: UserService,
@@ -26,7 +29,6 @@ export class ForgotPasswordPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ForgotPasswordPage');
   }
   alreadyHaveCode(){
     this.navCtrl.push(ResetPasswordPage);
@@ -40,18 +42,15 @@ export class ForgotPasswordPage {
       return
     }
     let loader = this.loadingCtrl.create({
-      content: 'Checking...'
+      content: 'Sending reset token...'
     });
     loader.present();
     this.userService.forgotPassword(form.value.email).subscribe((data)=> {
-      console.log(data);
       loader.dismiss();
-      this.navCtrl.push(ResetPasswordPage);
+      this.navCtrl.setRoot(EmailSentPage,{email:form.value.email});
     }, (err)=> {
-      console.log(err)
       loader.dismiss();
       this.toastService.presentToast(err.message);
-      console.log(err)
     })
   }
 

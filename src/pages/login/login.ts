@@ -8,6 +8,7 @@ import {ChangePasswordPage} from "../change-password/change-password";
 import {ForgotPasswordPage} from "../forgot-password/forgot-password";
 import {AssetsService} from "../../providers/assets.service";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
+import {EmailSentPage} from "../email-sent/email-sent";
 
 @Component({
   selector: 'page-login',
@@ -79,6 +80,7 @@ export class LoginPage {
 
   forgotPassword() {
     this.navCtrl.push(ForgotPasswordPage)
+
   }
 
 }

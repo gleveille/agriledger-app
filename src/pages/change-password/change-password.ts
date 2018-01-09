@@ -10,7 +10,7 @@ import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 })
 export class ChangePasswordPage {
 
-  credential = {oldPassword: null, newPassword: null, rePassword: null};
+  credential = {oldPassword: '', newPassword: '', rePassword: ''};
   passwordChangeRequestStatus = 'resolved';
 
   constructor(public navCtrl:NavController,
@@ -21,6 +21,12 @@ export class ChangePasswordPage {
   }
 
   changePassword() {
+
+    if (this.credential.newPassword === this.credential.oldPassword) {
+      this.toastService.presentToast('New Password should not be same as old Password');
+      return;
+    }
+
     if (this.credential.newPassword !== this.credential.rePassword) {
       this.toastService.presentToast('Password does not match');
       return;
@@ -36,9 +42,9 @@ export class ChangePasswordPage {
       .subscribe((data:any)=> {
       loader.dismiss();
         this.passwordChangeRequestStatus = 'resolved';
-        this.credential.oldPassword = null;
-        this.credential.newPassword = null;
-        this.credential.rePassword = null;
+        this.credential.oldPassword = '';
+        this.credential.newPassword = '';
+        this.credential.rePassword = '';
         this.navCtrl.setRoot(PasscodeLockPage)
         this.toastService.presentToast('Password Changed Sucessfully');
 

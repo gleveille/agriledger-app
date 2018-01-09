@@ -22,7 +22,6 @@
 
   <form #f="ngForm" (ngSubmit)="login(f)" no-padding>
 
-    <ion-list no-margin no-padding>
       <ion-item>
         <ion-label floating>{{'Username'|translate}}</ion-label>
         <ion-input type="email" [(ngModel)]="email" name="email" required ></ion-input>
@@ -30,7 +29,7 @@
 
       <ion-item>
         <ion-label floating>{{'Password'|translate}}</ion-label>
-        <ion-input type="number"  [(ngModel)]="password" name="password" required></ion-input>
+        <ion-input type="password"  [(ngModel)]="password" name="password" required></ion-input>
       </ion-item>
 
       <ion-item style="margin-top: 10px;" no-lines>
@@ -38,13 +37,21 @@
         <ion-checkbox [(ngModel)]="isChecked" name="isChecked" color="primary" required></ion-checkbox>
 
       </ion-item>
-      <button ion-button block [disabled]="f.invalid || !isChecked " class="btnHeight40Px">
-        {{'Sign In'|translate}}
-      </button>
 
-      <a (click)="forgotPassword()" no-margin no-padding text-right style="float: right" clear ion-button>{{'Forgot Password?'|translate}}</a>
+    <ion-row>
+      <ion-col col-12 text-right no-padding>
+        <button style="width: 140px;" ion-button small [disabled]="f.invalid || !isChecked " class="btnHeight40Px">
+          {{'Sign In'|translate}}
+        </button>
+      </ion-col>
+      <ion-col col-12 text-right no-padding>
+        <a (click)="forgotPassword()" no-margin no-padding item-right text-right
+           style="padding: 0;margin: 0;" clear ion-button>{{'Forgot Password?'|translate}}
+        </a>
 
-    </ion-list>
+      </ion-col>
+    </ion-row>
+
 
   </form>
 

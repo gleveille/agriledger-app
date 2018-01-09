@@ -62,6 +62,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
 import {LoanPage} from "../pages/loan/loan";
 import {WeatherPage} from "../pages/weather/weather";
+import {EmailSentPage} from "../pages/email-sent/email-sent";
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -100,7 +101,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgotPasswordPage,
     PasscodeLockPage,
     LoanPage,
-    WeatherPage
+    WeatherPage,
+    EmailSentPage
   ],
   imports: [
     HttpClientModule,
@@ -153,7 +155,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgotPasswordPage,
     PasscodeLockPage,
     LoanPage,
-    WeatherPage
+    WeatherPage,
+    EmailSentPage
+
 
 
 

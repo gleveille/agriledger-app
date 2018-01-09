@@ -1,0 +1,32 @@
+
+
+
+<ion-content padding class="bg">
+
+  <div style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;color: white">
+
+    <ion-row>
+      <ion-col col-12 text-center>
+        <ion-icon style="font-size: 48px;" name="checkmark-circle-outline"></ion-icon>
+      </ion-col>
+      <ion-col col-12 text-center>
+        <h3>Success</h3>
+        <p>
+          We have sent a link to {{email}} to reset your password.Once you have updated your information
+          you can tap login
+        </p>
+      </ion-col>
+      <ion-col col-12 text-center>
+        <label>
+          Didn't get it?
+        </label>
+        <a href="javascript:void(0)" (click)="goToForgetPasswordPage()" style="font-weight: bold;color: white;text-decoration:none">Send it again</a>
+      </ion-col>
+    </ion-row>
+
+    <button ion-button block color="primary"
+            style="position: absolute;bottom: 0;padding: 0;margin: 0;background-color: transparent;color: white"
+            class="btnHeight40Px" (click)="goToLoginPage()">LOGIN</button>
+
+  </div>
+</ion-content>
