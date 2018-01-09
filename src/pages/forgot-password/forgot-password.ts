@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ResetPasswordPage} from "../reset-password/reset-password";
 import {ToastProvider} from "../../providers/toast";
 import {WelcomePage} from "../welcome/welcome";
@@ -19,20 +19,37 @@ import {UserService} from "../../providers/user.service";
 })
 export class ForgotPasswordPage {
 
-  constructor(public navCtrl:NavController,public userService: UserService, public navParams:NavParams, public toastService:ToastProvider) {
+  constructor(public navCtrl:NavController,
+              private loadingCtrl:LoadingController,
+              public userService: UserService,
+              public navParams:NavParams, public toastService:ToastProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ForgotPasswordPage');
   }
+  alreadyHaveCode(){
+    this.navCtrl.push(ResetPasswordPage);
 
+  }
 
   forgotPassword(form:any):void {
+    console.log(form)
+    if(!form.value.email){
+      this.toastService.presentToast('Email can not be left blank');
+      return
+    }
+    let loader = this.loadingCtrl.create({
+      content: 'Checking...'
+    });
+    loader.present();
     this.userService.forgotPassword(form.value.email).subscribe((data)=> {
-      console.log('suhas');
       console.log(data);
+      loader.dismiss();
       this.navCtrl.push(ResetPasswordPage);
     }, (err)=> {
+      console.log(err)
+      loader.dismiss();
       this.toastService.presentToast(err.message);
       console.log(err)
     })

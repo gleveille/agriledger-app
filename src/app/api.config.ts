@@ -26,6 +26,11 @@ const UserApi = {
     method: 'POST'
 
   },
+  resetPassword: {
+    url: ()=>ServerUrl + '/api/users/reset-password',
+    method: 'POST'
+
+  },
   updateProfile: {
     url: ()=>ServerUrl + '/api/users',
     method: 'POST'
@@ -42,13 +47,11 @@ const UserApi = {
   },
   getAssets: {
     url: ()=>ServerUrl + '/api/users',
-    method: 'GET',
-    params: ['filterType', 'filterName']
+    method: 'GET'
   },
-  resetPassword: {
+  sendResetPasswordToken: {
     url: ()=>ServerUrl + '/api/users/reset',
-    method: 'GET',
-    params: ['filterType', 'filterName']
+    method: 'GET'
   }
 }
 

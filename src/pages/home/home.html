@@ -13,7 +13,7 @@
            [src]="serverUrl+user.profiles?.profileUrl?.url"
            onError="this.src='assets/img/default-avatar.png';">
 
-      <p text-capitalize style=" margin: 0px; font-size: 2rem; letter-spacing: 2px">
+      <p text-capitalize style=" margin: 0px; font-size: 2rem; ">
         {{user?.profiles?.name || user?.name}}
       </p>
       <i text-center style="opacity: 0.8; margin: 0px; font-size: 10px">Member since {{user.createdAt|moment:true}}</i>

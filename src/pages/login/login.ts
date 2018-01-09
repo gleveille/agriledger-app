@@ -15,6 +15,9 @@ import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 })
 export class LoginPage {
 
+  email:string=null;
+  password:string=null;
+  isChecked:boolean=false;
   constructor(public navCtrl:NavController, public navParams:NavParams,private loadingCtrl:LoadingController,
               private userService:UserService,
               private assetService:AssetsService,
@@ -22,10 +25,14 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
   login(f:NgForm) {
+    if(!f.value.email || !f.value.password || !f.value.isChecked){
+      this.toastService.presentToast('All fields are mandatory');
+      return;
+
+    }
     let loader = this.loadingCtrl.create({
       content: 'Logging you..'
     });

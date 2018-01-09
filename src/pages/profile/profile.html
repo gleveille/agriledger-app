@@ -32,9 +32,12 @@
     <ion-col>
 
 
-      <p class="profile-description" text-capitalize style="margin: 0px; margin-bottom: 15px;">
+      <p  text-capitalize style="margin: 0px; font-size: 2rem;">
         {{user?.profiles?.name || user?.name}}
       </p>
+
+      <i text-center style="opacity: 0.8; margin: 0px; font-size: 10px">Member since {{user.createdAt|moment:true}}</i>
+
     </ion-col>
   </ion-row>
 

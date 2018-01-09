@@ -1,3 +1,4 @@
+
 <ion-header>
 
   <ion-navbar color="primary">
@@ -6,60 +7,45 @@
 
 </ion-header>
 
+<ion-content padding>
+  <ion-row align-items-center justify-content-center>
+    <ion-col col-auto align-self-center no-padding>
+      <img class="header-image" src="assets/icon/icon.png">
+    </ion-col>
+  </ion-row>
 
-<ion-content>
+  <ion-row>
+    <ion-col text-center>
+      <h3 style="font-weight: 900;letter-spacing:2px;color:#519a48" color="primary">AGRILEDGER</h3>
+    </ion-col>
+  </ion-row>
 
+  <form #f="ngForm" (ngSubmit)="login(f)" no-padding>
 
-  <form #f="ngForm" (ngSubmit)="login(f)">
-    <ion-card padding>
-      <ion-grid no-padding>
-        <ion-row align-items-center justify-content-center>
-          <ion-col col-auto align-self-center no-padding>
-            <img class="header-image" src="assets/icon/icon.png">
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <ion-list no-margin no-padding>
+      <ion-item>
+        <ion-label floating>{{'Username'|translate}}</ion-label>
+        <ion-input type="email" [(ngModel)]="email" name="email" required ></ion-input>
+      </ion-item>
 
-      <ion-card-content text-center no-padding>
-        <ion-card-title style="letter-spacing: 3px; font-weight: 900;" color="primary" text-uppercase>
-          Agriledger
-        </ion-card-title>
-      </ion-card-content>
-      <ion-list style="padding-top:0px">
-        <ion-item>
-          <ion-label floating>{{'Username'|translate}}</ion-label>
-          <ion-input type="email" [(ngModel)]="email" name="email" required email id="email"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label floating>{{'Password'|translate}}</ion-label>
+        <ion-input type="number"  [(ngModel)]="password" name="password" required></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label floating>{{'Password'|translate}}</ion-label>
-          <ion-input type="password" ngModel [(ngModel)]="password" name="password" required></ion-input>
-        </ion-item>
-      </ion-list>
+      <ion-item style="margin-top: 10px;" no-lines>
+        <ion-label (click)="termsAndConditions()">{{'I agree to the' |translate}} {{'Terms and Conditions'|translate}}</ion-label>
+        <ion-checkbox [(ngModel)]="isChecked" name="isChecked" color="primary" required></ion-checkbox>
 
-      <ion-row style="padding-top: 10px">
-        <input color="dark" style="float: left; margin-top: 16px; margin-right: 10px" type="checkbox"
-               name="checkbox" ngModel [(ngModel)]="checked" checked="true">
-        <ion-label style="font-weight: lighter">{{'I agree to the' |translate}} <a (click)="termsAndConditions()">{{'Terms
-          and Conditions'|translate}}
-        </a></ion-label>
-      </ion-row>
+      </ion-item>
+      <button ion-button block [disabled]="f.invalid || !isChecked " class="btnHeight40Px">
+        {{'Sign In'|translate}}
+      </button>
 
+      <a (click)="forgotPassword()" no-margin no-padding text-right style="float: right" clear ion-button>{{'Forgot Password?'|translate}}</a>
 
-      <ion-row align-items-center justify-content-center>
-        <ion-col align-self-center>
-          <button ion-button block class="btnHeight40Px" [disabled]="!checked || !email || !password">
-            {{'Sign In'|translate}}
-          </button>
-        </ion-col>
-      </ion-row>
+    </ion-list>
 
-
-      <ion-row text-right (click)="forgotPassword()">
-        <ion-label><a style="text-decoration: underline;">{{'Forgot Password?'|translate}}
-        </a></ion-label>
-      </ion-row>
-    </ion-card>
   </form>
 
 

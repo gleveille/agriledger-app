@@ -145,6 +145,13 @@ export class UserService {
     });
   };
 
+  resetPassword(accessToken:string, newPassword:string) {
+    return this.http.post(`${UserApi.resetPassword.url()}?access_token=${accessToken}`,
+      {newPassword: newPassword}).do((data)=> {
+    }).catch((res)=> {
+      return this.errorHandler.handle(res);
+    });
+  };
   logout() {
     return this.http.post(`${UserApi.logout.url()}`,
       {}).do((data)=> {
@@ -161,11 +168,7 @@ export class UserService {
   }
 
   forgotPassword(email:any) {
-    if (!email) {
-      return Observable.throw('no email');
-    }
-    return this.http.post(`${UserApi.resetPassword.url()}`, {email: email}).do((res)=> {
-
+    return this.http.post(`${UserApi.sendResetPasswordToken.url()}`, {email: email}).do((res)=> {
     })
       .catch((err)=> {
         return this.errorHandler.handle(err);
