@@ -55,6 +55,8 @@ export class UserService {
       })
   }
 
+  
+
 
 
   getUserIdFromLocalStorage() {
@@ -159,6 +161,7 @@ export class UserService {
       return this.errorHandler.handle(res);
     });
   };
+  
   logout() {
     return this.http.post(`${UserApi.logout.url()}`,
       {}).do((data)=> {
@@ -171,7 +174,7 @@ export class UserService {
 
   resetState() {
 
-    this.user = JSON.parse(JSON.stringify({profileUrl: {}}))
+    this.dataStore.user = JSON.parse(JSON.stringify({profileUrl: {}}))
   }
 
 

@@ -32,7 +32,6 @@ export class LoginPage {
     if(!f.value.email || !f.value.password || !f.value.isChecked){
       this.toastService.presentToast('All fields are mandatory');
       return;
-
     }
     let loader = this.loadingCtrl.create({
       content: 'Logging you..'

@@ -62,6 +62,7 @@ export class HomePage {
 
   }
   subscribeUser(){
+    console.log(this.userService)
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
       console.log(this.user)

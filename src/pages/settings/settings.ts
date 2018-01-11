@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TranslateServiceProvider } from '../../providers/translate-service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { FingerprintProvider } from '../../providers/fingerprint';
+import { UserService } from '../../providers/user.service';
+import { LoadingController } from 'ionic-angular';
+import { App } from 'ionic-angular';
+import { WelcomePage } from '../welcome/welcome';
 
 
 
@@ -18,7 +22,10 @@ export class SettingsPage {
   defaultLangauge:string = 'ch';
   constructor(public navCtrl: NavController, public navParams: NavParams,
             private translateService:TranslateServiceProvider,private fingerprintService:FingerprintProvider,
-            private alertCtrl:AlertController) {
+            private alertCtrl:AlertController,
+            private userService:UserService,
+            private loadingCtrl:LoadingController,
+            private appCtrl:App) {
 
               this.isFingerPrintEnabled();
   }
@@ -120,6 +127,18 @@ export class SettingsPage {
 
       }
     }
+  }
+
+  onLogout(){
+    console.log("onLogout");
+    let loader = this.loadingCtrl.create({
+      content: 'Logging you out..'
+    });
+    loader.present();
+    this.userService.logout().subscribe(()=>{
+      loader.dismiss();
+      this.appCtrl.getRootNav().setRoot(WelcomePage);
+    });
   }
 
 }
