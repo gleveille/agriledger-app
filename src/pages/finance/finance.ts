@@ -11,6 +11,7 @@ export class FinancePage {
 
   user = {profileUrl: {}} as Iuser;
   segmentName: string = 'loan';
+  overlayHidden: boolean = false;
 
 
 
