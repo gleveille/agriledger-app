@@ -101,7 +101,7 @@ export class AssetsService {
               this.dataStore.myAssets[i] = asset;
             }
           });
-          this._myAssets.next(this.dataStore.myAssets.slice());
+          //this._myAssets.next(this.dataStore.myAssets.slice());
 
         })
         .catch((res) => {
