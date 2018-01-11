@@ -31,7 +31,8 @@ export class AssetsPage {
   subscribeMyAssets(){
     this.assetService.myAssets.subscribe((assets:any[])=>{
       this.assets=assets;
-
+      this.availableAssets= [];
+console.log(assets)
       assets.forEach((asset)=>{
         if(asset.status==='available'){
           this.availableAssets.push(asset);
