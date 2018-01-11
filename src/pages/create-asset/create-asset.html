@@ -63,6 +63,11 @@
       </ion-item>
 
       <ion-item>
+        <ion-label floating>{{'Grade *'|translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="asset.grade" text-capitalize name="grade" required></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label floating>{{'Expected Yield *'|translate}}</ion-label>
         <ion-input type="number" [(ngModel)]="asset.expectedYield" text-capitalize name="expectedYield" required></ion-input>
         <ion-note item-end>

@@ -60,4 +60,20 @@ page-finance {
     // margin-bottom: 50px;
   }
 
+  .my-overlay {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(29, 43, 83, 0.5);
+    height: 135%;
+  }
+
+  .textCenter {
+    color: white;
+    letter-spacing: 4px;
+  }
+
 }
