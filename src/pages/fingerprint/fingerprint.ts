@@ -10,7 +10,9 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class FingerprintPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fingerprintService:FingerprintProvider) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    private fingerprintService:FingerprintProvider) {
   }
 
   ionViewDidLoad() {
@@ -19,7 +21,7 @@ export class FingerprintPage {
 
 
   async enable(){
-    let isVerified=await this.fingerprintService.fingerprintVerification();
+   let isVerified=await this.fingerprintService.fingerprintVerification();
     if(isVerified){
       let enable=await this.fingerprintService.setFingerPrintEnabled();
       this.navCtrl.setRoot(TabsPage);
