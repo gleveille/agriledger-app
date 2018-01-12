@@ -67,7 +67,7 @@
 
       <ion-item>
         <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
+        <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" min="{{minDate}}" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Health of Soil'|translate}}</ion-label>

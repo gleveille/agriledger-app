@@ -20,7 +20,7 @@ import {ServerUrl} from '../../app/api.config'
 export class AssetInfoPage {
   @ViewChild(Slides) slides: Slides;
   serverUrl=ServerUrl;
-
+  minDate:string;
   chosenLang='en';
   asset = {category: {}} as any;
   assets = [];
@@ -48,6 +48,8 @@ export class AssetInfoPage {
   }
 
   ionViewDidLoad() {
+    let date = new Date();
+    this.minDate = date.getFullYear()+'-'+('0'+(date.getMonth()+1)).slice(-2)+'-'+('0'+date.getDate()).slice(-2).toString();
     this.subscribeMyAssets();
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
