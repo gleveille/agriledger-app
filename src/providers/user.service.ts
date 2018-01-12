@@ -17,11 +17,10 @@ import {Storage} from '@ionic/storage'
 
 @Injectable()
 export class UserService {
-  private _user: BehaviorSubject<Iuser>;
-  dataStore:{user:Iuser} = { user:{} };
+  private _user:BehaviorSubject<Iuser>;
+  dataStore:{user:Iuser} = {user: {}};
 
-  user: Observable<Iuser>;
-
+  user:Observable<Iuser>;
 
 
   constructor(private http:HttpClient, private errorHandler:ErrorHandlerService, private storage:Storage) {
@@ -32,17 +31,17 @@ export class UserService {
   }
 
   login(credential:any) {
-    let accessToken=null;
+    let accessToken = null;
     return this.http.post(`${UserApi.login.url()}`, credential)
       .concatMap((result:any)=> {
-      accessToken=result.id;
+        accessToken = result.id;
         return this.http.get(`${UserApi.findById.url()}/${result.userId}?access_token=${accessToken}&filter[include]=profiles`)
       })
       .do((user:any)=> {
-      console.log(user);
+        console.log(user);
         this.dataStore.user = user;
-        if(!this.dataStore.user.profiles || !this.dataStore.user.profiles.id)
-          this.dataStore.user.profiles={};
+        if (!this.dataStore.user.profiles || !this.dataStore.user.profiles.id)
+          this.dataStore.user.profiles = {};
         this._user.next(this.dataStore.user);
 
         this.storage.set('userId', user.id);
@@ -55,9 +54,6 @@ export class UserService {
       })
   }
 
-  
-
-
 
   getUserIdFromLocalStorage() {
     return this.storage.get('userId');
@@ -65,11 +61,11 @@ export class UserService {
 
   createProfile(user:Iuser) {
 
-    let profile=user.profiles;
+    let profile = user.profiles;
     console.log('creating profile is')
     console.log(profile)
     return this.http.post(`${UserApi.updateProfile.url()}/${this.dataStore.user.id}/profiles`, profile).do((data)=> {
-      this.dataStore.user.profiles=data;
+      this.dataStore.user.profiles = data;
       this._user.next(this.dataStore.user);
       console.log('created')
     })
@@ -82,21 +78,21 @@ export class UserService {
   };
 
 
-  profilePicChanged(data:any){
-    this.dataStore.user.profiles.profileUrl=data;
+  profilePicChanged(data:any) {
+    this.dataStore.user.profiles.profileUrl = data;
     this._user.next(this.dataStore.user);
   }
+
   updateProfile(user:Iuser) {
 
-    let profiles=user.profiles;
-    if(!this.dataStore.user.profiles.id)
-    {
+    let profiles = user.profiles;
+    if (!this.dataStore.user.profiles.id) {
       return this.createProfile(user);
     }
     console.log('updating profile is')
     console.log(profiles)
     return this.http.put(`${UserApi.updateProfile.url()}/${this.dataStore.user.id}/profiles`, profiles).do((profile:any)=> {
-      this.dataStore.user.profiles=profile;
+      this.dataStore.user.profiles = profile;
       this._user.next(this.dataStore.user);
       console.log('updated')
       console.log(this.dataStore.user)
@@ -120,13 +116,17 @@ export class UserService {
         }
       })
 
-      .map((user:Iuser)=>{
-        if(!user.profiles || !user.profiles.id)
-          user.profiles={};
+      .map((user:Iuser)=> {
+        if (!user.profiles || !user.profiles.id)
+          user.profiles = {
+            farmDetails: {farmName:'',products: '',crops:'',grade:'',size:'',region:''},
+            address:{line1:'',line2:'',city:'',province:''}
+          };
+
         return user;
       })
-      .do((user:Iuser)=>{
-        this.dataStore.user=user;
+      .do((user:Iuser)=> {
+        this.dataStore.user = user;
         this._user.next(this.dataStore.user);
       })
       .catch((err)=> {
@@ -134,7 +134,6 @@ export class UserService {
       })
 
   };
-
 
 
   changePassword(oldPassword:string, newPassword:string) {
@@ -154,6 +153,7 @@ export class UserService {
         return this.errorHandler.handle(err);
       })
   };
+
   resetPassword(accessToken:string, newPassword:string) {
     return this.http.post(`${UserApi.resetPassword.url()}?access_token=${accessToken}`,
       {newPassword: newPassword}).do((data)=> {
@@ -161,7 +161,7 @@ export class UserService {
       return this.errorHandler.handle(res);
     });
   };
-  
+
   logout() {
     return this.http.post(`${UserApi.logout.url()}`,
       {}).do((data)=> {
@@ -176,8 +176,6 @@ export class UserService {
 
     this.dataStore.user = JSON.parse(JSON.stringify({profileUrl: {}}))
   }
-
-
 
 
 }

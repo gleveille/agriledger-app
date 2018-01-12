@@ -22,12 +22,10 @@ import {AssetsService} from "../../providers/assets.service";
 })
 export class ProfilePage {
   serverUrl = ServerUrl;
-  user:Iuser = {profiles: {}};
+  user:Iuser = {};
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
-  status:string = "all";
-  assets = [];
-  asset = {farmDetails: {}} as any;
+  farm: string = "accountDetails";
 
 
   constructor(public navCtrl:NavController,
@@ -38,12 +36,15 @@ export class ProfilePage {
               private uploadService:UploadProvider,
               private userService:UserService,
               private translateService:TranslateServiceProvider, private assetsService: AssetsService) {
+    this.user.profiles={
+      farmDetails:{farmName:'',products: '',crops:'',grade:'',size:'',region:''},
+      address:{line1:'',line2:'',city:'',province:''}
+    }
 
   }
 
   ionViewDidLoad() {
     this.subscribeUser();
-    this.subscribeMyAssets();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
 
   }
@@ -146,27 +147,23 @@ export class ProfilePage {
     console.log(this.defaultLangauge)
   }
 
-  subscribeMyAssets() {
-    this.assetsService.myAssets.subscribe((assets:any[])=> {
-      this.assets = assets;
-    });
-  }
-
-  updateAsset() {
+  updateFarm() {
     let loader = this.loadingCtrl.create({
-      content: 'Updating Asset Details..'
+      content: 'Upading Farm details..'
     });
     loader.present();
-    this.assetsService.updateAsset(this.asset).subscribe((data)=> {
-      console.log('saved succesfully')
+
+    this.userService.updateProfile(this.user).subscribe((data)=> {
       loader.dismiss();
-      this.toastService.presentToast('Saved Succesfully');
+
+      this.toastService.presentToast('Farm details Updated...')
     }, (err)=> {
-      console.log(err)
       loader.dismiss();
-      this.toastService.presentToast('Something went wrong');
+      this.toastService.presentToast(err.message || 'Farm details could not be Updated...')
+
     })
   }
+
 
 
 
