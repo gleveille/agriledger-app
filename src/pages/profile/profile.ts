@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {
-  NavController,  ActionSheetController, ModalController,
+  NavController, ActionSheetController, ModalController,
   LoadingController
 } from "ionic-angular/index";
 import {ServerUrl} from '../../app/api.config'
@@ -13,6 +13,7 @@ import {Iuser} from "../../interface/user.interface";
 import {TranslateServiceProvider} from "../../providers/translate-service";
 import {UploadProvider} from "../../providers/upload";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
+import {AssetsService} from "../../providers/assets.service";
 
 
 @Component({
@@ -21,9 +22,12 @@ import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 })
 export class ProfilePage {
   serverUrl = ServerUrl;
-  user:Iuser={profiles:{}};
+  user:Iuser = {profiles: {}};
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
+  status:string = "all";
+  assets = [];
+  asset = {farmDetails: {}} as any;
 
 
   constructor(public navCtrl:NavController,
@@ -33,75 +37,74 @@ export class ProfilePage {
               private toastService:ToastProvider,
               private uploadService:UploadProvider,
               private userService:UserService,
-              private translateService:TranslateServiceProvider,) {
+              private translateService:TranslateServiceProvider, private assetsService: AssetsService) {
 
   }
 
   ionViewDidLoad() {
     this.subscribeUser();
+    this.subscribeMyAssets();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
 
   }
 
-  updateProfile(){
+  updateProfile() {
     let loader = this.loadingCtrl.create({
       content: 'Upading profile..'
     });
     loader.present();
 
-    this.userService.updateProfile(this.user).subscribe((data)=>{
+    this.userService.updateProfile(this.user).subscribe((data)=> {
       loader.dismiss();
 
       this.toastService.presentToast('Profile Updated...')
-    },(err)=>{
+    }, (err)=> {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Profile could not be Updated...')
 
     })
   }
-  subscribeUser(){
+
+  subscribeUser() {
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
     });
   }
 
-  verify(source:string){
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
+  verify(source:string) {
+    let passcodeModal = this.modalController.create(PasscodeLockPage, {passcode: this.user.profiles.passcode});
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
-      if(data && data.success===true){
+      if (data && data.success === true) {
         this.upload(source);
       }
-      else{
+      else {
       }
     });
   }
 
-  async upload(source:string){
+  async upload(source:string) {
 
 
-    const config:IUploadPageConfig={
-      uploadType:'profile', //profile,field
-      id:this.user.profiles.id
+    const config:IUploadPageConfig = {
+      uploadType: 'profile', //profile,field
+      id: this.user.profiles.id
     };
     let isUploaded;
-    if(source==='camera'){
-      isUploaded=await this.uploadService.takePhotoFromCamera(config);
-
+    if (source === 'camera') {
+      isUploaded = await this.uploadService.takePhotoFromCamera(config);
     }
-    else if(source==='album') {
-      isUploaded=await this.uploadService.takePhotoFromAlbum(config);
-
+    else if (source === 'album') {
+      isUploaded = await this.uploadService.takePhotoFromAlbum(config);
     }
-    if(isUploaded){
+    if (isUploaded) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
-
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -133,7 +136,6 @@ export class ProfilePage {
         }
       ]
     });
-
     actionSheet.present();
   }
 
@@ -142,7 +144,28 @@ export class ProfilePage {
     this.translateService.changeLang(this.defaultLangauge);
     this.showdropdown = false
     console.log(this.defaultLangauge)
+  }
 
+  subscribeMyAssets() {
+    this.assetsService.myAssets.subscribe((assets:any[])=> {
+      this.assets = assets;
+    });
+  }
+
+  updateAsset() {
+    let loader = this.loadingCtrl.create({
+      content: 'Updating Asset Details..'
+    });
+    loader.present();
+    this.assetsService.updateAsset(this.asset).subscribe((data)=> {
+      console.log('saved succesfully')
+      loader.dismiss();
+      this.toastService.presentToast('Saved Succesfully');
+    }, (err)=> {
+      console.log(err)
+      loader.dismiss();
+      this.toastService.presentToast('Something went wrong');
+    })
   }
 
 
