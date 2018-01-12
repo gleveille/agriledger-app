@@ -37,13 +37,10 @@ export class AssetInfoPage {
               private modalController:ModalController,
               private userService:UserService,
               public navParams:NavParams,
-              private assetsService: AssetsService, platform:Platform, private events:Events,
-              public assetService: AssetsService) {
+              private assetsService: AssetsService, platform:Platform, private events:Events) {
 
     this.isAndroid = platform.is('android');
-
     this.asset = this.navParams.get('asset');
-
 
   }
 
@@ -52,28 +49,23 @@ export class AssetInfoPage {
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
     });
-
   }
 
-
   subscribeMyAssets(){
-    this.assetService.myAssets.subscribe((assets:any[])=>{
+    this.assetsService.myAssets.subscribe((assets:any[])=>{
       this.assets=assets;
+      console.log(this.assets);
+      console.log('asset info subscription');
 
-      console.log(this.assets)
-      console.log('asset info subscription')
       assets.forEach((asset)=>{
-
-        if(asset.id===this.asset.id){
+        if(asset.id===this.asset.id) {
           this.asset=asset;
           if(this.slides)
             this.slides.slideTo(0, 500);
         }
       });
-
     });
   }
-
 
   verifyBeforeUpload(source:string){
     let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
