@@ -21,6 +21,14 @@
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'puppies'">
 
+      <!-- <ion-row no-padding (click)="onEdit()">
+        <ion-col text-right no-padding>
+          <button ion-button clear style="color: #519a48; margin-right: 8px; letter-spacing: 2px;">
+            {{'Edit'|translate}}
+          </button>
+        </ion-col>
+      </ion-row> -->
+
       <ion-list>
         <ion-label style="margin-bottom: 0px;margin-left: 16px; opacity: .4; ">
           {{'Asset category'|translate}}
@@ -48,48 +56,78 @@
       </ion-list>
       <ion-item>
         <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
+
+        <!-- [readonly]="isEditable" -->
         <ion-input type="text" [(ngModel)]="asset.name" text-capitalize required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Grade *'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.grade" text-capitalize name="grade" required></ion-input>
+        <ion-input type="text"
+                  [(ngModel)]="asset.grade"
+                  text-capitalize
+                  name="grade"
+                  required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Expected Yield *'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.expectedYield" text-capitalize name="expectedYield" required></ion-input>
+        <ion-input type="text"
+                  [(ngModel)]="asset.expectedYield"
+                  text-capitalize name="expectedYield"
+                  required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Packaging *'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.packaging" text-capitalize name="packaging"
+        <ion-input type="text"
+                  [(ngModel)]="asset.packaging"
+                  text-capitalize name="packaging"
                    required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" max="2100-10-31" [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
+        <ion-datetime displayFormat="MMM DD, YYYY"
+                      pickerFormat="MMM DD, YYYY"
+                      min="{{minDate}}"
+                      max="2100-10-31"
+                      [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Health of Soil'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.healthOfSoil" text-capitalize name="healthOfSoil"></ion-input>
+        <ion-input type="text"
+                  [(ngModel)]="asset.healthOfSoil"
+                  text-capitalize
+                  name="healthOfSoil"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Land History'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.landHistory" text-capitalize name="landHistory"></ion-input>
+        <ion-input type="text"
+                  [(ngModel)]="asset.landHistory"
+                  text-capitalize
+                  name="landHistory"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Farm Investments'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.farmInvestments" text-capitalize name="farmInvestments"></ion-input>
+        <ion-input type="text"
+                  [(ngModel)]="asset.farmInvestments"
+                  text-capitalize
+                  name="farmInvestments"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Additional Information'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.additionalInformation" text-capitalize name="additionalInformation"></ion-input>
+        <ion-input type="text"
+                  [(ngModel)]="asset.additionalInformation"
+                  text-capitalize
+                  name="additionalInformation"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Asset Status'|translate}}</ion-label>
-        <ion-input type="text" [(ngModel)]="asset.status" text-capitalize disabled></ion-input>
+        <ion-input type="text"
+                  [(ngModel)]="asset.status"
+                  text-capitalize
+                  ></ion-input>
       </ion-item>
 
       <ion-grid>

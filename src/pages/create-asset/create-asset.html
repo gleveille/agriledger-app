@@ -84,8 +84,8 @@
         <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
         <ion-datetime
           displayFormat="MMM DD, YYYY"
-          [min]="startDate"
-          [max]="endDate"
+          min="{{startDate}}"
+          max="2100-01-01"
           [(ngModel)]="asset.expectedHarvestDate">
         </ion-datetime>
       </ion-item>

@@ -6,7 +6,7 @@ import {FingerprintProvider} from "../../providers/fingerprint";
 import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
-
+import moment from 'moment';
 
 @Component({
   selector: 'page-create-asset',
@@ -14,7 +14,7 @@ import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 })
 export class CreateAssetPage {
 
-  startDate:string = '2017-12-01';
+  startDate:string;
   endDate:string = '2100-12-01';
 
   asset:any = {
@@ -50,7 +50,9 @@ export class CreateAssetPage {
               private toastService:ToastProvider,
               private fingerprintProvider:FingerprintProvider,
               public userService: UserService,  private loadingCtrl: LoadingController) {
-
+                
+              let date = new Date();
+              this.startDate = date.getFullYear()+'-'+('0'+(date.getMonth()+1)).slice(-2)+'-'+('0'+date.getDate()).slice(-2).toString();            
   }
 
   ionViewDidLoad() {
