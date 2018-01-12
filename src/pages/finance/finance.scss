@@ -62,13 +62,17 @@ page-finance {
 
   .my-overlay {
     z-index: 1;
-    position: absolute;
+    position: relative;
     bottom: 0;
     top: 0;
     left: 0;
     right: 0;
     background: rgba(29, 43, 83, 0.5);
-    height: 135%;
+    //height: 150%;
+  }
+
+  .page{
+
   }
 
   .textCenter {
