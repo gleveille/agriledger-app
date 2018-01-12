@@ -28,6 +28,7 @@ export class AssetInfoPage {
   isAndroid:boolean = false;
   isSecurityCheckPassed:boolean=false;
   user = {} as Iuser;
+  isEditable:boolean=true;
 
   constructor(public navCtrl:NavController,
               private loadingCtrl:LoadingController,
@@ -83,6 +84,7 @@ export class AssetInfoPage {
   }
 
   verifyBeforeUpdate(){
+    // this.isEditable=true;
     let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
@@ -170,6 +172,8 @@ export class AssetInfoPage {
       this.toastService.presentToast('Something went wrong');
     })
   }
-
+  // onEdit(){
+  //   this.isEditable=false;
+  // }
 
 }
