@@ -4,8 +4,21 @@ export interface Iuser {
     phone?: string,
     passcode?: number,
     name?: string,
-    registration?:String,
-    address?:string,
+    registration?:string,
+    address?:{
+      line1?:string,
+      line2?:string,
+      city?:string,
+      province?:string
+    },
+    farmDetails?:{
+      farmName?:string,
+      products?: string,
+      crops?:string,
+      grade?:string,
+      size?:string,
+      region?:string
+    },
     company?:string,
     profileUrl?: {
       url: string,
