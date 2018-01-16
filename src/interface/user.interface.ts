@@ -1,9 +1,9 @@
 export interface Iuser {
-  profiles?: {
+  profiles?:{
     id?:string,
-    phone?: string,
-    passcode?: number,
-    name?: string,
+    phone?:string,
+    passcode?:number,
+    name?:string,
     registration?:string,
     address?:{
       line1?:string,
@@ -13,17 +13,17 @@ export interface Iuser {
     },
     farmDetails?:{
       farmName?:string,
-      products?: string,
+      products?:string,
       crops?:string,
       grade?:string,
       size?:string,
       region?:string
     },
     company?:string,
-    profileUrl?: {
-      url: string,
-      lat: number,
-      long: number,
+    profileUrl?:{
+      url:string,
+      lat:number,
+      long:number,
       hash:string
     },
   },

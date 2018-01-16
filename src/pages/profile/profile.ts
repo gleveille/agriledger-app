@@ -40,7 +40,6 @@ export class ProfilePage {
       farmDetails:{farmName:'',products: '',crops:'',grade:'',size:'',region:''},
       address:{line1:'',line2:'',city:'',province:''}
     }
-
   }
 
   ionViewDidLoad() {
@@ -69,6 +68,9 @@ export class ProfilePage {
   subscribeUser() {
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
+      if(!this.user.profiles.farmDetails){
+        this.user.profiles.farmDetails={farmName:'',products: '',crops:'',grade:'',size:'',region:''}
+      }
     });
   }
 
