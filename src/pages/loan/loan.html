@@ -10,7 +10,7 @@
             <ion-col col-12 padding>
 
               <p text-left>Loan Amount</p>
-              <ion-range no-padding min="100" max="50000" step="100" pin="true" snaps="true" [(ngModel)]="loanAmount" (ionChange)="sliderChange($event,'amount')">
+              <ion-range no-padding min="1000" max="50000" step="1000" pin="true" snaps="true" [(ngModel)]="loanAmount" (ionChange)="sliderChange($event,'amount')">
                 <ion-label range-right>{{loanAmount}} &yen;</ion-label>
 
               </ion-range>
