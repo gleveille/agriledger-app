@@ -82,9 +82,9 @@
     </ion-row>
   </ion-grid>
 
-  <div class="dropdown">
+  <div class="dropdown" (click)="showdropdown=true">
     <p class="language_text">
-      <img (click)="showdropdown=true" [src]="defaultLangauge==='ch'?'assets/img/flag_china.png':'assets/img/uk.png'"
+      <img  [src]="defaultLangauge==='ch'?'assets/img/flag_china.png':'assets/img/uk.png'"
            alt=""></p>
     <em class="down_icon"></em>
     <div class="dropdown-content">
