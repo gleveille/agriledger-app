@@ -4,10 +4,10 @@ import {Events, LoadingController} from "ionic-angular/index";
 import {HttpClient} from "@angular/common/http";
 import {Geolocation} from '@ionic-native/geolocation';
 
-import {ContainerApi,ServerUrl} from '../app/api.config';
+import {ContainerApi, ServerUrl} from '../app/api.config';
 
 import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
-import {Camera,CameraOptions} from "@ionic-native/camera";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 import {ToastProvider} from "./toast";
 import {UserService} from "./user.service";
 import {AssetsService} from "./assets.service";
@@ -29,32 +29,32 @@ export class UploadProvider {
 
 
   async takePhotoFromCamera(config:any) {
-    let base64Image=null;
+    let base64Image = null;
     const options:CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      sourceType:this.camera.PictureSourceType.CAMERA,
+      sourceType: this.camera.PictureSourceType.CAMERA,
       targetWidth: 450,
       targetHeight: 450,
       correctOrientation: true,
     };
 
-    try{
-      const imageData=await this.camera.getPicture(options);
+    try {
+      const imageData = await this.camera.getPicture(options);
       base64Image = "data:image/jpeg;base64," + imageData;
       console.log('try')
     }
-    catch (err){
+    catch (err) {
       return null;
     }
 
-    if(base64Image){
-      const isSuccess=await this.upload(base64Image,config);
-      if(isSuccess){
+    if (base64Image) {
+      const isSuccess = await this.upload(base64Image, config);
+      if (isSuccess) {
         return true;
       }
-      else{
+      else {
         return false;
       }
 
@@ -65,31 +65,31 @@ export class UploadProvider {
   }
 
   async takePhotoFromAlbum(config:any) {
-    let base64Image=null;
+    let base64Image = null;
     const options:CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       targetWidth: 450,
       targetHeight: 450,
       correctOrientation: true
     };
 
-    try{
-      const imageData=await this.camera.getPicture(options);
+    try {
+      const imageData = await this.camera.getPicture(options);
       base64Image = "data:image/jpeg;base64," + imageData;
     }
-    catch (err){
+    catch (err) {
       return null;
     }
 
-    if(base64Image){
-      const isSuccess=await this.upload(base64Image,config);
-      if(isSuccess){
+    if (base64Image) {
+      const isSuccess = await this.upload(base64Image, config);
+      if (isSuccess) {
         return true;
       }
-      else{
+      else {
         return false;
       }
 
@@ -103,21 +103,23 @@ export class UploadProvider {
   async upload(base64, config) {
     let url;
     if (config.uploadType === 'profile')
-      url= ContainerApi.ProfileUploadUrl();
+      url = ContainerApi.ProfileUploadUrl();
     else if (config.uploadType === 'evidences')
-      url= ContainerApi.EvidencesUploadUrl();
+      url = ContainerApi.EvidencesUploadUrl();
+    else if (config.uploadType === 'asset_documents')
+      url = ContainerApi.AssetDocumentsUploadUrl();
 
-    let lat='',long='';
+    let lat = '', long = '';
 
-    try{
-      const resp:any=await this.geolocation.getCurrentPosition();
-      lat=resp.coords.latitude;
-      long= resp.coords.longitude;
+    try {
+      const resp:any = await this.geolocation.getCurrentPosition();
+      lat = resp.coords.latitude;
+      long = resp.coords.longitude;
     }
-    catch (err){
+    catch (err) {
 
     }
-    try{
+    try {
 
       const fileTransfer:FileTransferObject = this.transfer.create();
       const timestamp = Date.now();
@@ -128,35 +130,39 @@ export class UploadProvider {
       };
 
       this.uploadInProgress();
-      const result= await fileTransfer.upload(base64, url, options);
+      const result = await fileTransfer.upload(base64, url, options);
       console.log('result is')
       console.log(result)
       let data;
 
-      try{
+      try {
         data = JSON.parse(result.response);
-        let obj={url:null,lat:null,long:null,hash:null};
+        let obj = {url: null, lat: null, long: null, hash: null};
         console.log('..................')
         console.log(data)
-        if(data.result.files && data.result.files.file[0].data) {
-          obj=data.result.files.file[0].data
+        if (data.result.files && data.result.files.file[0].data) {
+          obj = data.result.files.file[0].data
         }
         console.log(obj)
 
 
         console.log(config.uploadType)
-          if (config.uploadType === 'profile'){
+        if (config.uploadType === 'profile') {
           this.userService.profilePicChanged(obj);
-          }
+        }
 
-          if (config.uploadType === 'evidences'){
-            this.assetService.evidencesUploaded(config.assetId,obj);
-          }
+        if (config.uploadType === 'evidences') {
+          this.assetService.evidencesUploaded(config.assetId, obj);
+        }
+
+        if (config.uploadType === 'asset_documents') {
+          this.assetService.documentsUploaded(config.assetId, obj);
+        }
 
         this.toastService.presentToast('Uploaded');
 
       }
-      catch (err){
+      catch (err) {
         console.log(err);
         this.toastService.presentToast('Uploaded please refresh to view it');
 
@@ -167,7 +173,7 @@ export class UploadProvider {
 
       return true;
     }
-    catch (err){
+    catch (err) {
       this.toastService.presentToast('upload failed');
 
       console.log('from catch ')
@@ -179,7 +185,7 @@ export class UploadProvider {
 
   }
 
-  uploadInProgress(){
+  uploadInProgress() {
     this.loader = this.loadingCtrl.create({
       content: 'Uploading...'
     });
@@ -189,10 +195,10 @@ export class UploadProvider {
 
   }
 
-  uploadFinish(){
-    if(this.loader){
+  uploadFinish() {
+    if (this.loader) {
       this.loader.dismiss();
-      this.loader=null;
+      this.loader = null;
     }
   }
 }

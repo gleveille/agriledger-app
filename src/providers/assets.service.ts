@@ -76,6 +76,33 @@ export class AssetsService {
     this._myAssets.next(this.dataStore.myAssets.slice());
 
   }
+
+  documentsUploaded(assetId:string,data:{url:string,lat:number,long:number,hash:string}){
+
+    console.log('inside upload')
+    console.log(assetId)
+    this.dataStore.myAssets.forEach((asset, i) => {
+      if (asset.id === assetId)
+      {
+        console.log('id match')
+        if(asset.documents && asset.documents.length){
+          asset.documents.unshift(data)
+        }
+        else{
+          asset.documents=[];
+          asset.documents.unshift(data)
+
+        }
+        this.dataStore.myAssets[i] = asset;
+
+        console.log('after pushing')
+        console.log(this.dataStore.myAssets)
+      }
+    });
+    this._myAssets.next(this.dataStore.myAssets.slice());
+
+  }
+
   createAsset(asset:any) {
 
       const url = `${UserApi.getAssets.url()}/${this.userService.dataStore.user.id}/assets`;

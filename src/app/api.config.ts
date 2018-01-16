@@ -7,7 +7,10 @@ export const ServerUrl = environment.apiURL + ':' + environment.apiPORT;
 
 const ContainerApi = {
   ProfileUploadUrl: ()=>ServerUrl + '/api/containers/profiles/upload',
-  EvidencesUploadUrl: ()=>ServerUrl + '/api/containers/evidences/upload'
+  EvidencesUploadUrl: ()=>ServerUrl + '/api/containers/evidences/upload',
+  AssetDocumentsUploadUrl: ()=>ServerUrl + '/api/containers/asset_documents/upload',
+  ProfileDocumentsUploadUrl: ()=>ServerUrl + '/api/containers/profile_documents/upload'
+
 
 };
 const UserApi = {

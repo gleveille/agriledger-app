@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {
-   NavController, NavParams, Platform, Events, ActionSheetController,
+  NavController, NavParams, Platform, Events, ActionSheetController,
   LoadingController, Slides, ModalController
 } from 'ionic-angular';
 import {AssetsService} from "../../providers/assets.service";
@@ -18,17 +18,17 @@ import {ServerUrl} from '../../app/api.config'
   templateUrl: 'asset-info.html',
 })
 export class AssetInfoPage {
-  @ViewChild(Slides) slides: Slides;
-  serverUrl=ServerUrl;
+  @ViewChild(Slides) slides:Slides;
+  serverUrl = ServerUrl;
   minDate:string;
-  chosenLang='en';
+  chosenLang = 'en';
   asset = {category: {}} as any;
   assets = [];
   pet:string = "puppies";
   isAndroid:boolean = false;
-  isSecurityCheckPassed:boolean=false;
+  isSecurityCheckPassed:boolean = false;
   user = {} as Iuser;
-  isEditable:boolean=true;
+  isEditable:boolean = true;
 
   constructor(public navCtrl:NavController,
               private loadingCtrl:LoadingController,
@@ -38,7 +38,7 @@ export class AssetInfoPage {
               private modalController:ModalController,
               private userService:UserService,
               public navParams:NavParams,
-              private assetsService: AssetsService, platform:Platform, private events:Events) {
+              private assetsService:AssetsService, platform:Platform, private events:Events) {
 
     this.isAndroid = platform.is('android');
     this.asset = this.navParams.get('asset');
@@ -47,79 +47,114 @@ export class AssetInfoPage {
 
   ionViewDidLoad() {
     let date = new Date();
-    this.minDate = date.getFullYear()+'-'+('0'+(date.getMonth()+1)).slice(-2)+'-'+('0'+date.getDate()).slice(-2).toString();
+    this.minDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2).toString();
     this.subscribeMyAssets();
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
     });
   }
 
-  subscribeMyAssets(){
-    this.assetsService.myAssets.subscribe((assets:any[])=>{
-      this.assets=assets;
+  subscribeMyAssets() {
+    this.assetsService.myAssets.subscribe((assets:any[])=> {
+      this.assets = assets;
       console.log(this.assets);
       console.log('asset info subscription');
 
-      assets.forEach((asset)=>{
-        if(asset.id===this.asset.id) {
-          this.asset=asset;
-          if(this.slides)
+      assets.forEach((asset)=> {
+        if (asset.id === this.asset.id) {
+          this.asset = asset;
+          if (this.slides)
             this.slides.slideTo(0, 500);
         }
       });
     });
   }
 
-  verifyBeforeUpload(source:string){
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
+  verifyBeforeUpload(source:string) {
+    let passcodeModal = this.modalController.create(PasscodeLockPage, {passcode: this.user.profiles.passcode});
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
-      if(data && data.success===true){
+      if (data && data.success === true) {
         this.upload(source);
       }
-      else{
+      else {
       }
     });
   }
 
-  verifyBeforeUpdate(){
-    // this.isEditable=true;
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
+  verifyBeforeUploadDox(source:string) {
+    let passcodeModal = this.modalController.create(PasscodeLockPage, {passcode: this.user.profiles.passcode});
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
-      if(data && data.success===true){
-        this.updateAsset();
+      if (data && data.success === true) {
+        this.uploadDox(source);
       }
-      else{
+      else {
       }
     });
   }
 
-  async upload(source:string){
-    const config:IUploadPageConfig={
-      assetId:this.asset.id,
-      uploadType:'evidences', //profile,field
-      id:this.user.profiles.id
+  verifyBeforeUpdate() {
+    // this.isEditable=true;
+    let passcodeModal = this.modalController.create(PasscodeLockPage, {passcode: this.user.profiles.passcode});
+    passcodeModal.present();
+    passcodeModal.onDidDismiss(data => {
+      console.log(data);
+      if (data && data.success === true) {
+        this.updateAsset();
+      }
+      else {
+      }
+    });
+  }
+
+  async upload(source:string) {
+    const config:IUploadPageConfig = {
+      assetId: this.asset.id,
+      uploadType: 'evidences', //profile,field
+      id: this.user.profiles.id
     };
     let isUploaded;
-    if(source==='camera'){
-      isUploaded=await this.uploadService.takePhotoFromCamera(config);
+    if (source === 'camera') {
+      isUploaded = await this.uploadService.takePhotoFromCamera(config);
 
     }
-    else if(source==='album') {
-      isUploaded=await this.uploadService.takePhotoFromAlbum(config);
+    else if (source === 'album') {
+      isUploaded = await this.uploadService.takePhotoFromAlbum(config);
 
     }
-    if(isUploaded){
+    if (isUploaded) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
+  async uploadDox(source:string) {
+    const config:IUploadPageConfig = {
+      assetId: this.asset.id,
+      uploadType: 'asset_documents', //profile,field
+      id: this.user.profiles.id
+    };
+    let isUploaded;
+    if (source === 'camera') {
+      isUploaded = await this.uploadService.takePhotoFromCamera(config);
+
+    }
+    else if (source === 'album') {
+      isUploaded = await this.uploadService.takePhotoFromAlbum(config);
+
+    }
+    if (isUploaded) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -137,7 +172,7 @@ export class AssetInfoPage {
           text: 'From Camera',
           icon: 'camera',
           handler: () => {
-             this.verifyBeforeUpload('camera')
+            this.verifyBeforeUpload('camera')
 
           }
         },
@@ -155,7 +190,38 @@ export class AssetInfoPage {
     actionSheet.present();
   }
 
+  presentActionSheetDoc() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Upload Documents',
+      buttons: [
+        {
+          text: 'From Gallery',
+          icon: 'folder-open',
+          handler: () => {
+            this.verifyBeforeUploadDox('album')
+            return;
+          }
+        },
+        {
+          text: 'From Camera',
+          icon: 'camera',
+          handler: () => {
+            this.verifyBeforeUploadDox('camera')
 
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
 
   updateAsset() {
     let loader = this.loadingCtrl.create({
@@ -172,6 +238,7 @@ export class AssetInfoPage {
       this.toastService.presentToast('Something went wrong');
     })
   }
+
   // onEdit(){
   //   this.isEditable=false;
   // }

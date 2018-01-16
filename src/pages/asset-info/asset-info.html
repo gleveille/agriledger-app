@@ -34,7 +34,8 @@
           {{'Asset category'|translate}}
         </ion-label>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
+          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize
+                     disabled></ion-input>
           <button ion-button clear item-end>{{'Level 1'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level2">
@@ -63,24 +64,24 @@
       <ion-item>
         <ion-label floating>{{'Grade *'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.grade"
-                  text-capitalize
-                  name="grade"
-                  required></ion-input>
+                   [(ngModel)]="asset.grade"
+                   text-capitalize
+                   name="grade"
+                   required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Expected Yield *'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.expectedYield"
-                  text-capitalize name="expectedYield"
-                  required></ion-input>
+                   [(ngModel)]="asset.expectedYield"
+                   text-capitalize name="expectedYield"
+                   required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Packaging *'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.packaging"
-                  text-capitalize name="packaging"
+                   [(ngModel)]="asset.packaging"
+                   text-capitalize name="packaging"
                    required></ion-input>
       </ion-item>
 
@@ -95,39 +96,39 @@
       <ion-item>
         <ion-label floating>{{'Health of Soil'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.healthOfSoil"
-                  text-capitalize
-                  name="healthOfSoil"></ion-input>
+                   [(ngModel)]="asset.healthOfSoil"
+                   text-capitalize
+                   name="healthOfSoil"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Land History'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.landHistory"
-                  text-capitalize
-                  name="landHistory"></ion-input>
+                   [(ngModel)]="asset.landHistory"
+                   text-capitalize
+                   name="landHistory"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Farm Investments'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.farmInvestments"
-                  text-capitalize
-                  name="farmInvestments"></ion-input>
+                   [(ngModel)]="asset.farmInvestments"
+                   text-capitalize
+                   name="farmInvestments"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Additional Information'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.additionalInformation"
-                  text-capitalize
-                  name="additionalInformation"></ion-input>
+                   [(ngModel)]="asset.additionalInformation"
+                   text-capitalize
+                   name="additionalInformation"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Asset Status'|translate}}</ion-label>
         <ion-input type="text"
-                  [(ngModel)]="asset.status"
-                  text-capitalize
-                  ></ion-input>
+                   [(ngModel)]="asset.status"
+                   text-capitalize
+        ></ion-input>
       </ion-item>
 
       <ion-grid>
@@ -146,61 +147,64 @@
 
       <ion-row>
         <ion-col>
-            <ion-list-header >
-              <div float-right>
-                <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px" (click)="presentActionSheet()">
-                  +&nbsp; {{'Add Evidences'}}
-                </button>
-              </div>
-            </ion-list-header>
-
-          <div text-center *ngIf="!asset.evidences || (asset.evidences && !asset.evidences.length)" >
+          <ion-list-header>
+            <div float-right>
+              <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px"
+                      (click)="presentActionSheet()">
+                +&nbsp; {{'Add Evidences'}}
+              </button>
+            </div>
+          </ion-list-header>
+          <div text-center *ngIf="!asset.evidences || (asset.evidences && !asset.evidences.length)">
             <h4 style="opacity: 0.6">No Evidences uploaded</h4>
           </div>
-
           <ion-grid>
             <ion-row align-items-center justify-content-center>
               <ion-col col-auto align-self-center *ngFor="let evidence of asset.evidences">
                 <div class="image">
-
                   <img width="150" height="150" [src]="serverUrl+evidence.url" imageViewer/>
-
                   <span *ngIf="evidence.date">{{evidence.date|moment:true}} ago</span>
-
                 </div>
-
               </ion-col>
             </ion-row>
           </ion-grid>
 
-       <!--     <ion-slides #slides  loop="false" slidesPerView="2"  spaceBetween="10px" style="position: relative;top: -30px;">
-              <ion-slide *ngFor="let evidence of asset.evidences">
-                  <img [src]="serverUrl+evidence.url" imageViewer/>
+          <!--     <ion-slides #slides  loop="false" slidesPerView="2"  spaceBetween="10px" style="position: relative;top: -30px;">
+                 <ion-slide *ngFor="let evidence of asset.evidences">
+                     <img [src]="serverUrl+evidence.url" imageViewer/>
 
-&lt;!&ndash;
-                  <figcaption>{{evidence?.date|moment}}</figcaption>
-&ndash;&gt;
+   &lt;!&ndash;
+                     <figcaption>{{evidence?.date|moment}}</figcaption>
+   &ndash;&gt;
 
 
-              </ion-slide>
-            </ion-slides>-->
+                 </ion-slide>
+               </ion-slides>-->
 
           <ion-list-header>
             <div float-right>
-              <button ion-button clear style="color: #519a48; letter-spacing: 2px;font-size: 16px; padding: 0px;" (click)="presentActionSheet()">
+              <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px"
+                      (click)="presentActionSheetDoc()">
                 +&nbsp; {{'Add Documents'}}
               </button>
             </div>
           </ion-list-header>
-
-          <div text-center>
+          <div text-center *ngIf="!asset.documents || (asset.documents && !asset.documents.length)">
             <h4 style="opacity: 0.6">No Documents uploaded</h4>
           </div>
-
+          <ion-grid>
+            <ion-row align-items-center justify-content-center>
+              <ion-col col-auto align-self-center *ngFor="let document of asset.documents">
+                <div class="image">
+                  <img width="150" height="150" [src]="serverUrl+document.url" imageViewer/>
+                  <span *ngIf="document.date">{{document.date|moment:true}} ago</span>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
 
         </ion-col>
       </ion-row>
-
 
 
     </ion-list>
