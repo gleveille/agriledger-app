@@ -24,11 +24,15 @@ export class AssetInfoPage {
   chosenLang = 'en';
   asset = {category: {}} as any;
   assets = [];
+  tempAsset = [];
   pet:string = "puppies";
   isAndroid:boolean = false;
   isSecurityCheckPassed:boolean = false;
   user = {} as Iuser;
-  isEditable:boolean = true;
+  isEditable:boolean=true;
+  disabledButton:boolean = true;
+  previousDate:any;
+
 
   constructor(public navCtrl:NavController,
               private loadingCtrl:LoadingController,
@@ -42,7 +46,43 @@ export class AssetInfoPage {
 
     this.isAndroid = platform.is('android');
     this.asset = this.navParams.get('asset');
+    this.tempAsset = this.navParams.get('asset');
 
+  }
+
+  onDateChange(event){
+
+    var newDate = event.split("T",1);
+    var oldDate = this.previousDate.split("T",1)
+
+    var oldDateUnix = (+new Date(oldDate).getTime())/1000;
+    var newDateUnix = (+new Date(newDate).getTime())/1000;
+
+    console.log(newDateUnix);
+    console.log(oldDateUnix);
+
+    if(newDateUnix === oldDateUnix){
+      this.disabledButton = true;
+      console.log(true);
+    }else{
+      this.disabledButton = false;
+      console.log(false);
+    }
+  }
+
+  onChange(keyCode){
+    //console.log(keyCode)
+    console.log(this.asset);
+    console.log(this.tempAsset);
+
+    if(JSON.stringify(this.asset)===JSON.stringify(this.tempAsset)){
+      this.disabledButton = true;
+      console.log(true);
+    }else{
+      this.disabledButton = false;
+      console.log(false);
+    }
+    
   }
 
   ionViewDidLoad() {
@@ -54,10 +94,11 @@ export class AssetInfoPage {
     });
   }
 
-  subscribeMyAssets() {
-    this.assetsService.myAssets.subscribe((assets:any[])=> {
-      this.assets = assets;
-      console.log(this.assets);
+
+  subscribeMyAssets(){
+    this.assetsService.myAssets.subscribe((assets:any[])=>{
+      this.assets=assets;
+
       console.log('asset info subscription');
 
       assets.forEach((asset)=> {
@@ -67,6 +108,17 @@ export class AssetInfoPage {
             this.slides.slideTo(0, 500);
         }
       });
+
+      //Storing assets temporary...
+      this.previousDate = this.asset.expectedHarvestDate;//new Date();
+      console.log(this.previousDate);
+      this.tempAsset=JSON.parse(JSON.stringify(this.asset));
+
+      console.log('main asset');
+      console.log(this.asset);
+      console.log('temp assets');
+      console.log(this.tempAsset);
+
     });
   }
 
@@ -232,6 +284,16 @@ export class AssetInfoPage {
       console.log('saved succesfully')
       loader.dismiss();
       this.toastService.presentToast('Saved Succesfully');
+      //Adding code here. Start....
+      this.disabledButton = true;
+      this.tempAsset = JSON.parse(JSON.stringify(this.asset));
+      //End..
+
+
+      console.log(this.asset);
+      console.log(this.tempAsset);
+
+
     }, (err)=> {
       console.log(err)
       loader.dismiss();

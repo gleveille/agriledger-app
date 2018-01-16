@@ -23,10 +23,12 @@ import {AssetsService} from "../../providers/assets.service";
 export class ProfilePage {
   serverUrl = ServerUrl;
   user:Iuser = {};
+  tempUser:Iuser = {};
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
   farm: string = "accountDetails";
-
+  disabledButton:boolean = true;
+  disabledFarmButton:boolean = true;
 
   constructor(public navCtrl:NavController,
               private actionSheetCtrl:ActionSheetController,
@@ -40,6 +42,43 @@ export class ProfilePage {
       farmDetails:{farmName:'',products: '',crops:'',grade:'',size:'',region:''},
       address:{line1:'',line2:'',city:'',province:''}
     }
+
+    this.tempUser.profiles={
+      farmDetails:{farmName:'',products: '',crops:'',grade:'',size:'',region:''},
+      address:{line1:'',line2:'',city:'',province:''}
+    }
+
+
+  }
+
+  onChange(keyCode){
+    //console.log(keyCode)
+    console.log(this.user.profiles);
+    console.log(this.tempUser.profiles);
+
+    if(JSON.stringify(this.user.profiles)===JSON.stringify(this.tempUser.profiles)){
+      this.disabledButton = true;
+      console.log(true);
+    }else{
+      this.disabledButton = false;
+      console.log(false);
+    }
+    
+  }
+
+  onFarmChange(keyCode){
+    //console.log(keyCode)
+    console.log(this.user.profiles);
+    console.log(this.tempUser.profiles);
+
+    if(JSON.stringify(this.user.profiles)===JSON.stringify(this.tempUser.profiles)){
+      this.disabledFarmButton = true;
+      console.log(true);
+    }else{
+      this.disabledFarmButton = false;
+      console.log(false);
+    }
+    
   }
 
   ionViewDidLoad() {
@@ -57,7 +96,11 @@ export class ProfilePage {
     this.userService.updateProfile(this.user).subscribe((data)=> {
       loader.dismiss();
 
-      this.toastService.presentToast('Profile Updated...')
+      this.toastService.presentToast('Profile Updated...');
+      //Adding code here. Start....
+      this.disabledButton = true;
+      this.tempUser = JSON.parse(JSON.stringify(this.user));
+      //End..
     }, (err)=> {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Profile could not be Updated...')
@@ -71,6 +114,9 @@ export class ProfilePage {
       if(!this.user.profiles.farmDetails){
         this.user.profiles.farmDetails={farmName:'',products: '',crops:'',grade:'',size:'',region:''}
       }
+
+      this.tempUser = JSON.parse(JSON.stringify(this.user));//changing code here...
+
     });
   }
 
@@ -159,6 +205,10 @@ export class ProfilePage {
       loader.dismiss();
 
       this.toastService.presentToast('Farm details Updated...')
+      //Adding code here. Start....
+      this.disabledFarmButton = true;
+      this.tempUser = JSON.parse(JSON.stringify(this.user));
+      //End..
     }, (err)=> {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Farm details could not be Updated...')

@@ -59,48 +59,49 @@
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Full Name'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.name"></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.name"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating text-capitalize>{{'Mobile Number'|translate}}</ion-label>
-          <ion-input type="tel" [(ngModel)]="user.profiles.phone"></ion-input>
+          <ion-input type="tel" (keyup)="onChange($event)"  [(ngModel)]="user.profiles.phone"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Wechat ID'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.weChat"></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.weChat"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Company name'|translate}}</ion-label>
-          <ion-input [(ngModel)]="user.profiles.company" type="text"></ion-input>
+          <ion-input [(ngModel)]="user.profiles.company" (keyup)="onChange($event)" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize style="display: inline-table;">{{'Address Line1 (Street address, P.O. box, c\o)'|translate}}
           </ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.address.line1"></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.line1"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize style="display: inline-table;">{{'Address Line2 (Unit, building, floor, etc.)'|translate}}
           </ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.address.line2"></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.line2"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'City'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.address.city"></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)"  [(ngModel)]="user.profiles.address.city"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'State/Province/Region'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.address.province"></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.province"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Registration number'|translate}}</ion-label>
-          <ion-input type="number" [(ngModel)]="user.profiles.registration"></ion-input>
+          <ion-input type="number" (keyup)="onChange($event)"  [(ngModel)]="user.profiles.registration"></ion-input>
         </ion-item>
       </ion-list>
-
+      <!-- (keyup)="onChange($event)" -->
       <ion-row>
         <ion-col>
-          <button (click)="updateProfile()" ion-button block class="btnHeight40Px">{{'Save'|translate}}</button>
+            <!-- [disabled]="disabledButton" -->
+          <button (click)="updateProfile()" [disabled]="disabledButton"   ion-button block class="btnHeight40Px">{{'Save'|translate}}</button>
         </ion-col>
       </ion-row>
 
@@ -110,34 +111,36 @@
 
       <ion-list>
         <ion-item>
+            
           <ion-label floating text-capitalize>{{'Farm Name'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.farmDetails.farmName"></ion-input>
+          <ion-input type="text" (keyup)="onFarmChange($event)"  [(ngModel)]="user.profiles.farmDetails.farmName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Products'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.farmDetails.products"></ion-input>
+          <ion-input type="text" (keyup)="onFarmChange($event)" [(ngModel)]="user.profiles.farmDetails.products"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Name of the crops'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.farmDetails.crops"></ion-input>
+          <ion-input type="text" (keyup)="onFarmChange($event)" [(ngModel)]="user.profiles.farmDetails.crops"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Grade'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.farmDetails.grade"></ion-input>
+          <ion-input type="text" (keyup)="onFarmChange($event)" [(ngModel)]="user.profiles.farmDetails.grade"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Size'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.farmDetails.size" type="text"></ion-input>
+          <ion-input type="text" (keyup)="onFarmChange($event)" [(ngModel)]="user.profiles.farmDetails.size" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'Region'|translate}}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.profiles.farmDetails.region" type="text"></ion-input>
+          <ion-input type="text" (keyup)="onFarmChange($event)" [(ngModel)]="user.profiles.farmDetails.region" type="text"></ion-input>
         </ion-item>
       </ion-list>
 
       <ion-row>
         <ion-col>
-          <button (click)="updateFarm()" ion-button block class="btnHeight40Px">{{'Save'|translate}}</button>
+            <!-- [disabled]="disabledButton" -->
+          <button (click)="updateFarm()" [disabled]="disabledFarmButton" ion-button block class="btnHeight40Px">{{'Save'|translate}}</button>
         </ion-col>
       </ion-row>
 

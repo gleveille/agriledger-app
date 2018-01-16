@@ -34,24 +34,25 @@
           {{'Asset category'|translate}}
         </ion-label>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize
-                     disabled></ion-input>
+
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize disabled></ion-input>
+
           <button ion-button clear item-end>{{'Level 1'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level2">
-          <ion-input type="text" [(ngModel)]="asset.category.level2" text-capitalize disabled></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="asset.category.level2" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 2'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level3">
-          <ion-input type="text" [(ngModel)]="asset.category.level3" text-capitalize disabled></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="asset.category.level3" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 3'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level4">
-          <ion-input type="text" [(ngModel)]="asset.category.level4" text-capitalize disabled></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="asset.category.level4" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 4'|translate}}</button>
         </ion-item>
         <ion-item *ngIf="asset.category.level5">
-          <ion-input type="text" [(ngModel)]="asset.category.level5" text-capitalize disabled></ion-input>
+          <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="asset.category.level5" text-capitalize disabled></ion-input>
           <button ion-button clear item-end>{{'Level 5'|translate}}</button>
         </ion-item>
       </ion-list>
@@ -59,13 +60,15 @@
         <ion-label floating>{{'Asset Name *'|translate}}</ion-label>
 
         <!-- [readonly]="isEditable" -->
-        <ion-input type="text" [(ngModel)]="asset.name" text-capitalize required></ion-input>
+        <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="asset.name" text-capitalize required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>{{'Grade *'|translate}}</ion-label>
         <ion-input type="text"
+
                    [(ngModel)]="asset.grade"
                    text-capitalize
+                   (keyup)="onChange($event)"
                    name="grade"
                    required></ion-input>
       </ion-item>
@@ -74,23 +77,28 @@
         <ion-input type="text"
                    [(ngModel)]="asset.expectedYield"
                    text-capitalize name="expectedYield"
-                   required></ion-input>
+                   required
+                   (keyup)="onChange($event)">
+                  </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Packaging *'|translate}}</ion-label>
         <ion-input type="text"
                    [(ngModel)]="asset.packaging"
-                   text-capitalize name="packaging"
-                   required></ion-input>
+                   (keyup)="onChange($event)" 
+                   text-capitalize name="packaging">
+                  </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>{{'Expected harvest date'|translate}}</ion-label>
         <ion-datetime displayFormat="MMM DD, YYYY"
+                      (keyup)="onChange($event)"
                       pickerFormat="MMM DD, YYYY"
                       min="{{minDate}}"
                       max="2100-10-31"
+                      (ngModelChange)="onDateChange($event)"
                       [(ngModel)]="asset.expectedHarvestDate"></ion-datetime>
       </ion-item>
       <ion-item>
@@ -98,6 +106,7 @@
         <ion-input type="text"
                    [(ngModel)]="asset.healthOfSoil"
                    text-capitalize
+                   (keyup)="onChange($event)"
                    name="healthOfSoil"></ion-input>
       </ion-item>
       <ion-item>
@@ -105,6 +114,7 @@
         <ion-input type="text"
                    [(ngModel)]="asset.landHistory"
                    text-capitalize
+                   (keyup)="onChange($event)"
                    name="landHistory"></ion-input>
       </ion-item>
 
@@ -113,6 +123,7 @@
         <ion-input type="text"
                    [(ngModel)]="asset.farmInvestments"
                    text-capitalize
+                   (keyup)="onChange($event)"
                    name="farmInvestments"></ion-input>
       </ion-item>
 
@@ -121,6 +132,7 @@
         <ion-input type="text"
                    [(ngModel)]="asset.additionalInformation"
                    text-capitalize
+                   (keyup)="onChange($event)"
                    name="additionalInformation"></ion-input>
       </ion-item>
       <ion-item>
@@ -128,14 +140,15 @@
         <ion-input type="text"
                    [(ngModel)]="asset.status"
                    text-capitalize
-        ></ion-input>
+                   (keyup)="onChange($event)">
+                  </ion-input>
       </ion-item>
 
       <ion-grid>
         <ion-row>
 
           <ion-col>
-            <button ion-button block class="btnHeight40Px" [disabled]="false" (click)="verifyBeforeUpdate()">
+            <button ion-button block class="btnHeight40Px" [disabled]="disabledButton" (click)="verifyBeforeUpdate()">
               {{registerPromise==='pending'?'Registering' :'SAVE'|translate}}
             </button>
           </ion-col>
