@@ -289,11 +289,6 @@ export class AssetInfoPage {
       this.tempAsset = JSON.parse(JSON.stringify(this.asset));
       //End..
 
-
-      console.log(this.asset);
-      console.log(this.tempAsset);
-
-
     }, (err)=> {
       console.log(err)
       loader.dismiss();
