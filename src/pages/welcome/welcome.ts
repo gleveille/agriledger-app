@@ -23,12 +23,13 @@ export class WelcomePage {
   constructor(public navCtrl:NavController,
               private translateService:TranslateServiceProvider, private storage:Storage) {
 
+
   }
 
   changeLang() {
     this.defaultLangauge = this.defaultLangauge === 'ch' ? 'en' : 'ch';
     this.translateService.changeLang(this.defaultLangauge);
-    this.showdropdown = false
+    this.showdropdown = false;
     console.log(this.defaultLangauge)
   }
 
