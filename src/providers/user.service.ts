@@ -18,7 +18,7 @@ import {Storage} from '@ionic/storage'
 @Injectable()
 export class UserService {
   private _user:BehaviorSubject<Iuser>;
-  dataStore:{user:Iuser} = {user: {}};
+  dataStore = {user: {profiles:{}}} as any
 
   user:Observable<Iuser>;
 
@@ -48,12 +48,10 @@ export class UserService {
         this.storage.set('accessToken', accessToken);
       })
       .catch((err)=> {
-
         console.log(err)
         return this.errorHandler.handle(err);
       })
   }
-
 
   getUserIdFromLocalStorage() {
     return this.storage.get('userId');
@@ -76,7 +74,6 @@ export class UserService {
       })
 
   };
-
 
   profilePicChanged(data:any) {
     this.dataStore.user.profiles.profileUrl = data;
@@ -135,7 +132,6 @@ export class UserService {
 
   };
 
-
   changePassword(oldPassword:string, newPassword:string) {
     return this.http.post(`${UserApi.changePassword.url()}`,
       {oldPassword: oldPassword, newPassword: newPassword}).do((data)=> {
@@ -175,6 +171,15 @@ export class UserService {
   resetState() {
 
     this.dataStore.user = JSON.parse(JSON.stringify({profileUrl: {}}))
+  }
+
+  profileDocumentsUploaded(data:{url:string,lat:number,long:number,hash:string}){
+    if(!this.dataStore.user.profiles.documents){
+      this.dataStore.user.profiles.documents=[];
+    }
+
+    this.dataStore.user.profiles.documents.push(data);
+    this._user.next(this.dataStore.user);
   }
 
 

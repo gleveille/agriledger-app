@@ -98,8 +98,7 @@ export class UploadProvider {
 
     return false;
   }
-
-
+  
   async upload(base64, config) {
     let url;
     if (config.uploadType === 'profile')
@@ -108,6 +107,8 @@ export class UploadProvider {
       url = ContainerApi.EvidencesUploadUrl();
     else if (config.uploadType === 'asset_documents')
       url = ContainerApi.AssetDocumentsUploadUrl();
+    else if (config.uploadType === 'profile_documents')
+      url = ContainerApi.ProfileDocumentsUploadUrl();
 
     let lat = '', long = '';
 
@@ -157,6 +158,10 @@ export class UploadProvider {
 
         if (config.uploadType === 'asset_documents') {
           this.assetService.documentsUploaded(config.assetId, obj);
+        }
+
+        if (config.uploadType === 'profile_documents') {
+          this.userService.profileDocumentsUploaded(obj);
         }
 
         this.toastService.presentToast('Uploaded');

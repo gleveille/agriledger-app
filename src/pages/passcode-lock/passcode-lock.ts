@@ -125,6 +125,7 @@ export class PasscodeLockPage {
       loader.present();
 
       this.user.profiles.passcode=passcode
+    console.log(this.user)
       this.userService.updateProfile(this.user).subscribe(()=>{
         loader.dismiss();
 

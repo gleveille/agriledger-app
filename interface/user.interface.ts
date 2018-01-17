@@ -1,3 +1,13 @@
+interface Idocument{
+  url?:string,
+  lat?:number,
+  long?:number,
+  hash?:string,
+  date?:string,
+  status?:string,
+  description?:string
+}
+
 export interface Iuser {
   profiles?: {
     id?:string,
@@ -13,6 +23,7 @@ export interface Iuser {
       long: number,
       hash:string
     },
+    documents?:Idocument[]
   },
   id?:string,
   username?:string,

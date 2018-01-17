@@ -14,8 +14,8 @@ import {TranslateServiceProvider} from "../../providers/translate-service";
 import {UploadProvider} from "../../providers/upload";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 import {AssetsService} from "../../providers/assets.service";
-import { IndexProvider } from '../../providers/index/index';
-import { AlertController } from 'ionic-angular';
+import {IndexProvider} from '../../providers/index/index';
+import {AlertController} from 'ionic-angular';
 
 
 @Component({
@@ -24,11 +24,18 @@ import { AlertController } from 'ionic-angular';
 })
 export class ProfilePage {
   serverUrl = ServerUrl;
-  user:Iuser = {};
-  tempUser:Iuser = {};
+  user={profiles:{
+    farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
+    documents: [],
+    address: {line1: '', line2: '', city: '', province: ''}}} as Iuser;
+  tempUser={profiles:{
+    farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
+    documents: [],
+    address: {line1: '', line2: '', city: '', province: ''}}} as Iuser;
+
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
-  farm: string = "accountDetails";
+  farm:string = "accountDetails";
   disabledButton:boolean = true;
   disabledFarmButton:boolean = true;
 
@@ -39,55 +46,46 @@ export class ProfilePage {
               private toastService:ToastProvider,
               private uploadService:UploadProvider,
               private userService:UserService,
-              private translateService:TranslateServiceProvider, 
-              private assetsService: AssetsService,
+              private translateService:TranslateServiceProvider,
+              private assetsService:AssetsService,
               private indexProvider:IndexProvider,
               private alertCtrl:AlertController) {
-    this.user.profiles={
-      farmDetails:{farmName:'',products: '',crops:'',grade:'',size:'',region:''},
-      address:{line1:'',line2:'',city:'',province:''}
-    }
-
-    this.tempUser.profiles={
-      farmDetails:{farmName:'',products: '',crops:'',grade:'',size:'',region:''},
-      address:{line1:'',line2:'',city:'',province:''}
-    }
 
 
   }
 
-  onChange(keyCode){
+  onChange(keyCode) {
     //console.log(keyCode)
     console.log(this.user.profiles);
     console.log(this.tempUser.profiles);
 
-    if(JSON.stringify(this.user.profiles)===JSON.stringify(this.tempUser.profiles)){
+    if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
       this.disabledButton = true;
       console.log(true);
-    }else{
+    } else {
       this.disabledButton = false;
       console.log(false);
     }
-    
+
   }
 
-  onFarmChange(keyCode){
+  onFarmChange(keyCode) {
     //console.log(keyCode)
     console.log(this.user.profiles);
     console.log(this.tempUser.profiles);
 
-    if(JSON.stringify(this.user.profiles)===JSON.stringify(this.tempUser.profiles)){
+    if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
       this.disabledFarmButton = true;
       console.log(true);
-    }else{
+    } else {
       this.disabledFarmButton = false;
       console.log(false);
     }
-    
+
   }
 
 
-  showWelcomeMessage(){
+  showWelcomeMessage() {
     let alert = this.alertCtrl.create({
       title: 'Welcome to Agriledger',
       subTitle: 'Please verify your details and edit if any corrections are required',
@@ -97,13 +95,12 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    if(this.indexProvider.selectedIndex === 4){
+    if (this.indexProvider.selectedIndex === 4) {
       this.showWelcomeMessage();
     }
 
     this.subscribeUser();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
-
   }
 
   updateProfile() {
@@ -130,33 +127,30 @@ export class ProfilePage {
   subscribeUser() {
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
-      if(!this.user.profiles.farmDetails){
-        this.user.profiles.farmDetails={farmName:'',products: '',crops:'',grade:'',size:'',region:''}
+      if (!this.user.profiles.farmDetails) {
+        this.user.profiles.farmDetails = {farmName: '', products: '', crops: '', grade: '', size: '', region: ''}
       }
-
       this.tempUser = JSON.parse(JSON.stringify(this.user));//changing code here...
 
     });
   }
 
-  verify(source:string) {
+  verify(source:string,uploadType:string) {
     let passcodeModal = this.modalController.create(PasscodeLockPage, {passcode: this.user.profiles.passcode});
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
       if (data && data.success === true) {
-        this.upload(source);
+        this.upload(source,uploadType);
       }
       else {
       }
     });
   }
 
-  async upload(source:string) {
-
-
+  async upload(source:string,uploadType:string) {
     const config:IUploadPageConfig = {
-      uploadType: 'profile', //profile,field
+      uploadType:uploadType, //profile,field
       id: this.user.profiles.id
     };
     let isUploaded;
@@ -174,6 +168,39 @@ export class ProfilePage {
     }
   }
 
+
+
+  presentActionSheetDocs() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Add Documents/Images',
+      buttons: [
+        {
+          text: 'From Gallery',
+          icon: 'folder-open',
+          handler: () => {
+            this.verify('album','profile_documents')
+            return;
+          }
+        },
+        {
+          text: 'From Camera',
+          icon: 'camera',
+          handler: () => {
+            this.verify('camera','profile_documents')
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Change Profile',
@@ -182,7 +209,7 @@ export class ProfilePage {
           text: 'From Gallery',
           icon: 'folder-open',
           handler: () => {
-            this.verify('album')
+            this.verify('album','profile')
             return;
           }
         },
@@ -190,7 +217,7 @@ export class ProfilePage {
           text: 'From Camera',
           icon: 'camera',
           handler: () => {
-            this.verify('camera')
+            this.verify('camera','profile')
 
           }
         },
@@ -234,8 +261,6 @@ export class ProfilePage {
 
     })
   }
-
-
 
 
 }
