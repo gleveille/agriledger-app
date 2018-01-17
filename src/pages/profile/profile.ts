@@ -94,11 +94,13 @@ export class ProfilePage {
       buttons: ['OK']
     });
     alert.present();
+    
   }
 
   ionViewDidLoad() {
     if(this.indexProvider.selectedIndex === 4){
       this.showWelcomeMessage();
+      this.indexProvider.selectedIndex = 0;
     }
 
     this.subscribeUser();
