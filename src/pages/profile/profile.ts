@@ -14,6 +14,8 @@ import {TranslateServiceProvider} from "../../providers/translate-service";
 import {UploadProvider} from "../../providers/upload";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 import {AssetsService} from "../../providers/assets.service";
+import { IndexProvider } from '../../providers/index/index';
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
@@ -37,7 +39,10 @@ export class ProfilePage {
               private toastService:ToastProvider,
               private uploadService:UploadProvider,
               private userService:UserService,
-              private translateService:TranslateServiceProvider, private assetsService: AssetsService) {
+              private translateService:TranslateServiceProvider, 
+              private assetsService: AssetsService,
+              private indexProvider:IndexProvider,
+              private alertCtrl:AlertController) {
     this.user.profiles={
       farmDetails:{farmName:'',products: '',crops:'',grade:'',size:'',region:''},
       address:{line1:'',line2:'',city:'',province:''}
@@ -81,7 +86,21 @@ export class ProfilePage {
     
   }
 
+
+  showWelcomeMessage(){
+    let alert = this.alertCtrl.create({
+      title: 'Welcome to Agriledger',
+      subTitle: 'Please verify your details and edit if any corrections are required',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
   ionViewDidLoad() {
+    if(this.indexProvider.selectedIndex === 4){
+      this.showWelcomeMessage();
+    }
+
     this.subscribeUser();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
 

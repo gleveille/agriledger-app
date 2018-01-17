@@ -3,6 +3,7 @@ import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {UserService} from "../../providers/user.service";
 import {ToastProvider} from "../../providers/toast";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
+import { IndexProvider } from '../../providers/index/index';
 
 @Component({
   selector: 'page-change-password',
@@ -16,7 +17,13 @@ export class ChangePasswordPage {
   constructor(public navCtrl:NavController,
               private loadingCtrl:LoadingController,
               public navParams:NavParams, private toastService:ToastProvider,
-              private userService:UserService) {
+              private userService:UserService,
+              private indexProvider:IndexProvider) {
+
+              /*
+              * This selected index value will be 4 for First time only...
+              */
+              this.indexProvider.selectedIndex = 4;
 
   }
 

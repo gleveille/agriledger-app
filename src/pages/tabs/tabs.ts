@@ -6,6 +6,8 @@ import {CommunityPage} from "../community/community";
 import {FinancePage} from "../finance/finance";
 import {HomePage} from "../home/home";
 import {UserService} from "../../providers/user.service";
+import { NavParams } from 'ionic-angular';
+import { IndexProvider } from '../../providers/index/index';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -17,10 +19,11 @@ export class TabsPage {
   tab3Root = InformationPage;
   tab4Root = FinancePage;
   tab5Root = ProfilePage;
+  selectedIndex:number;
 
 
-  constructor(private userService:UserService) {
-
+  constructor(private userService:UserService,private indexProvider:IndexProvider) {
+    this.selectedIndex = this.indexProvider.selectedIndex;
   }
 
   ionViewDidEnter() {

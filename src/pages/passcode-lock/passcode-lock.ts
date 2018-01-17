@@ -26,6 +26,7 @@ export class PasscodeLockPage {
               private loadingCtrl:LoadingController,
               private alertController:AlertController,
               private fingerprintService:FingerprintProvider) {
+
     this.user=this.userService.dataStore.user;
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;

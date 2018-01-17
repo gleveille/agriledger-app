@@ -63,6 +63,7 @@ import {PasscodeLockPage} from "../pages/passcode-lock/passcode-lock";
 import {LoanPage} from "../pages/loan/loan";
 import {WeatherPage} from "../pages/weather/weather";
 import {EmailSentPage} from "../pages/email-sent/email-sent";
+import { IndexProvider } from '../providers/index/index';
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -188,7 +189,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SocialSharing,
     Geolocation,
     Camera,
-    InAppBrowser
+    InAppBrowser,
+    IndexProvider
   ]
 })
 

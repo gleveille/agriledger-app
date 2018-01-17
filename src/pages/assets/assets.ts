@@ -25,6 +25,7 @@ export class AssetsPage {
 
   ionViewDidLoad() {
     this.subscribeMyAssets();
+    console.log(this.assets);
   }
 
 

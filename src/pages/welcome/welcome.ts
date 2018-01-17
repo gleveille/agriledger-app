@@ -38,7 +38,7 @@ export class WelcomePage {
   }
 
   signIn() {
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push(LoginPage,{selectedIndex:0});
   }
 
 
