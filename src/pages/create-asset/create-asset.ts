@@ -75,7 +75,7 @@ export class CreateAssetPage {
     this.deepestCategorySelected = false;
 
     if (level === 0) {
-
+      
       this.assetCategoriesLevelThree = [];
       this.assetCategoriesLevelFour = [];
       this.assetCategoriesLevelFive = [];

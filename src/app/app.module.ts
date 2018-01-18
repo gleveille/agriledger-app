@@ -64,6 +64,7 @@ import {LoanPage} from "../pages/loan/loan";
 import {WeatherPage} from "../pages/weather/weather";
 import {EmailSentPage} from "../pages/email-sent/email-sent";
 import { IndexProvider } from '../providers/index/index';
+import { ImageDialogPage } from '../pages/image-dialog/image-dialog';
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -103,7 +104,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasscodeLockPage,
     LoanPage,
     WeatherPage,
-    EmailSentPage
+    EmailSentPage,
+    ImageDialogPage
   ],
   imports: [
     HttpClientModule,
@@ -157,7 +159,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasscodeLockPage,
     LoanPage,
     WeatherPage,
-    EmailSentPage
+    EmailSentPage,
+    ImageDialogPage
 
 
 

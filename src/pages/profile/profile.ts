@@ -38,6 +38,15 @@ export class ProfilePage {
   farm:string = "accountDetails";
   disabledButton:boolean = true;
   disabledFarmButton:boolean = true;
+  allCountry:any=[];
+  allStates:any=[];
+  allCity:any=[];
+
+  statesData:any;
+  cityData:any;
+  countryName:string;
+  stateName:string;
+  cityName:string;
 
   constructor(public navCtrl:NavController,
               private actionSheetCtrl:ActionSheetController,
@@ -51,10 +60,40 @@ export class ProfilePage {
               private indexProvider:IndexProvider,
               private alertCtrl:AlertController) {
 
+    this.allCountry=['China','India'];
 
+    this.statesData={
+
+      China:['Anhui','Fujian','Gansu','Guangdong',
+        'Guizhou','Hainan','Hebei','Heilongjiang',
+        'Henan','Hubei','Hunan','Jiangsu','Jiangxi',
+        'Jilin','Liaoning','Qinghai','Shaanxi',
+        'Shandong','Shanxi','Sichuan','Yunnan','Zhejiang'],
+
+      India:['Karnataka']
+    }
+
+    this.cityData={
+      'Karnataka':['Bangalore']
+    }
   }
 
-  onChange(keyCode) {
+  onCountryChange(event){
+    
+    this.allStates = this.statesData[event];
+    this.allCity=[];
+    this.stateName=null;
+    this.cityName=null;
+  }
+
+  onStateChange(event){
+    this.cityName = null;  
+    this.allCity = this.cityData[event];
+  }
+
+
+  onChange(keyCode){
+
     //console.log(keyCode)
     console.log(this.user.profiles);
     console.log(this.tempUser.profiles);

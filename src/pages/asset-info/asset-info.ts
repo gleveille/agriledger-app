@@ -12,6 +12,7 @@ import {ToastProvider} from "../../providers/toast";
 import {FingerprintProvider} from "../../providers/fingerprint";
 import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 import {ServerUrl} from '../../app/api.config'
+import { ImageDialogPage } from '../image-dialog/image-dialog';
 
 @Component({
   selector: 'page-asset-info',
@@ -42,12 +43,19 @@ export class AssetInfoPage {
               private modalController:ModalController,
               private userService:UserService,
               public navParams:NavParams,
-              private assetsService:AssetsService, platform:Platform, private events:Events) {
+              private assetsService:AssetsService, 
+              platform:Platform, private events:Events,
+              private modalCtrl:ModalController) {
 
     this.isAndroid = platform.is('android');
     this.asset = this.navParams.get('asset');
     this.tempAsset = this.navParams.get('asset');
 
+  }
+
+  onImageClick(i:number,type:string){
+    let modal = this.modalCtrl.create(ImageDialogPage,{asset:this.asset,index:i,type},{showBackdrop:true, enableBackdropDismiss:true});
+    modal.present();
   }
 
   onDateChange(event){

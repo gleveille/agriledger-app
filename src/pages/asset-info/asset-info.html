@@ -173,9 +173,10 @@
           </div>
           <ion-grid>
             <ion-row align-items-center justify-content-center>
-              <ion-col col-auto align-self-center *ngFor="let evidence of asset.evidences">
+              <ion-col col-auto align-self-center *ngFor="let evidence of asset.evidences;let i=index;">
                 <div class="image">
-                  <img width="150" height="150" [src]="serverUrl+evidence.url" imageViewer/>
+                  <!--imageViewer-->
+                  <img width="150" height="150" [src]="serverUrl+evidence.url" (click)="onImageClick(i,'evidences')" />
                   <span *ngIf="evidence.date">{{evidence.date|moment:true}} ago</span>
                 </div>
               </ion-col>
@@ -207,9 +208,10 @@
           </div>
           <ion-grid>
             <ion-row align-items-center justify-content-center>
-              <ion-col col-auto align-self-center *ngFor="let document of asset.documents">
-                <div class="image">
-                  <img width="150" height="150" [src]="serverUrl+document.url" imageViewer/>
+              <ion-col col-auto align-self-center *ngFor="let document of asset.documents;let i=index;">
+                <div class="image"> 
+                  <!-- imageViewer -->
+                  <img width="150" height="150" [src]="serverUrl+document.url" (click)="onImageClick(i,'documents')"/>
                   <span *ngIf="document.date">{{document.date|moment:true}} ago</span>
                 </div>
               </ion-col>
