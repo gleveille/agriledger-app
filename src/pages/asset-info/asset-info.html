@@ -86,7 +86,7 @@
         <ion-label floating>{{'Packaging *'|translate}}</ion-label>
         <ion-input type="text"
                    [(ngModel)]="asset.packaging"
-                   (keyup)="onChange($event)" 
+                   (keyup)="onChange($event)"
                    text-capitalize name="packaging">
                   </ion-input>
       </ion-item>
@@ -120,7 +120,7 @@
 
       <ion-item>
         <ion-label floating>{{'Farm Investments'|translate}}</ion-label>
-        <ion-input type="text"
+        <ion-input type="number"
                    [(ngModel)]="asset.farmInvestments"
                    text-capitalize
                    (keyup)="onChange($event)"
@@ -146,9 +146,14 @@
 
       <ion-grid>
         <ion-row>
-
-          <ion-col>
-            <button ion-button block class="btnHeight40Px" [disabled]="disabledButton" (click)="verifyBeforeUpdate()">
+          <ion-col *ngIf="asset.status==='available'">
+            <button ion-button clear style="color: red; letter-spacing: 2px;" class="btnHeight40Px" (click)="verifyBeforeDelete()">
+              <ion-icon name="trash"></ion-icon>
+              &nbsp; {{registerPromise==='pending'?'Registering' :'DELETE'|translate}}
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button style="width: 120px" class="btnHeight40Px" [disabled]="disabledButton" (click)="verifyBeforeUpdate()">
               {{registerPromise==='pending'?'Registering' :'SAVE'|translate}}
             </button>
           </ion-col>

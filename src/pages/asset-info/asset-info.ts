@@ -50,7 +50,6 @@ export class AssetInfoPage {
     this.isAndroid = platform.is('android');
     this.asset = this.navParams.get('asset');
     this.tempAsset = this.navParams.get('asset');
-
   }
 
   onImageClick(i:number,type:string){
@@ -90,7 +89,7 @@ export class AssetInfoPage {
       this.disabledButton = false;
       console.log(false);
     }
-    
+
   }
 
   ionViewDidLoad() {
@@ -101,7 +100,6 @@ export class AssetInfoPage {
       this.user = user;
     });
   }
-
 
   subscribeMyAssets(){
     this.assetsService.myAssets.subscribe((assets:any[])=>{
@@ -302,6 +300,36 @@ export class AssetInfoPage {
       loader.dismiss();
       this.toastService.presentToast('Something went wrong');
     })
+  }
+
+  deleteAsset() {
+    let loader = this.loadingCtrl.create({
+      content: 'Deleting Asset Details..'
+    });
+    loader.present();
+    this.assetsService.deleteAsset(this.asset).subscribe((data)=> {
+      console.log('Deleted succesfully')
+      loader.dismiss();
+      this.navCtrl.pop();
+      this.toastService.presentToast('Deleted Succesfully');
+    }, (err)=> {
+      console.log(err)
+      loader.dismiss();
+      this.toastService.presentToast('Something went wrong');
+    })
+  }
+
+  verifyBeforeDelete() {
+    let passcodeModal = this.modalController.create(PasscodeLockPage, {passcode: this.user.profiles.passcode});
+    passcodeModal.present();
+    passcodeModal.onDidDismiss(data => {
+      console.log(data);
+      if (data && data.success === true) {
+        this.deleteAsset();
+      }
+      else {
+      }
+    });
   }
 
   // onEdit(){
