@@ -28,11 +28,11 @@ export class ProfilePage {
   user={profiles:{
     farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
     documents: [],
-    address: {line1: '', line2: '', city: '', province: ''}}} as Iuser;
+    address: {line1: '', line2: '', city: '', province: '',country:''}}} as Iuser;
   tempUser={profiles:{
     farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
     documents: [],
-    address: {line1: '', line2: '', city: '', province: ''}}} as Iuser;
+    address: {line1: '', line2: '', city: '', province: '',country:''}}} as Iuser;
 
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
@@ -91,13 +91,29 @@ export class ProfilePage {
     
     this.allStates = this.statesData[event];
     this.allCity=[];
-    this.stateName=null;
-    this.cityName=null;
+    this.user.profiles.address.province=null;
+    this.user.profiles.address.city=null;
+
+    if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
+      this.disabledButton = true;
+      console.log(true);
+    } else {
+      this.disabledButton = false;
+      console.log(false);
+    }
   }
 
   onStateChange(event){
-    this.cityName = null;  
+    this.user.profiles.address.city = null;  
     this.allCity = this.cityData[event];
+
+    if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
+      this.disabledButton = true;
+      console.log(true);
+    } else {
+      this.disabledButton = false;
+      console.log(false);
+    }
   }
 
 
@@ -151,6 +167,11 @@ export class ProfilePage {
 
     this.subscribeUser();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
+
+
+
+    console.log('Profile details');
+    console.log(this.user);
   }
 
   updateProfile() {
