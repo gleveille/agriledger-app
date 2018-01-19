@@ -16,6 +16,7 @@ import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
 import {AssetsService} from "../../providers/assets.service";
 import {IndexProvider} from '../../providers/index/index';
 import {AlertController} from 'ionic-angular';
+import { UserDocumentDialogPage } from '../user-document-dialog/user-document-dialog';
 
 
 @Component({
@@ -58,7 +59,8 @@ export class ProfilePage {
               private translateService:TranslateServiceProvider,
               private assetsService:AssetsService,
               private indexProvider:IndexProvider,
-              private alertCtrl:AlertController) {
+              private alertCtrl:AlertController,
+              private modalCtrl:ModalController) {
 
     this.allCountry=['China'];
 
@@ -78,6 +80,13 @@ export class ProfilePage {
       'Guangdong': ['Guangzhou','Shenzhen','Dongguan','Foshan','Shantou','Zhongshan','Huizhou','Jiangmen','Zhuhai']
     }
   }
+
+
+  onImageClick(i:number,type:string){
+    let modal = this.modalCtrl.create(UserDocumentDialogPage,{user:this.user,index:i,type},{showBackdrop:true, enableBackdropDismiss:true});
+    modal.present();
+  }
+
 
   onCountryChange(event){
 

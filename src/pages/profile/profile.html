@@ -202,9 +202,9 @@
           </div>
           <ion-grid>
             <ion-row align-items-center justify-content-center>
-              <ion-col col-auto align-self-center *ngFor="let document of user.profiles.documents">
+              <ion-col col-auto align-self-center *ngFor="let document of user.profiles.documents; let i=index;">
                 <div class="image">
-                  <img width="150" height="150" [src]="serverUrl+document.url" imageViewer/>
+                  <img width="150" height="150" [src]="serverUrl+document.url" (click)="onImageClick(i,'documents')"/>
                   <span *ngIf="document.date">{{document.date|moment:true}} ago</span>
                 </div>
               </ion-col>
