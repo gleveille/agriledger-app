@@ -36,11 +36,11 @@
           <i text-center style="opacity: 0.8; margin: 0px; font-size: 10px">Member since {{user.createdAt|moment:true}}</i>
         <br>
           <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='pending'" text-center style="font-size: 10px">
-              Profile updates is pending for approval</i>
+              Profile update is pending for approval by the Operations team</i>
           <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='approved'" text-center style="font-size: 10px">
-              Profile updates is aprroved</i>
+              Profile updates have been approved</i>
           <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='rejected'" text-center style="font-size: 10px">
-              Profile updates is rejected</i>
+              Profile updates were rejected</i>
 
       </ion-col>
 
