@@ -90,10 +90,9 @@ export class ProfilePage {
 
   onCountryChange(event){
 
+    console.log('event 1')
     this.allStates = this.statesData[event];
     this.allCity=[];
-    this.user.profiles.address.province=null;
-    this.user.profiles.address.city=null;
 
     if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
       this.disabledButton = true;
@@ -106,8 +105,8 @@ export class ProfilePage {
 
   onStateChange(event){
 
-    this.user.profiles.address.city = null;  
-
+    console.log('event 2')
+    
     this.allCity = this.cityData[event];
 
     if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
@@ -120,7 +119,20 @@ export class ProfilePage {
   }
 
 
+  onCityChange(event){
+    if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
+      this.disabledButton = true;
+      console.log(true);
+    } else {
+      this.disabledButton = false;
+      console.log(false);
+    }
+  }
+
+
   onChange(keyCode){
+    console.log('event31')
+    
 
     //console.log(keyCode)
     console.log(this.user.profiles);
@@ -137,6 +149,8 @@ export class ProfilePage {
   }
 
   onFarmChange(keyCode) {
+    console.log('event 4')
+    
     //console.log(keyCode)
     console.log(this.user.profiles);
     console.log(this.tempUser.profiles);
@@ -199,8 +213,11 @@ export class ProfilePage {
   }
 
   subscribeUser() {
+    console.log('inside ')
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
+      console.log(this.user)
+      
       if (!this.user.profiles.farmDetails) {
         this.user.profiles.farmDetails = {farmName: '', products: '', crops: '', grade: '', size: '', region: ''}
       }

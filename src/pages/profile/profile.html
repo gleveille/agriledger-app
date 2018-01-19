@@ -101,17 +101,18 @@
           </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="allStates?.length">
+        <!-- *ngIf="allStates?.length" -->
+        <ion-item >
 
             <ion-label floating>States/Provinces</ion-label>
             <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onStateChange($event)">
               <ion-option  *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
             </ion-select>
           </ion-item>
-
-          <ion-item *ngIf="allCity?.length">
+          <!-- *ngIf="allCity?.length" -->
+          <ion-item>
               <ion-label floating>City</ion-label>
-              <ion-select [(ngModel)]="user.profiles.address.city">
+              <ion-select [(ngModel)]="user.profiles.address.city" (ionChange)="onCityChange($event)">
                 <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
               </ion-select>
             </ion-item>

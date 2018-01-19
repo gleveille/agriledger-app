@@ -8,7 +8,6 @@ import { ToastProvider } from '../../providers/toast';
 import { UserService } from '../../providers/user.service';
 
 
-@IonicPage()
 @Component({
   selector: 'page-user-document-dialog',
   templateUrl: 'user-document-dialog.html',

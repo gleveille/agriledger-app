@@ -6,7 +6,6 @@ import { AssetsService } from '../../providers/assets.service';
 import { ToastProvider } from '../../providers/toast';
 import { LoadingController } from 'ionic-angular';
 
-@IonicPage()
 @Component({
   selector: 'page-image-dialog',
   templateUrl: 'image-dialog.html',
