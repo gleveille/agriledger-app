@@ -102,6 +102,9 @@ export class UserService {
   };
 
   loadUser() {
+
+    console.log('insise loadddddd')
+    
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
       .concatMap((userId)=> {
         console.log('userId ', userId)
@@ -123,8 +126,10 @@ export class UserService {
         return user;
       })
       .do((user:Iuser)=> {
+        console.log('...................')
+        console.log(user)
         this.dataStore.user = user;
-        this._user.next(this.dataStore.user);
+        this._user.next(JSON.parse(JSON.stringify(this.dataStore.user)));
       })
       .catch((err)=> {
         return this.errorHandler.handle(err);

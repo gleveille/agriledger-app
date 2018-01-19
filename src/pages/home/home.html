@@ -22,62 +22,48 @@
   </ion-row>
 
 
-
-
   <section>
     <page-weather [showViewMoreButton]="true"></page-weather>
   </section>
 
   <section>
-    <ion-card class="card-background" >
+    <ion-card class="card-background">
       <ion-card-header style="text-align: left !important;">
         Asset Summary
       </ion-card-header>
       <hr>
 
-      <ion-spinner  *ngIf="loadingAssetHttpRequest==='pending'"></ion-spinner>
-
-
+      <ion-spinner *ngIf="loadingAssetHttpRequest==='pending'"></ion-spinner>
       <ion-card-content *ngIf="loadingAssetHttpRequest==='resolved'" text-center no-padding>
-
-          <ion-row no-padding>
-            <ion-col col-12 no-padding *ngIf="assets.length">
-
-              <canvas
-                baseChart
-                [data]="doughnutChartData"
-                [labels]="doughnutChartLabels"
-                [chartType]="doughnutChartType">
-
-              </canvas>
-            </ion-col>
-
-            <ion-col text-center *ngIf="!assets.length">
-              <p text-center style="opacity: 0.6">Assets not available.</p>
-
-            </ion-col>
-
-
-          </ion-row>
+        <ion-row no-padding>
+          <ion-col col-12 no-padding *ngIf="assets.length">
+            <canvas
+              baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </ion-col>
+          <ion-col text-center *ngIf="!assets.length">
+            <p text-center style="opacity: 0.6">Assets not available.</p>
+          </ion-col>
+        </ion-row>
 
         <ion-row>
           <ion-col col-12 text-right>
             <button ion-button clear (click)="goToViewAssetPage()" *ngIf="assets.length">VIEW ASSET</button>
-            <button ion-button clear style="padding-right: 12px;" no-padding (click)="goToCreateAssetPage()">CREATE ASSET</button>
+            <button ion-button clear style="padding-right: 12px;" no-padding (click)="goToCreateAssetPage()">CREATE
+              ASSET
+            </button>
           </ion-col>
         </ion-row>
-
       </ion-card-content>
     </ion-card>
-
   </section>
-
-
 
 
   <section>
     <page-loan></page-loan>
-
   </section>
 
 

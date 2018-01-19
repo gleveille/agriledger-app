@@ -165,9 +165,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImageDialogPage,
     UserDocumentDialogPage
 
-
-
-
   ],
   providers: [
     {
