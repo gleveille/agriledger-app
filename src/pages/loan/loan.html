@@ -5,30 +5,24 @@
   <hr>
 
   <ion-card-content no-padding text-center>
-
     <ion-row>
       <ion-col col-12 padding>
-
         <p text-left>Loan Amount</p>
         <ion-range no-padding min="5000" max="50000" step="5000" [(ngModel)]="loanAmount"
                    (ionChange)="sliderChange($event,'amount')">
           <ion-label range-right>{{loanAmount}} &yen;</ion-label>
         </ion-range>
-
         <p text-left>Interest Rate</p>
         <ion-range no-padding min="1" max="20" [(ngModel)]="loanInterest"
                    (ionChange)="sliderChange($event,'rate')">
           <ion-label range-right>{{loanInterest}} %</ion-label>
         </ion-range>
-
         <p text-left>Tenure</p>
         <ion-range no-padding min="1" max="36" [(ngModel)]="loanTenure"
                    (ionChange)="sliderChange($event,'tenure')">
           <ion-label range-right>{{loanTenure}} Month</ion-label>
-
         </ion-range>
       </ion-col>
-
     </ion-row>
 
     <ion-row justify-content-center align-items-center>
@@ -71,7 +65,6 @@
           </ion-col>
         </ion-row>
       </ion-col>
-
       <ion-col col-12 text-right>
         <button ion-button clear style="padding-right: 12px;" no-padding>APPLY NOW</button>
       </ion-col>

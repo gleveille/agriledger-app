@@ -135,6 +135,7 @@
                    (keyup)="onChange($event)"
                    name="additionalInformation"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label floating>{{'Asset Status'|translate}}</ion-label>
         <ion-input type="text"
@@ -147,9 +148,8 @@
       <ion-grid>
         <ion-row>
           <ion-col *ngIf="asset.status==='available'">
-            <button ion-button clear style="color: red; letter-spacing: 2px;" class="btnHeight40Px" (click)="verifyBeforeDelete()">
-              <ion-icon name="trash"></ion-icon>
-              &nbsp; {{registerPromise==='pending'?'Registering' :'DELETE'|translate}}
+            <button ion-button style="width: 120px" class="btnHeight40Px" color="danger" (click)="verifyBeforeDelete()">
+              {{registerPromise==='pending'?'Registering' :'DELETE'|translate}}
             </button>
           </ion-col>
           <ion-col text-right>
@@ -214,7 +214,7 @@
           <ion-grid>
             <ion-row align-items-center justify-content-center>
               <ion-col col-auto align-self-center *ngFor="let document of asset.documents;let i=index;">
-                <div class="image"> 
+                <div class="image">
                   <!-- imageViewer -->
                   <img width="150" height="150" [src]="serverUrl+document.url" (click)="onImageClick(i,'documents')"/>
                   <span *ngIf="document.date">{{document.date|moment:true}} ago</span>

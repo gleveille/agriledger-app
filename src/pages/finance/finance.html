@@ -18,20 +18,18 @@
 
 <ion-content class="my-overlay">
 
-  <div [ngSwitch]="segmentName" >
-
-    <section *ngSwitchCase="'loan'" >
-          <div style="width: 100%; text-align: center">
-            <h1 class="textCenter">COMING SOON</h1>
-          </div>
-          <page-loan></page-loan>
+  <div [ngSwitch]="segmentName">
+    <section *ngSwitchCase="'loan'">
+      <div style="width: 100%; text-align: center">
+        <h6 class="textCenter">COMING SOON</h6>
+      </div>
+      <page-loan></page-loan>
     </section>
 
     <section *ngSwitchCase="'insurance'">
       <div style="width: 100%; text-align: center">
-        <h1 class="textCenter">COMING SOON</h1>
+        <h6 class="textCenter">COMING SOON</h6>
       </div>
-
       <!--<ion-grid>
         <ion-row>
           <ion-col no-padding>
@@ -60,8 +58,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>-->
-
-
     </section>
 
   </div>
