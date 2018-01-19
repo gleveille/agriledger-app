@@ -164,5 +164,18 @@
   "OK":"OK",
   "CANCEL":"CANCEL",
   "Chinese":"Chinese",
-  "Grade *": "Grade *"
+  "Grade *": "Grade *",
+  "Country":"Country",
+  "States/Provinces/Region":"States/Provinces/Region",
+  "City":"City",
+  "Farm Name":"Farm Name",
+  "Products":"Products",
+  "Name of the crops":"Name of the crops",
+  "Grade":"Grade",
+  "Size":"Size",
+  "Region":"Region",
+  "Full Name":"Full Name",
+  "Expected Yield *":"Expected Yield *",
+  "Packaging *":"Packaging *",
+  "Health of Soil":"Health of Soil"
 }

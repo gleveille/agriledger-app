@@ -167,6 +167,18 @@
   "ok":"好",
   "cancel":"取消",
   "Chinese":"中文",
-  "Grade *": "年级*"
+  "Grade *": "年级*",
+  "Country":"国家",
+  "States/Provinces/Region":"州/省/地区",
+  "City":"市",
+  "Farm Name":"农场名称",
+  "Products":"制品",
+  "Name of the crops":"庄稼的名字",
+  "Grade":"年级",
+  "Size":"尺寸",
+  "Region":"地区",
+  "Expected Yield *":"预期收益*",
+  "Packaging *":"打包 *",
+  "Health of Soil":"土壤健康"
 
 }

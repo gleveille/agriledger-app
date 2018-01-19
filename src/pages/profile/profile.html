@@ -35,11 +35,11 @@
       </p>
           <i text-center style="opacity: 0.8; margin: 0px; font-size: 10px">Member since {{user.createdAt|moment:true}}</i>
         <br>
-          <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='pending'" text-center style="font-size: 10px">
-              Profile updates is pending for approval</i>
-          <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='approved'" text-center style="font-size: 10px">
+          <i style="opacity: 0.8; margin: 0px; font-size: 10px;" *ngIf="user?.profiles?.verificationStatus==='pending'" text-center>
+              Profile updates is pending for approval by Ops</i>
+          <i style="opacity: 0.8; margin: 0px; font-size: 10px;" *ngIf="user?.profiles?.verificationStatus==='approved'" text-center>
               Profile updates is aprroved</i>
-          <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='rejected'" text-center style="font-size: 10px">
+          <i style="opacity: 0.8; margin: 0px; font-size: 10px;" *ngIf="user?.profiles?.verificationStatus==='rejected'" text-center>
               Profile updates is rejected</i>
 
       </ion-col>
@@ -95,7 +95,7 @@
         <!-- Start Here  -->
 
         <ion-item>
-          <ion-label floating>Country</ion-label>
+          <ion-label floating>{{'Country'|translate}}</ion-label>
           <ion-select [(ngModel)]="user.profiles.address.country" (ionChange)="onCountryChange($event)">
             <ion-option *ngFor="let country of allCountry; let i=index">{{country}}</ion-option>
           </ion-select>
@@ -104,14 +104,14 @@
         <!-- *ngIf="allStates?.length" -->
         <ion-item >
 
-            <ion-label floating>States/Provinces</ion-label>
+            <ion-label floating>{{'States/Provinces/Region'| translate}}</ion-label>
             <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onStateChange($event)">
               <ion-option  *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
             </ion-select>
           </ion-item>
           <!-- *ngIf="allCity?.length" -->
           <ion-item>
-              <ion-label floating>City</ion-label>
+              <ion-label floating>{{'City'|translate}}</ion-label>
               <ion-select [(ngModel)]="user.profiles.address.city" (ionChange)="onCityChange($event)">
                 <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
               </ion-select>
