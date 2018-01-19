@@ -60,7 +60,7 @@ export class ProfilePage {
               private indexProvider:IndexProvider,
               private alertCtrl:AlertController) {
 
-    this.allCountry=['China','India'];
+    this.allCountry=['China'];
 
     this.statesData={
 
@@ -68,18 +68,19 @@ export class ProfilePage {
         'Guizhou','Hainan','Hebei','Heilongjiang',
         'Henan','Hubei','Hunan','Jiangsu','Jiangxi',
         'Jilin','Liaoning','Qinghai','Shaanxi',
-        'Shandong','Shanxi','Sichuan','Yunnan','Zhejiang'],
-
-      India:['Karnataka']
+        'Shandong','Shanxi','Sichuan','Yunnan','Zhejiang']
     }
 
     this.cityData={
-      'Karnataka':['Bangalore']
+      'Anhui': ['Hefei','Huainan','Wuhu','Huaibei','Bengbu','Fuyang','Suzhou','Lu an','Ma anshan','Anqing','Tongling'],
+      'Fujian': ['Xiamen','Fuzhou','Jinjiang','	Quanzhou','Putian','Nan an','Zhangzhou','Fuqing','Shishi','Hui an','Longyan'],
+      'Gansu': ['Lanzhou','Tianshui','Baiyin','Wuwei','Jiuquan','Pingliang','Linxia','Zhangye','Jiayuguan	'],
+      'Guangdong': ['Guangzhou','Shenzhen','Dongguan','Foshan','Shantou','Zhongshan','Huizhou','Jiangmen','Zhuhai']
     }
   }
 
   onCountryChange(event){
-    
+
     this.allStates = this.statesData[event];
     this.allCity=[];
     this.stateName=null;
@@ -87,7 +88,7 @@ export class ProfilePage {
   }
 
   onStateChange(event){
-    this.cityName = null;  
+    this.cityName = null;
     this.allCity = this.cityData[event];
   }
 
@@ -131,7 +132,7 @@ export class ProfilePage {
       buttons: ['OK']
     });
     alert.present();
-    
+
   }
 
   ionViewDidLoad() {

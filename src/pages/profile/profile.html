@@ -64,7 +64,6 @@
           <ion-label floating text-capitalize>{{'Full Name'|translate}}</ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.name"></ion-input>
         </ion-item>
-
         <ion-item>
           <ion-label floating text-capitalize>{{'Mobile Number'|translate}}</ion-label>
           <ion-input type="tel" (keyup)="onChange($event)" [(ngModel)]="user.profiles.phone"></ion-input>
@@ -77,13 +76,11 @@
           <ion-label floating text-capitalize>{{'Company name'|translate}}</ion-label>
           <ion-input [(ngModel)]="user.profiles.company" (keyup)="onChange($event)" type="text"></ion-input>
         </ion-item>
-        <ion-item>
-
-          <ion-label floating text-capitalize style="display: inline-table;">{{'Address Line 1 (Street address, P.O. box, c\o)'|translate}}
+        <!--<ion-item>
+          <ion-label floating text-capitalize style="display: inline-table;">{{'Address Line 1 (Street address, P.O.box, c\o)'|translate}}
           </ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.line1"></ion-input>
-        </ion-item>
-
+        </ion-item>-->
 
         <!-- Start Here  -->
 
@@ -95,35 +92,34 @@
         </ion-item>
 
         <ion-item *ngIf="allStates?.length">
-            <ion-label floating>States/Provinces</ion-label>
-            <ion-select [(ngModel)]="stateName" (ionChange)="onStateChange($event)">
-              <ion-option  *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-label floating>Provinces</ion-label>
+          <ion-select [(ngModel)]="stateName" (ionChange)="onStateChange($event)">
+            <ion-option *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
+          </ion-select>
+        </ion-item>
 
-          <ion-item *ngIf="allCity?.length">
-              <ion-label floating>City</ion-label>
-              <ion-select [(ngModel)]="cityName">
-                <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
-              </ion-select>
-            </ion-item>
-        
+        <ion-item *ngIf="allCity?.length">
+          <ion-label floating>City</ion-label>
+          <ion-select [(ngModel)]="cityName">
+            <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
+          </ion-select>
+        </ion-item>
+
         <!-- End Here  -->
-
 
         <ion-item>
           <ion-label floating text-capitalize style="display: inline-table;">{{'Address Line 2 (Unit, building, floor, etc.)'|translate}}
           </ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.line2"></ion-input>
         </ion-item>
-        <ion-item>
+        <!--<ion-item>
           <ion-label floating text-capitalize>{{'City'|translate}}</ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.city"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating text-capitalize>{{'State/Province/Region'|translate}}</ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.province"></ion-input>
-        </ion-item>
+        </ion-item>-->
         <ion-item>
           <ion-label floating text-capitalize>{{'Registration number'|translate}}</ion-label>
           <ion-input type="number" (keyup)="onChange($event)" [(ngModel)]="user.profiles.registration"></ion-input>
@@ -200,7 +196,8 @@
               </button>
             </div>
           </ion-list-header>
-          <div text-center *ngIf="!user.profiles.documents || (user.profiles.documents && !user.profiles.documents.length)">
+          <div text-center
+               *ngIf="!user.profiles.documents || (user.profiles.documents && !user.profiles.documents.length)">
             <h4 style="opacity: 0.6">No Documents/Images uploaded</h4>
           </div>
           <ion-grid>
