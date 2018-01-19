@@ -43,8 +43,8 @@
               Profile updates is rejected</i>
 
       </ion-col>
-  
-     
+
+
   </ion-row>
 
   <ion-toolbar no-border-top style="padding: 0px; min-height: 0px;">
@@ -116,13 +116,13 @@
                 <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
               </ion-select>
             </ion-item>
-        
+
         <!-- End Here  -->
 
-      
+
 
         <ion-item>
-          <ion-label floating text-capitalize style="display: inline-table;">{{'Address Line 2 (Unit, building, floor, etc.)'|translate}}
+          <ion-label floating style="display: inline-table;">{{'Address Line 2 (Unit, Building, Floor, etc.)'|translate}}
           </ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.line2"></ion-input>
         </ion-item>

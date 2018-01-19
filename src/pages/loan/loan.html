@@ -5,33 +5,24 @@
   <hr>
 
   <ion-card-content no-padding text-center>
-
     <ion-row>
       <ion-col col-12 padding>
-
         <p text-left>Loan Amount</p>
-        <ion-range no-padding min="5000" max="50000" step="5000" pin="true" [(ngModel)]="loanAmount"
+        <ion-range no-padding min="5000" max="50000" step="5000" [(ngModel)]="loanAmount"
                    (ionChange)="sliderChange($event,'amount')">
           <ion-label range-right>{{loanAmount}} &yen;</ion-label>
-
         </ion-range>
-
         <p text-left>Interest Rate</p>
-        <ion-range no-padding min="1" max="20" pin="true" [(ngModel)]="loanInterest"
+        <ion-range no-padding min="1" max="20" [(ngModel)]="loanInterest"
                    (ionChange)="sliderChange($event,'rate')">
           <ion-label range-right>{{loanInterest}} %</ion-label>
-
         </ion-range>
-
         <p text-left>Tenure</p>
-        <ion-range no-padding min="1" max="36" pin="true" [(ngModel)]="loanTenure"
+        <ion-range no-padding min="1" max="36" [(ngModel)]="loanTenure"
                    (ionChange)="sliderChange($event,'tenure')">
-
           <ion-label range-right>{{loanTenure}} Month</ion-label>
-
         </ion-range>
       </ion-col>
-
     </ion-row>
 
     <ion-row justify-content-center align-items-center>
@@ -43,9 +34,7 @@
           <p>
             EMI / MONTH
           </p>
-
         </div>
-
       </ion-col>
     </ion-row>
 
@@ -54,35 +43,28 @@
       <ion-col col-12 no-padding>
         <ion-row align-items-center>
           <ion-col col-4 style="border-right: 1px solid gray">
-
             <h4>PRINCIPAL</h4>
             <p class="loan-content">
               <ion-icon class="loan-content-icon" style="color: #917cbd" name="logo-yen"></ion-icon>
               <span class="loan-content-text" style="color: #917cbd">{{loanAmount}}</span>
             </p>
-
           </ion-col>
           <ion-col col-4 style="border-right: 1px solid gray">
-
             <h4>INTEREST</h4>
             <p class="loan-content">
               <ion-icon class="loan-content-icon" style="color: #ff5b74" name="logo-yen"></ion-icon>
-              <span class="loan-content-text" style="color: #ff5b74">{{loanInterest}}</span>
-
+              <span class="loan-content-text" style="color: #ff5b74">{{loanInterest}} %</span>
             </p>
           </ion-col>
           <ion-col col-4>
-
             <h4>FEE</h4>
             <p class="loan-content">
               <ion-icon class="loan-content-icon" name="logo-yen"></ion-icon>
               <span class="loan-content-text">{{loanFee}}</span>
-
             </p>
           </ion-col>
         </ion-row>
       </ion-col>
-
       <ion-col col-12 text-right>
         <button ion-button clear style="padding-right: 12px;" no-padding>APPLY NOW</button>
       </ion-col>

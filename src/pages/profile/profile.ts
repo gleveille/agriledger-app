@@ -77,7 +77,25 @@ export class ProfilePage {
       'Anhui': ['Hefei','Huainan','Wuhu','Huaibei','Bengbu','Fuyang','Suzhou','Lu an','Ma anshan','Anqing','Tongling'],
       'Fujian': ['Xiamen','Fuzhou','Jinjiang','	Quanzhou','Putian','Nan an','Zhangzhou','Fuqing','Shishi','Hui an','Longyan'],
       'Gansu': ['Lanzhou','Tianshui','Baiyin','Wuwei','Jiuquan','Pingliang','Linxia','Zhangye','Jiayuguan	'],
-      'Guangdong': ['Guangzhou','Shenzhen','Dongguan','Foshan','Shantou','Zhongshan','Huizhou','Jiangmen','Zhuhai']
+      'Guangdong': ['Guangzhou','Shenzhen','Dongguan','Foshan','Shantou','Zhongshan','Huizhou','Jiangmen','Zhuhai'],
+      'Guizhou': ['Guiyang','	Zunyi','Liupanshui','Bijie','Anshun','Xingyi','Kaili','Weining'],
+      'Hainan': ['Haikou','Sanya','Danzhou','Wenchang','Wanning','Qionghai','Chengmai','Lingao','Dongfang'],
+      'Hebei': ['Shijiazhuang','Tangshan','Baoding','Zhangjiakou','Qinhuangdao','Handan','Xingtai','Langfang'],
+      'Heilongjiang': ['Harbin','Daqing','Qiqihar','Mudanjiang','Jixi','Yichun','Jiamusi','Hegang','Qitaihe'],
+      'Henan': ['Zhengzhou','Luoyang','Xinxiang','Anyang','Nanyang','Kaifeng','Pingdingshan','Jiaozuo'],
+      'Hubei': ['Wuhan','Xiangyang','Yichang','Jingzhou','Shiyan','Huangshi','Tianmen','Ezhou','Xiaogan','Xiantao'],
+      'Hunan': ['	Changsha','Hengyang','Zhuzhou','Yueyang','Xiangtan','Changde','Yiyang','Liuyang','Chenzhou','Shaoyang','Yongzhou'],
+      'Jiangsu': ['Nanjing','Suzhou','Wuxi','Changzhou','Xuzhou','Nantong','Yangzhou','Huai an','Yancheng','Kunshan','Jiangyin'],
+      'Jiangxi': ['Nanchang','Ganzhou','Pingxiang','Jiujiang','Xinyu','Fuzhou','Yichun','Jingdezhen','Nanchang'],
+      'Jilin': ['Changchun','Jilin','Siping','Yanji','Baishan','Tonghua','Songyuan','Liaoyuan','Baicheng','Gongzhuling'],
+      'Liaoning': ['Shenyang','Dalian','Anshan','Fushun','Benxi','Jinzhou','Yingkou','Panjin','Dandong','Fuxin'],
+      'Qinghai': ['Xining','Golmud','Datong','Minhe','Huangzhong','Ledu','Huzhu','Yushu','Delhi','Ping an'],
+      'Shaanxi': ['Xi an','Baoji','Xianyang','Tongchuan','Yulin','Ankang','Hanzhong','Weinan','Yan an'],
+      'Shandong': ['Qingdao','Jinan','Zibo','Yantai','Linyi','Weifang','Tai an','Zaozhuang','Jining','Rizhao'],
+      'Shanxi': ['Taiyuan','Datong','Changzhi','Yangquan','Linfen','Jincheng','Jinzhong','Yuncheng','Shuozhou'],
+      'Sichuan': ['Chengdu','Mianyang','Nanchong','Luzhou','Leshan','Zigong','Panzhihua'],
+      'Yunnan': ['Kunming','Qujing','Xuanwei','Dali','Chuxiong','Yuxi','Baoshan','Zhaotong'],
+      'Zhejiang': ['Hangzhou','Wenzhou','Ningbo','Shaoxing','Taizhou','Cixi','Rui an','Yiwu']
     }
   }
 
@@ -89,8 +107,6 @@ export class ProfilePage {
 
 
   onCountryChange(event){
-
-    console.log('event 1')
     this.allStates = this.statesData[event];
     this.allCity=[];
 
@@ -104,9 +120,6 @@ export class ProfilePage {
   }
 
   onStateChange(event){
-
-    console.log('event 2')
-    
     this.allCity = this.cityData[event];
 
     if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
@@ -132,7 +145,7 @@ export class ProfilePage {
 
   onChange(keyCode){
     console.log('event31')
-    
+
 
     //console.log(keyCode)
     console.log(this.user.profiles);
@@ -150,7 +163,7 @@ export class ProfilePage {
 
   onFarmChange(keyCode) {
     console.log('event 4')
-    
+
     //console.log(keyCode)
     console.log(this.user.profiles);
     console.log(this.tempUser.profiles);
@@ -217,7 +230,7 @@ export class ProfilePage {
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
       console.log(this.user)
-      
+
       if (!this.user.profiles.farmDetails) {
         this.user.profiles.farmDetails = {farmName: '', products: '', crops: '', grade: '', size: '', region: ''}
       }
