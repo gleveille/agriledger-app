@@ -179,6 +179,14 @@
   "Region":"地区",
   "Expected Yield *":"预期收益*",
   "Packaging *":"打包 *",
-  "Health of Soil":"土壤健康"
+  "Health of Soil":"土壤健康",
+  "Land History":"土地历史",
+  "Farm Investments":"农场投资",
+  "Additional Information":"附加信息",
+  "Create Asset":"创建资产",
+  "Add Evidences":"添加证据",
+  "No Evidences uploaded":"没有证据上传",
+  "Add Documents":"添加文档",
+  "No Documents uploaded":"没有文件上传"
 
 }

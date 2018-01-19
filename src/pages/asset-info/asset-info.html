@@ -169,12 +169,12 @@
             <div float-right>
               <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px"
                       (click)="presentActionSheet()">
-                +&nbsp; {{'Add Evidences'}}
+                +&nbsp; {{'Add Evidences'|translate}}
               </button>
             </div>
           </ion-list-header>
           <div text-center *ngIf="!asset.evidences || (asset.evidences && !asset.evidences.length)">
-            <h4 style="opacity: 0.6">No Evidences uploaded</h4>
+            <h4 style="opacity: 0.6">{{'No Evidences uploaded'|translate}}</h4>
           </div>
           <ion-grid>
             <ion-row align-items-center justify-content-center>
@@ -204,12 +204,12 @@
             <div float-right>
               <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px"
                       (click)="presentActionSheetDoc()">
-                +&nbsp; {{'Add Documents'}}
+                +&nbsp; {{'Add Documents'|translate}}
               </button>
             </div>
           </ion-list-header>
           <div text-center *ngIf="!asset.documents || (asset.documents && !asset.documents.length)">
-            <h4 style="opacity: 0.6">No Documents uploaded</h4>
+            <h4 style="opacity: 0.6">{{'No Documents uploaded'| translate}}</h4>
           </div>
           <ion-grid>
             <ion-row align-items-center justify-content-center>
