@@ -23,7 +23,10 @@
   </div>
 
   <ion-list no-lines>
-
+    <ion-item>
+      <ion-label style="color: black" fixed>Title</ion-label>
+      <ion-input style="color: #c5c5c5;" [(ngModel)]="title"></ion-input>
+    </ion-item>
     <ion-item>
       <ion-label>Status</ion-label>
       <ion-note item-end>{{asset[type][index]?.status}}</ion-note>

@@ -1,9 +1,4 @@
-<!--
-  Generated template for the UserDocumentDialogPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
@@ -31,6 +26,10 @@
   </div>
 
   <ion-list no-lines>
+      <ion-item>
+          <ion-label style="color: black" fixed>Title</ion-label>
+          <ion-input style="color: #c5c5c5;" [(ngModel)]="title"></ion-input>
+        </ion-item>
     <ion-item>
       <ion-label>Status</ion-label>
       <ion-note item-end>{{user.profiles[type][index]?.status}}</ion-note>

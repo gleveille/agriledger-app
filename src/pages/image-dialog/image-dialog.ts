@@ -13,6 +13,7 @@ import { LoadingController } from 'ionic-angular';
 export class ImageDialogPage {
   serverUrl = ServerUrl;
   description='';
+  title='';
   asset={evidences:[],documents:[]};
   type='evidences';
   index=0;
@@ -30,7 +31,7 @@ export class ImageDialogPage {
     this.type = this.navParams.get('type');
     this.index = this.navParams.get('index');
     this.description=this.asset[this.type][this.index].description;
-    
+    this.title = this.asset[this.type][this.index].title;
   }
 
   ionViewDidLoad() {
@@ -49,6 +50,7 @@ export class ImageDialogPage {
     });
     loader.present();
       this.asset[this.type][this.index].description=this.description;
+      this.asset[this.type][this.index].title=this.title;
       this.assetService.updateAsset(this.asset).subscribe(()=>{
         loader.dismiss();
         this.toastService.presentToast('Updated')

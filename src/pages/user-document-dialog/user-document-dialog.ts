@@ -15,10 +15,11 @@ import { UserService } from '../../providers/user.service';
 export class UserDocumentDialogPage {
   serverUrl = ServerUrl;
   description='';
+  title='';
   user={profiles:{
     farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
     documents: [],
-    address: {line1: '', line2: '', city: '', province: ''}}} as Iuser;
+    address: {line1:'', line2: '', city: '', province: ''}}} as Iuser;
   type='evidences';
   index=0;
   constructor(public navCtrl: NavController,
@@ -36,6 +37,7 @@ export class UserDocumentDialogPage {
     this.type = this.navParams.get('type');
     this.index = this.navParams.get('index');
     this.description=this.user.profiles[this.type][this.index].description;
+    this.title=this.user.profiles[this.type][this.index].title;
   }
 
   ionViewDidLoad() {
@@ -52,6 +54,7 @@ export class UserDocumentDialogPage {
     });
     loader.present();
       this.user.profiles[this.type][this.index].description=this.description;
+      this.user.profiles[this.type][this.index].title=this.title;
       this.userService.updateProfile(this.user).subscribe(()=>{
         loader.dismiss();
         this.toastService.presentToast('Updated')
