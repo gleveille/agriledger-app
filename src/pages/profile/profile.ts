@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {
   NavController, ActionSheetController, ModalController,
-  LoadingController
+  LoadingController, App
 } from "ionic-angular/index";
 import { ServerUrl } from '../../app/api.config'
 import { ToastProvider } from "../../providers/toast";
@@ -17,6 +17,8 @@ import { AssetsService } from "../../providers/assets.service";
 import { IndexProvider } from '../../providers/index/index';
 import { AlertController } from 'ionic-angular';
 import { UserDocumentDialogPage } from '../user-document-dialog/user-document-dialog';
+import {CreateFarmPage} from "../create-farm/create-farm";
+import {FarmInfoPage} from "../farm-info/farm-info";
 
 
 @Component({
@@ -58,7 +60,8 @@ export class ProfilePage{
     private assetsService: AssetsService,
     private indexProvider: IndexProvider,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private app:App) {
 
     this.allCountry = ['China'];
 
@@ -411,7 +414,7 @@ export class ProfilePage{
     this.allDistrict = [];
     this.allCity = [];
     this.checkStatus();
-    
+
   }
 
    onStateChange(event) {
@@ -619,11 +622,21 @@ export class ProfilePage{
       loader.dismiss();
 
       this.toastService.presentToast('Farm details Updated...')
+      this.navCtrl.pop();
     }, (err) => {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Farm details could not be Updated...')
 
     })
+  }
+
+  createFarm() {
+    this.navCtrl.push(CreateFarmPage);
+    //this.app.getRootNav().push(CreateFarmPage);
+  }
+
+  farmInfo(index:number) {
+    this.navCtrl.push(FarmInfoPage,{user:this.user,index:index});
   }
 
 

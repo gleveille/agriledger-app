@@ -168,7 +168,7 @@
       </ion-row>
 
       <ion-list style="margin-top: -10px;">
-        <div text-center *ngIf="!user.profiles?.farmDetails?.length" class="centered-content">
+        <div text-center *ngIf="!user.profiles?.farmDetails?.length">
           <img src="assets/icon/no-record.png">
           <h4 style="opacity: 0.6">No Farms Added!</h4>
         </div>
@@ -214,7 +214,10 @@
           </ion-list-header>
           <div text-center
                *ngIf="!user.profiles.documents || (user.profiles.documents && !user.profiles.documents.length)">
-            <h4 style="opacity: 0.6">No Documents/Images uploaded</h4>
+            <div text-center>
+              <img src="assets/icon/no-record.png">
+              <h4 style="opacity: 0.6">No Documents/Images uploaded</h4>
+            </div>
           </div>
           <ion-grid>
             <ion-row align-items-center justify-content-center>
