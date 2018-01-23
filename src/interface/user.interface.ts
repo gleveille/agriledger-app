@@ -10,7 +10,8 @@ export interface Iuser {
       line2?:string,
       city?:string,
       province?:string,
-      country?:string
+      country?:string,
+      district?:string
     },
     farmDetails?:{
       farmName?:string,

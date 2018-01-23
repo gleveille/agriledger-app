@@ -29,7 +29,7 @@
   <section>
     <ion-card class="card-background">
       <ion-card-header style="text-align: left !important;">
-        Asset Summary
+        {{'Asset Summary'|translate}}
       </ion-card-header>
       <hr>
 
@@ -45,15 +45,14 @@
             </canvas>
           </ion-col>
           <ion-col text-center *ngIf="!assets.length">
-            <p text-center style="opacity: 0.6">Assets not available.</p>
+            <p text-center style="opacity: 0.6">{{'Assets not available.'|translate}} </p>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col col-12 text-right>
-            <button ion-button clear (click)="goToViewAssetPage()" *ngIf="assets.length">VIEW ASSET</button>
-            <button ion-button clear style="padding-right: 12px;" no-padding (click)="goToCreateAssetPage()">CREATE
-              ASSET
+            <button ion-button clear (click)="goToViewAssetPage()" *ngIf="assets.length">{{'VIEW ASSET'|translate}} </button>
+            <button ion-button clear style="padding-right: 12px;" no-padding (click)="goToCreateAssetPage()">{{'CREATE ASSET'|translate}}
             </button>
           </ion-col>
         </ion-row>

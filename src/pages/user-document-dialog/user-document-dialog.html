@@ -7,10 +7,10 @@
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Image detail</ion-title>
+    <ion-title>{{'Image details'|translate}} </ion-title>
     <ion-buttons end>
       <button ion-button (click)="save()">
-        SAVE
+        {{'SAVE'|translate}}
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -27,27 +27,27 @@
 
   <ion-list no-lines>
       <ion-item>
-          <ion-label style="color: black" fixed>Title</ion-label>
+          <ion-label style="color: black">{{'Title'|translate}} </ion-label>
           <ion-input style="color: #c5c5c5;" [(ngModel)]="title"></ion-input>
         </ion-item>
     <ion-item>
-      <ion-label>Status</ion-label>
+      <ion-label>{{'Status'|translate}}</ion-label>
       <ion-note item-end>{{user.profiles[type][index]?.status}}</ion-note>
     </ion-item>
     <ion-item>
-      <ion-label>Date</ion-label>
+      <ion-label>{{'Date'|translate}}</ion-label>
       <ion-note item-end>{{user.profiles[type][index]?.date | date }}</ion-note>
     </ion-item>
     <ion-item>
-      <ion-label>Lat</ion-label>
+      <ion-label>{{'Lat'|translate}} </ion-label>
       <ion-note item-end>{{user.profiles[type][index]?.lat}}</ion-note>
     </ion-item>
     <ion-item>
-      <ion-label>Long</ion-label>
+      <ion-label>{{'Long'|translate}} </ion-label>
       <ion-note item-end>{{user.profiles[type][index]?.long}}</ion-note>
     </ion-item>
     <ion-item>
-      <ion-label style="color: black" >Description</ion-label>
+      <ion-label style="color: black">{{'Description'|translate}} </ion-label>
       <ion-textarea [(ngModel)]="description" style="color: #c5c5c5;" placeholder="Click here to enter text."></ion-textarea>
     </ion-item>
   </ion-list>
