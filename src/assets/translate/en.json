@@ -222,6 +222,7 @@
   "Assets not available.":"Assets not available.",
   "CREATE ASSET":"CREATE ASSET",
   "VIEW ASSET":"VIEW ASSET",
-  "DELETE":"DELETE"
+  "DELETE":"DELETE",
+  "Province":"Province"
 
 }

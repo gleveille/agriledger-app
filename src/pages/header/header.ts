@@ -7,6 +7,7 @@ import {WalletPage} from "../wallet/wallet";
 import {UserService} from "../../providers/user.service";
 import {CommunityPage} from "../community/community";
 import { SettingsPage } from '../settings/settings';
+import { App } from 'ionic-angular';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class HeaderPage {
 
   constructor(public navCtrl:NavController, private loadingCtrl:LoadingController,
               private toastService:ToastProvider,
-              public navParams:NavParams, private user: UserService) {
+              public navParams:NavParams, private user: UserService,
+              private app:App) {
   }
 
   ionViewDidLoad() {
@@ -29,6 +31,7 @@ export class HeaderPage {
 
   onSettings(){
     this.navCtrl.push(SettingsPage);
+    //this.app.getRootNav().push(SettingsPage);
   }
 
   /*logout() {

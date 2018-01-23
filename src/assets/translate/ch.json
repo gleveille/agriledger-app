@@ -223,5 +223,6 @@
   "Assets not available.":"资产不可用。",
   "CREATE ASSET":"创建资产",
   "VIEW ASSET":"查看资产",
-  "DELETE":"删除"
+  "DELETE":"删除",
+  "Province":"省"
 }
