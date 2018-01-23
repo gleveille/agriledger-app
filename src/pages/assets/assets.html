@@ -155,13 +155,13 @@
                 <ion-row>
                   <ion-col col-6>
                     <ion-item>
-                      <ion-label floating>Asset Name:</ion-label>
+                      <ion-label floating>{{'Asset Name'|translate}} </ion-label>
                       <ion-input type="text" [(ngModel)]="asset.name" text-capitalize disabled></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col col-6>
                     <ion-item>
-                      <ion-label floating>Asset Category:</ion-label>
+                      <ion-label floating>{{'Asset Category'|translate}} </ion-label>
                       <ion-input type="tel" [(ngModel)]="asset.category.level1 || asset.category" text-capitalize
                                  disabled></ion-input>
                     </ion-item>
@@ -182,7 +182,7 @@
                         name="arrow-forward"></ion-icon>
             </div>
           </div>
-
+          
         </ion-card>
       </ion-list>
     </ion-list>

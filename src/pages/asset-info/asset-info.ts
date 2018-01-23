@@ -77,11 +77,7 @@ export class AssetInfoPage {
     }
   }
 
-  onChange(keyCode){
-    //console.log(keyCode)
-    console.log(this.asset);
-    console.log(this.tempAsset);
-
+  checkStatus(){
     if(JSON.stringify(this.asset)===JSON.stringify(this.tempAsset)){
       this.disabledButton = true;
       console.log(true);
@@ -89,6 +85,14 @@ export class AssetInfoPage {
       this.disabledButton = false;
       console.log(false);
     }
+  }
+
+  onChange(keyCode){
+    //console.log(keyCode)
+    console.log(this.asset);
+    console.log(this.tempAsset);
+
+    this.checkStatus();
 
   }
 

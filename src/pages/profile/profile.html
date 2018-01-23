@@ -116,6 +116,14 @@
               </ion-select>
             </ion-item>
 
+
+            <ion-item>
+                <ion-label floating>{{'District'|translate}}</ion-label>
+                <ion-select [(ngModel)]="user.profiles.address.district" (ionChange)="onDistrictChange($event)">
+                  <ion-option *ngFor="let district of allDistrict; let i=index">{{district}}</ion-option>
+                </ion-select>
+              </ion-item>
+
         <!-- End Here  -->
 
 
@@ -134,7 +142,7 @@
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.province"></ion-input>
         </ion-item>-->
         <ion-item>
-          <ion-label floating text-capitalize>{{'Registration number'|translate}}</ion-label>
+          <ion-label floating text-capitalize>{{'Registration Number'|translate}}</ion-label>
           <ion-input type="number" (keyup)="onChange($event)" [(ngModel)]="user.profiles.registration"></ion-input>
         </ion-item>
       </ion-list>
@@ -143,7 +151,7 @@
         <ion-col>
           <!-- [disabled]="disabledButton" -->
           <button (click)="updateProfile()" [disabled]="disabledButton" ion-button block class="btnHeight40Px">
-            {{'Save'|translate}}
+            {{'SAVE'|translate}}
           </button>
         </ion-col>
       </ion-row>
@@ -190,7 +198,7 @@
         <ion-col>
           <!-- [disabled]="disabledButton" -->
           <button (click)="updateFarm()" [disabled]="disabledFarmButton" ion-button block class="btnHeight40Px">
-            {{'Save'|translate}}
+            {{'SAVE'|translate}}
           </button>
         </ion-col>
       </ion-row>
@@ -205,7 +213,7 @@
             <div text-center>
               <button ion-button clear style="color: #519a48; letter-spacing: 2px; font-size: 16px"
                       (click)="presentActionSheetDocs()">
-                +&nbsp; {{'Add Documents/Images'}}
+                +&nbsp; {{'Add Documents/Images'|translate}}
               </button>
             </div>
           </ion-list-header>
