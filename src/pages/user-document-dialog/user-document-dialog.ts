@@ -17,7 +17,6 @@ export class UserDocumentDialogPage {
   description='';
   title='';
   user={profiles:{
-    farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
     documents: [],
     address: {line1:'', line2: '', city: '', province: ''}}} as Iuser;
   type='evidences';
