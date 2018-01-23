@@ -401,14 +401,12 @@ export class ProfilePage {
       console.log(false);
     }
   }
-
-
+  
   onImageClick(i:number,type:string){
     let modal = this.modalCtrl.create(UserDocumentDialogPage,{user:this.user,index:i,type},{showBackdrop:true, enableBackdropDismiss:true});
     modal.present();
   }
-
-
+  
   onCountryChange(event){
     this.allStates = this.statesData[event];
     this.allCity=[];
@@ -422,44 +420,24 @@ export class ProfilePage {
 
     this.checkStatus();
   }
-
-
+  
   onCityChange(event){
     this.allDistrict = this.districtData[event];
-
     this.checkStatus();
   }
 
   onDistrictChange(event){
-
     this.checkStatus();
   }
-
-
+  
   onChange(keyCode){
-    console.log('event31')
-
-
-    //console.log(keyCode)
-    console.log(this.user.profiles);
-    console.log(this.tempUser.profiles);
-
     this.checkStatus();
-
   }
 
   onFarmChange(keyCode) {
-    console.log('event 4')
-
-    //console.log(keyCode)
-    console.log(this.user.profiles);
-    console.log(this.tempUser.profiles);
-
     this.checkStatus();
-
   }
-
-
+  
   showWelcomeMessage() {
     let alert = this.alertCtrl.create({
       title: 'Welcome to Agriledger',
@@ -552,9 +530,7 @@ export class ProfilePage {
       return false;
     }
   }
-
-
-
+  
   presentActionSheetDocs() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Add Documents/Images',
