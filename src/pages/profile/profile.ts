@@ -25,45 +25,27 @@ import { UserDocumentDialogPage } from '../user-document-dialog/user-document-di
 })
 export class ProfilePage{
   serverUrl = ServerUrl;
-  user = {
-    profiles: {
-      farmDetails: { farmName: '', products: '', crops: '', grade: '', size: '', region: '' },
-      documents: [],
-      address: { line1: '', line2: '', city: '', province: '', country: '', district: '' }
-    }
-  } as Iuser;
+  user={profiles:{
+    documents: [],
+    address: {line1: '', line2: '', city: '', province: '',country:'',district:''}}} as Iuser;
+  tempUser={profiles:{
+    documents: [],
+    address: {line1: '', line2: '', city: '', province: '',country:'',district:''}}} as Iuser;
 
-  tempUser = {
-    profiles: {
-      farmDetails: { farmName: '', products: '', crops: '', grade: '', size: '', region: '' },
-      documents: [],
-      address: { line1: '', line2: '', city: '', province: '', country: '', district: '' }
-    }
-  } as Iuser;
+  defaultLangauge:string = 'ch';
+  showdropdown:boolean = false;
+  farm:string = "accountDetails";
+  disabledButton:boolean = true;
 
-  defaultLangauge: string = 'ch';
-  showdropdown: boolean = false;
-  farm: string = "accountDetails";
-  disabledButton: boolean = true;
-  disabledFarmButton: boolean = true;
+  allCountry:any=[''];
+  allStates:any=[''];
+  allCity:any=[''];
+  allDistrict:any=[''];
 
-  allCountry: any = [''];
-  allStates: any = [''];
-  allCity: any = [''];
-  allDistrict: any = [''];
+  statesData:any;
+  cityData:any;
+  districtData:any;
 
-  statesData: any;
-  cityData: any;
-  districtData: any;
-
-  countryName: string;
-  stateName: string;
-  cityName: string;
-  districtName: string;
-
-  showProvince:boolean = false;
-  showCity:boolean = false;
-  showDistrict:boolean = false;
 
   constructor(public navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
@@ -92,7 +74,7 @@ export class ProfilePage{
     this.cityData = {
 
       'Anhui': ['Hefei', 'Huainan', 'Wuhu', 'Huaibei', 'Bengbu', 'Fuyang', 'Anhui→Suzhou', 'Lu an', 'Ma anshan', 'Anqing', 'Tongling'],
-      'Fujian': ['Xiamen', 'Fuzhou', 'Jinjiang', '	Quanzhou', 'Putian', 'Nan an', 'Zhangzhou', 'Fuqing', 'Shishi', 'Hui an', 'Longyan'],
+      'Fujian': ['Xiamen', 'Fuzhou', 'Jinjiang', 'Quanzhou', 'Putian', 'Nan an', 'Zhangzhou', 'Fuqing', 'Shishi', 'Hui an', 'Longyan'],
       'Gansu': ['Lanzhou', 'Tianshui', 'Baiyin', 'Wuwei', 'Jiuquan', 'Pingliang', 'Linxia', 'Zhangye', 'Jiayuguan	'],
       'Guangdong': ['Guangzhou', 'Shenzhen', 'Dongguan', 'Foshan', 'Shantou', 'Zhongshan', 'Huizhou', 'Jiangmen', 'Zhuhai'],
       'Guizhou': ['Guiyang', '	Zunyi', 'Liupanshui', 'Bijie', 'Anshun', 'Xingyi', 'Kaili', 'Weining'],
@@ -465,24 +447,6 @@ export class ProfilePage{
 
   }
 
-  onFarmChange(keyCode) {
-    
-    console.log(keyCode)
-
-    //console.log(keyCode)
-    console.log(this.user.profiles.farmDetails);
-    console.log(this.tempUser.profiles.farmDetails);
-
-    if (JSON.stringify(this.user.profiles) === JSON.stringify(this.tempUser.profiles)) {
-      this.disabledFarmButton = true;
-      console.log(true);
-    } else {
-      this.disabledFarmButton = false;
-      console.log(false);
-    }
-
-  }
-
 
   showWelcomeMessage() {
     let alert = this.alertCtrl.create({
@@ -535,15 +499,7 @@ export class ProfilePage{
     this.userService.user.subscribe((user: Iuser) => {
       this.user = user;
       console.log(this.user)
-
       this.tempUser = JSON.parse(JSON.stringify(this.user));//changing code here...
-
-
-      if (!this.user.profiles.farmDetails) {
-        this.user.profiles.farmDetails = { farmName: '', products: '', crops: '', grade: '', size: '', region: '' };
-        this.tempUser.profiles.farmDetails = { farmName: '', products: '', crops: '', grade: '', size: '', region: '' };
-      }
-
     });
   }
 
@@ -663,10 +619,6 @@ export class ProfilePage{
       loader.dismiss();
 
       this.toastService.presentToast('Farm details Updated...')
-      //Adding code here. Start....
-      this.disabledFarmButton = true;
-      this.tempUser = JSON.parse(JSON.stringify(this.user));
-      //End..
     }, (err) => {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Farm details could not be Updated...')

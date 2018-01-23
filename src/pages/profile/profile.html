@@ -103,7 +103,6 @@
           </ion-select>
         </ion-item>
 
-<<<<<<< HEAD
         <!--  -->
         <ion-item *ngIf="allStates?.length">
 
@@ -127,34 +126,6 @@
                   <ion-option *ngFor="let district of allDistrict; let i=index">{{district}}</ion-option>
                 </ion-select>
               </ion-item>
-=======
-        <!-- *ngIf="allStates?.length" -->
-        <ion-item>
->>>>>>> 843668e4ac4fb8747da85dbe932622cad564bf8f
-
-          <ion-label floating>{{'Province'| translate}}</ion-label>
-          <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onStateChange($event)">
-            <ion-option *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
-          </ion-select>
-        </ion-item>
-        <!-- *ngIf="allCity?.length" -->
-        <ion-item>
-          <ion-label floating>{{'City'|translate}}</ion-label>
-          <ion-select [(ngModel)]="user.profiles.address.city" (ionChange)="onCityChange($event)">
-            <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
-          </ion-select>
-        </ion-item>
-
-
-        <ion-item>
-          <ion-label floating>{{'District'|translate}}</ion-label>
-          <ion-select [(ngModel)]="user.profiles.address.district" (ionChange)="onDistrictChange($event)">
-            <ion-option *ngFor="let district of allDistrict; let i=index">{{district}}</ion-option>
-          </ion-select>
-        </ion-item>
-
-        <!-- End Here  -->
-
 
         <ion-item>
           <ion-label floating style="display: inline-table;">{{'Address Line 2 (Unit, Building, Floor,
