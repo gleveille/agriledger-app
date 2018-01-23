@@ -75,7 +75,7 @@ export class ProfilePage {
         'Guizhou','Hainan','Hebei','Heilongjiang',
         'Henan','Hubei','Hunan','Jiangsu','Jiangxi',
         'Jilin','Liaoning','Qinghai','Shaanxi',
-        'Shandong','Shanxi','Sichuan','Yunnan','Zhejiang']
+        'Shandong','Shanxi','Sichuan','Yunnan','Zhejiang', 'Inner Mongolia']
     }
 
     this.cityData={
@@ -431,7 +431,7 @@ export class ProfilePage {
   }
 
   onDistrictChange(event){
-    
+
     this.checkStatus();
   }
 

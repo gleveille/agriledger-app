@@ -103,7 +103,7 @@
         <!-- *ngIf="allStates?.length" -->
         <ion-item >
 
-            <ion-label floating>{{'States/Provinces/Region'| translate}}</ion-label>
+            <ion-label floating>{{'Province'| translate}}</ion-label>
             <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onStateChange($event)">
               <ion-option  *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
             </ion-select>
