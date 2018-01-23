@@ -33,15 +33,18 @@
       <p text-capitalize style="margin: 0px; font-size: 2rem;">
         {{user?.profiles?.name || user?.name}}
       </p>
-          <i text-center style="opacity: 0.8; margin: 0px; font-size: 10px">Member since {{user.createdAt|moment:true}}</i>
-        <br>
-          <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='pending'" text-center style="font-size: 10px">
-              Profile update is pending for approval by the Operations team</i>
-          <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='approved'" text-center style="font-size: 10px">
-              Profile updates have been approved</i>
-          <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='rejected'" text-center style="font-size: 10px">
-              Profile updates were rejected</i>
-      </ion-col>
+      <i text-center style="opacity: 0.8; margin: 0px; font-size: 10px">Member since {{user.createdAt|moment:true}}</i>
+      <br>
+      <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='pending'"
+         text-center style="font-size: 10px">
+        Profile update is pending for approval by the Operations team</i>
+      <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='approved'"
+         text-center style="font-size: 10px">
+        Profile updates have been approved</i>
+      <i style="opacity: 0.8; margin: 0px; font-size: 20px" *ngIf="user?.profiles?.verificationStatus==='rejected'"
+         text-center style="font-size: 10px">
+        Profile updates were rejected</i>
+    </ion-col>
 
 
   </ion-row>
@@ -101,35 +104,35 @@
         </ion-item>
 
         <!-- *ngIf="allStates?.length" -->
-        <ion-item >
+        <ion-item>
 
-            <ion-label floating>{{'Province'| translate}}</ion-label>
-            <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onStateChange($event)">
-              <ion-option  *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
-            </ion-select>
-          </ion-item>
-          <!-- *ngIf="allCity?.length" -->
-          <ion-item>
-              <ion-label floating>{{'City'|translate}}</ion-label>
-              <ion-select [(ngModel)]="user.profiles.address.city" (ionChange)="onCityChange($event)">
-                <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
-              </ion-select>
-            </ion-item>
+          <ion-label floating>{{'Province'| translate}}</ion-label>
+          <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onStateChange($event)">
+            <ion-option *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <!-- *ngIf="allCity?.length" -->
+        <ion-item>
+          <ion-label floating>{{'City'|translate}}</ion-label>
+          <ion-select [(ngModel)]="user.profiles.address.city" (ionChange)="onCityChange($event)">
+            <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
+          </ion-select>
+        </ion-item>
 
 
-            <ion-item>
-                <ion-label floating>{{'District'|translate}}</ion-label>
-                <ion-select [(ngModel)]="user.profiles.address.district" (ionChange)="onDistrictChange($event)">
-                  <ion-option *ngFor="let district of allDistrict; let i=index">{{district}}</ion-option>
-                </ion-select>
-              </ion-item>
+        <ion-item>
+          <ion-label floating>{{'District'|translate}}</ion-label>
+          <ion-select [(ngModel)]="user.profiles.address.district" (ionChange)="onDistrictChange($event)">
+            <ion-option *ngFor="let district of allDistrict; let i=index">{{district}}</ion-option>
+          </ion-select>
+        </ion-item>
 
         <!-- End Here  -->
 
 
-
         <ion-item>
-          <ion-label floating style="display: inline-table;">{{'Address Line 2 (Unit, Building, Floor, etc.)'|translate}}
+          <ion-label floating style="display: inline-table;">{{'Address Line 2 (Unit, Building, Floor,
+            etc.)'|translate}}
           </ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.line2"></ion-input>
         </ion-item>
@@ -159,50 +162,45 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'farmDetails'">
-
-      <ion-list>
-        <ion-item>
-
-          <ion-label floating text-capitalize>{{'Farm Name'|translate}}</ion-label>
-          <ion-input type="text" (keyup)="onFarmChange($event)"
-                     [(ngModel)]="user.profiles.farmDetails.farmName"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating text-capitalize>{{'Products'|translate}}</ion-label>
-          <ion-input type="text" (keyup)="onFarmChange($event)"
-                     [(ngModel)]="user.profiles.farmDetails.products"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating text-capitalize>{{'Name of the crops'|translate}}</ion-label>
-          <ion-input type="text" (keyup)="onFarmChange($event)"
-                     [(ngModel)]="user.profiles.farmDetails.crops"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating text-capitalize>{{'Grade'|translate}}</ion-label>
-          <ion-input type="text" (keyup)="onFarmChange($event)"
-                     [(ngModel)]="user.profiles.farmDetails.grade"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating text-capitalize>{{'Size'|translate}}</ion-label>
-          <ion-input type="text" (keyup)="onFarmChange($event)" [(ngModel)]="user.profiles.farmDetails.size"
-                     type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating text-capitalize>{{'Region'|translate}}</ion-label>
-          <ion-input type="text" (keyup)="onFarmChange($event)" [(ngModel)]="user.profiles.farmDetails.region"
-                     type="text"></ion-input>
-        </ion-item>
-      </ion-list>
-
-      <ion-row>
-        <ion-col>
-          <!-- [disabled]="disabledButton" -->
-          <button (click)="updateFarm()" [disabled]="disabledFarmButton" ion-button block class="btnHeight40Px">
-            {{'SAVE'|translate}}
+      <ion-row no-padding (click)="createFarm()">
+        <ion-col text-right no-padding>
+          <button ion-button clear style="color: #519a48; margin-right: 8px; letter-spacing: 2px;">
+            +&nbsp; {{'Add Farm'|translate}}
           </button>
         </ion-col>
       </ion-row>
 
+      <ion-list style="margin-top: -10px;">
+        <div text-center *ngIf="!user.profiles?.farmDetails?.length" class="centered-content">
+          <img src="assets/icon/no-record.png">
+          <h4 style="opacity: 0.6">No Farms Added!</h4>
+        </div>
+
+        <ion-card *ngFor="let farm of user.profiles.farmDetails;let i=index">
+          <div (click)="farmInfo(i)">
+            <ion-card-content style="padding: 0px;">
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col col-6>
+                    <ion-item>
+                      <ion-label floating>{{'Farm Name'|translate}}</ion-label>
+                      <ion-input type="text" [(ngModel)]="farm.farmName" text-capitalize disabled></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-6>
+                    <ion-item no-padding>
+                      <ion-label floating>{{'Region'|translate}}</ion-label>
+                      <ion-input type="text" [(ngModel)]="farm.region"
+                                 text-capitalize disabled></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </div>
+        </ion-card>
+
+      </ion-list>
     </ion-list>
 
     <ion-list *ngSwitchCase="'documents'">

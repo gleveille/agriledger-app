@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="headerColor">
+    <ion-title>
+      {{'Add Farm Details'|translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label floating text-capitalize>{{'Farm Name'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="farmDetails.farmName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating text-capitalize>{{'Products'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="farmDetails.products"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating text-capitalize>{{'Name of the crops'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="farmDetails.crops"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating text-capitalize>{{'Grade'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="farmDetails.grade"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating text-capitalize>{{'Size'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="farmDetails.size"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating text-capitalize>{{'Region'|translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="farmDetails.region"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-row>
+    <ion-col>
+      <button (click)="updateFarm()" ion-button block class="btnHeight40Px">
+        {{'SAVE'|translate}}
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

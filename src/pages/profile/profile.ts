@@ -17,6 +17,8 @@ import {AssetsService} from "../../providers/assets.service";
 import {IndexProvider} from '../../providers/index/index';
 import {AlertController} from 'ionic-angular';
 import { UserDocumentDialogPage } from '../user-document-dialog/user-document-dialog';
+import {CreateFarmPage} from "../create-farm/create-farm";
+import {FarmInfoPage} from "../farm-info/farm-info";
 
 
 @Component({
@@ -26,11 +28,9 @@ import { UserDocumentDialogPage } from '../user-document-dialog/user-document-di
 export class ProfilePage {
   serverUrl = ServerUrl;
   user={profiles:{
-    farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
     documents: [],
     address: {line1: '', line2: '', city: '', province: '',country:'',district:''}}} as Iuser;
   tempUser={profiles:{
-    farmDetails: {farmName: '', products: '', crops: '', grade: '', size: '', region: ''},
     documents: [],
     address: {line1: '', line2: '', city: '', province: '',country:'',district:''}}} as Iuser;
 
@@ -38,7 +38,6 @@ export class ProfilePage {
   showdropdown:boolean = false;
   farm:string = "accountDetails";
   disabledButton:boolean = true;
-  disabledFarmButton:boolean = true;
 
   allCountry:any=[];
   allStates:any=[];
@@ -64,8 +63,7 @@ export class ProfilePage {
               private translateService:TranslateServiceProvider,
               private assetsService:AssetsService,
               private indexProvider:IndexProvider,
-              private alertCtrl:AlertController,
-              private modalCtrl:ModalController) {
+              private alertCtrl:AlertController) {
 
     this.allCountry=['China'];
 
@@ -401,12 +399,12 @@ export class ProfilePage {
       console.log(false);
     }
   }
-  
+
   onImageClick(i:number,type:string){
-    let modal = this.modalCtrl.create(UserDocumentDialogPage,{user:this.user,index:i,type},{showBackdrop:true, enableBackdropDismiss:true});
+    let modal = this.modalController.create(UserDocumentDialogPage,{user:this.user,index:i,type},{showBackdrop:true, enableBackdropDismiss:true});
     modal.present();
   }
-  
+
   onCountryChange(event){
     this.allStates = this.statesData[event];
     this.allCity=[];
@@ -420,7 +418,7 @@ export class ProfilePage {
 
     this.checkStatus();
   }
-  
+
   onCityChange(event){
     this.allDistrict = this.districtData[event];
     this.checkStatus();
@@ -429,15 +427,11 @@ export class ProfilePage {
   onDistrictChange(event){
     this.checkStatus();
   }
-  
+
   onChange(keyCode){
     this.checkStatus();
   }
 
-  onFarmChange(keyCode) {
-    this.checkStatus();
-  }
-  
   showWelcomeMessage() {
     let alert = this.alertCtrl.create({
       title: 'Welcome to Agriledger',
@@ -453,14 +447,8 @@ export class ProfilePage {
       this.showWelcomeMessage();
       this.indexProvider.selectedIndex = 0;
     }
-
     this.subscribeUser();
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
-
-
-
-    console.log('Profile details');
-    console.log(this.user);
   }
 
   updateProfile() {
@@ -479,8 +467,7 @@ export class ProfilePage {
       //End..
     }, (err)=> {
       loader.dismiss();
-      this.toastService.presentToast(err.message || 'Profile could not be Updated...')
-
+      this.toastService.presentToast(err.message || 'Profile could not be Updated...');
     })
   }
 
@@ -489,12 +476,6 @@ export class ProfilePage {
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
       console.log(this.user)
-
-      if (!this.user.profiles.farmDetails) {
-        this.user.profiles.farmDetails = {farmName: '', products: '', crops: '', grade: '', size: '', region: ''}
-      }
-      this.tempUser = JSON.parse(JSON.stringify(this.user));//changing code here...
-
     });
   }
 
@@ -530,7 +511,7 @@ export class ProfilePage {
       return false;
     }
   }
-  
+
   presentActionSheetDocs() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Add Documents/Images',
@@ -602,25 +583,12 @@ export class ProfilePage {
     console.log(this.defaultLangauge)
   }
 
-  updateFarm() {
-    let loader = this.loadingCtrl.create({
-      content: 'Upading Farm details..'
-    });
-    loader.present();
+  createFarm() {
+    this.navCtrl.push(CreateFarmPage);
+  }
 
-    this.userService.updateProfile(this.user).subscribe((data)=> {
-      loader.dismiss();
-
-      this.toastService.presentToast('Farm details Updated...')
-      //Adding code here. Start....
-      this.disabledFarmButton = true;
-      this.tempUser = JSON.parse(JSON.stringify(this.user));
-      //End..
-    }, (err)=> {
-      loader.dismiss();
-      this.toastService.presentToast(err.message || 'Farm details could not be Updated...')
-
-    })
+  farmInfo(index:number) {
+    this.navCtrl.push(FarmInfoPage,{user:this.user,index:index});
   }
 
 

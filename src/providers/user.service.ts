@@ -57,23 +57,6 @@ export class UserService {
     return this.storage.get('userId');
   }
 
-  createProfile(user:Iuser) {
-
-    let profile = user.profiles;
-    console.log('creating profile is')
-    console.log(profile)
-    return this.http.post(`${UserApi.updateProfile.url()}/${this.dataStore.user.id}/profiles`, profile).do((data)=> {
-      this.dataStore.user.profiles = data;
-      this._user.next(this.dataStore.user);
-      console.log('created')
-    })
-      .catch((err)=> {
-
-        console.log(err)
-        return this.errorHandler.handle(err);
-      })
-
-  };
 
   profilePicChanged(data:any) {
     this.dataStore.user.profiles.profileUrl = data;
@@ -83,16 +66,9 @@ export class UserService {
   updateProfile(user:Iuser) {
 
     let profiles = user.profiles;
-    if (!this.dataStore.user.profiles.id) {
-      return this.createProfile(user);
-    }
-    console.log('updating profile is')
-    console.log(profiles)
     return this.http.put(`${UserApi.updateProfile.url()}/${this.dataStore.user.id}/profiles`, profiles).do((profile:any)=> {
       this.dataStore.user.profiles = profile;
       this._user.next(this.dataStore.user);
-      console.log('updated')
-      console.log(this.dataStore.user)
     })
       .catch((err)=> {
 
@@ -104,7 +80,7 @@ export class UserService {
   loadUser() {
 
     console.log('insise loadddddd')
-    
+
     return Observable.fromPromise(this.getUserIdFromLocalStorage())
       .concatMap((userId)=> {
         console.log('userId ', userId)
@@ -114,16 +90,6 @@ export class UserService {
         else {
           return this.http.get(`${UserApi.findById.url()}/${userId}?filter[include]=profiles`)
         }
-      })
-
-      .map((user:Iuser)=> {
-        if (!user.profiles || !user.profiles.id)
-          user.profiles = {
-            farmDetails: {farmName:'',products: '',crops:'',grade:'',size:'',region:''},
-            address:{line1:'',line2:'',city:'',province:''}
-          };
-
-        return user;
       })
       .do((user:Iuser)=> {
         console.log('...................')

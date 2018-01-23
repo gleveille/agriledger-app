@@ -20,7 +20,7 @@ export interface Iuser {
       grade?:string,
       size?:string,
       region?:string
-    },
+    }[],
     company?:string,
     profileUrl?:{
       url:string,
