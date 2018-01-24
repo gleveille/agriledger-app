@@ -20,8 +20,10 @@ import {ToastProvider} from "../../providers/toast";
 export class FarmInfoPage {
 
   user={} as Iuser;
+  tempUser={} as Iuser;
   index:number=0;
   defaultLangauge:string = 'ch';
+  disableFarmButton:boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private actionSheetCtrl:ActionSheetController,
@@ -35,6 +37,7 @@ export class FarmInfoPage {
               private indexProvider:IndexProvider,
               private alertCtrl:AlertController) {
     this.user=this.navParams.get('user');
+    this.tempUser=JSON.parse(JSON.stringify(this.navParams.get('user')));
     this.index=this.navParams.get('index');
 
   }
@@ -43,7 +46,15 @@ export class FarmInfoPage {
     this.defaultLangauge = this.translateService.getDefaultLanguage() || 'ch';
   }
 
-
+  onChange(key){
+    if (JSON.stringify(this.user) === JSON.stringify(this.tempUser)) {
+      this.disableFarmButton = true;
+      console.log(true);
+    } else {
+      this.disableFarmButton = false;
+      console.log(false);
+    }
+  }
 
   updateFarm() {
     let loader = this.loadingCtrl.create({
@@ -55,7 +66,14 @@ export class FarmInfoPage {
       loader.dismiss();
 
       this.toastService.presentToast('Farm details Updated...');
+
       this.navCtrl.pop();
+      
+      //Adding code here. Start....
+      this.disableFarmButton = true;
+      this.tempUser = JSON.parse(JSON.stringify(this.user));
+      //End..
+
     }, (err)=> {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Farm details could not be Updated...')

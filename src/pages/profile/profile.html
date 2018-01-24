@@ -77,11 +77,11 @@
           <ion-input type="text" [(ngModel)]="user.agriId" disabled></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating text-capitalize>{{'Full Name'|translate}}</ion-label>
+          <ion-label floating text-capitalize>{{'Full Name *'|translate}}</ion-label>
           <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.name"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating text-capitalize>{{'Mobile Number'|translate}}</ion-label>
+          <ion-label floating text-capitalize>{{'Mobile Number *'|translate}}</ion-label>
           <ion-input type="tel" (keyup)="onChange($event)" [(ngModel)]="user.profiles.phone"></ion-input>
         </ion-item>
         <ion-item>
@@ -101,34 +101,40 @@
         <!-- Start Here  -->
 
         <ion-item>
-          <ion-label floating>{{'Country'|translate}}</ion-label>
+          <ion-label floating>{{'Country *'|translate}}</ion-label>
           <ion-select [(ngModel)]="user.profiles.address.country" (ionChange)="onCountryChange($event)">
-            <ion-option *ngFor="let country of allCountry; let i=index">{{country}}</ion-option>
+            <ion-option *ngFor="let country of address.country; let i=index">{{country?.name}}</ion-option>
           </ion-select>
         </ion-item>
 
-        <!--  -->
-        <ion-item *ngIf="allStates?.length">
+        <!-- *ngIf="address.province.length" -->
+        <ion-item *ngIf="address.province.length">
 
-            <ion-label floating>{{'Province'| translate}}</ion-label>
-            <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onStateChange($event)">
-              <ion-option  *ngFor="let states of allStates; let i=index">{{states}}</ion-option>
+            <ion-label floating>{{'Province *'| translate}}</ion-label>
+            <ion-select [(ngModel)]="user.profiles.address.province" (ionChange)="onProvinceChange($event)">
+              <ion-option  *ngFor="let province of address.province; let i=index">{{province?.name}}</ion-option>
             </ion-select>
           </ion-item>
-          <!--  -->
-          <ion-item *ngIf="allCity?.length">
-              <ion-label floating>{{'City'|translate}}</ion-label>
+          <!-- *ngIf="address.city.length" -->
+          <ion-item *ngIf="address.city.length">
+              <ion-label floating>{{'City *'|translate}}</ion-label>
               <ion-select [(ngModel)]="user.profiles.address.city" (ionChange)="onCityChange($event)">
-                <ion-option *ngFor="let city of allCity; let i=index">{{city}}</ion-option>
+                <ion-option *ngFor="let city of address.city; let i=index">{{city?.name}}</ion-option>
               </ion-select>
             </ion-item>
 
-            <!--  -->
-            <ion-item *ngIf="allDistrict?.length">
+            <!-- *ngIf="address.district.length" -->
+            <ion-item *ngIf="address.district.length">
                 <ion-label floating>{{'District'|translate}}</ion-label>
                 <ion-select [(ngModel)]="user.profiles.address.district" (ionChange)="onDistrictChange($event)">
-                  <ion-option *ngFor="let district of allDistrict; let i=index">{{district}}</ion-option>
+                  <ion-option *ngFor="let district of address.district; let i=index">{{district?.name}}</ion-option>
                 </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating style="display: inline-table;">{{'Address Line 1 (Steet Address Line P.O.Box, c\o) *'|translate}}
+                </ion-label>
+                <ion-input type="text" (keyup)="onChange($event)" [(ngModel)]="user.profiles.address.line1"></ion-input>
               </ion-item>
 
         <ion-item>
@@ -154,7 +160,7 @@
       <ion-row>
         <ion-col>
           <!-- [disabled]="disabledButton" -->
-          <button (click)="updateProfile()" [disabled]="disabledButton" ion-button block class="btnHeight40Px">
+          <button (click)="updateProfile()" [disabled]="disabledSaveButton" ion-button block class="btnHeight40Px">
             {{'SAVE'|translate}}
           </button>
         </ion-col>
