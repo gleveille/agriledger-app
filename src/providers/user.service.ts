@@ -68,7 +68,7 @@ export class UserService {
     let profiles = user.profiles;
     return this.http.put(`${UserApi.updateProfile.url()}/${this.dataStore.user.id}/profiles`, profiles).do((profile:any)=> {
       this.dataStore.user.profiles = profile;
-      this._user.next(this.dataStore.user);
+      this._user.next(JSON.parse(JSON.stringify(this.dataStore.user)));
     })
       .catch((err)=> {
 
