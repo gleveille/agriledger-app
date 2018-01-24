@@ -68,6 +68,7 @@ import { ImageDialogPage } from '../pages/image-dialog/image-dialog';
 import { UserDocumentDialogPage } from '../pages/user-document-dialog/user-document-dialog';
 import {CreateFarmPage} from "../pages/create-farm/create-farm";
 import {FarmInfoPage} from "../pages/farm-info/farm-info";
+import { AddressService } from '../providers/address.service';
 
 
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -199,7 +200,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     Geolocation,
     Camera,
     InAppBrowser,
-    IndexProvider
+    IndexProvider,
+    AddressService
   ]
 })
 

@@ -5,7 +5,7 @@ import {environment} from './environments/environment';
 export const ServerUrl = environment.apiURL + ':' + environment.apiPORT;
 
 
-const ContainerApi = {
+export const ContainerApi = {
   ProfileUploadUrl: ()=>ServerUrl + '/api/containers/profiles/upload',
   EvidencesUploadUrl: ()=>ServerUrl + '/api/containers/evidences/upload',
   AssetDocumentsUploadUrl: ()=>ServerUrl + '/api/containers/asset_documents/upload',
@@ -13,7 +13,7 @@ const ContainerApi = {
 
 
 };
-const UserApi = {
+export const UserApi = {
   login: {
     url: ()=>ServerUrl + '/api/users/login',
     method: 'POST'
@@ -58,8 +58,31 @@ const UserApi = {
   }
 }
 
+export const AddressApi = {
+  getCountry: {
+    url: ()=>ServerUrl + '/api/countries',
+    method: 'GET',
+    queryParams: []
+  },
+  getProvince: {
+    url: ()=>ServerUrl + '/api/provinces',
+    method: 'GET',
+    queryParams: ['country']
+  },
+  getCity: {
+    url: ()=>ServerUrl + '/api/cities',
+    method: 'GET',
+    queryParams: ['province']
+  },
+  getDistrict: {
+    url: ()=>ServerUrl + '/api/districts',
+    method: 'GET',
+    queryParams: ['city']
+  }
+};
 
-const AssetApi = {
+
+export const AssetApi = {
   getAssets: {
     url: ()=>ServerUrl + '/api/assets',
     method: 'GET',
@@ -72,7 +95,7 @@ const AssetApi = {
   }
 };
 
-const WeatherApi = {
+export const WeatherApi = {
   getCurrent: {
     url: ()=>ServerUrl + '/api/weather/current',
     method: 'GET',
@@ -84,4 +107,3 @@ const WeatherApi = {
     params: ['lat', 'long']
   }
 };
-export {UserApi, AssetApi, ContainerApi,WeatherApi}
