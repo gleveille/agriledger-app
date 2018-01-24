@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {
   NavController, ActionSheetController, ModalController,
   LoadingController, App
 } from "ionic-angular/index";
-import { ServerUrl } from '../../app/api.config'
-import { ToastProvider } from "../../providers/toast";
-import { IUploadPageConfig } from "../../interface/uploadPageConfig.interface";
-import { UserService } from "../../providers/user.service";
-import { Iuser } from "../../interface/user.interface";
-import { TranslateServiceProvider } from "../../providers/translate-service";
-import { UploadProvider } from "../../providers/upload";
-import { PasscodeLockPage } from "../passcode-lock/passcode-lock";
-import { AssetsService } from "../../providers/assets.service";
-import { IndexProvider } from '../../providers/index/index';
-import { AlertController } from 'ionic-angular';
-import { UserDocumentDialogPage } from '../user-document-dialog/user-document-dialog';
+import {ServerUrl} from '../../app/api.config'
+import {ToastProvider} from "../../providers/toast";
+import {IUploadPageConfig} from "../../interface/uploadPageConfig.interface";
+import {UserService} from "../../providers/user.service";
+import {Iuser} from "../../interface/user.interface";
+import {TranslateServiceProvider} from "../../providers/translate-service";
+import {UploadProvider} from "../../providers/upload";
+import {PasscodeLockPage} from "../passcode-lock/passcode-lock";
+import {AssetsService} from "../../providers/assets.service";
+import {IndexProvider} from '../../providers/index/index';
+import {AlertController} from 'ionic-angular';
+import {UserDocumentDialogPage} from '../user-document-dialog/user-document-dialog';
 import {CreateFarmPage} from "../create-farm/create-farm";
 import {FarmInfoPage} from "../farm-info/farm-info";
 
@@ -25,43 +25,49 @@ import {FarmInfoPage} from "../farm-info/farm-info";
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
-export class ProfilePage{
+export class ProfilePage {
   serverUrl = ServerUrl;
-  user={profiles:{
-    documents: [],
-    address: {line1: '', line2: '', city: '', province: '',country:'',district:''}}} as Iuser;
-  tempUser={profiles:{
-    documents: [],
-    address: {line1: '', line2: '', city: '', province: '',country:'',district:''}}} as Iuser;
+  user = {
+    profiles: {
+      documents: [],
+      address: {line1: '', line2: '', city: '', province: '', country: '', district: ''}
+    }
+  } as Iuser;
+  tempUser = {
+    profiles: {
+      documents: [],
+      address: {line1: '', line2: '', city: '', province: '', country: '', district: ''}
+    }
+  } as Iuser;
 
   defaultLangauge:string = 'ch';
   showdropdown:boolean = false;
   farm:string = "accountDetails";
   disabledButton:boolean = true;
 
-  allCountry:any=[''];
-  allStates:any=[''];
-  allCity:any=[''];
-  allDistrict:any=[''];
+  allCountry:any = [''];
+  allStates:any = [''];
+  allCity:any = [''];
+  allDistrict:any = [''];
 
   statesData:any;
   cityData:any;
   districtData:any;
 
 
-  constructor(public navCtrl: NavController,
-    private actionSheetCtrl: ActionSheetController,
-    private modalController: ModalController,
-    private loadingCtrl: LoadingController,
-    private toastService: ToastProvider,
-    private uploadService: UploadProvider,
-    private userService: UserService,
-    private translateService: TranslateServiceProvider,
-    private assetsService: AssetsService,
-    private indexProvider: IndexProvider,
-    private alertCtrl: AlertController,
-    private modalCtrl: ModalController,
-    private app:App) {
+  constructor(public navCtrl:NavController,
+              private actionSheetCtrl:ActionSheetController,
+              private modalController:ModalController,
+              private loadingCtrl:LoadingController,
+              private toastService:ToastProvider,
+              private uploadService:UploadProvider,
+              private userService:UserService,
+              private translateService:TranslateServiceProvider,
+              private assetsService:AssetsService,
+              private indexProvider:IndexProvider,
+              private alertCtrl:AlertController,
+              private modalCtrl:ModalController,
+              private app:App) {
 
     this.allCountry = ['China'];
 
@@ -398,15 +404,17 @@ export class ProfilePage{
     }
   }
 
-  onImageClick(i: number, type: string) {
-    let modal = this.modalCtrl.create(UserDocumentDialogPage, { user: this.user, index: i, type }, { showBackdrop: true, enableBackdropDismiss: true });
+  onImageClick(i:number, type:string) {
+    let modal = this.modalCtrl.create(UserDocumentDialogPage, {user: this.user, index: i, type}, {
+      showBackdrop: true,
+      enableBackdropDismiss: true
+    });
     modal.present();
   }
 
-
-   onCountryChange(event) {
-     console.log('onCountryChange '+event)
-    this.allStates =  this.statesData[event];
+  onCountryChange(event) {
+    console.log('onCountryChange ' + event)
+    this.allStates = this.statesData[event];
     // if(!this.allStates.length){
     //   this.allStates.push('N/A');
     // }
@@ -417,8 +425,8 @@ export class ProfilePage{
 
   }
 
-   onStateChange(event) {
-    console.log('onStateChange '+event)
+  onStateChange(event) {
+    console.log('onStateChange ' + event)
     this.allCity = this.cityData[event];
 
     this.allDistrict = [];
@@ -426,19 +434,17 @@ export class ProfilePage{
     this.checkStatus();
   }
 
-
   onCityChange(event) {
-    console.log('onCityChange '+event)
-    this.allDistrict =this.districtData[event];
+    console.log('onCityChange ' + event)
+    this.allDistrict = this.districtData[event];
 
     this.checkStatus();
   }
 
- onDistrictChange(event) {
-  console.log('onDistrictChange '+event)
+  onDistrictChange(event) {
+    console.log('onDistrictChange ' + event)
     this.checkStatus();
   }
-
 
   onChange(keyCode) {
 
@@ -449,7 +455,6 @@ export class ProfilePage{
     this.checkStatus();
 
   }
-
 
   showWelcomeMessage() {
     let alert = this.alertCtrl.create({
@@ -474,7 +479,17 @@ export class ProfilePage{
     console.log(this.user);
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.userService.loadUser().subscribe(()=>{
+      refresher.complete();
 
+    },(err)=>{
+      refresher.complete();
+
+    });
+
+  }
 
   updateProfile() {
     let loader = this.loadingCtrl.create({
@@ -497,17 +512,19 @@ export class ProfilePage{
     })
   }
 
+
+
   subscribeUser() {
     console.log('inside ')
-    this.userService.user.subscribe((user: Iuser) => {
+    this.userService.user.subscribe((user:Iuser) => {
       this.user = user;
       console.log(this.user)
       this.tempUser = JSON.parse(JSON.stringify(this.user));//changing code here...
     });
   }
 
-  verify(source: string, uploadType: string) {
-    let passcodeModal = this.modalController.create(PasscodeLockPage, { passcode: this.user.profiles.passcode });
+  verify(source:string, uploadType:string) {
+    let passcodeModal = this.modalController.create(PasscodeLockPage, {passcode: this.user.profiles.passcode});
     passcodeModal.present();
     passcodeModal.onDidDismiss(data => {
       console.log(data);
@@ -519,8 +536,8 @@ export class ProfilePage{
     });
   }
 
-  async upload(source: string, uploadType: string) {
-    const config: IUploadPageConfig = {
+  async upload(source:string, uploadType:string) {
+    const config:IUploadPageConfig = {
       uploadType: uploadType, //profile,field
       id: this.user.profiles.id
     };
@@ -538,8 +555,6 @@ export class ProfilePage{
       return false;
     }
   }
-
-
 
   presentActionSheetDocs() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -636,7 +651,7 @@ export class ProfilePage{
   }
 
   farmInfo(index:number) {
-    this.navCtrl.push(FarmInfoPage,{user:this.user,index:index});
+    this.navCtrl.push(FarmInfoPage, {user: this.user, index: index});
   }
 
 

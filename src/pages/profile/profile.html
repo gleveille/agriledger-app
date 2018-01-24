@@ -4,6 +4,10 @@
 
 <ion-content text-center>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="header-image" style="background-image: url('assets/img/field.jpg');"></div>
 
   <ion-row justify-content-center>
@@ -167,7 +171,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-list style="margin-top: -10px;">
+      <ion-list>
         <div text-center *ngIf="!user.profiles?.farmDetails?.length">
           <img src="assets/icon/no-record.png">
           <h4 style="opacity: 0.6">No Farms Added!</h4>
