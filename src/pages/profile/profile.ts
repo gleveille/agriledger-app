@@ -488,7 +488,6 @@ export class ProfilePage {
       refresher.complete();
 
     });
-
   }
 
   updateProfile() {
