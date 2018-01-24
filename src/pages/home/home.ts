@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {NavController, NavParams, Events,} from 'ionic-angular';
+import {NavController, NavParams, Events, App,} from 'ionic-angular';
 import {UserService} from "../../providers/user.service";
 import {Iuser} from "../../interface/user.interface";
 import {ToastProvider} from "../../providers/toast";
 import {AssetsService} from "../../providers/assets.service";
-import { Chart } from 'chart.js';
+import {Chart} from 'chart.js';
 import {WeatherProvider} from "../../providers/weather";
 
 import {ServerUrl} from '../../app/api.config'
@@ -17,18 +17,15 @@ import {AssetsPage} from "../assets/assets";
 export class HomePage {
 
 
-  serverUrl=ServerUrl;
-  user:Iuser = {profiles:{}};
-  currentWeather={};
+  serverUrl = ServerUrl;
+  user:Iuser = {profiles: {}};
+  currentWeather = {};
 
-  loadingAssetHttpRequest:string='resolved';
-  assets:any[]=[];
+  loadingAssetHttpRequest:string = 'resolved';
+  assets:any[] = [];
   doughnutChartLabels:string[] = [];
   doughnutChartData:number[] = [];
   doughnutChartType:string = 'doughnut';
-
-
-
 
 
   constructor(public navCtrl:NavController,
@@ -36,32 +33,29 @@ export class HomePage {
               private weatherService:WeatherProvider,
               public navParams:NavParams, private events:Events,
               private ref:ChangeDetectorRef,
-              private toastCtrl:ToastProvider, private userService:UserService) {
-
-             
+              private toastCtrl:ToastProvider, private userService:UserService, private app:App) {
 
 
   }
 
   ionViewDidLoad() {
-
     this.subscribeUser();
     this.loadMyAssets();
-
   }
 
-  loadMyAssets(){
-    this.loadingAssetHttpRequest='pending';
-    this.assetService.loadMyAssets().subscribe((assets:any[])=>{
+  loadMyAssets() {
+    this.loadingAssetHttpRequest = 'pending';
+    this.assetService.loadMyAssets().subscribe((assets:any[])=> {
       this.subscribeMyAssets();
 
-    },(err)=>{
-      this.loadingAssetHttpRequest='rejected';
+    }, (err)=> {
+      this.loadingAssetHttpRequest = 'rejected';
 
     })
 
   }
-  subscribeUser(){
+
+  subscribeUser() {
     console.log(this.userService)
     this.userService.user.subscribe((user:Iuser)=> {
       this.user = user;
@@ -72,28 +66,28 @@ export class HomePage {
 
   drawChart(assets:any[]) {
 
-    if(!assets.length){
+    if (!assets.length) {
       return;
     }
-    let availableAssetNumber:number=0;
-    let pooledAssetNumber:number=0;
-    let rejectedAssetNumber:number=0;
+    let availableAssetNumber:number = 0;
+    let pooledAssetNumber:number = 0;
+    let rejectedAssetNumber:number = 0;
 
-    assets.forEach((asset)=>{
-      if(asset.status==='available'){
+    assets.forEach((asset)=> {
+      if (asset.status === 'available') {
         availableAssetNumber++;
       }
-      else if(asset.status==='pooled'){
+      else if (asset.status === 'pooled') {
         pooledAssetNumber++;
       }
-      else if(asset.status==='rejected'){
+      else if (asset.status === 'rejected') {
         rejectedAssetNumber++;
       }
     });
 
 
-    let doughnutChartLabels=[];
-    let doughnutChartData=[];
+    let doughnutChartLabels = [];
+    let doughnutChartData = [];
 
     doughnutChartLabels.push(`Available (${availableAssetNumber})`);
     doughnutChartLabels.push(`Pooled (${pooledAssetNumber})`);
@@ -103,36 +97,35 @@ export class HomePage {
     this.doughnutChartLabels = doughnutChartLabels.slice();
 
     this.ref.detectChanges();
-    console.log(this.doughnutChartData )
-    console.log(this.doughnutChartLabels )
+    console.log(this.doughnutChartData)
+    console.log(this.doughnutChartLabels)
 
   }
-  subscribeMyAssets(){
-    this.assetService.myAssets.subscribe((assets:any[])=>{
-      this.loadingAssetHttpRequest='pending';
 
-      this.assets=assets;
+  subscribeMyAssets() {
+    this.assetService.myAssets.subscribe((assets:any[])=> {
+      this.loadingAssetHttpRequest = 'pending';
+
+      this.assets = assets;
       this.drawChart(assets)
-      setTimeout(()=>{
-        this.loadingAssetHttpRequest='resolved';
+      setTimeout(()=> {
+        this.loadingAssetHttpRequest = 'resolved';
 
-      },200)
+      }, 200)
 
-    },(err)=>{
+    }, (err)=> {
 
     })
   }
 
 
-
-
-  goToCreateAssetPage(){
-    this.navCtrl.push(CreateAssetPage);
+  goToCreateAssetPage() {
+    this.app.getRootNav().push(CreateAssetPage);
 
   }
 
-  goToViewAssetPage(){
-    this.navCtrl.push(AssetsPage);
+  goToViewAssetPage() {
+    this.app.getRootNav().push(AssetsPage);
 
   }
 }

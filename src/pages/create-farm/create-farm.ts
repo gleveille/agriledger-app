@@ -73,6 +73,7 @@ export class CreateFarmPage {
       loader.dismiss();
 
       this.toastService.presentToast('Farm details Updated...')
+      this.navCtrl.pop();
 
       Object.keys(this.farmDetails).forEach((prop)=>{
         prop='';
@@ -81,6 +82,7 @@ export class CreateFarmPage {
     }, (err)=> {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Farm details could not be Updated...')
+      this.navCtrl.pop();
 
     })
   }

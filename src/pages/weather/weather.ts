@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, App} from 'ionic-angular';
 import {WeatherProvider} from "../../providers/weather";
 import {InformationPage} from "../information/information";
 
@@ -9,12 +9,12 @@ import {InformationPage} from "../information/information";
   templateUrl: 'weather.html',
 })
 export class WeatherPage {
-  @Input()showViewMoreButton:boolean=true;
+  @Input() showViewMoreButton:boolean = true;
   currentWeather:any = null;
   currentForecast:any = null;
   weatherHttpStatus:string = 'pending';
 
-  constructor(public navCtrl:NavController, public navParams:NavParams, private weatherService:WeatherProvider) {
+  constructor(public navCtrl:NavController, public navParams:NavParams, private weatherService:WeatherProvider, private app:App) {
 
     this.weatherService.loadCurrentWeather().subscribe(()=> {
       this.weatherHttpStatus = 'resolved';
@@ -29,7 +29,7 @@ export class WeatherPage {
   }
 
   goToInfo() {
-    this.navCtrl.push(InformationPage);
+    this.app.getRootNav().push(InformationPage);
   }
 
 

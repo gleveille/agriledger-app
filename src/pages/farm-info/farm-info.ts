@@ -54,10 +54,12 @@ export class FarmInfoPage {
     this.userService.updateProfile(this.user).subscribe((data)=> {
       loader.dismiss();
 
-      this.toastService.presentToast('Farm details Updated...')
+      this.toastService.presentToast('Farm details Updated...');
+      this.navCtrl.pop();
     }, (err)=> {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Farm details could not be Updated...')
+      this.navCtrl.pop();
 
     })
   }

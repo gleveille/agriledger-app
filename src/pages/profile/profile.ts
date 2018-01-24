@@ -636,7 +636,7 @@ export class ProfilePage {
       loader.dismiss();
 
       this.toastService.presentToast('Farm details Updated...')
-      this.navCtrl.pop();
+
     }, (err) => {
       loader.dismiss();
       this.toastService.presentToast(err.message || 'Farm details could not be Updated...')
@@ -645,12 +645,12 @@ export class ProfilePage {
   }
 
   createFarm() {
-    this.navCtrl.push(CreateFarmPage);
-    //this.app.getRootNav().push(CreateFarmPage);
+    //this.navCtrl.push(CreateFarmPage);
+    this.app.getRootNav().push(CreateFarmPage);
   }
 
   farmInfo(index:number) {
-    this.navCtrl.push(FarmInfoPage, {user: this.user, index: index});
+    this.app.getRootNav().push(FarmInfoPage, {user: this.user, index: index});
   }
 
 
