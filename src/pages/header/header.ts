@@ -30,8 +30,8 @@ export class HeaderPage {
   }
 
   onSettings(){
-    this.navCtrl.push(SettingsPage);
-    //this.app.getRootNav().push(SettingsPage);
+    //this.navCtrl.push(SettingsPage);
+    this.app.getRootNav().push(SettingsPage);
   }
 
   /*logout() {
@@ -57,6 +57,6 @@ export class HeaderPage {
   }
 
   community() {
-    this.navCtrl.push(CommunityPage)
+    this.app.getRootNav().push(CommunityPage)
   }
 }

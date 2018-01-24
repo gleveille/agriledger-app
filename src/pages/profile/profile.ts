@@ -254,9 +254,7 @@ private getDistrictByCity(cityName:string){
 
     }); //End
   }
-
-
-
+  
   subscribeUser() {
     console.log('inside ')
     this.userService.user.subscribe((user:Iuser) => {
@@ -377,18 +375,18 @@ private getDistrictByCity(cityName:string){
 
   updateFarm() {
     let loader = this.loadingCtrl.create({
-      content: 'Upading Farm details..'
+      content: 'Upading Farm details'
     });
     loader.present();
 
     this.userService.updateProfile(this.user).subscribe((data) => {
       loader.dismiss();
 
-      this.toastService.presentToast('Farm details Updated...')
+      this.toastService.presentToast('Farm details Updated')
 
     }, (err) => {
       loader.dismiss();
-      this.toastService.presentToast(err.message || 'Farm details could not be Updated...')
+      this.toastService.presentToast(err.message || 'Farm details could not be Updated')
 
     })
   }
